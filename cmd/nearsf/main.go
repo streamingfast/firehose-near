@@ -1,4 +1,4 @@
-package nearsf
+package main
 
 import "github.com/streamingfast/near-sf/cmd/nearsf/cli"
 
