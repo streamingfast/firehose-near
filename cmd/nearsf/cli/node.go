@@ -99,7 +99,7 @@ func nodeFactoryFunc(isMindreader bool, appLogger, nodeLogger **zap.Logger) func
 				blocksChanCapacity,
 				chainOperator.Shutdown,
 				metricsAndReadinessManager,
-				tracker,
+				nil,
 				gs,
 				*appLogger,
 			)
@@ -108,14 +108,8 @@ func nodeFactoryFunc(isMindreader bool, appLogger, nodeLogger **zap.Logger) func
 			}
 
 			superviser.RegisterLogPlugin(mindreaderPlugin)
-
-			trxPoolLogPlugin := nodemanager.NewTrxPoolLogPlugin(*appLogger)
-			superviser.RegisterLogPlugin(trxPoolLogPlugin)
-			trxPoolLogPlugin.RegisterServices(gs)
-
 			return nodeMindReaderApp.New(&nodeMindReaderApp.Config{
 				ManagerAPIAddress: managerAPIAddress,
-				GRPCAddr:          GRPCAddr,
 			}, &nodeMindReaderApp.Modules{
 				Operator:                   chainOperator,
 				MetricsAndReadinessManager: metricsAndReadinessManager,

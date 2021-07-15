@@ -20,10 +20,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/streamingfast/near-sf/codec"
+	pbcodec "github.com/streamingfast/near-sf/pb/sf/near/codec/v1"
+
 	"github.com/dfuse-io/bstream"
 	"github.com/dfuse-io/bstream/blockstream"
-	"github.com/dfuse-io/dfuse-eosio/codec"
-	pbcodec "github.com/dfuse-io/dtrader/pb/dfuse/ethereum/codec/v1"
 	nodeManager "github.com/dfuse-io/node-manager"
 	"github.com/dfuse-io/node-manager/mindreader"
 	"google.golang.org/grpc"
@@ -82,8 +83,7 @@ func getMindreaderLogPlugin(
 	blockStreamServer := blockstream.NewServer(gs, blockstream.ServerOptionWithLogger(appLogger))
 
 	consoleReaderFactory := func(lines chan string) (mindreader.ConsolerReader, error) {
-		return nil, nil
-		//return codec.NewConsoleReader(lines)
+		return codec.NewConsoleReader(lines)
 	}
 
 	consoleReaderBlockTransformer := func(obj interface{}) (*bstream.Block, error) {

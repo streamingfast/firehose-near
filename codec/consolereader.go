@@ -1,31 +1,14 @@
-// Copyright 2021 dfuse Platform Inc.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package codec
 
 import (
 	"bufio"
-	"encoding/hex"
-	"encoding/json"
 	"fmt"
 	"io"
-	"math/big"
 	"strconv"
 	"strings"
 	"time"
 
-	pbcodec "github.com/streamingfast/dfuse-ethereum/pb/dfuse/ethereum/codec/v1"
+	pbcodec "github.com/streamingfast/near-sf/pb/sf/near/codec/v1"
 	"go.uber.org/zap"
 )
 
@@ -91,13 +74,8 @@ func (s *parsingStats) inc(key string) {
 }
 
 type parseCtx struct {
-	currentBlock         *pbcodec.Block
-	currentTrace         *pbcodec.TransactionTrace
-	currentTraceLogCount int
-	// currentRootCall is a pointer to the first EVM call. It is used to collect
-	// CreateAccount, BalanceChange, NonceChanges and append them in order in the first EVM call
-	currentRootCall *pbcodec.Call
-	finalizing      bool
+	currentBlock *pbcodec.Block
+	currentTrace *pbcodec.TransactionTrace
 
 	transactionTraces   []*pbcodec.TransactionTrace
 	evmCallStackIndexes []int32
@@ -138,122 +116,23 @@ func (c *ConsoleReader) next(readType int) (out interface{}, err error) {
 
 		// Order conditions based (approximately) on those that appear more often
 		switch {
-		case strings.HasPrefix(line, "SUICIDE_CHANGE"):
-			ctx.stats.inc("SUICIDE_CHANGE")
-			err = ctx.readSuicideChange(line)
+		case strings.HasPrefix(line, "START_BLOCK"):
+			err = ctx.readStartBlock(line)
 
-		case strings.HasPrefix(line, "CREATED_ACCOUNT"):
-			ctx.stats.inc("CREATED_ACCOUNT")
-			err = ctx.readCreateAccount(line)
+		case strings.HasPrefix(line, "START_TRANSACTION"):
+			err = ctx.readStartTransaction(line)
 
-		case strings.HasPrefix(line, "CODE_CHANGE"):
-			ctx.stats.inc("CODE_CHANGE")
-			err = ctx.readCodeChange(line)
+		case strings.HasPrefix(line, "END_TRANSACTION"):
+			err = ctx.readEndTransaction(line)
 
-		case strings.HasPrefix(line, "BEGIN_BLOCK") && readType == readBlock:
-			err = ctx.readBeginBlock(line)
-
-		case strings.HasPrefix(line, "BEGIN_APPLY_TRX"):
-			ctx.stats.inc("BEGIN_APPLY_TRX")
-			err = ctx.readApplyTrxBegin(line)
-
-		case strings.HasPrefix(line, "TRX_FROM"):
-			ctx.stats.inc("TRX_FROM")
-			err = ctx.readTrxFrom(line)
-
-		case strings.HasPrefix(line, "EVM_PARAM"):
-			ctx.stats.inc("EVM_PARAM")
-			err = ctx.readEVMParamCall(line)
-
-		case strings.HasPrefix(line, "EVM_RUN_CALL"):
-			ctx.stats.inc("EVM_RUN_CALL")
-			err = ctx.readEVMRunCall(line)
-
-		case strings.HasPrefix(line, "EVM_CALL_FAILED"):
-			ctx.stats.inc("EVM_CALL_FAILED")
-			err = ctx.readEVMCallFailed(line)
-
-		case strings.HasPrefix(line, "EVM_REVERTED"):
-			ctx.stats.inc("EVM_CALL_FAILED")
-			err = ctx.readEVMReverted(line)
-
-		case strings.HasPrefix(line, "EVM_END_CALL"):
-			ctx.stats.inc("EVM_END_CALL")
-			err = ctx.readEVMEndCall(line)
-
-		case strings.HasPrefix(line, "EVM_KECCAK"):
-			ctx.stats.inc("EVM_KECCAK")
-			err = ctx.readEVMKeccak(line)
-
-		case strings.HasPrefix(line, "ACCOUNT_WITHOUT_CODE"):
-			ctx.stats.inc("ACCOUNT_WITHOUT_CODE")
-			err = ctx.readAccountWithoutCode(line)
-
-		case strings.HasPrefix(line, "STORAGE_CHANGE"):
-			ctx.stats.inc("STORAGE_CHANGE")
-			err = ctx.readStorageChange(line)
-
-		case strings.HasPrefix(line, "GAS_CHANGE"):
-			ctx.stats.inc("GAS_CHANGE")
-			err = ctx.readGasChange(line)
-
-		case strings.HasPrefix(line, "BALANCE_CHANGE"):
-			ctx.stats.inc("BALANCE_CHANGE")
-			err = ctx.readBalanceChange(line)
-
-		case strings.HasPrefix(line, "NONCE_CHANGE"):
-			ctx.stats.inc("NONCE_CHANGE")
-			err = ctx.readNonceChange(line)
-
-		case strings.HasPrefix(line, "ADD_LOG"):
-			ctx.stats.inc("ADD_LOG")
-			err = ctx.readAddLog(line)
-
-		case strings.HasPrefix(line, "GAS_EVENT"):
-			ctx.stats.inc("GAS_EVENT")
-			err = ctx.readGasEvent(line)
-
-		case strings.HasPrefix(line, "SKIPPED_TRX"):
-			ctx.stats.inc("SKIPPED_TRX")
-			err = ctx.readSkippedTrx(line)
-
-		case strings.HasPrefix(line, "END_APPLY_TRX"):
-			ctx.stats.inc("END_APPLY_TRX")
-			err = ctx.readApplyTrxEnd(line)
-
-			if readType == readTransaction {
-				if len(ctx.transactionTraces) != 1 {
-					return nil, fmt.Errorf("expecting to have a single transaction trace, got %d", len(ctx.transactionTraces))
-				}
-
-				return ctx.transactionTraces[0], err
-			}
-
-		case strings.HasPrefix(line, "FINALIZE_BLOCK") && readType == readBlock:
-			ctx.stats.inc("FINALIZE_BLOCK")
-			err = ctx.readFinalizeBlock(line)
-
-		case strings.HasPrefix(line, "FAILED_APPLY_TRX") && readType == readBlock:
-			// This fails the whole block, and happens when we get a
-			// block that is not signed with the right chain ID, but
-			// still circulates on the network we're on.  This is
-			// freaking wasteful.. so anyway, we just reset
-			// everything.
-			//
-			// This short-circuits FINALIZE_BLOCK, END_APPLY_TRX,
-			// END_BLOCK
-			ctx.stats.inc("FAILED_APPLY_TRX")
-			err = ctx.readFailedApplyTrx(line)
-
-		case strings.HasPrefix(line, "END_BLOCK") && readType == readBlock:
+		case strings.HasPrefix(line, "END_BLOCK"):
 			return ctx.readEndBlock(line)
-
-		case strings.HasPrefix(line, "TRX_ENTER_POOL"):
-			ctx.stats.inc("TRX_ENTER_POOL")
-			continue
-		case strings.HasPrefix(line, "TRX_DISCARDED"):
-			ctx.stats.inc("TRX_DISCARDED")
-			continue
+		case strings.HasPrefix(line, "APPLY_CHUNKS"):
+		case strings.HasPrefix(line, "BEFORE_APPLY_CHUNKS"):
+		case strings.HasPrefix(line, "CREATE_RECEIPT"):
+		case strings.HasPrefix(line, "COMPLETED_LOCAL_RECEIPT"):
+		case strings.HasPrefix(line, "COMPLETED_DELAYED_RECEIPT"):
+		case strings.HasPrefix(line, "COMPLETED_SHARDED_RECEIPT"):
 		default:
 			return nil, fmt.Errorf("unsupported log line: %q", line)
 		}
@@ -291,27 +170,10 @@ func (c *ConsoleReader) buildScanner(reader io.Reader) *bufio.Scanner {
 	return scanner
 }
 
-func (ctx *parseCtx) pushCallIndex(index int32) {
-	ctx.evmCallStackIndexes = append(ctx.evmCallStackIndexes, index)
-}
-
-func (ctx *parseCtx) popCallIndexReturnParent() (int32, uint32, error) {
-	l := len(ctx.evmCallStackIndexes)
-	if l == 0 {
-		return 0, 0, fmt.Errorf("busted call stack, more pops than pushes")
-	}
-
-	ctx.evmCallStackIndexes = ctx.evmCallStackIndexes[:l-1]
-	if l == 1 {
-		return 0, 0, nil
-	}
-	return ctx.evmCallStackIndexes[l-2], uint32(l) - 1, nil
-}
-
 // Formats
-// DMLOG BEGIN_BLOCK <NUM>
-func (ctx *parseCtx) readBeginBlock(line string) error {
-	chunks, err := SplitInChunks(line, 2)
+// DMLOG START_BLOCK <NUM> `<HASH>`
+func (ctx *parseCtx) readStartBlock(line string) error {
+	chunks, err := SplitInChunks(line, 3)
 	if err != nil {
 		return fmt.Errorf("split: %s", err)
 	}
@@ -321,13 +183,14 @@ func (ctx *parseCtx) readBeginBlock(line string) error {
 		return fmt.Errorf("invalid block num: %s", err)
 	}
 
-	if l := len(ctx.transactionTraces); l != 0 {
-		return fmt.Errorf("found %d leftover transactionTraces when starting block %d", l, blockNum)
+	if ctx.currentTrace != nil {
+		return fmt.Errorf("found leftover transactionTrace when starting block %d", blockNum)
 	}
 
 	ctx.stats = newParsingStats(blockNum)
 	ctx.currentBlock = &pbcodec.Block{
 		Number: blockNum,
+		Hash:   []byte(chunks[1]),
 		Ver:    1,
 	}
 
@@ -335,846 +198,59 @@ func (ctx *parseCtx) readBeginBlock(line string) error {
 }
 
 // Formats
-// DMLOG BEGIN_APPLY_TRX <TRX_HASH> <TO> <VALUE> <V> <R> <S> <GAS> <GAS_PRICE> <NONCE> <input>
-// DMLOG BEGIN_APPLY_TRX   deff 0bfa f48b2ed67dfdc54fbdb0e54045f40b260f5dcc51204f391c05709941b08903a8 3aee993d747b3390a92c79ecbe3eae65c515cfa3535d0af3743e60c7b3c27456 93999999 01 33 8ee478da000000000000000000000000a63e668919f50a591f5a23fb77881a347d10c0810000000000000000000000000000000000000000000000000000000000003003
-
-func (ctx *parseCtx) readApplyTrxBegin(line string) error {
+// DMLOG START_TRANSACTION `3QPB4KWh9sNVFWsRphryLd4ezmhuzAqUXgRAZPKKRFU7` ApplyState { block_index: 20, prev_block_hash: `6CAU5DSacXRNRWTCpK5b5YAmSX8jcoFVHqfsMF32L9Zc`, block_hash: `EQnM2hdJyVeNNEMip6dotf3vNXb2SMZpRJC5uipg54MY`, epoch_id: EpochId(`11111111111111111111111111111111`), epoch_height: 1, gas_price: 1000000000, block_timestamp: 1626386326477109000, gas_limit: Some(1000000000000000), random_seed: `FtjMPamwU1wzFNdxFdBwHsFAGaKk3Jwr5jBknjXhPsxV`, current_protocol_version: 46, config: RuntimeConfig { storage_amount_per_byte: 10000000000000000000, transaction_costs: RuntimeFeesConfig { action_receipt_creation_config: Fee { send_sir: 108059500000, send_not_sir: 108059500000, execution: 108059500000 }, data_receipt_creation_config: DataReceiptCreationConfig { base_cost: Fee { send_sir: 4697339419375, send_not_sir: 4697339419375, execution: 4697339419375 }, cost_per_byte: Fee { send_sir: 59357464, send_not_sir: 59357464, execution: 59357464 } }, action_creation_config: ActionCreationConfig { create_account_cost: Fee { send_sir: 99607375000, send_not_sir: 99607375000, execution: 99607375000 }, deploy_contract_cost: Fee { send_sir: 184765750000, send_not_sir: 184765750000, execution: 184765750000 }, deploy_contract_cost_per_byte: Fee { send_sir: 6812999, send_not_sir: 6812999, execution: 6812999 }, function_call_cost: Fee { send_sir: 2319861500000, send_not_sir: 2319861500000, execution: 2319861500000 }, function_call_cost_per_byte: Fee { send_sir: 2235934, send_not_sir: 2235934, execution: 2235934 }, transfer_cost: Fee { send_sir: 115123062500, send_not_sir: 115123062500, execution: 115123062500 }, stake_cost: Fee { send_sir: 141715687500, send_not_sir: 141715687500, execution: 102217625000 }, add_key_cost: AccessKeyCreationConfig { full_access_cost: Fee { send_sir: 101765125000, send_not_sir: 101765125000, execution: 101765125000 }, function_call_cost: Fee { send_sir: 102217625000, send_not_sir: 102217625000, execution: 102217625000 }, function_call_cost_per_byte: Fee { send_sir: 1925331, send_not_sir: 1925331, execution: 1925331 } }, delete_key_cost: Fee { send_sir: 94946625000, send_not_sir: 94946625000, execution: 94946625000 }, delete_account_cost: Fee { send_sir: 147489000000, send_not_sir: 147489000000, execution: 147489000000 } }, storage_usage_config: StorageUsageConfig { num_bytes_account: 100, num_extra_bytes_record: 40 }, burnt_gas_reward: Ratio { numer: 3, denom: 10 }, pessimistic_gas_price_inflation_ratio: Ratio { numer: 103, denom: 100 } }, wasm_config: VMConfig { ext_costs: ExtCostsConfig { base: 264768111, contract_compile_base: 35445963, contract_compile_bytes: 216750, read_memory_base: 2609863200, read_memory_byte: 3801333, write_memory_base: 2803794861, write_memory_byte: 2723772, read_register_base: 2517165186, read_register_byte: 98562, write_register_base: 2865522486, write_register_byte: 3801564, utf8_decoding_base: 3111779061, utf8_decoding_byte: 291580479, utf16_decoding_base: 3543313050, utf16_decoding_byte: 163577493, sha256_base: 4540970250, sha256_byte: 24117351, keccak256_base: 5879491275, keccak256_byte: 21471105, keccak512_base: 5811388236, keccak512_byte: 36649701, ripemd160_base: 853675086, ripemd160_block: 680107584, ecrecover_base: 3365369625000, log_base: 3543313050, log_byte: 13198791, storage_write_base: 64196736000, storage_write_key_byte: 70482867, storage_write_value_byte: 31018539, storage_write_evicted_byte: 32117307, storage_read_base: 56356845750, storage_read_key_byte: 30952533, storage_read_value_byte: 5611005, storage_remove_base: 53473030500, storage_remove_key_byte: 38220384, storage_remove_ret_value_byte: 11531556, storage_has_key_base: 54039896625, storage_has_key_byte: 30790845, storage_iter_create_prefix_base: 0, storage_iter_create_prefix_byte: 0, storage_iter_create_range_base: 0, storage_iter_create_from_byte: 0, storage_iter_create_to_byte: 0, storage_iter_next_base: 0, storage_iter_next_key_byte: 0, storage_iter_next_value_byte: 0, touching_trie_node: 16101955926, promise_and_base: 1465013400, promise_and_per_promise: 5452176, promise_return: 560152386, validator_stake_base: 911834726400, validator_total_stake_base: 911834726400 }, grow_mem_cost: 1, regular_op_cost: 3856371, limit_config: VMLimitConfig { max_gas_burnt: 200000000000000, max_gas_burnt_view: 200000000000000, max_stack_height: 16384, initial_memory_pages: 1024, max_memory_pages: 2048, registers_memory_limit: 1073741824, max_register_size: 104857600, max_number_registers: 100, max_number_logs: 100, max_total_log_length: 16384, max_total_prepaid_gas: 300000000000000, max_actions_per_receipt: 100, max_number_bytes_method_names: 2000, max_length_method_name: 256, max_arguments_length: 4194304, max_length_returned_data: 4194304, max_contract_size: 4194304, max_transaction_size: 4194304, max_length_storage_key: 4194304, max_length_storage_value: 4194304, max_promises_per_function_call_action: 1024, max_number_input_data_dependencies: 128 } }, account_creation_config: AccountCreationConfig { min_allowed_top_level_account_length: 0, registrar_account_id: "registrar" } }, cache: Some(Compiled contracts cache), is_new_chunk: true, profile: ERROR: No gas profiled
+// DMLOG START_TRANSACTION <TRX_HASH>
+func (ctx *parseCtx) readStartTransaction(line string) error {
 	if ctx.currentTrace != nil {
 		return fmt.Errorf("received when trx already begun")
 	}
-
-	chunks, err := SplitInChunks(line, 11)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	hash := FromHex(chunks[0], "BEGIN_APPLY_TRX txHash")
-	to := FromHex(chunks[1], "BEGIN_APPLY_TRX to")
-	value := pbcodec.BigIntFromBytes(FromHex(chunks[2], "BEGIN_APPLY_TRX value"))
-
-	val := &big.Int{}
-	val.SetBytes(value.Bytes)
-
-	v := FromHex(chunks[3], "BEGIN_APPLY_TRX v")
-	r := FromHex(chunks[4], "BEGIN_APPLY_TRX r")
-	s := FromHex(chunks[5], "BEGIN_APPLY_TRX s")
-	gas := FromUint64(chunks[6], "BEGIN_APPLY_TRX gas")
-	gasPrice := pbcodec.BigIntFromBytes(FromHex(chunks[7], "BEGIN_APPLY_TRX gasPrice"))
-	nonce := FromUint64(chunks[8], "BEGIN_APPLY_TRX nonce")
-	input := FromHex(chunks[9], "BEGIN_APPLY_TRX input")
-
-	ctx.currentTraceLogCount = 0
-	ctx.currentTrace = &pbcodec.TransactionTrace{
-		Index:    uint32(len(ctx.transactionTraces)),
-		Hash:     hash,
-		Value:    value,
-		V:        v,
-		R:        normalizeSignaturePoint(r),
-		S:        normalizeSignaturePoint(s),
-		GasLimit: gas,
-		GasPrice: gasPrice,
-		Nonce:    nonce,
-		Input:    input,
-	}
-
-	// A contract creation will have the `to` being null. In such case,
-	// we fill up the information at a later stage extracting it from contextual logs.
-	if to != nil {
-		ctx.currentTrace.To = to
-	}
-
-	ctx.currentRootCall = &pbcodec.Call{
-		// We don't know yet its real type, so put CALL and it will be resolved to its final value later on
-		CallType: pbcodec.CallType_CALL,
-		Index:    1,
-		Address:  to,
-		Value:    value,
-	}
-	ctx.currentTrace.Calls = append(ctx.currentTrace.Calls, ctx.currentRootCall)
-
-	return nil
-}
-
-// Formats
-// DMLOG EVM_RUN_CALL CALL 4
-func (ctx *parseCtx) readEVMRunCall(line string) error {
-	if ctx.currentTrace == nil {
-		return fmt.Errorf("no transaction started")
-	}
-
-	chunks, err := SplitInChunks(line, 3)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	rawCallType := chunks[0] //CALL
-	callType := pbcodec.CallType(pbcodec.CallType_value[rawCallType])
-	if callType == 0 {
-		return fmt.Errorf("invalid call type %q", rawCallType)
-	}
-
-	index := FromInt32(chunks[1], "EVM_RUN_CALL index") //4
-
-	ctx.pushCallIndex(index)
-
-	if index == 1 {
-		ctx.currentRootCall.CallType = callType
-		return nil
-	}
-
-	if int(index-1) != len(ctx.currentTrace.Calls) {
-		return fmt.Errorf("index (%d - 1) doesn't match the number of calls on the stack (%d)", index, len(ctx.currentTrace.Calls))
-	}
-
-	ctx.currentTrace.Calls = append(ctx.currentTrace.Calls, &pbcodec.Call{
-		Index:    uint32(index),
-		CallType: callType,
-	})
-
-	return nil
-}
-
-// Formats
-// DMLOG EVM_PARAM CALL 4 a63e668919f50a591f5a23fb77881a347d10c081 0000000000000000000000000000000000003003 defd 2300 .
-func (ctx *parseCtx) readEVMParamCall(line string) error {
-	if ctx.currentTrace == nil {
-		return fmt.Errorf("no transaction started")
-	}
-
-	chunks, err := SplitInChunks(line, 8)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	rawCallType := chunks[0] //CALL
-	callType := pbcodec.CallType(pbcodec.CallType_value[rawCallType])
-	if callType == 0 {
-		return fmt.Errorf("invalid call type %q", rawCallType)
-	}
-	indexStr := chunks[1]
-
-	evmCall, err := ctx.getCall(indexStr, "EVM_PARAM")
-	if err != nil {
-		return err
-	}
-
-	caller := FromHex(chunks[2], "EVM_RUN_CALL caller")
-	contractAddress := FromHex(chunks[3], "EVM_RUN_CALL contractAddress")
-	value := pbcodec.BigIntFromBytes(FromHex(chunks[4], "EVM_RUN_CALL value"))
-	gas := FromUint64(chunks[5], "EVM_RUN_CALL gas")
-	input := FromHex(chunks[6], "EVM_RUN_CALL input")
-
-	evmCall.Caller = caller
-	evmCall.Address = contractAddress
-	evmCall.Value = value
-	evmCall.GasLimit = gas
-	evmCall.Input = input
-
-	// If call type is not a CREATE and `input != []` we assume this call will execute code. Later on, when
-	// we see the `ACCOUNT_WITHOUT_CODE` message, we put it to `false` regardless of here since it's impossible
-	// for an account without code to execute the `input`.
-	evmCall.ExecutedCode = callType != pbcodec.CallType_CREATE && len(input) > 0
-
-	return nil
-}
-
-// Formats
-// DMLOG EVM_CALL_FAILED <CALL_INDEX> <GAS_LEFT> <REASON>
-func (ctx *parseCtx) readEVMCallFailed(line string) error {
-	if ctx.currentTrace == nil {
-		return fmt.Errorf("no transaction started")
-	}
-
-	chunks, err := SplitInBoundedChunks(line, 4)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	evmCall, err := ctx.getCall(chunks[0], "EVM_CALL_FAILED")
-	if err != nil {
-		return err
-	}
-
-	gasLeft := FromUint64(chunks[1], "EVM_CALL_FAILED gasLeft")
-	failureReason := chunks[2]
-
-	// FIXME: This would be overwitten by endCall below, check if
-	//        we need to make endCall aware of failure/revert and
-	//        act accordingly on gas consumed.
-	evmCall.GasConsumed = evmCall.GasLimit - gasLeft
-	evmCall.StatusFailed = true
-	evmCall.FailureReason = failureReason
-
-	return nil
-}
-
-// Formats
-// DMLOG EVM_REVERTED <CALL_INDEX>
-func (ctx *parseCtx) readEVMReverted(line string) error {
-	chunks, err := SplitInChunks(line, 2)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	evmCall, err := ctx.getCall(chunks[0], "EVM_REVERTED")
-	if err != nil {
-		return err
-	}
-
-	evmCall.StatusReverted = true
-
-	return nil
-}
-
-// Formats
-// DMLOG EVM_END_CALL <CALL_INDEX> <GAS_LEFT> <RETURN_VALUE>
-func (ctx *parseCtx) readEVMEndCall(line string) error {
-	chunks, err := SplitInChunks(line, 4)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	evmCall, err := ctx.getCall(chunks[0], "EVM_END_CALL")
-	if err != nil {
-		return err
-	}
-
-	gasLeft := FromUint64(chunks[1], "EVM_END_CALL gasLeft")
-
-	parentIndex, depth, err := ctx.popCallIndexReturnParent()
-	if err != nil {
-		return err
-	}
-
-	// TODO: Add a check to ensure this always results in a valid gas value (i.e. no overflow)
-	evmCall.GasConsumed = evmCall.GasLimit - gasLeft
-	evmCall.ReturnData = FromHex(chunks[2], "EVM_RUN_CALL returnData")
-	evmCall.ParentIndex = uint32(parentIndex)
-	evmCall.Depth = depth
-
-	return nil
-}
-
-// Formats
-// DMLOG SKIPPED_TRX <REASON>
-func (ctx *parseCtx) readSkippedTrx(line string) error {
-	if ctx.currentBlock == nil {
-		return fmt.Errorf("no block started")
-	}
-	if ctx.currentTrace == nil {
-		return fmt.Errorf("no transaction started")
-	}
-
-	// TODO: handle reason?
-
-	ctx.currentTrace = nil
-	return nil
-}
-
-// Formats
-// DMLOG END_APPLY_TRX <STATE_ROOT> <CUMULATIVE_GAS_USED> <LOGS_BLOOM> { []<deth.Log> }
-func (ctx *parseCtx) readApplyTrxEnd(line string) error {
-	if ctx.currentTrace == nil {
-		return fmt.Errorf("no matching BEGIN_APPLY_TRX")
-	}
-
-	trxTrace := ctx.currentTrace
-
-	chunks, err := SplitInBoundedChunks(line, 6)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	gasUsed := FromUint64(chunks[0], "END_APPLY_TRX gasUsed")
-	stateRoot := FromHex(chunks[1], "END_APPLY_TRX stateRoot")
-	cumulativeGasUsed := FromUint64(chunks[2], "END_APPLY_TRX cumulativeGasUsed")
-	logsBloom := FromHex(chunks[3], "END_APPLY_TRX logsBloom")
-
-	var logs []*Log
-	if err := json.Unmarshal([]byte(chunks[4]), &logs); err != nil {
-		return err
-	}
-
-	trxTrace.GasUsed = gasUsed
-	trxTrace.Receipt = &pbcodec.TransactionReceipt{
-		StateRoot:         stateRoot,
-		CumulativeGasUsed: cumulativeGasUsed,
-		LogsBloom:         logsBloom,
-	}
-
-	var pbLogs []*pbcodec.Log
-	for i, l := range logs {
-		log := &pbcodec.Log{
-			Index:   uint32(i),
-			Address: l.Address,
-			Data:    l.Data,
-		}
-
-		for _, t := range l.Topics {
-			log.Topics = append(log.Topics, t)
-		}
-
-		pbLogs = append(pbLogs, log)
-	}
-
-	if len(trxTrace.To) == 0 {
-		if trxTrace.Calls[0].CallType == pbcodec.CallType_CREATE {
-			trxTrace.To = trxTrace.Calls[0].Address
-		} else {
-			panic(fmt.Errorf("trx hash %s in block %d has no `to` and none could be computed", hex.EncodeToString(trxTrace.Hash), ctx.currentBlock.Number))
-		}
-	}
-
-	trxTrace.Receipt.Logs = pbLogs
-	trxTrace.PopulateStateReverted()
-
-	ctx.transactionTraces = append(ctx.transactionTraces, trxTrace)
-	ctx.currentTrace = nil
-	ctx.currentTraceLogCount = 0
-
-	// reset top level for new transaction
-	ctx.currentRootCall = nil
-
-	return nil
-}
-
-// Formats
-// DMLOG FINALIZE_BLOCK <NUM>
-func (ctx *parseCtx) readFinalizeBlock(line string) error {
-	if ctx.currentBlock == nil {
-		return fmt.Errorf("no block started")
-	}
-
-	chunks, err := SplitInChunks(line, 2)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	blockNum, err := strconv.ParseUint(chunks[0], 10, 64)
-	if err != nil {
-		return fmt.Errorf("failed to parse blockNum: %s", err)
-	}
-
-	if blockNum != ctx.currentBlock.Number {
-		return fmt.Errorf("finalizing block does not match active block num, got block num %d but current is block num %d", blockNum, ctx.currentBlock.Number)
-	}
-
-	ctx.finalizing = true
-	return nil
-}
-
-// Formats
-// DMLOG FAILED_APPLY_TRX transaction failure error message...
-func (ctx *parseCtx) readFailedApplyTrx(line string) error {
-	if ctx.currentBlock == nil {
-		return fmt.Errorf("no block started")
-	}
-	if ctx.currentTrace == nil {
-		return fmt.Errorf("no transaction started")
-	}
-
-	chunks, err := SplitInBoundedChunks(line, 2)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	fmt.Printf("FAILED trx %q at block %d (hash unavailable, probably forked): %s\n", hex.EncodeToString(ctx.currentTrace.Hash), ctx.currentBlock.Number, chunks[0])
-
-	ctx.currentBlock = nil
-	ctx.transactionTraces = nil
-	ctx.currentTrace = nil
-	ctx.currentTraceLogCount = 0
-	ctx.finalizing = false
-
-	return nil
-}
-
-// Formats
-// DMLOG CREATED_ACCOUNT 4 2af4f4790a71313e0c532072207a77f1e4c1baec
-func (ctx *parseCtx) readCreateAccount(line string) error {
-	chunks, err := SplitInChunks(line, 3)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	callIndex := chunks[0]
-	account := FromHex(chunks[1], "CREATED_#")
-
-	if callIndex == "0" {
-		if ctx.currentTrace != nil {
-			// We have a trace active, so let's add it to it's root call
-			ctx.currentRootCall.CreatedAccounts = append(ctx.currentRootCall.CreatedAccounts, account)
-		}
-
-		return nil
-	}
-
-	evmCall, err := ctx.getCall(callIndex, "CREATED_ACCOUNT")
-	if err != nil {
-		return err
-	}
-
-	evmCall.CreatedAccounts = append(evmCall.CreatedAccounts, account)
-	return nil
-}
-
-// Format
-// DMLOG SUICIDE_CHANGE 1 c356a543cec92de8bf1e43a88d09e568e9d3aca3 false .
-func (ctx *parseCtx) readSuicideChange(line string) error {
-	chunks, err := SplitInChunks(line, 5)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	callIndex := chunks[0]
-
-	if callIndex == "0" {
-		return fmt.Errorf("SUICIDE_CHANGE is expected to always happen within a call boundary but just seen SUICIDE_CHANGE outside of a call for block #%d", ctx.currentBlock.Number)
-	}
-
-	evmCall, err := ctx.getCall(callIndex, "SUICIDE_CHANGE")
-	if err != nil {
-		return err
-	}
-
-	evmCall.Suicide = true
-
-	return nil
-}
-
-// Format
-// DMLOG CODE_CHANGE 2 cb32e940a34b938f9cebe70313fe7e8ca3d23d36 c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 . 89f3219c608c80bcbb274738ff7a325624cd54c9868b9d54bde369e5ab005bc6 6080604052600080fdfea165627a7a723058204a5d828a5772e67b2eaa10bd570ffa7d9607586e73576cc26299c24348dc64450029
-//deepmind.Print("CODE_CHANGE", deepmind.CallIndex(), deepmind.Addr(s.address), deepmind.Hex(s.CodeHash()), deepmind.Hex(prevcode),
-// deepmind.Hash(codeHash), deepmind.Hex(code))
-func (ctx *parseCtx) readCodeChange(line string) error {
 
 	chunks, err := SplitInChunks(line, 7)
 	if err != nil {
 		return fmt.Errorf("split: %s", err)
 	}
 
-	callIndex := chunks[0]
-
-	codeChange := &pbcodec.CodeChange{
-		Address: FromHex(chunks[1], "CODE_CHANGE address"),
-		OldHash: FromHex(chunks[2], "CODE_CHANGE old_hash"),
-		OldCode: FromHex(chunks[3], "CODE_CHANGE old_code"),
-		NewHash: FromHex(chunks[4], "CODE_CHANGE new_hash"),
-		NewCode: FromHex(chunks[5], "CODE_CHANGE new_code"),
+	hash := chunks[0]
+	ctx.currentTrace = &pbcodec.TransactionTrace{
+		Hash: []byte(hash),
 	}
-
-	if callIndex == "0" {
-		if ctx.currentTrace == nil {
-			// This will append on BSC
-			if ctx.currentBlock != nil {
-				ctx.currentBlock.CodeChanges = append(ctx.currentBlock.CodeChanges, codeChange)
-			}
-			return nil
-		}
-
-		return fmt.Errorf("CODE_CHANGE is expected to always happen within a trace boundary but just seen CODE_CHANGE directly in block #%d (no active trace)", ctx.currentBlock.Number)
-	}
-
-	evmCall, err := ctx.getCall(callIndex, "CODE_CHANGE")
-	if err != nil {
-		return err
-	}
-
-	evmCall.CodeChanges = append(evmCall.CodeChanges, codeChange)
 
 	return nil
 }
 
 // Formats
-// DMLOG END_BLOCK <NUM> <SIZE> { header: <BlockHeader>, uncles: []<BlockHeader> }
-func (ctx *parseCtx) readEndBlock(line string) (*pbcodec.Block, error) {
-	if ctx.currentBlock == nil {
-		return nil, fmt.Errorf("no block started")
-	}
-	if !ctx.finalizing {
-		return nil, fmt.Errorf("block wasn't in finalizing mode")
-	}
-
-	chunks, err := SplitInBoundedChunks(line, 4)
-	if err != nil {
-		return nil, fmt.Errorf("split: %s", err)
-	}
-
-	blockNum, err := strconv.ParseUint(chunks[0], 10, 64)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse blockNum: %s", err)
-	}
-
-	if blockNum != ctx.currentBlock.Number {
-		return nil, fmt.Errorf("end block does not match active block num, got block num %d but current is block num %d", blockNum, ctx.currentBlock.Number)
-	}
-
-	size, err := strconv.ParseUint(chunks[1], 10, 64)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse size: %s", err)
-	}
-
-	var endBlockInfo struct {
-		Header *BlockHeader   `json:"header"`
-		Uncles []*BlockHeader `json:"uncles"`
-	}
-
-	if err := json.Unmarshal([]byte(chunks[2]), &endBlockInfo); err != nil {
-		return nil, err
-	}
-
-	header := FromHeader(endBlockInfo.Header)
-	if header.Number != ctx.currentBlock.Number {
-		return nil, fmt.Errorf("header end block does not match active block num, got block num %d but current is block num %d", header.Number, ctx.currentBlock.Number)
-	}
-
-	ctx.currentBlock.Size = size
-	ctx.currentBlock.Hash = header.Hash
-
-	ctx.currentBlock.Header = header
-	for _, uncle := range endBlockInfo.Uncles {
-		ctx.currentBlock.Uncles = append(ctx.currentBlock.Uncles, FromHeader(uncle))
-	}
-
-	ctx.currentBlock.TransactionTraces = ctx.transactionTraces
-
-	block := ctx.currentBlock
-	ctx.transactionTraces = nil
-	ctx.currentBlock = nil
-	ctx.finalizing = false
-	ctx.stats.log()
-	return block, nil
-}
-
-// Formats
-// DMLOG STORAGE_CHANGE <CALL_INDEX> <CONTRACT_ADDRESSS> <KEY> <OLD_VALUE> <NEW_VALUE>
-func (ctx *parseCtx) readStorageChange(line string) error {
-	chunks, err := SplitInChunks(line, 6)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	callIndex := chunks[0]
-	if callIndex == "0" {
-		// FIXME: Fow now, let's just skip them, but maybe we should store them at the block level?
-		return nil
-	}
-
-	evmCall, err := ctx.getCall(callIndex, "STORAGE_CHANGE")
-	if err != nil {
-		return err
-	}
-
-	evmCall.StorageChanges = append(evmCall.StorageChanges, &pbcodec.StorageChange{
-		Address:  FromHex(chunks[1], "STORAGE_CHANGE address"),
-		Key:      FromHex(chunks[2], "STORAGE_CHANGE key"),
-		OldValue: FromHex(chunks[3], "STORAGE_CHANGE oldValue"),
-		NewValue: FromHex(chunks[4], "STORAGE_CHANGE newValue"),
-	})
-
-	return nil
-}
-
-// Formats
-// DMLOG BALANCE_CHANGE <CALL_INDEX> <ADDRESSS> <OLD_VALUE> <NEW_VALUE> <REASON>
-func (ctx *parseCtx) readBalanceChange(line string) error {
-	chunks, err := SplitInChunks(line, 6)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	callIndex := chunks[0]
-
-	balanceChange := &pbcodec.BalanceChange{
-		Address:  FromHex(chunks[1], "BALANCE_CHANGE address"),
-		OldValue: pbcodec.BigIntFromBytes(FromHex(chunks[2], "BALANCE_CHANGE oldValue")),
-		NewValue: pbcodec.BigIntFromBytes(FromHex(chunks[3], "BALANCE_CHANGE newValue")),
-		Reason:   MustBalanceChangeReasonFromString(chunks[4]),
-	}
-
-	if ctx.currentTrace == nil && ctx.currentBlock != nil {
-		// This is temporary until reason why the `callIndex != "0"` happens, should be fixed now, but quite possible we still have a problem
-		ctx.currentBlock.BalanceChanges = append(ctx.currentBlock.BalanceChanges, balanceChange)
-		return nil
-	}
-
-	if callIndex == "0" {
-		if ctx.currentTrace != nil {
-			// We have a trace active, so let's add it to it's root call
-			ctx.currentRootCall.BalanceChanges = append(ctx.currentRootCall.BalanceChanges, balanceChange)
-			return nil
-		}
-
-		if ctx.currentBlock != nil {
-			// We have no trace active but a block is, so let's add it to the block balance changes
-			ctx.currentBlock.BalanceChanges = append(ctx.currentBlock.BalanceChanges, balanceChange)
-			return nil
-		}
-
-		return nil
-	}
-
-	evmCall, err := ctx.getCall(callIndex, "BALANCE_CHANGE")
-	if err != nil && (balanceChange.Reason == pbcodec.BalanceChange_REASON_REWARD_MINE_BLOCK || balanceChange.Reason == pbcodec.BalanceChange_REASON_REWARD_MINE_UNCLE) {
-		zlog.Warn("Skipping balance change that we cannot link to a transaction, something is broken but is temporary to overcome the problem")
-		return nil
-	}
-
-	if err != nil {
-		return err
-	}
-
-	evmCall.BalanceChanges = append(evmCall.BalanceChanges, balanceChange)
-
-	return nil
-}
-
-// Formats
-// DMLOG GAS_CHANGE <CALL_INDEX> <OLD_VALUE> <NEW_VALUE> <REASON>
-func (ctx *parseCtx) readGasChange(line string) error {
-	chunks, err := SplitInChunks(line, 5)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	callIndex := chunks[0]
-
-	gasChange := &pbcodec.GasChange{
-		OldValue: FromUint64(chunks[1], "GAS_CHANGE OldValue"),
-		NewValue: FromUint64(chunks[2], "GAS_CHANGE NewValue"),
-		Reason:   MustGasChangeReasonFromString(chunks[3]),
-	}
-
-	if callIndex == "0" {
-		if ctx.currentTrace != nil {
-			// We have a trace active, so let's add it to it's root call
-			ctx.currentRootCall.GasChanges = append(ctx.currentRootCall.GasChanges, gasChange)
-			return nil
-		}
-
-		// We simply ignore those, does not make sens in the context of gas change to have it on block level
-		return nil
-	}
-
-	evmCall, err := ctx.getCall(callIndex, "GAS_CHANGE")
-	if err != nil {
-		return err
-	}
-
-	evmCall.GasChanges = append(evmCall.GasChanges, gasChange)
-
-	return nil
-}
-
-// Formats
-// DMLOG GAS_EVENT <CALL_INDEX> <LINKED_CALL_INDEX> <ID> <GAS_VALUE>
-func (ctx *parseCtx) readGasEvent(line string) error {
-	chunks, err := SplitInChunks(line, 5)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	callIndex := chunks[0]
-
-	gasEvent := &pbcodec.GasEvent{
-		Id:              MustGasEventIDFromString(chunks[2]),
-		Gas:             FromUint64(chunks[3], "GAS_EVENT NewValue"),
-		LinkedCallIndex: FromUint64(chunks[1], "GAS_EVENT LinkedCallIndex"),
-	}
-
-	if callIndex == "0" {
-		if ctx.currentTrace != nil {
-			// We have a trace active, so let's add it to it's root call
-			ctx.currentRootCall.GasEvents = append(ctx.currentRootCall.GasEvents, gasEvent)
-			return nil
-		}
-
-		// We simply ignore those, does not make sens in the context of gas change to have it on block level
-		return nil
-	}
-
-	evmCall, err := ctx.getCall(callIndex, "GAS_EVENT")
-	if err != nil {
-		return err
-	}
-
-	evmCall.GasEvents = append(evmCall.GasEvents, gasEvent)
-
-	return nil
-}
-
-// Formats
-// DMLOG NONCE_CHANGE <CALL_INDEX> <ADDRESS> <OLD_VALUE> <NEW_VALUE>
-func (ctx *parseCtx) readNonceChange(line string) error {
-	chunks, err := SplitInChunks(line, 5)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	callIndex := chunks[0]
-	nonceChange := &pbcodec.NonceChange{
-		Address:  FromHex(chunks[1], "NONCE_CHANGE address"),
-		OldValue: FromUint64(chunks[2], "NONCE_CHANGE OldValue"),
-		NewValue: FromUint64(chunks[3], "NONCE_CHANGE NewValue"),
-	}
-
-	if callIndex == "0" {
-		if ctx.currentTrace != nil {
-			// We have a trace active, so let's add it to it's root call
-			ctx.currentRootCall.NonceChanges = append(ctx.currentRootCall.NonceChanges, nonceChange)
-			return nil
-		}
-
-		// We simply ignore those, does not make sens in the context of gas change to have it on block level
-		return nil
-	}
-
-	evmCall, err := ctx.getCall(callIndex, "NONCE_CHANGE")
-	if err != nil {
-		return err
-	}
-
-	evmCall.NonceChanges = append(evmCall.NonceChanges, nonceChange)
-
-	return nil
-}
-
-// Formats
-// DMLOG EVM_KECCAK <CALL_INDEX> <HASH_RESULT> <HASH_INPUT>
-func (ctx *parseCtx) readEVMKeccak(line string) error {
-	chunks, err := SplitInChunks(line, 4)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	evmCall, err := ctx.getCall(chunks[0], "EVM_KECCACK")
-	if err != nil {
-		return err
-	}
-
-	// THOUGHTS: KeccakPreimages is a map[string]string to ease navigation, as the idea is
-	//           to walk down the hashed value with it's preimage and do that recursively
-	//           in the map to find the original key. As such, it's much easier if each element
-	//           is of the same representation.
-	//
-	//           This is at the expense of storage cost as we store information in a less compact
-	//           way know. Would need to see if the storage is really that much decreased when
-	//           stored as map[[]byte][]byte (is that possible in Golang and in Protobuf?).
-	if evmCall.KeccakPreimages == nil {
-		evmCall.KeccakPreimages = make(map[string]string)
-	}
-
-	evmCall.KeccakPreimages[chunks[1]] = chunks[2]
-
-	return nil
-}
-
-// Formats
-// DMLOG TRX_FROM <ADDRESS>
-func (ctx *parseCtx) readTrxFrom(line string) error {
-	chunks, err := SplitInChunks(line, 2)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
+// DMLOG END_TRANSACTION 223182562500
+func (ctx *parseCtx) readEndTransaction(line string) error {
 	if ctx.currentTrace == nil {
 		return fmt.Errorf("no matching BEGIN_APPLY_TRX")
 	}
 
-	ctx.currentTrace.From = FromHex(chunks[0], "TRX_FROM from")
+	trxTrace := ctx.currentTrace
 
-	if len(ctx.currentTrace.Calls) == 1 && len(ctx.currentRootCall.Caller) == 0 {
-		ctx.currentRootCall.Caller = ctx.currentTrace.From
-	}
+	//chunks, err := SplitInBoundedChunks(line, 6)
+	//if err != nil {
+	//	return fmt.Errorf("split: %s", err)
+	//}
+	//
+	//gasUsed := chunks[0]
+
+	ctx.transactionTraces = append(ctx.transactionTraces, trxTrace)
+	ctx.currentTrace = nil
 	return nil
 }
 
 // Formats
-// DMLOG ACCOUNT_WITHOUT_CODE <CALL_INDEX>
-func (ctx *parseCtx) readAccountWithoutCode(line string) error {
-	chunks, err := SplitInChunks(line, 2)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
+// DMLOG END_BLOCK 20 `EQnM2hdJyVeNNEMip6dotf3vNXb2SMZpRJC5uipg54MY`
+func (ctx *parseCtx) readEndBlock(line string) (*pbcodec.Block, error) {
+	if ctx.currentBlock == nil {
+		return nil, fmt.Errorf("no block started")
 	}
 
-	evmCall, err := ctx.getCall(chunks[0], "ACCOUNT_WITHOUT_CODE")
-	if err != nil {
-		return err
-	}
-
-	evmCall.ExecutedCode = false
-	return nil
-}
-
-// Formats
-// DMLOG ADD_LOG <CALL_INDEX> <BLOCK_INDEX> <CONTRACT_ADDRESS> <TOPICS> <DATA>
-func (ctx *parseCtx) readAddLog(line string) error {
-	chunks, err := SplitInChunks(line, 6)
-	if err != nil {
-		return fmt.Errorf("split: %s", err)
-	}
-
-	if ctx.currentTrace == nil {
-		return fmt.Errorf("no previous transaction context")
-	}
-
-	callIndex := chunks[0]
-	blockIndex, err := strconv.ParseInt(chunks[1], 10, 32)
-	if err != nil {
-		return err
-	}
-
-	address := FromHex(chunks[2], "ADD_LOG address")
-	topicStrings := strings.Split(chunks[3], ",")
-
-	topics := make([][]byte, len(topicStrings))
-	for i, topicString := range topicStrings {
-		topics[i] = FromHex(topicString, fmt.Sprintf("TOPIC %d", i))
-	}
-	data := FromHex(chunks[4], "ADD_LOG data")
-
-	var evmCall *pbcodec.Call
-	if callIndex == "0" {
-		// We have a trace active, so let's add it to it's root call
-		evmCall = ctx.currentRootCall
-	} else {
-		evmCall, err = ctx.getCall(callIndex, "ADD_LOG")
-		if err != nil {
-			return err
-		}
-	}
-
-	logIndex := ctx.currentTraceLogCount
-	ctx.currentTraceLogCount++
-
-	evmCall.Logs = append(evmCall.Logs, &pbcodec.Log{
-		Address:    address,
-		Index:      uint32(logIndex),
-		BlockIndex: uint32(blockIndex),
-		Data:       data,
-		Topics:     topics,
-	})
-
-	return nil
-}
-
-// getCall returns the Call from the call stack, by index
-func (ctx *parseCtx) getCall(indexString string, tag string) (*pbcodec.Call, error) {
-	if ctx.currentTrace == nil {
-		return nil, fmt.Errorf("no previous transaction context")
-	}
-
-	index, err := strconv.ParseInt(indexString, 10, 32)
-	if err != nil {
-		return nil, err
-	}
-
-	idx := int(index)
-	if idx <= 0 || idx > len(ctx.currentTrace.Calls) {
-		return nil, fmt.Errorf("%s call %s doesn't exist, evm call stack depth is %d", tag, indexString, len(ctx.currentTrace.Calls))
-	}
-
-	return ctx.currentTrace.Calls[idx-1], nil
+	block := ctx.currentBlock
+	ctx.transactionTraces = nil
+	ctx.currentBlock = nil
+	ctx.stats.log()
+	return block, nil
 }
 
 // splitInChunks split the line in `count` chunks and returns the slice `chunks[1:count]` (so exclusive end), but verifies
@@ -1197,25 +273,4 @@ func SplitInBoundedChunks(line string, count int) ([]string, error) {
 	}
 
 	return chunks[1:count], nil
-}
-
-func Has0xPrefix(input string) bool {
-	return len(input) >= 2 && input[0] == '0' && (input[1] == 'x' || input[1] == 'X')
-}
-
-func normalizeSignaturePoint(value []byte) []byte {
-	if len(value) == 0 {
-		return value
-	}
-
-	if len(value) < 32 {
-		offset := 32 - len(value)
-
-		out := make([]byte, 32)
-		copy(out[offset:32], value)
-
-		return out
-	}
-
-	return value[0:32]
 }
