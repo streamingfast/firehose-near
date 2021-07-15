@@ -189,9 +189,10 @@ func (ctx *parseCtx) readStartBlock(line string) error {
 
 	ctx.stats = newParsingStats(blockNum)
 	ctx.currentBlock = &pbcodec.Block{
-		Number: blockNum,
-		Hash:   []byte(chunks[1]),
 		Ver:    1,
+		Hash:   []byte(chunks[1]),
+		Number: blockNum,
+		Size:   1, // SHOULD REMOVE THIS
 	}
 
 	return nil
@@ -212,7 +213,8 @@ func (ctx *parseCtx) readStartTransaction(line string) error {
 
 	hash := chunks[0]
 	ctx.currentTrace = &pbcodec.TransactionTrace{
-		Hash: []byte(hash),
+		Receiver: []byte(hash), // change it to a string
+		Hash:     []byte(hash),
 	}
 
 	return nil
@@ -234,7 +236,7 @@ func (ctx *parseCtx) readEndTransaction(line string) error {
 	//
 	//gasUsed := chunks[0]
 
-	ctx.transactionTraces = append(ctx.transactionTraces, trxTrace)
+	ctx.currentBlock.TransactionTraces = append(ctx.currentBlock.TransactionTraces, trxTrace)
 	ctx.currentTrace = nil
 	return nil
 }
