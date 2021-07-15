@@ -122,28 +122,18 @@ func nodeFactoryFunc(isMindreader bool, appLogger, nodeLogger **zap.Logger) func
 func registerCommonNodeFlags(cmd *cobra.Command, isMindreader bool) {
 	prefix := "node-"
 	managerAPIAddr := NodeManagerAPIAddr
-	defaultEnforcedPeers := ""
 	if isMindreader {
 		prefix = "mindreader-node-"
 		managerAPIAddr = MindreaderNodeManagerAPIAddr
-		defaultEnforcedPeers = "localhost" + NodeManagerAPIAddr
 	}
 
 	cmd.Flags().String(prefix+"path", "neard", "command that will be launched by the node manager")
 	cmd.Flags().String(prefix+"data-dir", "{dfuse-data-dir}/{node-role}/data", "Directory for node data ({node-role} is either mindreader, peering or dev-miner)")
 	cmd.Flags().Bool(prefix+"debug-deep-mind", false, "[DEV] Prints deep mind instrumentation logs to standard output, should be use for debugging purposes only")
 	cmd.Flags().Bool(prefix+"log-to-zap", true, "Enable all node logs to transit into node's logger directly, when false, prints node logs directly to stdout")
-
 	cmd.Flags().String(prefix+"arguments", "", "If not empty, overrides the list of default node arguments (computed from node type and role). Start with '+' to append to default args instead of replacing. You can use the {public-ip} token, that will be matched against space-separated hostname:IP pairs in PUBLIC_IPS env var, taking hostname from HOSTNAME env var.")
-	cmd.Flags().String(prefix+"ipc-path", "{dfuse-data-dir}/{node-role}/ipc", "IPC path cannot be more than 64chars on geth and lachesis")
-
-	cmd.Flags().String(prefix+"manager-api-addr", managerAPIAddr, "Ethereum node manager API address")
+	cmd.Flags().String(prefix+"manager-api-addr", managerAPIAddr, "Near node manager API address")
 	cmd.Flags().Duration(prefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")
-
-	cmd.Flags().String(prefix+"bootstrap-data-url", "", "URL (file or gs) to either a genesis.json file or a .tar.zst archive to decompress in the datadir. Only used when bootstrapping (no prior data)")
-	cmd.Flags().String(prefix+"enforce-peers", defaultEnforcedPeers, "Comma-separated list of dfuse operator nodes that will be queried for an 'enode' value and added as a peer")
-
-	cmd.Flags().StringSlice(prefix+"backups", []string{}, "Repeatable, space-separated key=values definitions for backups. Example: 'type=gke-pvc-snapshot prefix= tag=v1 freq-blocks=1000 freq-time= project=myproj'")
 
 }
 
