@@ -25,34 +25,38 @@ func nodeFactoryFunc(isMindreader bool, appLogger, nodeLogger **zap.Logger) func
 	return func(runtime *launcher.Runtime) (launcher.App, error) {
 		dfuseDataDir := runtime.AbsDataDir
 
-		prefix := "node-"
-		nodeRole := viper.GetString("node-role")
+		flagPrefix := "node-"
+		nodeRole := "peering"
 		if isMindreader {
-			prefix = "mindreader-node-"
+			flagPrefix = "mindreader-node-"
 			nodeRole = "mindreader"
 		}
 
-		nodePath := viper.GetString(prefix + "path")
-		nodeDataDir := replaceNodeRole(nodeRole, mustReplaceDataDir(dfuseDataDir, viper.GetString(prefix+"data-dir")))
-		configFile := replaceNodeRole(nodeRole, viper.GetString(prefix+"config-file"))
-		genesisFile := replaceNodeRole(nodeRole, viper.GetString(prefix+"genesis-file"))
-		nodeKeyFile := replaceNodeRole(nodeRole, viper.GetString(prefix+"node-key-file"))
-		readinessMaxLatency := viper.GetDuration(prefix + "readiness-max-latency")
-		debugDeepMind := viper.GetBool(prefix + "debug-deep-mind")
-		logToZap := viper.GetBool(prefix + "log-to-zap")
+		nodePath := viper.GetString(flagPrefix + "path")
+		nodeDataDir := replaceNodeRole(nodeRole, mustReplaceDataDir(dfuseDataDir, viper.GetString(flagPrefix+"data-dir")))
+		configFile := replaceNodeRole(nodeRole, viper.GetString(flagPrefix+"config-file"))
+		genesisFile := replaceNodeRole(nodeRole, viper.GetString(flagPrefix+"genesis-file"))
+		nodeKeyFile := replaceNodeRole(nodeRole, viper.GetString(flagPrefix+"node-key-file"))
+		readinessMaxLatency := viper.GetDuration(flagPrefix + "readiness-max-latency")
+		debugDeepMind := viper.GetBool(flagPrefix + "debug-deep-mind")
+		logToZap := viper.GetBool(flagPrefix + "log-to-zap")
 		shutdownDelay := viper.GetDuration("common-system-shutdown-signal-delay") // we reuse this global value
-		managerAPIAddress := viper.GetString(prefix + "manager-api-addr")
+		managerAPIAddress := viper.GetString(flagPrefix + "manager-api-addr")
 
 		nodeArguments, err := buildNodeArguments(
 			nodeDataDir,
-			viper.GetString(prefix+"arguments"),
+			flagPrefix,
 			nodeRole,
 		)
 		if err != nil {
 			return nil, fmt.Errorf("cannot build node bootstrap arguments")
 		}
+		extraArgs := getExtraArguments(flagPrefix)
+		if len(extraArgs) > 0 {
+			nodeArguments = append(nodeArguments, extraArgs...)
+		}
 
-		metricsAndReadinessManager := buildMetricsAndReadinessManager(prefix, readinessMaxLatency)
+		metricsAndReadinessManager := buildMetricsAndReadinessManager(flagPrefix, readinessMaxLatency)
 
 		superviser := nodemanager.NewSuperviser(
 			nodePath,
@@ -186,36 +190,27 @@ func registerCommonNodeFlags(cmd *cobra.Command, isMindreader bool) {
 	cmd.Flags().String(prefix+"node-key-file", "./{node-role}/node_key.json", "Node key configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {dfuse-data-dir}/{node-role}/data folder")
 	cmd.Flags().Bool(prefix+"debug-deep-mind", false, "[DEV] Prints deep mind instrumentation logs to standard output, should be use for debugging purposes only")
 	cmd.Flags().Bool(prefix+"log-to-zap", true, "Enable all node logs to transit into node's logger directly, when false, prints node logs directly to stdout")
-	cmd.Flags().String(prefix+"arguments", "", "If not empty, overrides the list of default node arguments (computed from node type and role). Start with '+' to append to default args instead of replacing. You can use the {public-ip} token, that will be matched against space-separated hostname:IP pairs in PUBLIC_IPS env var, taking hostname from HOSTNAME env var.")
 	cmd.Flags().String(prefix+"manager-api-addr", managerAPIAddr, "Near node manager API address")
 	cmd.Flags().Duration(prefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")
-
+	cmd.Flags().String(prefix+"node-boot-nodes", "ed25519:Abhsyd856iWybo6mZ1tifZqRsmtrNpLRLjxhYBWknoUo@127.0.0.1:24560", "Set the node's boot nodes to bootstrap network from")
+	cmd.Flags().String(prefix+"node-extra-arguments", "", "Extra arguments to be passed when executing superviser binary")
 }
 
 type nodeArgsByRole map[string]string
 
-func buildNodeArguments(nodeDataDir, providedArgs, nodeRole string) ([]string, error) {
+func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string) ([]string, error) {
 	typeRoles := nodeArgsByRole{
 		"peering":    "--home={node-data-dir} run",
 		"mindreader": "--home={node-data-dir} run",
 	}
 
-	args, ok := typeRoles[nodeRole]
+	roleArgs, ok := typeRoles[nodeRole]
 	if !ok {
 		return nil, fmt.Errorf("invalid node role: %s", nodeRole)
 	}
-
-	if providedArgs != "" {
-		if strings.HasPrefix(providedArgs, "+") {
-			args += " " + strings.TrimLeft(providedArgs, "+")
-		} else {
-			args = providedArgs // discard info provided by node type / role
-		}
-	}
-
-	args = strings.Replace(args, "{node-data-dir}", nodeDataDir, -1)
-
-	return strings.Fields(args), nil
+	args := strings.Fields(strings.Replace(roleArgs, "{node-data-dir}", nodeDataDir, -1))
+	args = append(args, "--boot-nodes", viper.GetString(flagPrefix+"node-boot-nodes"))
+	return args, nil
 }
 
 func buildMetricsAndReadinessManager(name string, maxLatency time.Duration) *nodeManager.MetricsAndReadinessManager {
@@ -228,4 +223,14 @@ func buildMetricsAndReadinessManager(name string, maxLatency time.Duration) *nod
 		maxLatency,
 	)
 	return metricsAndReadinessManager
+}
+
+func getExtraArguments(prefix string) (out []string) {
+	extraArguments := viper.GetString(prefix + "-node-extra-arguments")
+	if extraArguments != "" {
+		for _, arg := range strings.Split(extraArguments, " ") {
+			out = append(out, arg)
+		}
+	}
+	return
 }
