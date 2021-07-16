@@ -11,12 +11,13 @@ const (
 	RelayerServingAddr           string = ":13011"
 	FirehoseGRPCServingAddr      string = ":13042"
 
+	MergedBlocksStoreURL string = "file://{dfuse-data-dir}/storage/merged-blocks"
+	OneBlockStoreURL     string = "file://{dfuse-data-dir}/storage/one-blocks"
+
 	//Protocol                     = pbbstream.Protocol_ETH
 	//TrxdbDSN              string = "badger://{dfuse-data-dir}/storage/trxdb"
 	//StateDBDSN            string = "badger://{dfuse-data-dir}/storage/statedb"
-	//MergedBlocksStoreURL  string = "file://{dfuse-data-dir}/storage/merged-blocks"
 	//IndicesStoreURL       string = "file://{dfuse-data-dir}/storage/indexes"
-	//OneBlockStoreURL      string = "file://{dfuse-data-dir}/storage/one-blocks"
 	//SnapshotsURL          string = "file://{dfuse-data-dir}/storage/snapshots"
 	//DmeshDSN              string = "local://"
 	//DmeshServiceVersion   string = "v1"
