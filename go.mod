@@ -5,16 +5,20 @@ go 1.16
 require (
 	github.com/ShinyTrinkets/overseer v0.3.0
 	github.com/dfuse-io/bstream v0.0.2-0.20210218160250-ce6144227e87
+	github.com/dfuse-io/dauth v0.0.0-20210330175213-9154c2cf75be
 	github.com/dfuse-io/dbin v0.0.0-20200406215642-ec7f22e794eb
 	github.com/dfuse-io/derr v0.0.0-20201001203637-4dc9d8014152
-	github.com/dfuse-io/dgrpc v0.0.0-20210128133958-db1ca95920e4
+	github.com/dfuse-io/dgrpc v0.0.0-20210424033943-10e04dd5b19c
 	github.com/dfuse-io/dlauncher v0.0.0-20210401132540-cc35cfce1757
+	github.com/dfuse-io/dmetering v0.0.0-20210208201314-50d9add52005
+	github.com/dfuse-io/dmetrics v0.0.0-20200508170817-3b8cb01fee68
+	github.com/dfuse-io/firehose v0.1.1-0.20210424034522-6e5c05a23323
 	github.com/dfuse-io/logging v0.0.0-20210109005628-b97a57253f70
 	github.com/dfuse-io/merger v0.0.3-0.20210226144304-7e370a347999
 	github.com/dfuse-io/node-manager v0.0.2-0.20210716050720-2c168713e51c
 	github.com/dfuse-io/pbgo v0.0.6-0.20210429181308-d54fc7723ad3
+	github.com/dfuse-io/relayer v0.0.2-0.20210525190602-eeec872ddedf
 	github.com/golang/protobuf v1.5.2
-	github.com/kr/pretty v0.2.0 // indirect
 	github.com/lithammer/dedent v1.1.0
 	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/spf13/cobra v1.2.1

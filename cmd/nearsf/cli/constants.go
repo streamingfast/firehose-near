@@ -7,8 +7,9 @@ const (
 	MindreaderNodeManagerAPIAddr string = ":13009"
 	MindreaderNodeP2PPort        string = "30305"
 	MindreaderNodeRPCPort        string = "8547"
-
-	MergerServingAddr string = ":13012"
+	MergerServingAddr            string = ":13012"
+	RelayerServingAddr           string = ":13011"
+	FirehoseGRPCServingAddr      string = ":13042"
 
 	//Protocol                     = pbbstream.Protocol_ETH
 	//TrxdbDSN              string = "badger://{dfuse-data-dir}/storage/trxdb"
@@ -25,7 +26,6 @@ const (
 	//
 	//MindreaderNodeManagerAPIAddr   string = ":13009"
 
-	//RelayerServingAddr             string = ":13011"
 	//AbiServingAddr                 string = ":13013"
 	//BlockmetaServingAddr           string = ":13014"
 	//ArchiveServingAddr             string = ":13015"
