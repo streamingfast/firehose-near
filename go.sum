@@ -258,6 +258,10 @@ github.com/dfuse-io/merger v0.0.3-0.20210226144304-7e370a347999/go.mod h1:Dp769a
 github.com/dfuse-io/node-manager v0.0.2-0.20210716050720-2c168713e51c h1:opeiMP6UvQwZsXp9Ruwd3PsTvQ942Sc4ocqDbxGg2cc=
 github.com/dfuse-io/node-manager v0.0.2-0.20210716050720-2c168713e51c/go.mod h1:WK0Me9rZzE+FFEvHZJnxc0i4vMB4EJ5z/jfQgSY22bs=
 github.com/dfuse-io/opaque v0.0.0-20210108174126-bc02ec905d48 h1:nf8r2ROrv80taXLyyUXXtK2ugnn+x2Qd2nABRZAQAHA=
+github.com/dfuse-io/node-manager v0.0.1 h1:XSLryOrNpYJPW/AgRDAV3T/DDrKaqcINsuuklkl8f/Q=
+github.com/dfuse-io/node-manager v0.0.2-0.20210510211158-85801370a2bf h1:ztmsuL+mvA8C9iCFMNTIZzMa0NqJj+ut3gvhhu7KaF4=
+github.com/dfuse-io/node-manager v0.0.2-0.20210510211158-85801370a2bf/go.mod h1:WK0Me9rZzE+FFEvHZJnxc0i4vMB4EJ5z/jfQgSY22bs=
+github.com/dfuse-io/node-manager v0.0.2-0.20210716050720-2c168713e51c/go.mod h1:WK0Me9rZzE+FFEvHZJnxc0i4vMB4EJ5z/jfQgSY22bs=
 github.com/dfuse-io/opaque v0.0.0-20210108174126-bc02ec905d48/go.mod h1:wsfF2LBZEXeCgvz8ic4lcDN8NlPw3TiPAWXimHXeswk=
 github.com/dfuse-io/overseer v0.2.1-0.20210326144022-ee491780e3ef h1:WxHxSPrlZyIVajMLPVBSGJqdJjhxpvu9nNxKu2neOtc=
 github.com/dfuse-io/overseer v0.2.1-0.20210326144022-ee491780e3ef/go.mod h1:cq8CvbZ3ioFmGrHokSAJalS0lC+pVXLKhITScItUGXY=
