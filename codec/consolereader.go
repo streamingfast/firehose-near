@@ -77,11 +77,8 @@ type parseCtx struct {
 	currentBlock *pbcodec.Block
 	currentTrace *pbcodec.TransactionTrace
 
-	transactionTraces   []*pbcodec.TransactionTrace
-	evmCallStackIndexes []int32
-
-	blockStoreURL string
-	stats         *parsingStats
+	transactionTraces []*pbcodec.TransactionTrace
+	stats             *parsingStats
 }
 
 func (c *ConsoleReader) Read() (out interface{}, err error) {
@@ -127,14 +124,13 @@ func (c *ConsoleReader) next(readType int) (out interface{}, err error) {
 
 		case strings.HasPrefix(line, "END_BLOCK"):
 			return ctx.readEndBlock(line)
-		case strings.HasPrefix(line, "APPLY_CHUNKS"):
-		case strings.HasPrefix(line, "BEFORE_APPLY_CHUNKS"):
-		case strings.HasPrefix(line, "CREATE_RECEIPT"):
-		case strings.HasPrefix(line, "COMPLETED_LOCAL_RECEIPT"):
-		case strings.HasPrefix(line, "COMPLETED_DELAYED_RECEIPT"):
-		case strings.HasPrefix(line, "COMPLETED_SHARDED_RECEIPT"):
+
 		default:
-			return nil, fmt.Errorf("unsupported log line: %q", line)
+			if traceEnabled {
+				zlog.Debug("skipping known log line", zap.String("line", line))
+			}
+
+			continue
 		}
 
 		if err != nil {

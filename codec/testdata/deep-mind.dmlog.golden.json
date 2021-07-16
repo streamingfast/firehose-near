@@ -1,0 +1,13 @@
+[{
+  "ver": 1,
+  "hash": "YERaS0d1VU5kRzZQUng2UHlBYW5mdWZ6NDJzTUxZN2U4UDloV2s1Z1VDM0RGYA==",
+  "number": 32,
+  "size": 1,
+  "transaction_traces": [
+    {
+      "receiver": "YDhRV2VxUUpKNEVHU0Y4b0ZCdTFCY1F1OUR2cjFhWUFWVGluQ1ZGWGdjQVBg",
+      "hash": "YDhRV2VxUUpKNEVHU0Y4b0ZCdTFCY1F1OUR2cjFhWUFWVGluQ1ZGWGdjQVBg"
+    }
+  ]
+}
+]

@@ -16,6 +16,7 @@ package codec
 
 import (
 	"bytes"
+	"encoding/json"
 	"io"
 	"io/ioutil"
 	"os"
@@ -24,7 +25,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/dfuse-io/jsonpb"
 	"github.com/dfuse-io/logging"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
@@ -57,9 +57,8 @@ func TestParseFromFile(t *testing.T) {
 			cr := testFileConsoleReader(t, test.deepMindFile)
 			buf := &bytes.Buffer{}
 			buf.Write([]byte("["))
-			first := true
 
-			for {
+			for first := true; true; first = false {
 				var reader ObjectReader = cr.Read
 				if test.readTransaction {
 					reader = func() (interface{}, error) {
@@ -72,9 +71,15 @@ func TestParseFromFile(t *testing.T) {
 					if !first {
 						buf.Write([]byte(","))
 					}
-					first = false
 
-					value, err := jsonpb.MarshalIndentToString(v, "  ")
+					// FIXMME: jsonpb needs to be updated to latest version of used gRPC
+					//         elements. We are disaligned and using that breaks now.
+					//         Needs to check what is the latest way to properly serialize
+					//         Proto generated struct to JSON.
+					// value, err := jsonpb.MarshalIndentToString(v, "  ")
+					// require.NoError(t, err)
+
+					value, err := json.MarshalIndent(v, "", "  ")
 					require.NoError(t, err)
 
 					buf.Write([]byte(value))
