@@ -109,6 +109,7 @@ github.com/bgentry/speakeasy v0.1.0/go.mod h1:+zsyZBPWlz7T6j88CTgSN5bM796AkVf0kB
 github.com/bketelsen/crypt v0.0.4/go.mod h1:aI6NrJ0pMGgvZKL1iVgXLnfIFJtfV+bKCoqOes/6LfM=
 github.com/blendle/zapdriver v1.3.1 h1:C3dydBOWYRiOk+B8X9IVZ5IOe+7cl+tGOexN4QqHfpE=
 github.com/blendle/zapdriver v1.3.1/go.mod h1:mdXfREi6u5MArG4j9fewC+FGnXaBR+T4Ox4J2u4eHCc=
+github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869/go.mod h1:Ekp36dRnpXw/yCqJaO+ZrUyxD+3VXMFFr56k5XYrpB4=
 github.com/census-instrumentation/opencensus-proto v0.2.1 h1:glEXhBS5PSLLv4IXzLA5yPRVX4bilULVyxxbrfOtDAk=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/cespare/xxhash v1.1.0 h1:a6HrQnmkObjyL+Gs60czilIUGqrzKutQD6XZog3p+ko=
@@ -165,6 +166,7 @@ github.com/dfuse-io/dgrpc v0.0.0-20201215171222-11bde2006cf9 h1:3nbOI8JIVYnG07KZ
 github.com/dfuse-io/dgrpc v0.0.0-20201215171222-11bde2006cf9/go.mod h1:DANTlPl++VJnjf/wFlLrFQ1GJBSNoieP5808WQJfl9o=
 github.com/dfuse-io/dgrpc v0.0.0-20210128133958-db1ca95920e4 h1:gg+euP5SrnW1Bym6a2kpteAmNGKSVVY8OtDAtuyCv3E=
 github.com/dfuse-io/dgrpc v0.0.0-20210128133958-db1ca95920e4/go.mod h1:SQUqYjDen2kzhbM+pvNceNtbevla8o7eNX8idtDJDHA=
+github.com/dfuse-io/dhammer v0.0.0-20201127174908-667b90585063/go.mod h1:oZddPdIkulFkFWxsxyOY0cavd2+kSjpxLOYgtZAZeNE=
 github.com/dfuse-io/dlauncher v0.0.0-20210401132540-cc35cfce1757 h1:wWPkO99zQMjHGh/g7XRXfflcldvT6CExj922ujPxCGQ=
 github.com/dfuse-io/dlauncher v0.0.0-20210401132540-cc35cfce1757/go.mod h1:JZZ1oOCX9rw9Jm6W8Hqe7bZmTex1Nqby0dL6w4b7Tuo=
 github.com/dfuse-io/dmesh v0.0.0-20210224224128-9a9ef510dce1 h1:4dcAcoEd+Q8Khj9zhOVeTQ45y+wzVCU35yyT5eQB87I=
@@ -185,6 +187,7 @@ github.com/dfuse-io/logging v0.0.0-20200406213449-45fc25dc6a8d/go.mod h1:80YyilH
 github.com/dfuse-io/logging v0.0.0-20200407175011-14021b7a79af/go.mod h1:80YyilHcgoqrnoIeeJKgcsOw6Y/0/bQzDO/XzNIrIdM=
 github.com/dfuse-io/logging v0.0.0-20200417143534-5e26069a5e39 h1:vQL3ZKf3mUWvp4hdqCKYJ3J80lshaS/DYE2pB24hWOQ=
 github.com/dfuse-io/logging v0.0.0-20200417143534-5e26069a5e39/go.mod h1:80YyilHcgoqrnoIeeJKgcsOw6Y/0/bQzDO/XzNIrIdM=
+github.com/dfuse-io/logging v0.0.0-20201120222745-9988f63324bc/go.mod h1:n0Np6Dr/Yv56l8Rq2wgDZpv4vfjT8qlvY34pb3dcI0k=
 github.com/dfuse-io/logging v0.0.0-20210109005628-b97a57253f70 h1:CuJS05R9jmNlUK8GOxrEELPbfXm0EuGh/30LjkjN5vo=
 github.com/dfuse-io/logging v0.0.0-20210109005628-b97a57253f70/go.mod h1:EoK/8RFbMEteaCaz89uessDTnCWjbbcr+DXcBh4el5o=
 github.com/dfuse-io/node-manager v0.0.1 h1:XSLryOrNpYJPW/AgRDAV3T/DDrKaqcINsuuklkl8f/Q=
@@ -199,6 +202,8 @@ github.com/dfuse-io/pbgo v0.0.6-0.20200602201455-99986ef5a09d/go.mod h1:thG/VHT3
 github.com/dfuse-io/pbgo v0.0.6-0.20210108215028-712d6889e94a/go.mod h1:dbo6DfMDndlPjbJSTZ7Vw/25oKfKg3zzuia+RseeMkU=
 github.com/dfuse-io/pbgo v0.0.6-0.20210125181705-b17235518132 h1:xjkqVo6at6RDdkRGhb3QYZmXIsHq1uq2neMOQprLh/w=
 github.com/dfuse-io/pbgo v0.0.6-0.20210125181705-b17235518132/go.mod h1:dbo6DfMDndlPjbJSTZ7Vw/25oKfKg3zzuia+RseeMkU=
+github.com/dfuse-io/pbgo v0.0.6-0.20210429181308-d54fc7723ad3 h1:ehPpHr7Fj6Ai/PzL3Owjtga600MRRtRx0TvLv3b0pX4=
+github.com/dfuse-io/pbgo v0.0.6-0.20210429181308-d54fc7723ad3/go.mod h1:dbo6DfMDndlPjbJSTZ7Vw/25oKfKg3zzuia+RseeMkU=
 github.com/dfuse-io/shutter v1.4.1-0.20200319040708-c809eec458e6/go.mod h1:2mLf0v+n8J8NI7F6L6avYaRNfa6XECB6CP3WO8rRx88=
 github.com/dfuse-io/shutter v1.4.1-0.20200407040739-f908f9ab727f h1:3T9cxfuDYZqWaP/5FUi01UqbCXmcCKsndF4q5LBJr+U=
 github.com/dfuse-io/shutter v1.4.1-0.20200407040739-f908f9ab727f/go.mod h1:DNhYoTwU0YjpH3nixaqytVJ43uTe/4SahfipE221e68=
@@ -412,6 +417,7 @@ github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381/go.mod h1:7rIyQ
 github.com/logrusorgru/aurora v2.0.3+incompatible h1:tOpm7WcpBTn4fjmVfgpQq0EfczGlG91VSDkswnjF5A8=
 github.com/logrusorgru/aurora v2.0.3+incompatible/go.mod h1:7rIyQOR62GCctdiQpZ/zOJlFyk6y+94wXzv6RNZgaR4=
 github.com/lunixbochs/vtclean v0.0.0-20180621232353-2d01aacdc34a/go.mod h1:pHhQNgMf3btfWnGBVipUOjRYhoOsdGqdm/+2c2E2WMI=
+github.com/lytics/lifecycle v0.0.0-20130117214539-7b4c4028d422/go.mod h1:E8kU8C8dGPj2zMi5ofP4+qGu9FH1tsPdboOTYjUoA0U=
 github.com/magiconair/properties v1.8.0/go.mod h1:PppfXfuXeibc/6YijjN8zIbojt8czPbwD3XqdrwzmxQ=
 github.com/magiconair/properties v1.8.1/go.mod h1:PppfXfuXeibc/6YijjN8zIbojt8czPbwD3XqdrwzmxQ=
 github.com/magiconair/properties v1.8.5 h1:b6kJs+EmPFMYGkow9GiUyCyOvIwYetYJ3fSaWak/Gls=
@@ -623,6 +629,7 @@ go.uber.org/tools v0.0.0-20190618225709-2cfd321de3ee/go.mod h1:vJERXedbb3MVM5f9E
 go.uber.org/zap v1.10.0/go.mod h1:vwi/ZaCAaUcBkycHslxD9B2zi4UTXhF60s6SWpuDF0Q=
 go.uber.org/zap v1.14.0/go.mod h1:zwrFLgMcdUuIBviXEYEH1YKNaOBnKXsx2IPda5bBwHM=
 go.uber.org/zap v1.14.1/go.mod h1:Mb2vm2krFEG5DV0W9qcHBYFtp/Wku1cvYaqPsS/WYfc=
+go.uber.org/zap v1.15.0/go.mod h1:Mb2vm2krFEG5DV0W9qcHBYFtp/Wku1cvYaqPsS/WYfc=
 go.uber.org/zap v1.16.0/go.mod h1:MA8QOfq0BHJwdXa996Y4dYkAqRKB8/1K1QMMZVaNZjQ=
 go.uber.org/zap v1.17.0/go.mod h1:MXVU+bhUf/A7Xi2HNOnopQOrmycQ5Ih87HtOu4q5SSo=
 go.uber.org/zap v1.18.1 h1:CSUJ2mjFszzEWt4CdKISEuChVIXGBn3lAPwkRGyVrc4=

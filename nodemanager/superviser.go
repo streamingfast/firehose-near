@@ -3,7 +3,6 @@ package nodemanager
 import (
 	"fmt"
 	"net"
-	"regexp"
 	"strconv"
 	"strings"
 	"sync"
@@ -16,8 +15,6 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
-
-var enodeRegexp = regexp.MustCompile(`enode://([a-f0-9]*)@.*$`)
 
 type Superviser struct {
 	*superviser.Superviser

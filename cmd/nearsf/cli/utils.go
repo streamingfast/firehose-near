@@ -16,6 +16,7 @@ package cli
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
@@ -77,6 +78,24 @@ func makeDirs(directories []string) error {
 
 func dfuseAbsoluteDataDir() (string, error) {
 	return filepath.Abs(viper.GetString("global-data-dir"))
+}
+
+func copyFile(in, out string) error {
+	reader, err := os.Open(in)
+	if err != nil {
+		return fmt.Errorf("open file: %w", err)
+	}
+
+	writer, err := os.Create(out)
+	if err != nil {
+		return fmt.Errorf("create file: %w", err)
+	}
+
+	if _, err := io.Copy(writer, reader); err != nil {
+		return fmt.Errorf("copy content: %w", err)
+	}
+
+	return nil
 }
 
 //var gethVersionRegexp = regexp.MustCompile("Version: ([0-9]+)\\.([0-9]+)\\.([0-9]+)(-(.*))?")
