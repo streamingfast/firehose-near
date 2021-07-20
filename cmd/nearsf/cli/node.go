@@ -192,7 +192,7 @@ func registerCommonNodeFlags(cmd *cobra.Command, isMindreader bool) {
 	cmd.Flags().Bool(prefix+"log-to-zap", true, "Enable all node logs to transit into node's logger directly, when false, prints node logs directly to stdout")
 	cmd.Flags().String(prefix+"manager-api-addr", managerAPIAddr, "Near node manager API address")
 	cmd.Flags().Duration(prefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")
-	cmd.Flags().String(prefix+"node-boot-nodes", "ed25519:Abhsyd856iWybo6mZ1tifZqRsmtrNpLRLjxhYBWknoUo@127.0.0.1:24560", "Set the node's boot nodes to bootstrap network from")
+	cmd.Flags().String(prefix+"node-boot-nodes", "", "Set the node's boot nodes to bootstrap network from")
 	cmd.Flags().String(prefix+"node-extra-arguments", "", "Extra arguments to be passed when executing superviser binary")
 }
 
@@ -209,7 +209,12 @@ func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string) ([]string, err
 		return nil, fmt.Errorf("invalid node role: %s", nodeRole)
 	}
 	args := strings.Fields(strings.Replace(roleArgs, "{node-data-dir}", nodeDataDir, -1))
-	args = append(args, "--boot-nodes", viper.GetString(flagPrefix+"node-boot-nodes"))
+
+	bootNodes := viper.GetString(flagPrefix + "node-boot-nodes")
+	if bootNodes != "" {
+		args = append(args, "--boot-nodes", viper.GetString(flagPrefix+"node-boot-nodes"))
+	}
+
 	return args, nil
 }
 
