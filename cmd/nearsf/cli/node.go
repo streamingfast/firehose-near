@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -188,19 +189,22 @@ func (b *bootstrapper) Bootstrap() error {
 	genesisFileInDataDir := filepath.Join(b.nodeDataDir, "genesis.json")
 	nodeKeyFileInDataDir := filepath.Join(b.nodeDataDir, "node_key.json")
 
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+
 	if err := os.MkdirAll(b.nodeDataDir, os.ModePerm); err != nil {
 		return fmt.Errorf("create all dirs of %q: %w", b.nodeDataDir, err)
 	}
 
-	if err := copyFile(b.configFile, configFileInDataDir); err != nil {
+	if err := copyFile(ctx, b.configFile, configFileInDataDir); err != nil {
 		return fmt.Errorf("unable to copy config file %q to %q: %w", b.configFile, configFileInDataDir, err)
 	}
 
-	if err := copyFile(b.genesisFile, genesisFileInDataDir); err != nil {
+	if err := copyFile(ctx, b.genesisFile, genesisFileInDataDir); err != nil {
 		return fmt.Errorf("unable to copy genesis file %q to %q: %w", b.genesisFile, genesisFileInDataDir, err)
 	}
 
-	if err := copyFile(b.nodeKeyFile, nodeKeyFileInDataDir); err != nil {
+	if err := copyFile(ctx, b.nodeKeyFile, nodeKeyFileInDataDir); err != nil {
 		return fmt.Errorf("unable to copy node key file %q to %q: %w", b.nodeKeyFile, nodeKeyFileInDataDir, err)
 	}
 

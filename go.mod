@@ -12,6 +12,7 @@ require (
 	github.com/dfuse-io/dlauncher v0.0.0-20210401132540-cc35cfce1757
 	github.com/dfuse-io/dmetering v0.0.0-20210208201314-50d9add52005
 	github.com/dfuse-io/dmetrics v0.0.0-20200508170817-3b8cb01fee68
+	github.com/dfuse-io/dstore v0.1.1-0.20210507180120-88a95674809f // indirect
 	github.com/dfuse-io/firehose v0.1.1-0.20210424034522-6e5c05a23323
 	github.com/dfuse-io/logging v0.0.0-20210109005628-b97a57253f70
 	github.com/dfuse-io/merger v0.0.3-0.20210226144304-7e370a347999

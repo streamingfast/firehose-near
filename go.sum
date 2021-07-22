@@ -235,6 +235,8 @@ github.com/dfuse-io/dstore v0.1.1-0.20200819043022-7cdd92b6d8a9/go.mod h1:1dqWgm
 github.com/dfuse-io/dstore v0.1.1-0.20200820172424-8e0e519ece2f/go.mod h1:1dqWgmsMTFiBTsMw/7FM7AEBZiJm0/3f78EIR58MajI=
 github.com/dfuse-io/dstore v0.1.1-0.20210203172334-dec78c6098a6 h1:CGUz02WOCotX692P8NysC+ObDTm7RvBbS/RmP7kCtoI=
 github.com/dfuse-io/dstore v0.1.1-0.20210203172334-dec78c6098a6/go.mod h1:1dqWgmsMTFiBTsMw/7FM7AEBZiJm0/3f78EIR58MajI=
+github.com/dfuse-io/dstore v0.1.1-0.20210507180120-88a95674809f h1:XiRaO3pumUY0vClEjaFe/wMp8PJXnhJDJtg0URRMZ2E=
+github.com/dfuse-io/dstore v0.1.1-0.20210507180120-88a95674809f/go.mod h1:1dqWgmsMTFiBTsMw/7FM7AEBZiJm0/3f78EIR58MajI=
 github.com/dfuse-io/dtracing v0.0.0-20200406213603-4b0c0063b125/go.mod h1:SA/v5q2RIuah2W5uvVldEUwfFprEhGiw66Id0j68rtw=
 github.com/dfuse-io/dtracing v0.0.0-20200417133307-c09302668d0c h1:G/qxKHQXz8OGYuyB5fpkLybwlzDRoOFOHfpQehyxNUw=
 github.com/dfuse-io/dtracing v0.0.0-20200417133307-c09302668d0c/go.mod h1:SA/v5q2RIuah2W5uvVldEUwfFprEhGiw66Id0j68rtw=
@@ -255,13 +257,13 @@ github.com/dfuse-io/logging v0.0.0-20210109005628-b97a57253f70 h1:CuJS05R9jmNlUK
 github.com/dfuse-io/logging v0.0.0-20210109005628-b97a57253f70/go.mod h1:EoK/8RFbMEteaCaz89uessDTnCWjbbcr+DXcBh4el5o=
 github.com/dfuse-io/merger v0.0.3-0.20210226144304-7e370a347999 h1:PR8a1VQR1Ree+2qm2+onBpM+swR9r2wTIxaOQJCJp5Y=
 github.com/dfuse-io/merger v0.0.3-0.20210226144304-7e370a347999/go.mod h1:Dp769aARRjBQ9Ur3K5Rl8cQmB29XWueudFa9JOH2f8Q=
-github.com/dfuse-io/node-manager v0.0.2-0.20210716050720-2c168713e51c h1:opeiMP6UvQwZsXp9Ruwd3PsTvQ942Sc4ocqDbxGg2cc=
-github.com/dfuse-io/node-manager v0.0.2-0.20210716050720-2c168713e51c/go.mod h1:WK0Me9rZzE+FFEvHZJnxc0i4vMB4EJ5z/jfQgSY22bs=
-github.com/dfuse-io/opaque v0.0.0-20210108174126-bc02ec905d48 h1:nf8r2ROrv80taXLyyUXXtK2ugnn+x2Qd2nABRZAQAHA=
 github.com/dfuse-io/node-manager v0.0.1 h1:XSLryOrNpYJPW/AgRDAV3T/DDrKaqcINsuuklkl8f/Q=
 github.com/dfuse-io/node-manager v0.0.2-0.20210510211158-85801370a2bf h1:ztmsuL+mvA8C9iCFMNTIZzMa0NqJj+ut3gvhhu7KaF4=
 github.com/dfuse-io/node-manager v0.0.2-0.20210510211158-85801370a2bf/go.mod h1:WK0Me9rZzE+FFEvHZJnxc0i4vMB4EJ5z/jfQgSY22bs=
+github.com/dfuse-io/node-manager v0.0.2-0.20210716050720-2c168713e51c h1:opeiMP6UvQwZsXp9Ruwd3PsTvQ942Sc4ocqDbxGg2cc=
 github.com/dfuse-io/node-manager v0.0.2-0.20210716050720-2c168713e51c/go.mod h1:WK0Me9rZzE+FFEvHZJnxc0i4vMB4EJ5z/jfQgSY22bs=
+github.com/dfuse-io/node-manager v0.0.2-0.20210716050720-2c168713e51c/go.mod h1:WK0Me9rZzE+FFEvHZJnxc0i4vMB4EJ5z/jfQgSY22bs=
+github.com/dfuse-io/opaque v0.0.0-20210108174126-bc02ec905d48 h1:nf8r2ROrv80taXLyyUXXtK2ugnn+x2Qd2nABRZAQAHA=
 github.com/dfuse-io/opaque v0.0.0-20210108174126-bc02ec905d48/go.mod h1:wsfF2LBZEXeCgvz8ic4lcDN8NlPw3TiPAWXimHXeswk=
 github.com/dfuse-io/overseer v0.2.1-0.20210326144022-ee491780e3ef h1:WxHxSPrlZyIVajMLPVBSGJqdJjhxpvu9nNxKu2neOtc=
 github.com/dfuse-io/overseer v0.2.1-0.20210326144022-ee491780e3ef/go.mod h1:cq8CvbZ3ioFmGrHokSAJalS0lC+pVXLKhITScItUGXY=

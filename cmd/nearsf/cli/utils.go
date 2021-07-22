@@ -15,15 +15,16 @@
 package cli
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
 	"strings"
 
+	"github.com/dfuse-io/dstore"
 	"github.com/lithammer/dedent"
 	"github.com/logrusorgru/aurora"
-	"github.com/spf13/viper"
 	"go.uber.org/zap"
 )
 
@@ -76,14 +77,11 @@ func makeDirs(directories []string) error {
 	return nil
 }
 
-func dfuseAbsoluteDataDir() (string, error) {
-	return filepath.Abs(viper.GetString("global-data-dir"))
-}
-
-func copyFile(in, out string) error {
-	reader, err := os.Open(in)
+func copyFile(ctx context.Context, in, out string) error {
+	reader, _, _, err := dstore.OpenObject(ctx, in)
 	if err != nil {
-		return fmt.Errorf("open file: %w", err)
+		return fmt.Errorf("unable : %w", err)
+
 	}
 
 	writer, err := os.Create(out)
