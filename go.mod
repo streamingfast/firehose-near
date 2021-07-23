@@ -16,7 +16,7 @@ require (
 	github.com/dfuse-io/firehose v0.1.1-0.20210424034522-6e5c05a23323
 	github.com/dfuse-io/logging v0.0.0-20210109005628-b97a57253f70
 	github.com/dfuse-io/merger v0.0.3-0.20210226144304-7e370a347999
-	github.com/dfuse-io/node-manager v0.0.2-0.20210716050720-2c168713e51c
+	github.com/dfuse-io/node-manager v0.0.2-0.20210723133121-26b375a773ec
 	github.com/dfuse-io/pbgo v0.0.6-0.20210429181308-d54fc7723ad3
 	github.com/dfuse-io/relayer v0.0.2-0.20210525190602-eeec872ddedf
 	github.com/golang/protobuf v1.5.2
