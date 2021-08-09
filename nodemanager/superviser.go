@@ -8,10 +8,10 @@ import (
 	"sync"
 
 	"github.com/ShinyTrinkets/overseer"
-	nodeManager "github.com/dfuse-io/node-manager"
-	logplugin "github.com/dfuse-io/node-manager/log_plugin"
-	"github.com/dfuse-io/node-manager/metrics"
-	"github.com/dfuse-io/node-manager/superviser"
+	nodeManager "github.com/streamingfast/node-manager"
+	logplugin "github.com/streamingfast/node-manager/log_plugin"
+	"github.com/streamingfast/node-manager/metrics"
+	"github.com/streamingfast/node-manager/superviser"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
