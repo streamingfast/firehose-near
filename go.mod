@@ -13,7 +13,6 @@ require (
 	github.com/dfuse-io/dmetering v0.0.0-20210208201314-50d9add52005
 	github.com/dfuse-io/dmetrics v0.0.0-20200508170817-3b8cb01fee68
 	github.com/dfuse-io/dstore v0.1.1-0.20210507180120-88a95674809f
-	github.com/dfuse-io/firehose v0.1.1-0.20210424034522-6e5c05a23323
 	github.com/dfuse-io/logging v0.0.0-20210109005628-b97a57253f70
 	github.com/dfuse-io/node-manager v0.0.2-0.20210723133121-26b375a773ec
 	github.com/dfuse-io/pbgo v0.0.6-0.20210429181308-d54fc7723ad3
@@ -23,6 +22,7 @@ require (
 	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.8.1
+	github.com/streamingfast/firehose v0.1.1-0.20210809172230-12665dcfb713
 	github.com/streamingfast/merger v0.0.3-0.20210809165038-14f85d21b69b
 	github.com/stretchr/testify v1.7.0
 	go.uber.org/zap v1.18.1
