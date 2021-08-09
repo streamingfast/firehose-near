@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/dfuse-io/derr"
-	"github.com/dfuse-io/dlauncher/flags"
-	"github.com/dfuse-io/dlauncher/launcher"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/streamingfast/dlauncher/flags"
+	"github.com/streamingfast/dlauncher/launcher"
 	"go.uber.org/zap"
 )
 

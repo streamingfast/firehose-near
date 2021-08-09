@@ -15,8 +15,8 @@
 package cli
 
 import (
-	"github.com/dfuse-io/dlauncher/launcher"
 	"github.com/spf13/cobra"
+	"github.com/streamingfast/dlauncher/launcher"
 )
 
 func init() {
