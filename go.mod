@@ -15,7 +15,6 @@ require (
 	github.com/dfuse-io/dstore v0.1.1-0.20210507180120-88a95674809f
 	github.com/dfuse-io/logging v0.0.0-20210109005628-b97a57253f70
 	github.com/dfuse-io/pbgo v0.0.6-0.20210429181308-d54fc7723ad3
-	github.com/dfuse-io/relayer v0.0.2-0.20210525190602-eeec872ddedf
 	github.com/golang/protobuf v1.5.2
 	github.com/lithammer/dedent v1.1.0
 	github.com/logrusorgru/aurora v2.0.3+incompatible
@@ -26,6 +25,7 @@ require (
 	github.com/streamingfast/firehose v0.1.1-0.20210809193802-776cf9f9942e
 	github.com/streamingfast/merger v0.0.3-0.20210809165038-14f85d21b69b
 	github.com/streamingfast/node-manager v0.0.2-0.20210809174523-1392abec0243
+	github.com/streamingfast/relayer v0.0.2-0.20210809195208-c686bf91e083
 	github.com/stretchr/testify v1.7.0
 	go.uber.org/zap v1.18.1
 	google.golang.org/grpc v1.38.0
