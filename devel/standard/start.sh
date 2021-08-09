@@ -3,7 +3,7 @@
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 clean=
-nearsf="$ROOT/../nearsf"
+sfnear="$ROOT/../sfnear"
 
 main() {
   pushd "$ROOT" &> /dev/null
@@ -24,7 +24,7 @@ main() {
     rm -rf sf-data &> /dev/null || true
   fi
 
-  exec $nearsf -c $(basename $ROOT).yaml start "$@"
+  exec $sfnear -c $(basename $ROOT).yaml start "$@"
 }
 
 usage_error() {

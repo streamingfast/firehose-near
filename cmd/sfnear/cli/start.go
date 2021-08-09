@@ -27,8 +27,7 @@ import (
 	"go.uber.org/zap"
 )
 
-//nearsf start
-var StartCmd = &cobra.Command{Use: "start", Short: "Starts `nearsf` services all at once", RunE: nearStartE, Args: cobra.ArbitraryArgs}
+var StartCmd = &cobra.Command{Use: "start", Short: "Starts `sfnear` services all at once", RunE: nearStartE, Args: cobra.ArbitraryArgs}
 
 func init() {
 	RootCmd.AddCommand(StartCmd)
