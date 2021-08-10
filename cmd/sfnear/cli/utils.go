@@ -22,7 +22,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/dfuse-io/dstore"
+	"github.com/streamingfast/dstore"
 	"github.com/lithammer/dedent"
 	"github.com/logrusorgru/aurora"
 	"go.uber.org/zap"
