@@ -13,7 +13,7 @@ import (
 	"github.com/dfuse-io/logging"
 
 	"github.com/dfuse-io/bstream"
-	"github.com/dfuse-io/dgrpc"
+	"github.com/streamingfast/dgrpc"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/streamingfast/dlauncher/launcher"
