@@ -20,43 +20,19 @@ import (
 	"strings"
 	"time"
 
-	"github.com/streamingfast/near-sf/codec"
-	pbcodec "github.com/streamingfast/near-sf/pb/sf/near/codec/v1"
-
 	"github.com/dfuse-io/bstream"
 	"github.com/dfuse-io/bstream/blockstream"
-	nodeManager "github.com/dfuse-io/node-manager"
-	"github.com/dfuse-io/node-manager/mindreader"
-	"google.golang.org/grpc"
-
-	"github.com/dfuse-io/dlauncher/launcher"
-	"github.com/dfuse-io/logging"
 	"github.com/spf13/cobra"
+	nodeManager "github.com/streamingfast/node-manager"
+	"github.com/streamingfast/node-manager/mindreader"
+	"github.com/streamingfast/sf-near/codec"
+	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
+	"google.golang.org/grpc"
 )
 
 func init() {
-	appLogger := zap.NewNop()
-	nodeLogger := zap.NewNop()
-	logging.Register("github.com/streamingfast/near-sf/mindreader", &appLogger)
-	logging.Register("github.com/streamingfast/near-sf/mindreader/node", &nodeLogger)
-
-	launcher.RegisterApp(&launcher.AppDef{
-		ID:          "mindreader-node",
-		Title:       "Near Mindreader Node",
-		Description: "Near node with built-in operational manager and mindreader plugin to extract block data",
-		MetricsID:   "mindreader-node",
-		Logger: launcher.NewLoggingDef(
-			"github.com/streamingfast/near-sf/mindreader.*",
-			[]zapcore.Level{zap.WarnLevel, zap.WarnLevel, zap.InfoLevel, zap.DebugLevel},
-		),
-		RegisterFlags: registerMindreaderNodeFlags,
-		InitFunc: func(runtime *launcher.Runtime) error {
-			return nil
-		},
-		FactoryFunc: nodeFactoryFunc(true, &appLogger, &nodeLogger),
-	})
+	registerNode("mindreader", registerMindreaderNodeFlags, MindreaderNodeManagerAPIAddr)
 }
 
 func getMindreaderLogPlugin(
@@ -125,8 +101,6 @@ func getMindreaderLogPlugin(
 }
 
 func registerMindreaderNodeFlags(cmd *cobra.Command) error {
-	registerCommonNodeFlags(cmd, true)
-
 	cmd.Flags().Bool("mindreader-node-merge-and-store-directly", false, "[BATCH] When enabled, do not write oneblock files, sidestep the merger and write the merged 100-blocks logs directly to --common-blocks-store-url")
 	cmd.Flags().Bool("mindreader-node-discard-after-stop-num", false, "Ignore remaining blocks being processed after stop num (only useful if we discard the mindreader data after reprocessing a chunk of blocks)")
 	cmd.Flags().String("mindreader-node-working-dir", "{dfuse-data-dir}/mindreader/work", "Path where mindreader will stores its files")

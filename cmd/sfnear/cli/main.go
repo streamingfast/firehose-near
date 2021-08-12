@@ -5,16 +5,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/spf13/viper"
-	"go.uber.org/zap"
-
-	"github.com/dfuse-io/derr"
-	"github.com/dfuse-io/dlauncher/flags"
-	"github.com/dfuse-io/dlauncher/launcher"
+	"github.com/streamingfast/derr"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"github.com/streamingfast/dlauncher/flags"
+	"github.com/streamingfast/dlauncher/launcher"
+	"go.uber.org/zap"
 )
 
-var RootCmd = &cobra.Command{Use: "nearsf", Short: "streamingfast for Neat"}
+var RootCmd = &cobra.Command{Use: "sfnear", Short: "NEAR on StreamingFast"}
 var allFlags = make(map[string]bool) // used as global because of async access to cobra init functions
 
 func Main() {
@@ -57,7 +56,7 @@ func Main() {
 	derr.Check("neard", RootCmd.Execute())
 }
 
-var startCmdExample = `nearsf start mindreader`
+var startCmdExample = `sfnear start mindreader`
 var startCmdHelpTemplate = `Usage:{{if .Runnable}}
   {{.UseLine}}{{end}} [all|command1 [command2...]]{{if gt (len .Aliases) 0}}
 

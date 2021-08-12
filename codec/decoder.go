@@ -18,9 +18,9 @@ import (
 	"fmt"
 
 	"github.com/dfuse-io/bstream"
-	pbbstream "github.com/dfuse-io/pbgo/dfuse/bstream/v1"
 	"github.com/golang/protobuf/proto"
-	pbcodec "github.com/streamingfast/near-sf/pb/sf/near/codec/v1"
+	pbbstream "github.com/streamingfast/pbgo/dfuse/bstream/v1"
+	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 )
 
 func BlockDecoder(blk *bstream.Block) (interface{}, error) {

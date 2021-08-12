@@ -1,6 +1,6 @@
 package main
 
-import "github.com/streamingfast/near-sf/cmd/nearsf/cli"
+import "github.com/streamingfast/sf-near/cmd/sfnear/cli"
 
 // Commit sha1 value, injected via go build `ldflags` at build time
 var Commit = ""

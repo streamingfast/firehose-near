@@ -15,16 +15,16 @@
 package cli
 
 import (
-	"github.com/dfuse-io/dlauncher/launcher"
 	"github.com/spf13/cobra"
+	"github.com/streamingfast/dlauncher/launcher"
 )
 
 func init() {
 	launcher.RegisterCommonFlags = func(cmd *cobra.Command) error {
 		//Common stores configuration flags
-		//cmd.Flags().String("common-blocks-store-url", MergedBlocksStoreURL, "[COMMON] Store URL (with prefix) where to read/write. Used by: relayer, fluxdb, trxdb-loader, blockmeta, search-indexer, search-live, search-forkresolver")
-		//cmd.Flags().String("common-oneblock-store-url", OneBlockStoreURL, "[COMMON] Store URL (with prefix) to read/write one-block files. Used by: mindreader, merger")
-		//cmd.Flags().String("common-blockstream-addr", RelayerServingAddr, "[COMMON] gRPC endpoint to get real-time blocks. Used by: fluxdb, trxdb-loader, blockmeta, search-indexer, search-live (relayer uses its own --relayer-blockstream-addr)")
+		cmd.Flags().String("common-blocks-store-url", MergedBlocksStoreURL, "[COMMON] Store URL (with prefix) where to read/write. Used by: relayer, fluxdb, trxdb-loader, blockmeta, search-indexer, search-live, search-forkresolver")
+		cmd.Flags().String("common-oneblock-store-url", OneBlockStoreURL, "[COMMON] Store URL (with prefix) to read/write one-block files. Used by: mindreader, merger")
+		cmd.Flags().String("common-blockstream-addr", RelayerServingAddr, "[COMMON] gRPC endpoint to get real-time blocks. Used by: fluxdb, trxdb-loader, blockmeta, search-indexer, search-live (relayer uses its own --relayer-blockstream-addr)")
 		//cmd.Flags().StringSlice("common-trxstream-addresses", []string{MindreaderGRPCAddr}, "[COMMON] gRPC endpoint to get transaction stream. Used by: dweb3, trx-state-tracker")
 		//
 		//// Network config

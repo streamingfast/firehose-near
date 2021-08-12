@@ -1,8 +1,8 @@
 package cli
 
 import (
-	"github.com/dfuse-io/dlauncher/launcher"
 	"github.com/dfuse-io/logging"
+	"github.com/streamingfast/dlauncher/launcher"
 	"go.uber.org/zap"
 )
 
