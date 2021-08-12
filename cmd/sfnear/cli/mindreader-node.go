@@ -23,10 +23,10 @@ import (
 	"github.com/dfuse-io/bstream"
 	"github.com/dfuse-io/bstream/blockstream"
 	"github.com/spf13/cobra"
-	"github.com/streamingfast/near-sf/codec"
-	pbcodec "github.com/streamingfast/near-sf/pb/sf/near/codec/v1"
 	nodeManager "github.com/streamingfast/node-manager"
 	"github.com/streamingfast/node-manager/mindreader"
+	"github.com/streamingfast/sf-near/codec"
+	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 )

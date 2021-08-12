@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	pbcodec "github.com/streamingfast/near-sf/pb/sf/near/codec/v1"
+	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 	"go.uber.org/zap"
 )
 

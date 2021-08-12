@@ -13,16 +13,16 @@ import (
 	"github.com/dfuse-io/logging"
 
 	"github.com/dfuse-io/bstream"
-	"github.com/streamingfast/dgrpc"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/streamingfast/dgrpc"
 	"github.com/streamingfast/dlauncher/launcher"
-	"github.com/streamingfast/near-sf/nodemanager"
 	nodeManager "github.com/streamingfast/node-manager"
 	nodeManagerApp "github.com/streamingfast/node-manager/app/node_manager"
 	nodeMindReaderApp "github.com/streamingfast/node-manager/app/node_mindreader"
 	"github.com/streamingfast/node-manager/metrics"
 	"github.com/streamingfast/node-manager/operator"
+	"github.com/streamingfast/sf-near/nodemanager"
 	"go.uber.org/zap"
 )
 
@@ -36,8 +36,8 @@ func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) er
 	appLogger := zap.NewNop()
 	nodeLogger := zap.NewNop()
 
-	logging.Register(fmt.Sprintf("github.com/streamingfast/near-sf/%s", app), &appLogger)
-	logging.Register(fmt.Sprintf("github.com/streamingfast/near-sf/%s/node", app), &nodeLogger)
+	logging.Register(fmt.Sprintf("github.com/streamingfast/sf-near/%s", app), &appLogger)
+	logging.Register(fmt.Sprintf("github.com/streamingfast/sf-near/%s/node", app), &nodeLogger)
 
 	launcher.RegisterApp(&launcher.AppDef{
 		ID:          app,

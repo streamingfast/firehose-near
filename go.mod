@@ -1,4 +1,4 @@
-module github.com/streamingfast/near-sf
+module github.com/streamingfast/sf-near
 
 go 1.16
 
