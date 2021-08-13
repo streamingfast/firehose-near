@@ -17,7 +17,7 @@ ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
 
 # Protobuf definitions
 PROTO=${1:-"$ROOT/../proto"}
-PROTO_ETHEREUM=${2:-"$ROOT/../proto-near"}
+PROTO_NEAR=${2:-"$ROOT/../proto-near"}
 
 function main() {
   checks
@@ -30,7 +30,7 @@ function main() {
 
   echo "generate.sh - `date` - `whoami`" > $ROOT/pb/last_generate.txt
   echo "streamingfast/proto revision: `GIT_DIR=$PROTO/.git git rev-parse HEAD`" >> $ROOT/pb/last_generate.txt
-  echo "streamingfast/proto-ethereum revision: `GIT_DIR=$PROTO_ETHEREUM/.git git rev-parse HEAD`" >> $ROOT/pb/last_generate.txt
+  echo "streamingfast/proto-near revision: `GIT_DIR=$PROTO_NEAR/.git git rev-parse HEAD`" >> $ROOT/pb/last_generate.txt
 }
 
 # usage:
@@ -43,12 +43,12 @@ function generate() {
     fi
 
     for file in "$@"; do
-      protoc -I$PROTO -I$PROTO_ETHEREUM \
+      protoc -I$PROTO -I$PROTO_NEAR \
         --go_out=. --go_opt=paths=source_relative \
         --go-grpc_out=. --go-grpc_opt=paths=source_relative,require_unimplemented_servers=false \
          $base$file
 
-      # protoc -I$PROTO -I$PROTO_ETHEREUM $base$file --go_out=plugins=grpc,paths=source_relative:.
+      # protoc -I$PROTO -I$PROTO_NEAR $base$file --go_out=plugins=grpc,paths=source_relative:.
     done
 }
 
