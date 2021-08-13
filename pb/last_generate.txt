@@ -1,3 +1,3 @@
-generate.sh - Thu Jul 15 18:09:51 EDT 2021 - cbillett
-dfuse-io/proto revision: 098b159bda5b0624bcbda0e1f3c323f0ab09fdef
-dfuse-io/proto-ethereum revision: 03cde19522ff26bbce34d3bdd332d39f908e2b6f
+generate.sh - Fri Aug 13 11:52:48 EDT 2021 - maoueh
+streamingfast/proto revision: d32176fde69ef3a8868689b270b5ceef3de8678b
+streamingfast/proto-ethereum revision: 236dc2e9a692ec02a6d890616f11125ebc0d8396
