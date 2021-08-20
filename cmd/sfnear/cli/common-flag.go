@@ -32,10 +32,12 @@ func init() {
 		//cmd.Flags().Uint32("common-network-id", DefaultNetworkID, "[COMMON] ETH network ID as returned from JSON-RPC 'net_version' call. Used by: miner-geth-node, mindreader-geth-node, mindreader-openeth-node, peering-geth-node, peering-openeth-node")
 		//cmd.Flags().String("common-dfuse-network-id", DefaultDfuseNetworkID, "[COMMON] dfuse network ID, used for some billing functions by dgraphql")
 		//
-		////// Authentication, metering and rate limiter plugins
-		//cmd.Flags().String("common-auth-plugin", "null://", "[COMMON] Auth plugin URI, see dfuse-io/dauth repository")
-		//cmd.Flags().String("common-metering-plugin", "null://", "[COMMON] Metering plugin URI, see dfuse-io/dmetering repository")
-		//cmd.Flags().String("common-ratelimiter-plugin", "null://", "[COMMON] Rate Limiter plugin URI, see dfuse-io/dauth repository")
+
+		// Authentication, metering and rate limiter plugins
+		cmd.Flags().String("common-auth-plugin", "null://", "[COMMON] Auth plugin URI, see dfuse-io/dauth repository")
+		cmd.Flags().String("common-metering-plugin", "null://", "[COMMON] Metering plugin URI, see dfuse-io/dmetering repository")
+		// cmd.Flags().String("common-ratelimiter-plugin", "null://", "[COMMON] Rate Limiter plugin URI, see dfuse-io/dauth repository")
+
 		//
 		////// Database connection strings
 		//cmd.Flags().String("common-trxdb-dsn", TrxdbDSN, "[COMMON] kvdb connection string to trxdb database. Used by: trxdb-loader, dgraphql")

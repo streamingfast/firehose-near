@@ -17,15 +17,15 @@ package codec
 import (
 	"fmt"
 
-	"github.com/dfuse-io/bstream"
 	"github.com/golang/protobuf/proto"
+	"github.com/streamingfast/bstream"
 	pbbstream "github.com/streamingfast/pbgo/dfuse/bstream/v1"
 	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 )
 
 func BlockDecoder(blk *bstream.Block) (interface{}, error) {
-	if blk.Kind() != pbbstream.Protocol_UNKNOWN {
-		return nil, fmt.Errorf("expected kind %s, got %s", pbbstream.Protocol_UNKNOWN, blk.Kind())
+	if blk.Kind() != pbbstream.Protocol_NEAR {
+		return nil, fmt.Errorf("expected kind %s, got %s", pbbstream.Protocol_NEAR, blk.Kind())
 	}
 
 	if blk.Version() != 1 {
@@ -37,31 +37,6 @@ func BlockDecoder(blk *bstream.Block) (interface{}, error) {
 	if err != nil {
 		return nil, fmt.Errorf("unable to decode payload: %s", err)
 	}
-
-	//// This whole BlockDecoder method is being called through the `bstream.Block.ToNative()`
-	//// method. Hence, it's a great place to add temporary data normalization calls to backport
-	//// some features that were not in all blocks yet (because we did not re-process all blocks
-	//// yet).
-	////
-	//// Thoughts for the future: Ideally, we would leverage the version information here to take
-	//// a decision, like `do X if version <= 2.1` so we would not pay the performance hit
-	//// automatically instead of having to re-deploy a new version of bstream (which means
-	//// rebuild everything mostly)
-	////
-	//// We reconstruct the state reverted value per call, for each transaction traces. We also
-	//// normalize signature curve points since we were not setting to be alwasy 32 bytes long and
-	//// sometimes, it would have been only 31 bytes long.
-	//for _, trx := range block.TransactionTraces {
-	//	trx.PopulateStateReverted()
-	//
-	//	if len(trx.R) > 0 && len(trx.R) != 32 {
-	//		trx.R = normalizeSignaturePoint(trx.R)
-	//	}
-	//
-	//	if len(trx.S) > 0 && len(trx.S) != 32 {
-	//		trx.S = normalizeSignaturePoint(trx.S)
-	//	}
-	//}
 
 	return block, nil
 }

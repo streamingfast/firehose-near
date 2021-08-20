@@ -19,10 +19,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/dfuse-io/bstream"
-	"github.com/streamingfast/derr"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/streamingfast/bstream"
+	"github.com/streamingfast/derr"
 	"github.com/streamingfast/dlauncher/launcher"
 	"go.uber.org/zap"
 )
@@ -68,7 +68,7 @@ func Start(configFile string, dataDir string, args []string) (err error) {
 	//	return fmt.Errorf("unable to create dmesh client: %w", err)
 	//}
 
-	//tracker := bstream.NewTracker(50)
+	tracker := bstream.NewTracker(50)
 
 	//blockmetaAddr := viper.GetString("common-blockmeta-addr")
 	//if blockmetaAddr != "" {
@@ -81,12 +81,12 @@ func Start(configFile string, dataDir string, args []string) (err error) {
 	//	}
 	//}
 
-	//tracker.AddResolver(bstream.OffsetStartBlockResolver(200))
+	tracker.AddResolver(bstream.OffsetStartBlockResolver(200))
 
 	modules := &launcher.Runtime{
 		//SearchDmeshClient: meshClient,
 		AbsDataDir: dataDirAbs,
-		//Tracker:           tracker,
+		Tracker:    tracker,
 	}
 
 	err = bstream.ValidateRegistry()

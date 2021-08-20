@@ -22,9 +22,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/streamingfast/dstore"
 	"github.com/lithammer/dedent"
 	"github.com/logrusorgru/aurora"
+	"github.com/streamingfast/dstore"
 	"go.uber.org/zap"
 )
 
@@ -34,7 +34,7 @@ func mustReplaceDataDir(dataDir, in string) string {
 		panic(fmt.Errorf("file path abs: %w", err))
 	}
 
-	in = strings.Replace(in, "{dfuse-data-dir}", d, -1)
+	in = strings.Replace(in, "{sf-data-dir}", d, -1)
 	return in
 }
 
@@ -186,7 +186,7 @@ func copyFile(ctx context.Context, in, out string) error {
 //			- It's installed but execution of "geth version" or "geth --help" failed
 //
 //			Make sure you have a dfuse instrumented 'geth' binary, follow instructions
-//			at https://github.com/dfuse-io/dfuse-ethereum/blob/develop/DEPENDENCIES.md#dfuse-instrumented-ethereum-prebuilt-binaries
+//			at https://github.com/streamingfast/dfuse-ethereum/blob/develop/DEPENDENCIES.md#dfuse-instrumented-ethereum-prebuilt-binaries
 //			to find how to install it.
 //
 //			If you have your dfuse instrumented 'geth' binary outside your PATH, use --geth-path=<location>
@@ -204,7 +204,7 @@ func copyFile(ctx context.Context, in, out string) error {
 //			PATH environment variable?
 //
 //			Make sure you have a dfuse instrumented 'geth' binary, follow instructions
-//			at https://github.com/dfuse-io/dfuse-ethereum/blob/develop/DEPENDENCIES.md#dfuse-instrumented-ethereum-prebuilt-binaries
+//			at https://github.com/streamingfast/dfuse-ethereum/blob/develop/DEPENDENCIES.md#dfuse-instrumented-ethereum-prebuilt-binaries
 //			to find how to install it.
 //
 //			If you have your dfuse instrumented 'geth' binary outside your PATH, use --geth-path=<location>

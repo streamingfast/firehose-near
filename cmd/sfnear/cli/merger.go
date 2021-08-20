@@ -18,7 +18,7 @@ func init() {
 		Logger:      launcher.NewLoggingDef("github.com/streamingfast/merger.*", nil),
 		RegisterFlags: func(cmd *cobra.Command) error {
 			cmd.Flags().Duration("merger-time-between-store-lookups", 5*time.Second, "delay between source store polling (should be higher for remote storage)")
-			cmd.Flags().String("merger-state-file", "{dfuse-data-dir}/merger/merger.seen.gob", "Path to file containing last written block number, as well as a map of all 'seen blocks' in the 'max-fixable-fork' range")
+			cmd.Flags().String("merger-state-file", "{sf-data-dir}/merger/merger.seen.gob", "Path to file containing last written block number, as well as a map of all 'seen blocks' in the 'max-fixable-fork' range")
 			cmd.Flags().Bool("merger-batch-mode", false, "Ignores the state file, starts and stop based on flags")
 			cmd.Flags().Uint64("merger-start-block-num", 0, "[BATCH, LIVE] Set the block number where we should start processing. In LIVE mode, will override the seen file, and start explicitly from that block number onwards.")
 			cmd.Flags().Uint64("merger-stop-block-num", 0, "[BATCH] Set the block number where we should stop processing (and stop the process)")
@@ -35,27 +35,27 @@ func init() {
 		//        and avoid the duplication? Note that this duplicate happens in many other apps, we might need to re-think our
 		//        init flow and call init after the factory and giving it the instantiated app...
 		InitFunc: func(runtime *launcher.Runtime) (err error) {
-			dfuseDataDir := runtime.AbsDataDir
+			sfDataDir := runtime.AbsDataDir
 
-			if err = mkdirStorePathIfLocal(mustReplaceDataDir(dfuseDataDir, viper.GetString("common-blocks-store-url"))); err != nil {
+			if err = mkdirStorePathIfLocal(mustReplaceDataDir(sfDataDir, viper.GetString("common-blocks-store-url"))); err != nil {
 				return
 			}
 
-			if err = mkdirStorePathIfLocal(mustReplaceDataDir(dfuseDataDir, viper.GetString("common-oneblock-store-url"))); err != nil {
+			if err = mkdirStorePathIfLocal(mustReplaceDataDir(sfDataDir, viper.GetString("common-oneblock-store-url"))); err != nil {
 				return
 			}
 
-			if err = mkdirStorePathIfLocal(mustReplaceDataDir(dfuseDataDir, viper.GetString("merger-state-file"))); err != nil {
+			if err = mkdirStorePathIfLocal(mustReplaceDataDir(sfDataDir, viper.GetString("merger-state-file"))); err != nil {
 				return
 			}
 
 			return nil
 		},
 		FactoryFunc: func(runtime *launcher.Runtime) (launcher.App, error) {
-			dfuseDataDir := runtime.AbsDataDir
+			sfDataDir := runtime.AbsDataDir
 			return mergerApp.New(&mergerApp.Config{
-				StorageMergedBlocksFilesPath: mustReplaceDataDir(dfuseDataDir, viper.GetString("common-blocks-store-url")),
-				StorageOneBlockFilesPath:     mustReplaceDataDir(dfuseDataDir, viper.GetString("common-oneblock-store-url")),
+				StorageMergedBlocksFilesPath: mustReplaceDataDir(sfDataDir, viper.GetString("common-blocks-store-url")),
+				StorageOneBlockFilesPath:     mustReplaceDataDir(sfDataDir, viper.GetString("common-oneblock-store-url")),
 				TimeBetweenStoreLookups:      viper.GetDuration("merger-time-between-store-lookups"),
 				GRPCListenAddr:               viper.GetString("merger-grpc-listen-addr"),
 				BatchMode:                    viper.GetBool("merger-batch-mode"),
@@ -64,7 +64,7 @@ func init() {
 
 				MinimalBlockNum:                viper.GetUint64("merger-minimal-block-num"),
 				WritersLeewayDuration:          viper.GetDuration("merger-writers-leeway"),
-				StateFile:                      mustReplaceDataDir(dfuseDataDir, viper.GetString("merger-state-file")),
+				StateFile:                      mustReplaceDataDir(sfDataDir, viper.GetString("merger-state-file")),
 				MaxFixableFork:                 viper.GetUint64("merger-max-fixable-fork"),
 				MaxOneBlockOperationsBatchSize: viper.GetInt("merger-max-one-block-operations-batch-size"),
 				OneBlockDeletionThreads:        viper.GetInt("merger-one-block-deletion-threads"),

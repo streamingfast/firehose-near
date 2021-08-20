@@ -5,17 +5,17 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dfuse-io/bstream"
-	blockstreamv2 "github.com/dfuse-io/bstream/blockstream/v2"
-	"github.com/streamingfast/dmetrics"
-	"github.com/dfuse-io/logging"
-	pbbstream "github.com/streamingfast/pbgo/dfuse/bstream/v1"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/streamingfast/bstream"
+	blockstreamv2 "github.com/streamingfast/bstream/blockstream/v2"
 	dauthAuthenticator "github.com/streamingfast/dauth/authenticator"
 	"github.com/streamingfast/dlauncher/launcher"
 	"github.com/streamingfast/dmetering"
+	"github.com/streamingfast/dmetrics"
 	firehoseApp "github.com/streamingfast/firehose/app/firehose"
+	"github.com/streamingfast/logging"
+	pbbstream "github.com/streamingfast/pbgo/dfuse/bstream/v1"
 	"go.uber.org/zap"
 )
 
@@ -25,14 +25,14 @@ var headTimeDriftmetric = metricset.NewHeadTimeDrift("firehose")
 
 func init() {
 	appLogger := zap.NewNop()
-	logging.Register("github.com/dfuse-io/dfuse-solana/firehose", &appLogger)
+	logging.Register("github.com/streamingfast/sf-near/firehose", &appLogger)
 
 	launcher.RegisterApp(&launcher.AppDef{
 		ID:          "firehose",
 		Title:       "Block Firehose",
 		Description: "Provides on-demand filtered blocks, depends on common-blocks-store-url and common-blockstream-addr",
 		MetricsID:   "merged-filter",
-		Logger:      launcher.NewLoggingDef("github.com/dfuse-io/dfuse-solana/firehose.*", nil),
+		Logger:      launcher.NewLoggingDef("github.com/streamingfast/sf-near/firehose.*", nil),
 		RegisterFlags: func(cmd *cobra.Command) error {
 			cmd.Flags().String("firehose-grpc-listen-addr", FirehoseGRPCServingAddr, "Address on which the firehose will listen")
 			cmd.Flags().StringSlice("firehose-blocks-store-urls", nil, "If non-empty, overrides common-blocks-store-url with a list of blocks stores")
@@ -41,7 +41,7 @@ func init() {
 		},
 
 		FactoryFunc: func(runtime *launcher.Runtime) (launcher.App, error) {
-			dfuseDataDir := runtime.AbsDataDir
+			sfDataDir := runtime.AbsDataDir
 			tracker := runtime.Tracker.Clone()
 			blockstreamAddr := viper.GetString("common-blockstream-addr")
 			if blockstreamAddr != "" {
@@ -69,8 +69,8 @@ func init() {
 				firehoseBlocksStoreURLs = strings.Split(firehoseBlocksStoreURLs[0], ",")
 			}
 
-			for _, url := range firehoseBlocksStoreURLs {
-				url = mustReplaceDataDir(dfuseDataDir, url)
+			for i, url := range firehoseBlocksStoreURLs {
+				firehoseBlocksStoreURLs[i] = mustReplaceDataDir(sfDataDir, url)
 			}
 
 			shutdownSignalDelay := viper.GetDuration("common-system-shutdown-signal-delay")

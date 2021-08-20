@@ -9,16 +9,16 @@ const (
 	MindreaderNodeRPCPort        string = "8547"
 	MergerServingAddr            string = ":13012"
 	RelayerServingAddr           string = ":13011"
-	FirehoseGRPCServingAddr      string = ":13042"
+	FirehoseGRPCServingAddr      string = ":13042*"
 
-	MergedBlocksStoreURL string = "file://{dfuse-data-dir}/storage/merged-blocks"
-	OneBlockStoreURL     string = "file://{dfuse-data-dir}/storage/one-blocks"
+	MergedBlocksStoreURL string = "file://{sf-data-dir}/storage/merged-blocks"
+	OneBlockStoreURL     string = "file://{sf-data-dir}/storage/one-blocks"
 
 	//Protocol                     = pbbstream.Protocol_ETH
-	//TrxdbDSN              string = "badger://{dfuse-data-dir}/storage/trxdb"
-	//StateDBDSN            string = "badger://{dfuse-data-dir}/storage/statedb"
-	//IndicesStoreURL       string = "file://{dfuse-data-dir}/storage/indexes"
-	//SnapshotsURL          string = "file://{dfuse-data-dir}/storage/snapshots"
+	//TrxdbDSN              string = "badger://{sf-data-dir}/storage/trxdb"
+	//StateDBDSN            string = "badger://{sf-data-dir}/storage/statedb"
+	//IndicesStoreURL       string = "file://{sf-data-dir}/storage/indexes"
+	//SnapshotsURL          string = "file://{sf-data-dir}/storage/snapshots"
 	//DmeshDSN              string = "local://"
 	//DmeshServiceVersion   string = "v1"
 	//DefaultChainID        uint32 = 123

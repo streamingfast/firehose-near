@@ -5,9 +5,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/streamingfast/derr"
+	// Needs to be in this file which is the main entry of wrapper binary
+	_ "github.com/streamingfast/dauth/authenticator/null"   // auth null plugin
+	_ "github.com/streamingfast/dauth/authenticator/secret" // auth secret/hard-coded plugin
+	_ "github.com/streamingfast/dauth/ratelimiter/null"     // ratelimiter plugin
+
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/streamingfast/derr"
 	"github.com/streamingfast/dlauncher/flags"
 	"github.com/streamingfast/dlauncher/launcher"
 	"go.uber.org/zap"

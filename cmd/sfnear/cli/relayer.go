@@ -19,7 +19,7 @@ func init() {
 		Logger:      launcher.NewLoggingDef("github.com/streamingfast/relayer.*", nil),
 		RegisterFlags: func(cmd *cobra.Command) error {
 			cmd.Flags().String("relayer-grpc-listen-addr", RelayerServingAddr, "Address to listen for incoming gRPC requests")
-			cmd.Flags().StringSlice("relayer-source", []string{MindreaderNodeRPCPort}, "List of Blockstream sources (mindreaders) to connect to for live block feeds (repeat flag as needed)")
+			cmd.Flags().StringSlice("relayer-source", []string{MindreaderGRPCAddr}, "List of Blockstream sources (mindreaders) to connect to for live block feeds (repeat flag as needed)")
 			cmd.Flags().Int("relayer-source-request-burst", 90, "Block burst requested by relayer (useful when chaining relayers together, because normally a mindreader won't have a block buffer)")
 			cmd.Flags().String("relayer-merger-addr", MergerServingAddr, "Address for grpc merger service")
 			cmd.Flags().Int("relayer-buffer-size", 350, "Number of blocks that will be kept and sent immediately on connection")
@@ -28,7 +28,7 @@ func init() {
 			return nil
 		},
 		FactoryFunc: func(runtime *launcher.Runtime) (launcher.App, error) {
-			dfuseDataDir := runtime.AbsDataDir
+			sfDataDir := runtime.AbsDataDir
 
 			return relayerApp.New(&relayerApp.Config{
 				SourcesAddr:        viper.GetStringSlice("relayer-source"),
@@ -38,7 +38,7 @@ func init() {
 				MaxSourceLatency:   viper.GetDuration("relayer-max-source-latency"),
 				SourceRequestBurst: viper.GetInt("relayer-source-request-burst"),
 				MinStartOffset:     viper.GetUint64("relayer-min-start-offset"),
-				SourceStoreURL:     mustReplaceDataDir(dfuseDataDir, viper.GetString("common-blocks-store-url")),
+				SourceStoreURL:     mustReplaceDataDir(sfDataDir, viper.GetString("common-blocks-store-url")),
 			}, &relayerApp.Modules{}), nil
 		},
 	})

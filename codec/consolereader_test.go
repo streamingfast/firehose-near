@@ -25,8 +25,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/dfuse-io/logging"
 	"github.com/golang/protobuf/proto"
+	"github.com/streamingfast/logging"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -41,9 +41,8 @@ func TestParseFromFile(t *testing.T) {
 	tests := []struct {
 		deepMindFile     string
 		expectedPanicErr error
-		readTransaction  bool
 	}{
-		{"testdata/deep-mind.dmlog", nil, false},
+		{"testdata/deep-mind.dmlog", nil},
 	}
 
 	for _, test := range tests {
@@ -60,12 +59,6 @@ func TestParseFromFile(t *testing.T) {
 
 			for first := true; true; first = false {
 				var reader ObjectReader = cr.Read
-				if test.readTransaction {
-					reader = func() (interface{}, error) {
-						return cr.ReadTransaction()
-					}
-				}
-
 				out, err := reader()
 				if v, ok := out.(proto.Message); ok && !isNil(v) {
 					if !first {

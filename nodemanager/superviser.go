@@ -115,15 +115,20 @@ func (s *Superviser) MarshalLogObject(enc zapcore.ObjectEncoder) error {
 }
 
 func (s *Superviser) lastBlockSeenLogPlugin(line string) {
-	if !strings.HasPrefix(line, "DMLOG FINALIZE_BLOCK") {
+	// DMLOG BLOCK <HEIGHT> <HASH> <PROTO_HEX>
+	if !strings.HasPrefix(line, "DMLOG BLOCK") {
 		return
 	}
 
-	line = strings.TrimSpace(strings.TrimPrefix(line, "DMLOG FINALIZE_BLOCK"))
+	parts := strings.SplitN(line[12:], " ", 2)
+	if len(parts) != 2 {
+		s.Logger.Error("invalid block line, will fail at parsing time later on", zap.String("line[0:64]", line[0:64]))
+		return
+	}
 
-	blockNum, err := strconv.ParseUint(line, 10, 64)
+	blockNum, err := strconv.ParseUint(parts[0], 10, 64)
 	if err != nil {
-		s.Logger.Error("unable to extract last block num", zap.String("line", line), zap.Error(err))
+		s.Logger.Error("unable to extract last block num", zap.String("line[0:64]", line[0:64]), zap.Error(err))
 		return
 	}
 

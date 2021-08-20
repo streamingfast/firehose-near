@@ -8,23 +8,38 @@ import (
 	"strings"
 	"time"
 
-	"go.uber.org/zap/zapcore"
-
-	"github.com/dfuse-io/logging"
-
-	"github.com/dfuse-io/bstream"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/streamingfast/dgrpc"
+	"github.com/streamingfast/bstream/blockstream"
 	"github.com/streamingfast/dlauncher/launcher"
+	"github.com/streamingfast/logging"
 	nodeManager "github.com/streamingfast/node-manager"
-	nodeManagerApp "github.com/streamingfast/node-manager/app/node_manager"
-	nodeMindReaderApp "github.com/streamingfast/node-manager/app/node_mindreader"
+	nodeManagerApp "github.com/streamingfast/node-manager/app/node_manager2"
 	"github.com/streamingfast/node-manager/metrics"
 	"github.com/streamingfast/node-manager/operator"
+	pbbstream "github.com/streamingfast/pbgo/dfuse/bstream/v1"
+	pbheadinfo "github.com/streamingfast/pbgo/dfuse/headinfo/v1"
 	"github.com/streamingfast/sf-near/nodemanager"
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
+	"google.golang.org/grpc"
 )
+
+func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAddr string) {
+	cmd.Flags().String(flagPrefix+"path", "neard", "Command that will be launched by the node manager")
+	cmd.Flags().String(flagPrefix+"data-dir", "{sf-data-dir}/{node-role}/data", "Directory for node data ({node-role} is either mindreader, peering or dev-miner)")
+	cmd.Flags().String(flagPrefix+"config-file", "./{node-role}/config.json", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder")
+	cmd.Flags().String(flagPrefix+"genesis-file", "./{node-role}/genesis.json", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder")
+	cmd.Flags().String(flagPrefix+"node-key-file", "./{node-role}/node_key.json", "Node key configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder")
+	cmd.Flags().Bool(flagPrefix+"debug-deep-mind", false, "[DEV] Prints deep mind instrumentation logs to standard output, should be use for debugging purposes only")
+	cmd.Flags().Bool(flagPrefix+"log-to-zap", true, "Enable all node logs to transit into node's logger directly, when false, prints node logs directly to stdout")
+	cmd.Flags().String(flagPrefix+"manager-api-addr", managerAPIAddr, "Near node manager API address")
+	cmd.Flags().Duration(flagPrefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")
+	cmd.Flags().String(flagPrefix+"node-extra-arguments", "", "Extra arguments to be passed when executing superviser binary")
+
+	// FIXME: Right now our near-dm-indexer doesn't support it, we should plan on adding it!
+	// cmd.Flags().String(flagPrefix+"node-boot-nodes", "", "Set the node's boot nodes to bootstrap network from")
+}
 
 func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) error, managerAPIaddr string) {
 	if kind != "mindreader" && kind != "peering" {
@@ -41,11 +56,11 @@ func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) er
 
 	launcher.RegisterApp(&launcher.AppDef{
 		ID:          app,
-		Title:       fmt.Sprintf("Near Node (%s)", kind),
-		Description: fmt.Sprintf("Near %s node with built-in operational manager", kind),
+		Title:       fmt.Sprintf("NEAR Node (%s)", kind),
+		Description: fmt.Sprintf("NEAR %s node with built-in operational manager", kind),
 		MetricsID:   app,
 		Logger: launcher.NewLoggingDef(
-			fmt.Sprintf("github.com/dfuse-io/dfuse-solana/%s.*", app),
+			fmt.Sprintf("github.com/streamingfast/sf-near/%s.*", app),
 			[]zapcore.Level{zap.WarnLevel, zap.WarnLevel, zap.InfoLevel, zap.DebugLevel},
 		),
 		RegisterFlags: func(cmd *cobra.Command) error {
@@ -63,10 +78,10 @@ func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) er
 
 func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger) func(*launcher.Runtime) (launcher.App, error) {
 	return func(runtime *launcher.Runtime) (launcher.App, error) {
-		dfuseDataDir := runtime.AbsDataDir
+		sfDataDir := runtime.AbsDataDir
 
 		nodePath := viper.GetString(flagPrefix + "path")
-		nodeDataDir := replaceNodeRole(kind, mustReplaceDataDir(dfuseDataDir, viper.GetString(flagPrefix+"data-dir")))
+		nodeDataDir := replaceNodeRole(kind, mustReplaceDataDir(sfDataDir, viper.GetString(flagPrefix+"data-dir")))
 		configFile := replaceNodeRole(kind, viper.GetString(flagPrefix+"config-file"))
 		genesisFile := replaceNodeRole(kind, viper.GetString(flagPrefix+"genesis-file"))
 		nodeKeyFile := replaceNodeRole(kind, viper.GetString(flagPrefix+"node-key-file"))
@@ -74,7 +89,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 		debugDeepMind := viper.GetBool(flagPrefix + "debug-deep-mind")
 		logToZap := viper.GetBool(flagPrefix + "log-to-zap")
 		shutdownDelay := viper.GetDuration("common-system-shutdown-signal-delay") // we reuse this global value
-		managerAPIAddress := viper.GetString(flagPrefix + "manager-api-addr")
+		httpAddr := viper.GetString(flagPrefix + "manager-api-addr")
 
 		nodeArguments, err := buildNodeArguments(
 			nodeDataDir,
@@ -124,55 +139,65 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 
 		if kind != "mindreader" {
 			return nodeManagerApp.New(&nodeManagerApp.Config{
-				ManagerAPIAddress: managerAPIAddress,
+				HTTPAddr: httpAddr,
 			}, &nodeManagerApp.Modules{
 				Operator:                   chainOperator,
 				MetricsAndReadinessManager: metricsAndReadinessManager,
 			}, *appLogger), nil
 		}
 
-		oneBlockStoreURL := mustReplaceDataDir(dfuseDataDir, viper.GetString("common-oneblock-store-url"))
-		mergedBlockStoreURL := mustReplaceDataDir(dfuseDataDir, viper.GetString("common-blocks-store-url"))
-		workingDir := mustReplaceDataDir(dfuseDataDir, viper.GetString("mindreader-node-working-dir"))
+		blockStreamServer := blockstream.NewUnmanagedServer(blockstream.ServerOptionWithLogger(*appLogger))
+		oneBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-oneblock-store-url"))
+		mergedBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-blocks-store-url"))
+		workingDir := mustReplaceDataDir(sfDataDir, viper.GetString("mindreader-node-working-dir"))
+		gprcListenAdrr := viper.GetString("mindreader-node-grpc-listen-addr")
 		mergeAndStoreDirectly := viper.GetBool("mindreader-node-merge-and-store-directly")
 		mergeThresholdBlockAge := viper.GetDuration("mindreader-node-merge-threshold-block-age")
 		batchStartBlockNum := viper.GetUint64("mindreader-node-start-block-num")
 		batchStopBlockNum := viper.GetUint64("mindreader-node-stop-block-num")
-		failOnNonContiguousBlock := false //FIXME ?
 		waitTimeForUploadOnShutdown := viper.GetDuration("mindreader-node-wait-upload-complete-on-shutdown")
 		oneBlockFileSuffix := viper.GetString("mindreader-node-oneblock-suffix")
 		blocksChanCapacity := viper.GetInt("mindreader-node-blocks-chan-capacity")
-		gs := dgrpc.NewServer(dgrpc.WithLogger(*appLogger))
+
+		tracker := runtime.Tracker.Clone()
 
 		mindreaderPlugin, err := getMindreaderLogPlugin(
+			blockStreamServer,
 			oneBlockStoreURL,
 			mergedBlockStoreURL,
-			workingDir,
 			mergeAndStoreDirectly,
 			mergeThresholdBlockAge,
+			workingDir,
 			batchStartBlockNum,
 			batchStopBlockNum,
-			failOnNonContiguousBlock,
+			blocksChanCapacity,
+			false,
 			waitTimeForUploadOnShutdown,
 			oneBlockFileSuffix,
-			blocksChanCapacity,
 			chainOperator.Shutdown,
 			metricsAndReadinessManager,
-			bstream.NewTracker(25),
-			gs,
+			tracker,
 			*appLogger,
 		)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("new mindreader plugin: %w", err)
 		}
 
 		superviser.RegisterLogPlugin(mindreaderPlugin)
-		return nodeMindReaderApp.New(&nodeMindReaderApp.Config{
-			ManagerAPIAddress: managerAPIAddress,
-		}, &nodeMindReaderApp.Modules{
+
+		return nodeManagerApp.New(&nodeManagerApp.Config{
+			HTTPAddr: httpAddr,
+			GRPCAddr: gprcListenAdrr,
+		}, &nodeManagerApp.Modules{
 			Operator:                   chainOperator,
+			MindreaderPlugin:           mindreaderPlugin,
 			MetricsAndReadinessManager: metricsAndReadinessManager,
-			GrpcServer:                 gs,
+			RegisterGRPCService: func(server *grpc.Server) error {
+				pbheadinfo.RegisterHeadInfoServer(server, blockStreamServer)
+				pbbstream.RegisterBlockStreamServer(server, blockStreamServer)
+
+				return nil
+			},
 		}, *appLogger), nil
 	}
 }
@@ -209,20 +234,6 @@ func (b *bootstrapper) Bootstrap() error {
 	}
 
 	return nil
-}
-
-func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAddr string) {
-	cmd.Flags().String(flagPrefix+"path", "neard", "command that will be launched by the node manager")
-	cmd.Flags().String(flagPrefix+"data-dir", "{dfuse-data-dir}/{node-role}/data", "Directory for node data ({node-role} is either mindreader, peering or dev-miner)")
-	cmd.Flags().String(flagPrefix+"config-file", "./{node-role}/config.json", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {dfuse-data-dir}/{node-role}/data folder")
-	cmd.Flags().String(flagPrefix+"genesis-file", "./{node-role}/genesis.json", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {dfuse-data-dir}/{node-role}/data folder")
-	cmd.Flags().String(flagPrefix+"node-key-file", "./{node-role}/node_key.json", "Node key configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {dfuse-data-dir}/{node-role}/data folder")
-	cmd.Flags().Bool(flagPrefix+"debug-deep-mind", false, "[DEV] Prints deep mind instrumentation logs to standard output, should be use for debugging purposes only")
-	cmd.Flags().Bool(flagPrefix+"log-to-zap", true, "Enable all node logs to transit into node's logger directly, when false, prints node logs directly to stdout")
-	cmd.Flags().String(flagPrefix+"manager-api-addr", managerAPIAddr, "Near node manager API address")
-	cmd.Flags().Duration(flagPrefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")
-	cmd.Flags().String(flagPrefix+"node-boot-nodes", "", "Set the node's boot nodes to bootstrap network from")
-	cmd.Flags().String(flagPrefix+"node-extra-arguments", "", "Extra arguments to be passed when executing superviser binary")
 }
 
 type nodeArgsByRole map[string]string
@@ -262,9 +273,8 @@ func buildMetricsAndReadinessManager(name string, maxLatency time.Duration) *nod
 func getExtraArguments(prefix string) (out []string) {
 	extraArguments := viper.GetString(prefix + "-node-extra-arguments")
 	if extraArguments != "" {
-		for _, arg := range strings.Split(extraArguments, " ") {
-			out = append(out, arg)
-		}
+		out = append(out, strings.Split(extraArguments, " ")...)
 	}
+
 	return
 }
