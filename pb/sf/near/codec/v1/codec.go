@@ -2,6 +2,7 @@ package pbcodec
 
 import (
 	"encoding/hex"
+	"github.com/streamingfast/bstream"
 	"time"
 )
 
@@ -14,7 +15,14 @@ func (x *BlockWrapper) Number() uint64 {
 }
 
 func (x *BlockWrapper) LIBNum() uint64 {
-	// FIXME: What is the correct way to get was is the last irreversible num of a given block
+	if x.Number() == bstream.GetProtocolFirstStreamableBlock {
+		return bstream.GetProtocolGenesisBlock
+	}
+
+	if x.Number() <= 25+bstream.GetProtocolFirstStreamableBlock {
+		return bstream.GetProtocolFirstStreamableBlock
+	}
+
 	return x.Number() - 25
 }
 
