@@ -676,6 +676,8 @@ github.com/streamingfast/merger v0.0.3-0.20210830173741-de87767cf253 h1:L8dmL0A+
 github.com/streamingfast/merger v0.0.3-0.20210830173741-de87767cf253/go.mod h1:pM7ZvW7RFMsqeW7i9vZloe0Q+hvmp6OKPggfxtkpYfc=
 github.com/streamingfast/merger v0.0.3-0.20210830182226-0e0e91441091 h1:jh/7v8i+X3Y9B1thQ63zcUIKI4i2q+/ezrCh1HIblcE=
 github.com/streamingfast/merger v0.0.3-0.20210830182226-0e0e91441091/go.mod h1:pM7ZvW7RFMsqeW7i9vZloe0Q+hvmp6OKPggfxtkpYfc=
+github.com/streamingfast/merger v0.0.3-0.20210830183338-9be4c6d1b826 h1:OB8bHI7kVDB5sDGDlP8uB6+tXKANMaZwbswg1RdwCp0=
+github.com/streamingfast/merger v0.0.3-0.20210830183338-9be4c6d1b826/go.mod h1:pM7ZvW7RFMsqeW7i9vZloe0Q+hvmp6OKPggfxtkpYfc=
 github.com/streamingfast/node-manager v0.0.2-0.20210820155058-c5162e259ac0 h1:StqPoI7lQ3/H5s/j7OtxsBMmYqkHClqzdxu7PJX9aFM=
 github.com/streamingfast/node-manager v0.0.2-0.20210820155058-c5162e259ac0/go.mod h1:qv/DnTHhFDke9nvw8Vv3+RuO2nt206NeqPU7QFiJS60=
 github.com/streamingfast/node-manager v0.0.2-0.20210826123200-f660690ef930 h1:u1rwRFH587J+e8cgg5Ap2mhcEVhSXFgwbt/a36+tmTA=
