@@ -23,6 +23,7 @@ func init() {
 			cmd.Flags().Duration("merger-writers-leeway", 10*time.Second, "how long we wait after seeing the upper boundary, to ensure that we get as many blocks as possible in a bundle")
 			cmd.Flags().Int("merger-one-block-deletion-threads", 10, "number of parallel threads used to delete one-block-files (more means more stress on your storage backend)")
 			cmd.Flags().Int("merger-max-one-block-operations-batch-size", 2000, "max number of 'good' (mergeable) files to look up from storage in one polling operation")
+			cmd.Flags().Int("merger-next-exclusive-highest-block-limit", 0, "for next bundle boundary")
 
 			return nil
 		},
@@ -57,6 +58,7 @@ func init() {
 				StateFile:                      mustReplaceDataDir(sfDataDir, viper.GetString("merger-state-file")),
 				MaxOneBlockOperationsBatchSize: viper.GetInt("merger-max-one-block-operations-batch-size"),
 				OneBlockDeletionThreads:        viper.GetInt("merger-one-block-deletion-threads"),
+				NextExclusiveHighestBlockLimit: viper.GetUint64("merger-next-exclusive-highest-block-limit"),
 			}), nil
 		},
 	})
