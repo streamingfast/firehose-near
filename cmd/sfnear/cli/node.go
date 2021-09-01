@@ -35,7 +35,7 @@ func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAd
 	cmd.Flags().Bool(flagPrefix+"log-to-zap", true, "Enable all node logs to transit into node's logger directly, when false, prints node logs directly to stdout")
 	cmd.Flags().String(flagPrefix+"manager-api-addr", managerAPIAddr, "Near node manager API address")
 	cmd.Flags().Duration(flagPrefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")
-	cmd.Flags().String(flagPrefix+"node-extra-arguments", "", "Extra arguments to be passed when executing superviser binary")
+	cmd.Flags().String(flagPrefix+"node-arguments", "", "If not empty, overrides the list of default node arguments (computed from node type and role). Start with '+' to append to default args instead of replacing. ")
 
 	// FIXME: Right now our near-dm-indexer doesn't support it, we should plan on adding it!
 	// cmd.Flags().String(flagPrefix+"node-boot-nodes", "", "Set the node's boot nodes to bootstrap network from")
@@ -91,12 +91,12 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 		shutdownDelay := viper.GetDuration("common-system-shutdown-signal-delay") // we reuse this global value
 		httpAddr := viper.GetString(flagPrefix + "manager-api-addr")
 
-		extraArguments := viper.GetString(flagPrefix + "-node-extra-arguments")
+		arguments := viper.GetString(flagPrefix + "node-arguments")
 		nodeArguments, err := buildNodeArguments(
 			nodeDataDir,
 			flagPrefix,
 			kind,
-			extraArguments,
+			arguments,
 		)
 		if err != nil {
 			return nil, fmt.Errorf("cannot build node bootstrap arguments")
