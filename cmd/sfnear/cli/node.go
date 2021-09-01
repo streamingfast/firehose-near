@@ -271,7 +271,7 @@ func buildMetricsAndReadinessManager(name string, maxLatency time.Duration) *nod
 }
 
 func getExtraArguments(prefix string) (out []string) {
-	extraArguments := viper.GetString(prefix + "-node-extra-arguments")
+	extraArguments := viper.GetString(prefix + "node-extra-arguments")
 	if extraArguments != "" {
 		out = append(out, strings.Split(extraArguments, " ")...)
 	}
