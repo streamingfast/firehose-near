@@ -91,19 +91,16 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 		shutdownDelay := viper.GetDuration("common-system-shutdown-signal-delay") // we reuse this global value
 		httpAddr := viper.GetString(flagPrefix + "manager-api-addr")
 
+		extraArguments := viper.GetString(flagPrefix + "-node-extra-arguments")
 		nodeArguments, err := buildNodeArguments(
 			nodeDataDir,
 			flagPrefix,
 			kind,
+			extraArguments,
 		)
 		if err != nil {
 			return nil, fmt.Errorf("cannot build node bootstrap arguments")
 		}
-		extraArgs := getExtraArguments(flagPrefix)
-		if len(extraArgs) > 0 {
-			nodeArguments = append(nodeArguments, extraArgs...)
-		}
-
 		metricsAndReadinessManager := buildMetricsAndReadinessManager(flagPrefix, readinessMaxLatency)
 
 		superviser := nodemanager.NewSuperviser(
@@ -238,17 +235,26 @@ func (b *bootstrapper) Bootstrap() error {
 
 type nodeArgsByRole map[string]string
 
-func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string) ([]string, error) {
+func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, extraArgs string) ([]string, error) {
 	typeRoles := nodeArgsByRole{
-		"peering":    "--home={node-data-dir} run",
-		"mindreader": "--home={node-data-dir} run",
+		"peering":    "--home={node-data-dir} {extra-arg} run",
+		"mindreader": "--home={node-data-dir} {extra-arg} run",
 	}
 
-	roleArgs, ok := typeRoles[nodeRole]
+	argsString, ok := typeRoles[nodeRole]
 	if !ok {
 		return nil, fmt.Errorf("invalid node role: %s", nodeRole)
 	}
-	args := strings.Fields(strings.Replace(roleArgs, "{node-data-dir}", nodeDataDir, -1))
+
+	if strings.HasPrefix(extraArgs, "+") {
+		argsString = extraArgs[1:]
+	} else {
+		argsString = strings.Replace(argsString, "{extra-arg}", extraArgs, -1)
+	}
+
+	argsString = strings.Replace(argsString, "{node-data-dir}", nodeDataDir, -1)
+
+	args := strings.Fields(argsString)
 
 	bootNodes := viper.GetString(flagPrefix + "node-boot-nodes")
 	if bootNodes != "" {
@@ -268,13 +274,4 @@ func buildMetricsAndReadinessManager(name string, maxLatency time.Duration) *nod
 		maxLatency,
 	)
 	return metricsAndReadinessManager
-}
-
-func getExtraArguments(prefix string) (out []string) {
-	extraArguments := viper.GetString(prefix + "-node-extra-arguments")
-	if extraArguments != "" {
-		out = append(out, strings.Split(extraArguments, " ")...)
-	}
-
-	return
 }
