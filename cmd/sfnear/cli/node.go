@@ -270,6 +270,8 @@ func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, args string) (
 
 	if strings.HasPrefix(args, "+") {
 		argsString = strings.Replace(argsString, "{extra-arg}", args[1:], -1)
+	} else if args == "" {
+		argsString = strings.Replace(argsString, "{extra-arg}", "", -1)
 	} else {
 		argsString = args
 	}
