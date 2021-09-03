@@ -276,14 +276,14 @@ func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, args string) (
 
 	argsString = strings.Replace(argsString, "{node-data-dir}", nodeDataDir, -1)
 
-	args := strings.Fields(argsString)
+	argsSlice := strings.Fields(argsString)
 
 	bootNodes := viper.GetString(flagPrefix + "node-boot-nodes")
 	if bootNodes != "" {
-		args = append(args, "--boot-nodes", viper.GetString(flagPrefix+"node-boot-nodes"))
+		argsSlice = append(argsSlice, "--boot-nodes", viper.GetString(flagPrefix+"node-boot-nodes"))
 	}
 
-	return args, nil
+	return argsSlice, nil
 }
 
 func buildMetricsAndReadinessManager(name string, maxLatency time.Duration) *nodeManager.MetricsAndReadinessManager {
