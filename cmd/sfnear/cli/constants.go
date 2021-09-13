@@ -9,7 +9,7 @@ const (
 	MindreaderNodeRPCPort        string = "8547"
 	MergerServingAddr            string = ":13012"
 	RelayerServingAddr           string = ":13011"
-	FirehoseGRPCServingAddr      string = ":13042*"
+	FirehoseGRPCServingAddr      string = ":13042"
 
 	MergedBlocksStoreURL string = "file://{sf-data-dir}/storage/merged-blocks"
 	OneBlockStoreURL     string = "file://{sf-data-dir}/storage/one-blocks"
