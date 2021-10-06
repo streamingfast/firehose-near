@@ -26,7 +26,7 @@ main() {
 
   exec $sfnear -c $(basename $ROOT).yaml start "$@"
 }
-
+q:Q!
 usage_error() {
   message="$1"
   exit_code="$2"
