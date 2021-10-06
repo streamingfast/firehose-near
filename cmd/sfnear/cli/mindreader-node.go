@@ -18,7 +18,6 @@ import (
 	"context"
 	"fmt"
 	"math"
-	"strings"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -110,8 +109,4 @@ func getMindreaderLogPlugin(
 		blockStreamServer,
 		appLogger,
 	)
-}
-
-func replaceNodeRole(nodeRole, in string) string {
-	return strings.Replace(in, "{node-role}", nodeRole, -1)
 }
