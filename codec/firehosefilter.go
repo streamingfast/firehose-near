@@ -40,5 +40,8 @@ func (f *BlockFilter) TransformInPlace(blk *bstream.Block) error {
 	// }
 
 	//transformInPlaceV2(block, include, exclude)
+
+	//block.GetChunks()[0].ValidatorProposals[0].
+
 	return nil
 }
