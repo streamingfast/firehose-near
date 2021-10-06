@@ -75,7 +75,6 @@ func checkMergedBlocksE(cmd *cobra.Command, args []string) error {
 }
 
 func blockPrinter(block *bstream.Block) {
-	payloadSize := len(block.PayloadBuffer)
 	nearBlock := block.ToNative().(*pbcodec.BlockWrapper)
 	shardCount := len(nearBlock.Shards)
 	transactionCount := 0
@@ -86,9 +85,8 @@ func blockPrinter(block *bstream.Block) {
 		}
 	}
 
-	fmt.Printf("Block %s (%d bytes): %d shards, %d transactions\n",
+	fmt.Printf("Block %s: %d shards, %d transactions\n",
 		block.AsRef(),
-		payloadSize,
 		shardCount,
 		transactionCount,
 	)

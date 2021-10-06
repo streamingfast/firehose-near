@@ -60,7 +60,7 @@ func (l *BlockReader) Read() (*bstream.Block, error) {
 			return nil, fmt.Errorf("unable to read block proto: %s", err)
 		}
 
-		blk, err := bstream.BlockFromProto(pbBlock)
+		blk, err := bstream.NewBlockFromProto(pbBlock)
 		if err != nil {
 			return nil, err
 		}
