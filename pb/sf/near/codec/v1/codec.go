@@ -2,8 +2,9 @@ package pbcodec
 
 import (
 	"encoding/hex"
-	"github.com/streamingfast/bstream"
 	"time"
+
+	"github.com/streamingfast/bstream"
 )
 
 func (x *BlockWrapper) ID() string {
@@ -31,7 +32,7 @@ func (x *BlockWrapper) PreviousID() string {
 }
 
 func (x *BlockWrapper) Time() time.Time {
-	return time.Unix(0, int64(x.Block.Header.TimestampNanosec))
+	return time.Unix(0, int64(x.Block.Header.TimestampNanosec)).UTC()
 }
 
 func (x *CryptoHash) AsString() string {

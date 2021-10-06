@@ -28,14 +28,14 @@ import (
 func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAddr string) {
 	cmd.Flags().String(flagPrefix+"path", "neard", "Command that will be launched by the node manager")
 	cmd.Flags().String(flagPrefix+"data-dir", "{sf-data-dir}/{node-role}/data", "Directory for node data ({node-role} is either mindreader, peering or dev-miner)")
-	cmd.Flags().String(flagPrefix+"config-file", "./{node-role}/config.json", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder")
-	cmd.Flags().String(flagPrefix+"genesis-file", "./{node-role}/genesis.json", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder")
-	cmd.Flags().String(flagPrefix+"node-key-file", "./{node-role}/node_key.json", "Node key configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder")
+	cmd.Flags().String(flagPrefix+"config-file", "./{node-role}/config.json", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder Use {hostname} label to use short hostname in path")
+	cmd.Flags().String(flagPrefix+"genesis-file", "./{node-role}/genesis.json", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use short hostname in path")
+	cmd.Flags().String(flagPrefix+"node-key-file", "./{node-role}/node_key.json", "Node key configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use with short hostname in path")
 	cmd.Flags().Bool(flagPrefix+"debug-deep-mind", false, "[DEV] Prints deep mind instrumentation logs to standard output, should be use for debugging purposes only")
 	cmd.Flags().Bool(flagPrefix+"log-to-zap", true, "Enable all node logs to transit into node's logger directly, when false, prints node logs directly to stdout")
 	cmd.Flags().String(flagPrefix+"manager-api-addr", managerAPIAddr, "Near node manager API address")
 	cmd.Flags().Duration(flagPrefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")
-	cmd.Flags().String(flagPrefix+"node-arguments", "", "If not empty, overrides the list of default node arguments (computed from node type and role). Start with '+' to append to default args instead of replacing. ")
+	cmd.Flags().String(flagPrefix+"arguments", "", "If not empty, overrides the list of default node arguments (computed from node type and role). Start with '+' to append to default args instead of replacing. ")
 
 	// FIXME: Right now our near-dm-indexer doesn't support it, we should plan on adding it!
 	// cmd.Flags().String(flagPrefix+"node-boot-nodes", "", "Set the node's boot nodes to bootstrap network from")
@@ -85,13 +85,19 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 		configFile := replaceNodeRole(kind, viper.GetString(flagPrefix+"config-file"))
 		genesisFile := replaceNodeRole(kind, viper.GetString(flagPrefix+"genesis-file"))
 		nodeKeyFile := replaceNodeRole(kind, viper.GetString(flagPrefix+"node-key-file"))
+
+		hostname, _ := os.Hostname()
+		configFile = replaceHostname(hostname, configFile)
+		genesisFile = replaceHostname(hostname, genesisFile)
+		nodeKeyFile = replaceHostname(hostname, nodeKeyFile)
+
 		readinessMaxLatency := viper.GetDuration(flagPrefix + "readiness-max-latency")
 		debugDeepMind := viper.GetBool(flagPrefix + "debug-deep-mind")
 		logToZap := viper.GetBool(flagPrefix + "log-to-zap")
 		shutdownDelay := viper.GetDuration("common-system-shutdown-signal-delay") // we reuse this global value
 		httpAddr := viper.GetString(flagPrefix + "manager-api-addr")
 
-		arguments := viper.GetString(flagPrefix + "node-arguments")
+		arguments := viper.GetString(flagPrefix + "arguments")
 		nodeArguments, err := buildNodeArguments(
 			nodeDataDir,
 			flagPrefix,
@@ -218,16 +224,32 @@ func (b *bootstrapper) Bootstrap() error {
 		return fmt.Errorf("create all dirs of %q: %w", b.nodeDataDir, err)
 	}
 
-	if err := copyFile(ctx, b.configFile, configFileInDataDir); err != nil {
-		return fmt.Errorf("unable to copy config file %q to %q: %w", b.configFile, configFileInDataDir, err)
+	exists, err := fileExists(configFileInDataDir)
+	if err != nil {
+		return err
 	}
-
-	if err := copyFile(ctx, b.genesisFile, genesisFileInDataDir); err != nil {
-		return fmt.Errorf("unable to copy genesis file %q to %q: %w", b.genesisFile, genesisFileInDataDir, err)
+	if !exists {
+		if err := copyFile(ctx, b.configFile, configFileInDataDir); err != nil {
+			return fmt.Errorf("unable to copy config file %q to %q: %w", b.configFile, configFileInDataDir, err)
+		}
 	}
-
-	if err := copyFile(ctx, b.nodeKeyFile, nodeKeyFileInDataDir); err != nil {
-		return fmt.Errorf("unable to copy node key file %q to %q: %w", b.nodeKeyFile, nodeKeyFileInDataDir, err)
+	exists, err = fileExists(genesisFileInDataDir)
+	if err != nil {
+		return err
+	}
+	if !exists {
+		if err := copyFile(ctx, b.genesisFile, genesisFileInDataDir); err != nil {
+			return fmt.Errorf("unable to copy genesis file %q to %q: %w", b.genesisFile, genesisFileInDataDir, err)
+		}
+	}
+	exists, err = fileExists(nodeKeyFileInDataDir)
+	if err != nil {
+		return err
+	}
+	if !exists {
+		if err := copyFile(ctx, b.nodeKeyFile, nodeKeyFileInDataDir); err != nil {
+			return fmt.Errorf("unable to copy node key file %q to %q: %w", b.nodeKeyFile, nodeKeyFileInDataDir, err)
+		}
 	}
 
 	return nil
@@ -235,7 +257,7 @@ func (b *bootstrapper) Bootstrap() error {
 
 type nodeArgsByRole map[string]string
 
-func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, extraArgs string) ([]string, error) {
+func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, args string) ([]string, error) {
 	typeRoles := nodeArgsByRole{
 		"peering":    "--home={node-data-dir} {extra-arg} run",
 		"mindreader": "--home={node-data-dir} {extra-arg} run",
@@ -246,22 +268,24 @@ func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, extraArgs stri
 		return nil, fmt.Errorf("invalid node role: %s", nodeRole)
 	}
 
-	if strings.HasPrefix(extraArgs, "+") {
-		argsString = extraArgs[1:]
+	if strings.HasPrefix(args, "+") {
+		argsString = strings.Replace(argsString, "{extra-arg}", args[1:], -1)
+	} else if args == "" {
+		argsString = strings.Replace(argsString, "{extra-arg}", "", -1)
 	} else {
-		argsString = strings.Replace(argsString, "{extra-arg}", extraArgs, -1)
+		argsString = args
 	}
 
 	argsString = strings.Replace(argsString, "{node-data-dir}", nodeDataDir, -1)
 
-	args := strings.Fields(argsString)
+	argsSlice := strings.Fields(argsString)
 
 	bootNodes := viper.GetString(flagPrefix + "node-boot-nodes")
 	if bootNodes != "" {
-		args = append(args, "--boot-nodes", viper.GetString(flagPrefix+"node-boot-nodes"))
+		argsSlice = append(argsSlice, "--boot-nodes", viper.GetString(flagPrefix+"node-boot-nodes"))
 	}
 
-	return args, nil
+	return argsSlice, nil
 }
 
 func buildMetricsAndReadinessManager(name string, maxLatency time.Duration) *nodeManager.MetricsAndReadinessManager {
@@ -274,4 +298,12 @@ func buildMetricsAndReadinessManager(name string, maxLatency time.Duration) *nod
 		maxLatency,
 	)
 	return metricsAndReadinessManager
+}
+
+func replaceNodeRole(nodeRole, in string) string {
+	return strings.Replace(in, "{node-role}", nodeRole, -1)
+}
+
+func replaceHostname(hostname, in string) string {
+	return strings.Replace(in, "{hostname}", hostname, -1)
 }
