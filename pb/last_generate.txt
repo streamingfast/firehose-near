@@ -1,3 +1,3 @@
-generate.sh - Wed 06 Oct 2021 09:52:06 AM EDT - colin
-streamingfast/proto revision: 
-streamingfast/proto-near revision: f2c7ebc661d2bbd936aadcdb900c47ce869cccb8
+generate.sh - Thu 07 Oct 2021 08:23:59 AM EDT - colin
+streamingfast/proto revision: a2215dd82a69e1205b25aee016013e9feedce0bf
+streamingfast/proto-near revision: d96e66b562047c6a51fcb781e432deb8b48ba15e
