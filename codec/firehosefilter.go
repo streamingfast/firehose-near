@@ -62,7 +62,7 @@ func splitExpression(expression string) (filterType string, values map[string]bo
 }
 
 func (f *BlockFilter) TransformInPlace(blk *bstream.Block) error {
-	block := blk.ToNative().(*pbcodec.BlockWrapper)
+	block := blk.ToNative().(*pbcodec.Block)
 
 	var filteredShards []*pbcodec.IndexerShard
 	for _, shard := range block.Shards {
