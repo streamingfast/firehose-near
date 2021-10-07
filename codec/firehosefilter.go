@@ -23,21 +23,21 @@ type BlockFilter struct {
 
 //receiver-ids:bozo.near|matt.near
 func NewBlockFilter(includeExpression, excludeExpression string) (*BlockFilter, error) {
-	filterTYpe, includes, err := splitExpression(includeExpression)
+	filterType, includes, err := splitExpression(includeExpression)
 	if err != nil {
 		return nil, fmt.Errorf("parsing includes: %w", err)
 	}
 
-	if filterTYpe != "receiver-ids" {
+	if filterType != "receiver-ids" {
 		return nil, fmt.Errorf("invalid include filter type, supported types are: receiver-ids")
 	}
 
-	filterTYpe, excludes, err := splitExpression(excludeExpression)
+	filterType, excludes, err := splitExpression(excludeExpression)
 	if err != nil {
 		return nil, fmt.Errorf("parsing excludes: %w", err)
 	}
 
-	if filterTYpe != "receiver-ids" {
+	if filterType != "receiver-ids" {
 		return nil, fmt.Errorf("invalid exclude filter type, supported types are: receiver-ids")
 	}
 
@@ -48,6 +48,8 @@ func NewBlockFilter(includeExpression, excludeExpression string) (*BlockFilter, 
 }
 
 func splitExpression(expression string) (filterType string, values map[string]bool, err error) {
+	values = make(map[string]bool)
+
 	parts := strings.Split(expression, ":")
 	if len(parts) != 2 {
 		return "", nil, fmt.Errorf("bad expression format")
@@ -66,31 +68,39 @@ func (f *BlockFilter) TransformInPlace(blk *bstream.Block) error {
 
 	var filteredShards []*pbcodec.IndexerShard
 	for _, shard := range block.Shards {
-
 		//Filter execution transaction
+		if shard.Chunk == nil {
+			continue
+		}
+
 		var filteredTransaction []*pbcodec.IndexerTransactionWithOutcome
-		for _, transaction := range shard.Chunk.Transactions {
-			if _, found := f.ExcludeReceivers[transaction.Transaction.ReceiverId]; found {
-				continue
-			}
-			if _, found := f.ExcludeReceivers[transaction.Transaction.ReceiverId]; found {
-				filteredTransaction = append(filteredTransaction, transaction)
+		if shard.Chunk.Transactions != nil {
+			for _, transaction := range shard.Chunk.Transactions {
+				if _, found := f.ExcludeReceivers[transaction.Transaction.ReceiverId]; found {
+					continue
+				}
+				if _, found := f.IncludeReceivers[transaction.Transaction.ReceiverId]; found {
+					filteredTransaction = append(filteredTransaction, transaction)
+				}
 			}
 		}
+		shard.Chunk.Transactions = filteredTransaction
 
 		//Filter execution receipt
 		var filteredOutcomes []*pbcodec.IndexerExecutionOutcomeWithReceipt
-		for _, executionOutcome := range shard.ReceiptExecutionOutcomes {
-			if _, found := f.ExcludeReceivers[executionOutcome.Receipt.ReceiverId]; found {
-				continue
-			}
-			if _, found := f.ExcludeReceivers[executionOutcome.Receipt.ReceiverId]; found {
-				filteredOutcomes = append(filteredOutcomes, executionOutcome)
+		if shard.ReceiptExecutionOutcomes != nil {
+			for _, executionOutcome := range shard.ReceiptExecutionOutcomes {
+				if _, found := f.ExcludeReceivers[executionOutcome.Receipt.ReceiverId]; found {
+					continue
+				}
+				if _, found := f.IncludeReceivers[executionOutcome.Receipt.ReceiverId]; found {
+					filteredOutcomes = append(filteredOutcomes, executionOutcome)
+				}
 			}
 		}
+		shard.ReceiptExecutionOutcomes = filteredOutcomes
 
 		if len(filteredOutcomes) > 0 || len(filteredTransaction) > 0 {
-			shard.ReceiptExecutionOutcomes = filteredOutcomes
 			filteredShards = append(filteredShards, shard)
 		}
 	}
