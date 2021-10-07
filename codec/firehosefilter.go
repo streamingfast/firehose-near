@@ -61,8 +61,27 @@ func splitExpression(expression string) (filterType string, values map[string]bo
 	return
 }
 
+func (f *BlockFilter) included(receiverID string) bool {
+	if len(f.IncludeReceivers) == 0 {
+		return true
+	}
+	_, found := f.IncludeReceivers[receiverID]
+	return found
+}
+func (f *BlockFilter) excluded(receiverID string) bool {
+	if len(f.ExcludeReceivers) == 0 {
+		return false
+	}
+	_, found := f.ExcludeReceivers[receiverID]
+	return found
+}
+
 func (f *BlockFilter) TransformInPlace(blk *bstream.Block) error {
 	block := blk.ToNative().(*pbcodec.Block)
+
+	if len(f.IncludeReceivers) == 0 && len(f.ExcludeReceivers) == 0 {
+		return nil
+	}
 
 	var filteredShards []*pbcodec.IndexerShard
 	for _, shard := range block.Shards {
@@ -70,10 +89,10 @@ func (f *BlockFilter) TransformInPlace(blk *bstream.Block) error {
 		//Filter execution transaction
 		var filteredTransaction []*pbcodec.IndexerTransactionWithOutcome
 		for _, transaction := range shard.Chunk.Transactions {
-			if _, found := f.ExcludeReceivers[transaction.Transaction.ReceiverId]; found {
+			if f.excluded(transaction.Transaction.ReceiverId) {
 				continue
 			}
-			if _, found := f.ExcludeReceivers[transaction.Transaction.ReceiverId]; found {
+			if f.included(transaction.Transaction.ReceiverId) {
 				filteredTransaction = append(filteredTransaction, transaction)
 			}
 		}
@@ -81,10 +100,10 @@ func (f *BlockFilter) TransformInPlace(blk *bstream.Block) error {
 		//Filter execution receipt
 		var filteredOutcomes []*pbcodec.IndexerExecutionOutcomeWithReceipt
 		for _, executionOutcome := range shard.ReceiptExecutionOutcomes {
-			if _, found := f.ExcludeReceivers[executionOutcome.Receipt.ReceiverId]; found {
+			if f.excluded(executionOutcome.Receipt.ReceiverId) {
 				continue
 			}
-			if _, found := f.ExcludeReceivers[executionOutcome.Receipt.ReceiverId]; found {
+			if f.included(executionOutcome.Receipt.ReceiverId) {
 				filteredOutcomes = append(filteredOutcomes, executionOutcome)
 			}
 		}
