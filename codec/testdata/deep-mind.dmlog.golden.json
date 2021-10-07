@@ -1,7 +1,7 @@
 [{
-  "author": "node3",
+  "author": "node0",
   "header": {
-    "height": 21,
+    "height": 60,
     "epoch_id": {
       "bytes": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
     },
@@ -9,268 +9,22 @@
       "bytes": "gbCPgKfDjvBORnjFHRAxL95Ad2dDGa2pmteXNt2Awa0="
     },
     "hash": {
-      "bytes": "cbUsmsQE7X8GZtlPdwad/kxPu0eNBs7HfnO/ISlcgts="
+      "bytes": "kb1Yjr0pvaOl9dCcnJtj/N+dLrAdhDltlqpx2wuDnMk="
     },
     "prev_hash": {
-      "bytes": "+WGE95vUqQ2vTW0JyMz03EfREjuuPU34ybiZkh15fQo="
+      "bytes": "B8in2uftjph1encPlU2de9Ckio3c5bN2248BwbeunFU="
     },
     "prev_state_root": {
-      "bytes": "fBM6GxBg7dg9RJZbK2NyB4zjGxkDaJlDwXksGGrOUqs="
-    },
-    "chunk_receipts_root": {
-      "bytes": "Zjfbyd4+HVpemDG84mT27oF7b/86BDGfw5MOM8L2fWY="
-    },
-    "chunk_headers_root": {
-      "bytes": "RV8WggofIoAt1dhRKOfpX35rZ/0pKzGq+Jf3wCg2QzU="
-    },
-    "chunk_tx_root": {
-      "bytes": "Zmh6rfhivXdsj8GLjp+OIAiXFIVu4jOzkCpZHQ1fKSU="
-    },
-    "outcome_root": {
-      "bytes": "YWwelaWXQthF2uQqNgubRYppUX1gZ2U1ESt4osHT5Fo="
-    },
-    "chunks_included": 1,
-    "challenges_root": {
-      "bytes": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
-    },
-    "timestamp": 1633545421270293111,
-    "timestamp_nanosec": 1633545421270293111,
-    "random_value": {
-      "bytes": "3HNtoqY9EIHDNTUH1SE13SV03QqxNOVKbwafMU0IUvo="
-    },
-    "chunk_mask": [
-      true
-    ],
-    "gas_price": {
-      "bytes": "AAAAAAAAAAAAAAAAO5rKAA=="
-    },
-    "validator_reward": {
-      "bytes": "AAAAAAAAAAAAAAAAAAAAAA=="
-    },
-    "total_supply": {
-      "bytes": "AAD4+/YNZHbauqr+HbwYAA=="
-    },
-    "last_final_block": {
-      "bytes": "HMzYhXw0JDpTWuoC7thhRljbYvHRAK019WhaveOllcs="
-    },
-    "last_ds_final_block": {
-      "bytes": "+WGE95vUqQ2vTW0JyMz03EfREjuuPU34ybiZkh15fQo="
-    },
-    "next_bp_hash": {
-      "bytes": "R9wSchM0GaSDRmNKCyfoSLDlJEO9IxZnzj3tLKeIuoM="
-    },
-    "block_merkle_root": {
-      "bytes": "lb06Kk5MRXxfcY8BJELnHS/KgPNhVA11VyZdfcsolSc="
-    },
-    "latest_protocol_version": 47
-  },
-  "chunk_headers": [
-    {
-      "chunk_hash": "XwP6ulloihuSgCWFKzuDjIbJIuxA75Sis4E6UL/r9BA=",
-      "prev_block_hash": "+WGE95vUqQ2vTW0JyMz03EfREjuuPU34ybiZkh15fQo=",
-      "outcome_root": "VHwNg22X4g4BIsL8C7wB0RcIhr+OnPunVmLPf6FWN3M=",
-      "prev_state_root": "hCGHZgX6cUN7uJeYpV8wwHK1rlbCKL8tvgXZVflm8VE=",
-      "encoded_merkle_root": "USSJmZDnFFIKXFlNjO8HbzVRV0fLX0+CNJLllHvx+Uw=",
-      "encoded_length": 199,
-      "height_created": 21,
-      "height_included": 21,
-      "gas_used": 424555062500,
-      "gas_limit": 1000000000000000,
-      "validator_reward": {
-        "bytes": "AAAAAAAAAAAAAAAAAAAAAA=="
-      },
-      "balance_burnt": {
-        "bytes": "AAAAAAAAABcD4pP0YkPoAA=="
-      },
-      "outgoing_receipts_root": "ndEX8qrsgjMNEUOyO1Ejk0BxVzQ3euTYlJ7K4FXtqLI=",
-      "tx_root": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
-    }
-  ],
-  "shards": [
-    {
-      "chunk": {
-        "author": "node3",
-        "header": {
-          "chunk_hash": "XwP6ulloihuSgCWFKzuDjIbJIuxA75Sis4E6UL/r9BA=",
-          "prev_block_hash": "+WGE95vUqQ2vTW0JyMz03EfREjuuPU34ybiZkh15fQo=",
-          "outcome_root": "VHwNg22X4g4BIsL8C7wB0RcIhr+OnPunVmLPf6FWN3M=",
-          "prev_state_root": "hCGHZgX6cUN7uJeYpV8wwHK1rlbCKL8tvgXZVflm8VE=",
-          "encoded_merkle_root": "USSJmZDnFFIKXFlNjO8HbzVRV0fLX0+CNJLllHvx+Uw=",
-          "encoded_length": 199,
-          "height_created": 21,
-          "height_included": 21,
-          "gas_used": 424555062500,
-          "gas_limit": 1000000000000000,
-          "validator_reward": {
-            "bytes": "AAAAAAAAAAAAAAAAAAAAAA=="
-          },
-          "balance_burnt": {
-            "bytes": "AAAAAAAAABcD4pP0YkPoAA=="
-          },
-          "outgoing_receipts_root": "ndEX8qrsgjMNEUOyO1Ejk0BxVzQ3euTYlJ7K4FXtqLI=",
-          "tx_root": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
-        },
-        "receipts": [
-          {
-            "predecessor_id": "near",
-            "receiver_id": "battlefield.near",
-            "receipt_id": {
-              "bytes": "E3Tm1GhUm6jLB8NfLWFqGEa0zMQg2IBcVvyeGJOy9eo="
-            },
-            "Receipt": {
-              "Action": {
-                "signer_id": "near",
-                "signer_public_key": {
-                  "bytes": "PVWYePA9Unnxiaqvd4mKxrkUmexc1aYOP5BZoRIuGf8="
-                },
-                "gas_price": {
-                  "bytes": "AAAAAAAAAAAAAAAAPWSNgA=="
-                },
-                "actions": [
-                  {
-                    "Action": {
-                      "CreateAccount": {}
-                    }
-                  },
-                  {
-                    "Action": {
-                      "Transfer": {
-                        "deposit": {
-                          "bytes": "AAAAAAGdlx5P6EAedAAAAA=="
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "Action": {
-                      "AddKey": {
-                        "public_key": {
-                          "bytes": "PVWYePA9Unnxiaqvd4mKxrkUmexc1aYOP5BZoRIuGf8="
-                        },
-                        "access_key": {
-                          "permission": {
-                            "Permission": {
-                              "FullAccess": {}
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "receipt_execution_outcomes": [
-        {
-          "execution_outcome": {
-            "proof": {},
-            "block_hash": {
-              "bytes": "cbUsmsQE7X8GZtlPdwad/kxPu0eNBs7HfnO/ISlcgts="
-            },
-            "id": {
-              "bytes": "E3Tm1GhUm6jLB8NfLWFqGEa0zMQg2IBcVvyeGJOy9eo="
-            },
-            "outcome": {
-              "receipt_ids": [
-                {
-                  "bytes": "AioYaWSzfCeOQKajwZkWjc3DbQESx1eAdZP5NUPGnzU="
-                }
-              ],
-              "gas_burnt": 424555062500,
-              "tokens_burnt": {
-                "bytes": "AAAAAAAAABcD4pP0YkPoAA=="
-              },
-              "executor_id": "battlefield.near",
-              "Status": {
-                "SuccessValue": {}
-              }
-            }
-          },
-          "receipt": {
-            "predecessor_id": "near",
-            "receiver_id": "battlefield.near",
-            "receipt_id": {
-              "bytes": "E3Tm1GhUm6jLB8NfLWFqGEa0zMQg2IBcVvyeGJOy9eo="
-            },
-            "Receipt": {
-              "Action": {
-                "signer_id": "near",
-                "signer_public_key": {
-                  "bytes": "PVWYePA9Unnxiaqvd4mKxrkUmexc1aYOP5BZoRIuGf8="
-                },
-                "gas_price": {
-                  "bytes": "AAAAAAAAAAAAAAAAPWSNgA=="
-                },
-                "actions": [
-                  {
-                    "Action": {
-                      "CreateAccount": {}
-                    }
-                  },
-                  {
-                    "Action": {
-                      "Transfer": {
-                        "deposit": {
-                          "bytes": "AAAAAAGdlx5P6EAedAAAAA=="
-                        }
-                      }
-                    }
-                  },
-                  {
-                    "Action": {
-                      "AddKey": {
-                        "public_key": {
-                          "bytes": "PVWYePA9Unnxiaqvd4mKxrkUmexc1aYOP5BZoRIuGf8="
-                        },
-                        "access_key": {
-                          "permission": {
-                            "Permission": {
-                              "FullAccess": {}
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        }
-      ]
-    }
-  ]
-}
-,{
-  "author": "node0",
-  "header": {
-    "height": 309,
-    "epoch_id": {
-      "bytes": "WFWSv4M3QTECLSn6S+cQZ0jJyYZNAQ10l798GefaVWk="
-    },
-    "next_epoch_id": {
-      "bytes": "TaQuLToYcDYDq40CuqtG19ntMZUM1BlEV8b1eK+YuAQ="
-    },
-    "hash": {
-      "bytes": "ykMHGRvZ78VLnmLKAvxizUvOZWWhZ92z2dRFiGnJWIw="
-    },
-    "prev_hash": {
-      "bytes": "bwdlwtUnLAcB6cny2x5gepxs4Xw0r1XYNd643aexVRQ="
-    },
-    "prev_state_root": {
-      "bytes": "SxVcQVBsp7erOYktya+j7pcpz3Di4y7i8js6Td1Uaoc="
+      "bytes": "TTnCSZc24oDBVek+y7Myz4j+0B2FMcEPWWMAouOwWr0="
     },
     "chunk_receipts_root": {
       "bytes": "ek/eNqQm3q9eElL1cYoG4Xh/jRLLfaWhgFf6n/tmzg0="
     },
     "chunk_headers_root": {
-      "bytes": "p1RKEM7buKYxz24zG5hPSZqm3kVJ6oICa6JWtQ9VC1M="
+      "bytes": "H3ldE7qd9BLvYSci1JcFOo6+KOh6m60ykqA9v8Ll4MM="
     },
     "chunk_tx_root": {
-      "bytes": "ty+KfVgMg6ePGvUGWw/tnYa2qYICA2X6ugA5DXErwK8="
+      "bytes": "AkvBJMWx4AVyVIBMN0+nUnp4qfxAZhVNRMP5byNHeYI="
     },
     "outcome_root": {
       "bytes": "Zmh6rfhivXdsj8GLjp+OIAiXFIVu4jOzkCpZHQ1fKSU="
@@ -279,10 +33,10 @@
     "challenges_root": {
       "bytes": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
     },
-    "timestamp": 1633545475755078878,
-    "timestamp_nanosec": 1633545475755078878,
+    "timestamp": 1633610762794997973,
+    "timestamp_nanosec": 1633610762794997973,
     "random_value": {
-      "bytes": "x2hdL/XIU8IiP2x6+0Y10yJLw2j6eC+glVHVJ6Wdp88="
+      "bytes": "4k/RxSq2oFPe5v1zNMuQHDmQ6gOh42mBbxpAoLg7VNg="
     },
     "chunk_mask": [
       true
@@ -290,36 +44,39 @@
     "gas_price": {
       "bytes": "AAAAAAAAAAAAAAAAO5rKAA=="
     },
+    "rent_paid": {
+      "bytes": "AAAAAAAAAAAAAAAAAAAAAA=="
+    },
     "validator_reward": {
       "bytes": "AAAAAAAAAAAAAAAAAAAAAA=="
     },
     "total_supply": {
-      "bytes": "AAD7YG3hCJC9Bh0VYapRMA=="
+      "bytes": "AAD4+/YNWY8m/+Yx8h3yAA=="
     },
     "last_final_block": {
-      "bytes": "m9lbQx8miDzdHaLZnI2OYrRothYJKVE47CeSNN3rarg="
+      "bytes": "KdcLSbUgvl99qZnSjGagQOuZWgWoPksXDO6WoiE07j4="
     },
     "last_ds_final_block": {
-      "bytes": "bwdlwtUnLAcB6cny2x5gepxs4Xw0r1XYNd643aexVRQ="
+      "bytes": "B8in2uftjph1encPlU2de9Ckio3c5bN2248BwbeunFU="
     },
     "next_bp_hash": {
-      "bytes": "/65rjrqIjH2ozAFbQNw7PbuXvSAOTmxD2xViL3gTHHg="
+      "bytes": "R9wSchM0GaSDRmNKCyfoSLDlJEO9IxZnzj3tLKeIuoM="
     },
     "block_merkle_root": {
-      "bytes": "4MjYGFQBr8q1WVwuLWJsW4hih0hEJOUC+gMxImaF/4s="
+      "bytes": "Sl5HKUKGnJ71lRRbYx13DDQmvIWC79LaAsKBavV6woU="
     },
     "latest_protocol_version": 47
   },
   "chunk_headers": [
     {
-      "chunk_hash": "/GDKnVbx1b8limH3AbLk7ZOUjRMRPobEgM79Un19z3M=",
-      "prev_block_hash": "bwdlwtUnLAcB6cny2x5gepxs4Xw0r1XYNd643aexVRQ=",
+      "chunk_hash": "nT8PhaoQsZ7ksoJ2ETEVSCTf7xfn4qPBJJoFGRoLGyo=",
+      "prev_block_hash": "B8in2uftjph1encPlU2de9Ckio3c5bN2248BwbeunFU=",
       "outcome_root": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
-      "prev_state_root": "NejEjWGcweGIRQALsk5DPaC1zu+Mevkht2CAIp72X+U=",
-      "encoded_merkle_root": "C4Nu7E5E5oQiXK61BBPpuRbRePCp9bDAnpitePqU5M4=",
+      "prev_state_root": "Hr9jZCfGXY8kOq8GzOhxx39RsfxLupDh3USd2VhVLcY=",
+      "encoded_merkle_root": "kkXfma82mtW0nlLCBZZQuziF5franL5To1xOSuHv2vk=",
       "encoded_length": 187,
-      "height_created": 309,
-      "height_included": 309,
+      "height_created": 60,
+      "height_included": 60,
       "gas_limit": 1000000000000000,
       "validator_reward": {
         "bytes": "AAAAAAAAAAAAAAAAAAAAAA=="
@@ -328,7 +85,7 @@
         "bytes": "AAAAAAAAAAAAAAAAAAAAAA=="
       },
       "outgoing_receipts_root": "7puS4yTgNBqWXa8ps5VVAw4sDlWR19PivQX/eF+UawU=",
-      "tx_root": "7Y8k4oZcQAFa1gfV1FmEFENdz2WgZMbRlX2xpGYUhlY="
+      "tx_root": "5365GiebBgRgvk4l9sCk+Hl6wn1I41icqtsSrcWx00o="
     }
   ],
   "shards": [
@@ -336,14 +93,14 @@
       "chunk": {
         "author": "node0",
         "header": {
-          "chunk_hash": "/GDKnVbx1b8limH3AbLk7ZOUjRMRPobEgM79Un19z3M=",
-          "prev_block_hash": "bwdlwtUnLAcB6cny2x5gepxs4Xw0r1XYNd643aexVRQ=",
+          "chunk_hash": "nT8PhaoQsZ7ksoJ2ETEVSCTf7xfn4qPBJJoFGRoLGyo=",
+          "prev_block_hash": "B8in2uftjph1encPlU2de9Ckio3c5bN2248BwbeunFU=",
           "outcome_root": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
-          "prev_state_root": "NejEjWGcweGIRQALsk5DPaC1zu+Mevkht2CAIp72X+U=",
-          "encoded_merkle_root": "C4Nu7E5E5oQiXK61BBPpuRbRePCp9bDAnpitePqU5M4=",
+          "prev_state_root": "Hr9jZCfGXY8kOq8GzOhxx39RsfxLupDh3USd2VhVLcY=",
+          "encoded_merkle_root": "kkXfma82mtW0nlLCBZZQuziF5franL5To1xOSuHv2vk=",
           "encoded_length": 187,
-          "height_created": 309,
-          "height_included": 309,
+          "height_created": 60,
+          "height_included": 60,
           "gas_limit": 1000000000000000,
           "validator_reward": {
             "bytes": "AAAAAAAAAAAAAAAAAAAAAA=="
@@ -352,7 +109,7 @@
             "bytes": "AAAAAAAAAAAAAAAAAAAAAA=="
           },
           "outgoing_receipts_root": "7puS4yTgNBqWXa8ps5VVAw4sDlWR19PivQX/eF+UawU=",
-          "tx_root": "7Y8k4oZcQAFa1gfV1FmEFENdz2WgZMbRlX2xpGYUhlY="
+          "tx_root": "5365GiebBgRgvk4l9sCk+Hl6wn1I41icqtsSrcWx00o="
         },
         "transactions": [
           {
@@ -361,7 +118,7 @@
               "public_key": {
                 "bytes": "PVWYePA9Unnxiaqvd4mKxrkUmexc1aYOP5BZoRIuGf8="
               },
-              "nonce": 28000016,
+              "nonce": 28000002,
               "receiver_id": "near",
               "actions": [
                 {
@@ -375,22 +132,22 @@
                 }
               ],
               "hash": {
-                "bytes": "awd0OMfxsIIw9hIA4Y20vcsjTHqJ+XrD4hCTF0bvhII="
+                "bytes": "fwGRrpMS/0sf9KK8VqsH4QMDJfYmad/3a2tjVqFmqik="
               }
             },
             "outcome": {
               "execution_outcome": {
                 "proof": {},
                 "block_hash": {
-                  "bytes": "ykMHGRvZ78VLnmLKAvxizUvOZWWhZ92z2dRFiGnJWIw="
+                  "bytes": "kb1Yjr0pvaOl9dCcnJtj/N+dLrAdhDltlqpx2wuDnMk="
                 },
                 "id": {
-                  "bytes": "awd0OMfxsIIw9hIA4Y20vcsjTHqJ+XrD4hCTF0bvhII="
+                  "bytes": "fwGRrpMS/0sf9KK8VqsH4QMDJfYmad/3a2tjVqFmqik="
                 },
                 "outcome": {
                   "receipt_ids": [
                     {
-                      "bytes": "kat/XjXlBHW2c7Bupjl53n9lEBhxl+pBmoa2ItYzpso="
+                      "bytes": "R5IAyIaJjm1kpaY7g6mesnfFbWw3k1rhJZMHehRwRKs="
                     }
                   ],
                   "gas_burnt": 223182562500,
@@ -401,7 +158,7 @@
                   "Status": {
                     "SuccessReceiptId": {
                       "id": {
-                        "bytes": "kat/XjXlBHW2c7Bupjl53n9lEBhxl+pBmoa2ItYzpso="
+                        "bytes": "R5IAyIaJjm1kpaY7g6mesnfFbWw3k1rhJZMHehRwRKs="
                       }
                     }
                   }
