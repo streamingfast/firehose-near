@@ -79,9 +79,9 @@ func getMindreaderLogPlugin(
 	}
 
 	consoleReaderTransformer := func(obj interface{}) (*bstream.Block, error) {
-		blk, ok := obj.(*pbcodec.BlockWrapper)
+		blk, ok := obj.(*pbcodec.Block)
 		if !ok {
-			return nil, fmt.Errorf("expected *pbcodec.BlockWrapper, got %T", obj)
+			return nil, fmt.Errorf("expected *pbcodec.Block, got %T", obj)
 		}
 
 		return codec.BlockFromProto(blk)

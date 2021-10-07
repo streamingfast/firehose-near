@@ -150,7 +150,7 @@ func (c *ConsoleReader) buildScanner(reader io.Reader) *bufio.Scanner {
 
 // Formats
 // DMLOG BLOCK <NUM> <HASH> <PROTO_HEX>
-func (ctx *parseCtx) readBlock(line string) (*pbcodec.BlockWrapper, error) {
+func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 	chunks, err := SplitInChunks(line, 4)
 	if err != nil {
 		return nil, fmt.Errorf("split: %s", err)
@@ -168,7 +168,7 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.BlockWrapper, error) {
 		return nil, fmt.Errorf("invalid block bytes: %w", err)
 	}
 
-	block := &pbcodec.BlockWrapper{}
+	block := &pbcodec.Block{}
 	if err := proto.Unmarshal(protoBytes, block); err != nil {
 		return nil, fmt.Errorf("invalid block: %w", err)
 	}
