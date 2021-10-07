@@ -1,7 +1,11 @@
 package codec
 
 import (
+	"fmt"
+	"strings"
+
 	"github.com/streamingfast/bstream"
+	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 )
 
 type FilteringPreprocessor struct {
@@ -13,35 +17,70 @@ func (f *FilteringPreprocessor) PreprocessBlock(blk *bstream.Block) (interface{}
 }
 
 type BlockFilter struct {
-	IncludeExpression string
-	ExcludeExpression string
+	IncludeReceivers map[string]bool
+	ExcludeReceivers map[string]bool
 }
 
+//receiver-ids:bozo.near|matt.near
 func NewBlockFilter(includeExpression, excludeExpression string) (*BlockFilter, error) {
+	filterTYpe, includes, err := splitExpression(includeExpression)
+	if err != nil {
+		return nil, fmt.Errorf("parsing includes: %w", err)
+	}
+
+	if filterTYpe != "receiver-ids" {
+		return nil, fmt.Errorf("invalid include filter type, supported types are: receiver-ids")
+	}
+
+	filterTYpe, excludes, err := splitExpression(excludeExpression)
+	if err != nil {
+		return nil, fmt.Errorf("parsing excludes: %w", err)
+	}
+
+	if filterTYpe != "receiver-ids" {
+		return nil, fmt.Errorf("invalid exclude filter type, supported types are: receiver-ids")
+	}
 
 	return &BlockFilter{
-		IncludeExpression: includeExpression,
-		ExcludeExpression: excludeExpression,
+		IncludeReceivers: includes,
+		ExcludeReceivers: excludes,
 	}, nil
 }
 
+func splitExpression(expression string) (filterType string, values map[string]bool, err error) {
+	parts := strings.Split(expression, ":")
+	if len(parts) != 2 {
+		return "", nil, fmt.Errorf("bad expression format")
+	}
+
+	filterType = parts[0]
+	splitValues := strings.Split(parts[1], "|")
+	for _, v := range splitValues {
+		values[v] = true
+	}
+	return
+}
+
 func (f *BlockFilter) TransformInPlace(blk *bstream.Block) error {
-	//block := blk.ToNative().(*pbcodec.Block)
+	block := blk.ToNative().(*pbcodec.BlockWrapper)
 
-	// FIXME: Re-add when proto is changed to know about filtering
-	// if filterExprContains(block.FilteringIncludeFilterExpr, include.code) {
-	// 	include = includeNOOP
-	// }
-	// if filterExprContains(block.FilteringExcludeFilterExpr, exclude.code) {
-	// 	exclude = excludeNOOP
-	// }
-	// if include.IsNoop() && exclude.IsNoop() {
-	// 	return nil
-	// }
+	var filteredShards []*pbcodec.IndexerShard
 
-	//transformInPlaceV2(block, include, exclude)
-
-	//block.GetChunks()[0].ValidatorProposals[0].
-
+	for _, shard := range block.Shards {
+		var filteredOutcomes []*pbcodec.IndexerExecutionOutcomeWithReceipt
+		for _, executionOutcome := range shard.ReceiptExecutionOutcomes {
+			if _, found := f.ExcludeReceivers[executionOutcome.Receipt.ReceiverId]; found {
+				continue
+			}
+			if _, found := f.ExcludeReceivers[executionOutcome.Receipt.ReceiverId]; found {
+				filteredOutcomes = append(filteredOutcomes, executionOutcome)
+			}
+		}
+		if len(filteredOutcomes) > 0 {
+			shard.ReceiptExecutionOutcomes = filteredOutcomes
+			filteredShards = append(filteredShards, shard)
+		}
+	}
+	block.Shards = filteredShards
 	return nil
 }
