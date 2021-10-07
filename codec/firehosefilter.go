@@ -65,8 +65,20 @@ func (f *BlockFilter) TransformInPlace(blk *bstream.Block) error {
 	block := blk.ToNative().(*pbcodec.BlockWrapper)
 
 	var filteredShards []*pbcodec.IndexerShard
-
 	for _, shard := range block.Shards {
+
+		//Filter execution transaction
+		var filteredTransaction []*pbcodec.IndexerTransactionWithOutcome
+		for _, transaction := range shard.Chunk.Transactions {
+			if _, found := f.ExcludeReceivers[transaction.Transaction.ReceiverId]; found {
+				continue
+			}
+			if _, found := f.ExcludeReceivers[transaction.Transaction.ReceiverId]; found {
+				filteredTransaction = append(filteredTransaction, transaction)
+			}
+		}
+
+		//Filter execution receipt
 		var filteredOutcomes []*pbcodec.IndexerExecutionOutcomeWithReceipt
 		for _, executionOutcome := range shard.ReceiptExecutionOutcomes {
 			if _, found := f.ExcludeReceivers[executionOutcome.Receipt.ReceiverId]; found {
@@ -76,11 +88,13 @@ func (f *BlockFilter) TransformInPlace(blk *bstream.Block) error {
 				filteredOutcomes = append(filteredOutcomes, executionOutcome)
 			}
 		}
-		if len(filteredOutcomes) > 0 {
+
+		if len(filteredOutcomes) > 0 || len(filteredTransaction) > 0 {
 			shard.ReceiptExecutionOutcomes = filteredOutcomes
 			filteredShards = append(filteredShards, shard)
 		}
 	}
 	block.Shards = filteredShards
+
 	return nil
 }
