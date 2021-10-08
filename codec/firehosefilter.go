@@ -23,28 +23,37 @@ type BlockFilter struct {
 
 //receiver-ids:bozo.near|matt.near
 func NewBlockFilter(includeExpression, excludeExpression string) (*BlockFilter, error) {
-	filterType, includes, err := splitExpression(includeExpression)
-	if err != nil {
-		return nil, fmt.Errorf("parsing includes: %w", err)
+	blockfilter := &BlockFilter{
+		IncludeReceivers: make(map[string]bool),
+		ExcludeReceivers:  make(map[string]bool),
 	}
 
-	if filterType != "receiver-ids" {
-		return nil, fmt.Errorf("invalid include filter type, supported types are: receiver-ids")
+	if includeExpression != "" {
+		filterType, includes, err := splitExpression(includeExpression)
+		if err != nil {
+			return nil, fmt.Errorf("parsing includes: %w", err)
+		}
+
+		if filterType != "receiver-ids" {
+			return nil, fmt.Errorf("invalid include filter type, supported types are: receiver-ids")
+		}
+		blockfilter.IncludeReceivers = includes
 	}
 
-	filterType, excludes, err := splitExpression(excludeExpression)
-	if err != nil {
-		return nil, fmt.Errorf("parsing excludes: %w", err)
+
+	if excludeExpression != "" {
+		filterType, excludes, err := splitExpression(excludeExpression)
+		if err != nil {
+			return nil, fmt.Errorf("parsing excludes: %w", err)
+		}
+
+		if filterType != "receiver-ids" {
+			return nil, fmt.Errorf("invalid exclude filter type, supported types are: receiver-ids")
+		}
+		blockfilter.ExcludeReceivers = excludes
 	}
 
-	if filterType != "receiver-ids" {
-		return nil, fmt.Errorf("invalid exclude filter type, supported types are: receiver-ids")
-	}
-
-	return &BlockFilter{
-		IncludeReceivers: includes,
-		ExcludeReceivers: excludes,
-	}, nil
+	return blockfilter, nil
 }
 
 func splitExpression(expression string) (filterType string, values map[string]bool, err error) {
