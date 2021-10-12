@@ -3,8 +3,6 @@ package pbcodec
 import (
 	"encoding/hex"
 	"time"
-
-	"github.com/streamingfast/bstream"
 )
 
 func (x *Block) ID() string {
@@ -16,15 +14,7 @@ func (x *Block) Number() uint64 {
 }
 
 func (x *Block) LIBNum() uint64 {
-	if x.Number() == bstream.GetProtocolFirstStreamableBlock {
-		return bstream.GetProtocolGenesisBlock
-	}
-
-	if x.Number() <= 25+bstream.GetProtocolFirstStreamableBlock {
-		return bstream.GetProtocolFirstStreamableBlock
-	}
-
-	return x.Number() - 25
+	return x.Header.LastFinalBlockHeight
 }
 
 func (x *Block) PreviousID() string {

@@ -25,22 +25,25 @@ type ConsoleReader struct {
 }
 
 func NewConsoleReader(lines chan string) (*ConsoleReader, error) {
+	var getter blockMetaGetter //todo: need a blockMetaGetter that will do rpc call ...
 	l := &ConsoleReader{
 		lines: lines,
 		close: func() {},
-		ctx:   &parseCtx{},
-		done:  make(chan interface{}),
+		ctx: &parseCtx{
+			blockMetas: newBlockMetaHeap(getter),
+		},
+		done: make(chan interface{}),
 	}
 	return l, nil
 }
 
 //todo: WTF?
-func (l *ConsoleReader) Done() <-chan interface{} {
-	return l.done
+func (r *ConsoleReader) Done() <-chan interface{} {
+	return r.done
 }
 
-func (c *ConsoleReader) Close() {
-	c.close()
+func (r *ConsoleReader) Close() {
+	r.close()
 }
 
 type parsingStats struct {
@@ -76,24 +79,25 @@ func (s *parsingStats) inc(key string) {
 }
 
 type parseCtx struct {
-	stats *parsingStats
+	blockMetas         *blockMetaHeap
+	stats              *parsingStats
+	lastSeenFinalBlock uint64
 }
 
-func (c *ConsoleReader) Read() (out interface{}, err error) {
-	return c.next(readBlock)
+func (r *ConsoleReader) Read() (out interface{}, err error) {
+	return r.next(readBlock)
 }
 
 const (
-	readBlock       = 1
-	readTransaction = 2
+	readBlock = 1
 )
 
-func (c *ConsoleReader) next(readType int) (out interface{}, err error) {
-	ctx := c.ctx
+func (r *ConsoleReader) next(readType int) (out interface{}, err error) {
+	ctx := r.ctx
 
 	zlog.Debug("next", zap.Int("read_type", readType))
 
-	for line := range c.lines {
+	for line := range r.lines {
 		if !strings.HasPrefix(line, "DMLOG ") {
 			continue
 		}
@@ -125,22 +129,22 @@ func (c *ConsoleReader) next(readType int) (out interface{}, err error) {
 	return nil, io.EOF
 }
 
-func (c *ConsoleReader) ProcessData(reader io.Reader) error {
-	scanner := c.buildScanner(reader)
+func (r *ConsoleReader) ProcessData(reader io.Reader) error {
+	scanner := r.buildScanner(reader)
 	for scanner.Scan() {
 		line := scanner.Text()
-		c.lines <- line
+		r.lines <- line
 	}
 
 	if scanner.Err() == nil {
-		close(c.lines)
+		close(r.lines)
 		return io.EOF
 	}
 
 	return scanner.Err()
 }
 
-func (c *ConsoleReader) buildScanner(reader io.Reader) *bufio.Scanner {
+func (r *ConsoleReader) buildScanner(reader io.Reader) *bufio.Scanner {
 	buf := make([]byte, 50*1024*1024)
 	scanner := bufio.NewScanner(reader)
 	scanner.Buffer(buf, 50*1024*1024)
@@ -174,25 +178,22 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 	}
 
 	newParsingStats(blockNum).log()
+	bm := ctx.blockMetas.get(block.ID())
+	lastFinalBlock := bm.number
+	block.Header.LastFinalBlockHeight = lastFinalBlock
 
+	if lastFinalBlock > ctx.lastSeenFinalBlock {
+		ctx.blockMetas.purge(bm.id)
+	}
+	ctx.lastSeenFinalBlock = lastFinalBlock
 	return block, err
 }
 
 // splitInChunks split the line in `count` chunks and returns the slice `chunks[1:count]` (so exclusive end), but verifies
 // that there are only exactly `count` chunks, and nothing more.
+
 func SplitInChunks(line string, count int) ([]string, error) {
 	chunks := strings.SplitN(line, " ", -1)
-	if len(chunks) != count {
-		return nil, fmt.Errorf("%d fields required but found %d fields for line %q", count, len(chunks), line)
-	}
-
-	return chunks[1:count], nil
-}
-
-// splitInBoundedChunks split the line in `count` chunks and returns the slice `chunks[1:count]` (so exclusive end),
-// but will accumulate all trailing chunks within the last (for free-form strings, or JSON objects)
-func SplitInBoundedChunks(line string, count int) ([]string, error) {
-	chunks := strings.SplitN(line, " ", count)
 	if len(chunks) != count {
 		return nil, fmt.Errorf("%d fields required but found %d fields for line %q", count, len(chunks), line)
 	}
