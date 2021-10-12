@@ -25,18 +25,18 @@ type ConsoleReader struct {
 	done chan interface{}
 }
 
-func NewConsoleReader(lines chan string) (*ConsoleReader, error) {
-	var getter blockMetaGetter //todo: need a blockMetaGetter that will do rpc call ...
+func NewConsoleReader(lines chan string, grpcUrl string) (*ConsoleReader, error) {
 	l := &ConsoleReader{
 		lines: lines,
 		close: func() {},
 		ctx: &parseCtx{
-			blockMetas: newBlockMetaHeap(getter),
+			blockMetas: newBlockMetaHeap(NewRPCBlockMetaGetter(grpcUrl)),
 		},
 		done: make(chan interface{}),
 	}
 	return l, nil
 }
+
 
 //todo: WTF?
 func (r *ConsoleReader) Done() <-chan interface{} {

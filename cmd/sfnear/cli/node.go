@@ -259,8 +259,8 @@ type nodeArgsByRole map[string]string
 
 func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, args string) ([]string, error) {
 	typeRoles := nodeArgsByRole{
-		"peering":    "--home={node-data-dir} {extra-arg} run",
-		"mindreader": "--home={node-data-dir} {extra-arg} run",
+		"peering":    "--home={node-data-dir} {extra-arg} run --rpc-addr=0.0.0.0:" + NodeRPCPort,
+		"mindreader": "--home={node-data-dir} {extra-arg} run --rpc-addr=0.0.0.0:" + MindreaderNodeRPCPort,
 	}
 
 	argsString, ok := typeRoles[nodeRole]
@@ -277,7 +277,7 @@ func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, args string) (
 	}
 
 	argsString = strings.Replace(argsString, "{node-data-dir}", nodeDataDir, -1)
-
+	fmt.Println(argsString)
 	argsSlice := strings.Fields(argsString)
 
 	bootNodes := viper.GetString(flagPrefix + "node-boot-nodes")

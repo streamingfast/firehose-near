@@ -2,8 +2,11 @@ package codec
 
 import (
 	"container/heap"
+	"context"
 	"fmt"
 	"time"
+
+	"github.com/streamingfast/near-go/rpc"
 )
 
 type blockMeta struct {
@@ -12,7 +15,30 @@ type blockMeta struct {
 	blockTime time.Time
 }
 
-type blockMetaGetter func(id string) (*blockMeta, error)
+type blockMetaGetter interface {
+	getBlockMeta(id string) (*blockMeta, error)
+}
+
+type RPCBlockMetaGetter struct {
+	client *rpc.Client
+}
+
+func NewRPCBlockMetaGetter(endpointURL string) *RPCBlockMetaGetter {
+	return &RPCBlockMetaGetter{client: rpc.NewClient(endpointURL)}
+}
+
+func (g *RPCBlockMetaGetter) getBlockMeta(id string) (*blockMeta, error) {
+	res, err := g.client.GetBlock(context.Background(), id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &blockMeta{
+		id:        res.Header.Hash,
+		number:    uint64(res.Header.Height),
+		blockTime: time.Unix(res.Header.Timestamp, 0),
+	}, nil
+}
 
 type blockMetaHeap struct {
 	metas  []*blockMeta
@@ -34,7 +60,7 @@ func (h *blockMetaHeap) get(id string) *blockMeta {
 		}
 	}
 
-	bm, err := h.getter(id)
+	bm, err := h.getter.getBlockMeta(id)
 	if err != nil {
 		panic(fmt.Errorf("getting block for id: %s, %w", id, err))
 	}
