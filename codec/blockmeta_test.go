@@ -87,20 +87,15 @@ func TestBlockHeap_Purge(t *testing.T) {
 		h.Push(bm)
 	}
 
-	h.purge("nada")
-	bm := h.get("id.1")
-	require.Equal(t, "id.1", bm.id)
-
 	h.purge("id.1")
-	bm = heap.Pop(h).(*blockMeta)
+	bm := heap.Pop(h).(*blockMeta)
 	require.Equal(t, "id.2", bm.id)
 
 	h.purge("id.4")
 	bm = heap.Pop(h).(*blockMeta)
 	require.Equal(t, "id.5", bm.id)
 
-	shouldBeNil := h.get("id.5")
-	require.Nil(t, shouldBeNil)
+	require.Equal(t, 0, h.Len())
 
 	shouldAlsoBeNil := heap.Pop(h)
 	require.Nil(t, shouldAlsoBeNil)

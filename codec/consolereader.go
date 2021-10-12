@@ -2,6 +2,7 @@ package codec
 
 import (
 	"bufio"
+	"container/heap"
 	"encoding/hex"
 	"fmt"
 	"io"
@@ -79,9 +80,8 @@ func (s *parsingStats) inc(key string) {
 }
 
 type parseCtx struct {
-	blockMetas         *blockMetaHeap
-	stats              *parsingStats
-	lastSeenFinalBlock uint64
+	blockMetas *blockMetaHeap
+	stats      *parsingStats
 }
 
 func (r *ConsoleReader) Read() (out interface{}, err error) {
@@ -166,7 +166,6 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 	}
 
 	// We skip block hash for now
-
 	protoBytes, err := hex.DecodeString(chunks[2])
 	if err != nil {
 		return nil, fmt.Errorf("invalid block bytes: %w", err)
@@ -178,14 +177,25 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 	}
 
 	newParsingStats(blockNum).log()
-	bm := ctx.blockMetas.get(block.ID())
-	lastFinalBlock := bm.number
-	block.Header.LastFinalBlockHeight = lastFinalBlock
 
-	if lastFinalBlock > ctx.lastSeenFinalBlock {
-		ctx.blockMetas.purge(bm.id)
+	//Push new block meta
+	ctx.blockMetas.Push(&blockMeta{
+		id:        block.Header.Hash.AsString(),
+		number:    block.Number(),
+		blockTime: block.Time(),
+	})
+
+	//Setting LIB num
+	libBlockMeta := ctx.blockMetas.get(block.Header.LastFinalBlock.String())
+	block.Header.LastFinalBlockHeight = libBlockMeta.number
+
+	//Purging
+	for {
+		if ctx.blockMetas.Len() <= 2000 {
+			break
+		}
+		heap.Pop(ctx.blockMetas)
 	}
-	ctx.lastSeenFinalBlock = lastFinalBlock
 	return block, err
 }
 
