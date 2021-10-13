@@ -2,7 +2,6 @@ package codec
 
 import (
 	"bufio"
-	"container/heap"
 	"encoding/hex"
 	"fmt"
 	"io"
@@ -25,15 +24,11 @@ type ConsoleReader struct {
 	done chan interface{}
 }
 
-func NewConsoleReader(lines chan string) (*ConsoleReader, error) {
-	var getter blockMetaGetter //todo: need a blockMetaGetter that will do rpc call ...
+func NewConsoleReader(lines chan string, grpcUrl string) (*ConsoleReader, error) {
 	l := &ConsoleReader{
 		lines: lines,
 		close: func() {},
-		ctx: &parseCtx{
-			blockMetas: newBlockMetaHeap(getter),
-		},
-		done: make(chan interface{}),
+		done:  make(chan interface{}),
 	}
 	return l, nil
 }
@@ -80,8 +75,7 @@ func (s *parsingStats) inc(key string) {
 }
 
 type parseCtx struct {
-	blockMetas *blockMetaHeap
-	stats      *parsingStats
+	stats *parsingStats
 }
 
 func (r *ConsoleReader) Read() (out interface{}, err error) {
@@ -178,24 +172,6 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 
 	newParsingStats(blockNum).log()
 
-	//Push new block meta
-	ctx.blockMetas.Push(&blockMeta{
-		id:        block.Header.Hash.AsString(),
-		number:    block.Number(),
-		blockTime: block.Time(),
-	})
-
-	//Setting LIB num
-	libBlockMeta := ctx.blockMetas.get(block.Header.LastFinalBlock.String())
-	block.Header.LastFinalBlockHeight = libBlockMeta.number
-
-	//Purging
-	for {
-		if ctx.blockMetas.Len() <= 2000 {
-			break
-		}
-		heap.Pop(ctx.blockMetas)
-	}
 	return block, err
 }
 

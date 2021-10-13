@@ -24,7 +24,6 @@ import (
 	"reflect"
 	"strings"
 	"testing"
-	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/streamingfast/logging"
@@ -134,15 +133,7 @@ func testReaderConsoleReader(t *testing.T, lines chan string, closer func()) *Co
 	l := &ConsoleReader{
 		lines: lines,
 		close: closer,
-		ctx: &parseCtx{
-			blockMetas: newBlockMetaHeap(func(id string) (*blockMeta, error) {
-				return &blockMeta{
-					id:        "id.0",
-					number:    0,
-					blockTime: time.Now(),
-				}, nil
-			}),
-		},
+		ctx:   &parseCtx{},
 	}
 
 	return l
