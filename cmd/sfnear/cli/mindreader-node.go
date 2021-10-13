@@ -74,9 +74,8 @@ func getMindreaderLogPlugin(
 	})
 	// tracker.AddGetter(bstream.NetworkLIBTarget, bstream.NetworkLIBBlockRefGetter(blockmetaAddr))
 
-	grpcAddr := "localhost:"+MindreaderNodeRPCPort
 	consoleReaderFactory := func(lines chan string) (mindreader.ConsolerReader, error) {
-		return codec.NewConsoleReader(lines, grpcAddr)
+		return codec.NewConsoleReader(lines)
 	}
 
 	consoleReaderTransformer := func(obj interface{}) (*bstream.Block, error) {
