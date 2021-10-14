@@ -186,8 +186,11 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 	})
 
 	//Setting LIB num
-	libBlockMeta := ctx.blockMetas.get(block.Header.LastFinalBlock.String())
-	block.Header.LastFinalBlockHeight = libBlockMeta.number
+	lastFinalBlockId := block.Header.LastFinalBlock.AsBase58String()
+	if lastFinalBlockId != "11111111111111111111111111111111" {  // block id 0 (does not exist)
+		libBlockMeta := ctx.blockMetas.get(lastFinalBlockId)
+		block.Header.LastFinalBlockHeight = libBlockMeta.number
+	}
 
 	//Purging
 	for {

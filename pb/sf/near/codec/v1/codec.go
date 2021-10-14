@@ -3,6 +3,8 @@ package pbcodec
 import (
 	"encoding/hex"
 	"time"
+
+	"github.com/mr-tron/base58"
 )
 
 func (x *Block) ID() string {
@@ -27,4 +29,8 @@ func (x *Block) Time() time.Time {
 
 func (x *CryptoHash) AsString() string {
 	return hex.EncodeToString(x.Bytes)
+}
+
+func (x *CryptoHash) AsBase58String() string {
+	return base58.Encode(x.Bytes)
 }

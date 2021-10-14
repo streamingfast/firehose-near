@@ -259,8 +259,8 @@ type nodeArgsByRole map[string]string
 
 func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, args string) ([]string, error) {
 	typeRoles := nodeArgsByRole{
-		"peering":    "--home={node-data-dir} {extra-arg} run --rpc-addr=0.0.0.0:" + NodeRPCPort,
-		"mindreader": "--home={node-data-dir} {extra-arg} run --rpc-addr=0.0.0.0:" + MindreaderNodeRPCPort,
+		"peering":    "--home={node-data-dir} {extra-arg} run",
+		"mindreader": "--home={node-data-dir} {extra-arg} run",
 	}
 
 	argsString, ok := typeRoles[nodeRole]
