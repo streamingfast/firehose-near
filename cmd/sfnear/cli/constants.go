@@ -61,8 +61,9 @@ const (
 	//
 	//// Geth instance port definitions
 
-	//NodeP2PPort           string = "30303"
-	//NodeRPCPort           string = "8545"
+	NodeP2PPort           string = "30303"
+	NodeRPCPort           string = "3030"
+	NodeRPCAddr           string = ":3030"
 
 	//devMinerAddress       string = "0x821b55d8abe79bc98f05eb675fdc50dfe796b7ab"
 )
