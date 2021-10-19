@@ -32,15 +32,20 @@ func TestBlockHeap_Push_Get(t *testing.T) {
 		h.Push(bm)
 	}
 
+	var err error
+
 	//GET
-	bm := h.get("id.1")
+	bm, err := h.get("id.1")
 	require.Equal(t, bm.id, "id.1")
+	require.NoError(t, err)
 
-	bm = h.get("id.2")
+	bm, err = h.get("id.2")
 	require.Equal(t, bm.id, "id.2")
+	require.NoError(t, err)
 
-	bm = h.get("id.3")
+	bm, err = h.get("id.3")
 	require.Equal(t, bm.id, "id.3")
+	require.NoError(t, err)
 
 	//POP
 	bm = heap.Pop(h).(*blockMeta)

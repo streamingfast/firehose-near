@@ -59,28 +59,28 @@ func newBlockMetaHeap(getter blockMetaGetter) *blockMetaHeap {
 	return h
 }
 
-func (h *blockMetaHeap) get(id string) *blockMeta {
+func (h *blockMetaHeap) get(id string) (*blockMeta, error) {
 	for _, bm := range h.metas {
 		if bm.id == id {
-			return bm
+			return bm, nil
 		}
 	}
 
 	bm, err := h.getter.getBlockMeta(id)
-	if err != nil {
-		panic(fmt.Errorf("getting block for id: %s, %w", id, err))
+	if err != nil { //todo: add retry?
+		return nil, fmt.Errorf("getting block for id: %s, %w", id, err)
 	}
 
 	if bm == nil {
-		panic(fmt.Errorf("block getter return nil block for id: %s", id))
+		return nil, fmt.Errorf("block getter return nil block for id: %s", id)
 	}
 
 	heap.Push(h, bm)
-	return bm
+	return bm, nil
 }
 
 func (h *blockMetaHeap) purge(upToID string) {
-	if bm := h.get(upToID); bm == nil {
+	if bm, _ := h.get(upToID); bm == nil { //todo: handle error
 		return
 	}
 	for {
