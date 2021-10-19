@@ -7,24 +7,24 @@ import (
 	"github.com/mr-tron/base58"
 )
 
-func (x *Block) ID() string {
-	return x.Header.Hash.AsString()
+func (x *BlockWrapper) ID() string {
+	return x.Block.Header.Hash.AsString()
 }
 
-func (x *Block) Number() uint64 {
-	return x.Header.Height
+func (x *BlockWrapper) Number() uint64 {
+	return x.Block.Header.Height
 }
 
-func (x *Block) LIBNum() uint64 {
-	return x.Header.LastFinalBlockHeight
+func (x *BlockWrapper) LIBNum() uint64 {
+	return x.Block.Header.LastFinalBlockHeight
 }
 
-func (x *Block) PreviousID() string {
-	return x.Header.PrevHash.AsString()
+func (x *BlockWrapper) PreviousID() string {
+	return x.Block.Header.PrevHash.AsString()
 }
 
-func (x *Block) Time() time.Time {
-	return time.Unix(0, int64(x.Header.TimestampNanosec)).UTC()
+func (x *BlockWrapper) Time() time.Time {
+	return time.Unix(0, int64(x.Block.Header.TimestampNanosec)).UTC()
 }
 
 func (x *CryptoHash) AsString() string {

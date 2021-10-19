@@ -88,7 +88,7 @@ func (f *BlockFilter) excluded(receiverID string) bool {
 }
 
 func (f *BlockFilter) TransformInPlace(blk *bstream.Block) error {
-	block := blk.ToNative().(*pbcodec.Block)
+	block := blk.ToNative().(*pbcodec.BlockWrapper)
 
 	if len(f.IncludeReceivers) == 0 && len(f.ExcludeReceivers) == 0 {
 		return nil

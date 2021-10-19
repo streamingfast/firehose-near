@@ -1,3 +1,3 @@
-generate.sh - Thu 14 Oct 2021 03:32:10 PM EDT - colin
+generate.sh - Tue Oct 19 11:12:05 EDT 2021 - maoueh
 streamingfast/proto revision: a2215dd82a69e1205b25aee016013e9feedce0bf
-streamingfast/proto-near revision: 17355a196998bf547e24d0a95d2526cb02195ba5
+streamingfast/proto-near revision: b4439d7794d4d2d24efbd71cb26c7d5ba4d12d09

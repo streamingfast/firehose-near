@@ -37,7 +37,6 @@ func NewConsoleReader(lines chan string, grpcUrl string) (*ConsoleReader, error)
 	return l, nil
 }
 
-
 //todo: WTF?
 func (r *ConsoleReader) Done() <-chan interface{} {
 	return r.done
@@ -154,7 +153,7 @@ func (r *ConsoleReader) buildScanner(reader io.Reader) *bufio.Scanner {
 
 // Formats
 // DMLOG BLOCK <NUM> <HASH> <PROTO_HEX>
-func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
+func (ctx *parseCtx) readBlock(line string) (*pbcodec.BlockWrapper, error) {
 	chunks, err := SplitInChunks(line, 4)
 	if err != nil {
 		return nil, fmt.Errorf("split: %s", err)
@@ -171,7 +170,7 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 		return nil, fmt.Errorf("invalid block bytes: %w", err)
 	}
 
-	block := &pbcodec.Block{}
+	block := &pbcodec.BlockWrapper{}
 	if err := proto.Unmarshal(protoBytes, block); err != nil {
 		return nil, fmt.Errorf("invalid block: %w", err)
 	}
@@ -180,16 +179,16 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 
 	//Push new block meta
 	ctx.blockMetas.Push(&blockMeta{
-		id:        block.Header.Hash.AsString(),
+		id:        block.Block.Header.Hash.AsString(),
 		number:    block.Number(),
 		blockTime: block.Time(),
 	})
 
 	//Setting LIB num
-	lastFinalBlockId := block.Header.LastFinalBlock.AsBase58String()
-	if lastFinalBlockId != "11111111111111111111111111111111" {  // block id 0 (does not exist)
+	lastFinalBlockId := block.Block.Header.LastFinalBlock.AsBase58String()
+	if lastFinalBlockId != "11111111111111111111111111111111" { // block id 0 (does not exist)
 		libBlockMeta := ctx.blockMetas.get(lastFinalBlockId)
-		block.Header.LastFinalBlockHeight = libBlockMeta.number
+		block.Block.Header.LastFinalBlockHeight = libBlockMeta.number
 	}
 
 	//Purging
