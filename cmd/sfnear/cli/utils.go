@@ -90,6 +90,7 @@ func copyFile(ctx context.Context, in, out string) error {
 	}
 
 	if _, err := io.Copy(writer, reader); err != nil {
+		_ = os.Remove(out)
 		return fmt.Errorf("copy content: %w", err)
 	}
 

@@ -217,7 +217,7 @@ func (b *bootstrapper) Bootstrap() error {
 	genesisFileInDataDir := filepath.Join(b.nodeDataDir, "genesis.json")
 	nodeKeyFileInDataDir := filepath.Join(b.nodeDataDir, "node_key.json")
 
-	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Minute)
 	defer cancel()
 
 	if err := os.MkdirAll(b.nodeDataDir, os.ModePerm); err != nil {
