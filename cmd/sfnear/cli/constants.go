@@ -11,6 +11,8 @@ const (
 	RelayerServingAddr           string = ":15011"
 	FirehoseGRPCServingAddr      string = ":15042"
 
+	ATMDirectory         string = "{sf-data-dir}/atm"
+
 	MergedBlocksStoreURL string = "file://{sf-data-dir}/storage/merged-blocks"
 	OneBlockStoreURL     string = "file://{sf-data-dir}/storage/one-blocks"
 

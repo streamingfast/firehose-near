@@ -225,3 +225,14 @@ func cliErrorAndExit(message string) {
 func dedentf(format string, args ...interface{}) string {
 	return fmt.Sprintf(dedent.Dedent(strings.TrimPrefix(format, "\n")), args...)
 }
+
+// MustReplaceDataDir is used in sf-ethereum-priv
+func MustReplaceDataDir(dataDir, in string) string {
+	d, err := filepath.Abs(dataDir)
+	if err != nil {
+		panic(fmt.Errorf("file path abs: %w", err))
+	}
+
+	in = strings.Replace(in, "{sf-data-dir}", d, -1)
+	return in
+}
