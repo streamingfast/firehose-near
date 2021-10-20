@@ -100,6 +100,8 @@ func Start(configFile string, dataDir string, args []string) (err error) {
 		bstream.InitCache(storeUrl, cacheDir, maxRecentEntryBytes, maxEntryByAgeBytes)
 	}
 
+	bstream.GetProtocolFirstStreamableBlock = uint64(viper.GetInt("common-first-streamable-block"))
+
 	err = bstream.ValidateRegistry()
 	if err != nil {
 		return fmt.Errorf("protocol specific hooks not configured correctly: %w", err)
