@@ -67,7 +67,7 @@ func (h *blockMetaHeap) get(id string) (*blockMeta, error) {
 	}
 
 	bm, err := h.getter.getBlockMeta(id)
-	if err != nil { //todo: add retry?
+	if err != nil {
 		return nil, fmt.Errorf("getting block for id: %s, %w", id, err)
 	}
 
@@ -77,18 +77,6 @@ func (h *blockMetaHeap) get(id string) (*blockMeta, error) {
 
 	heap.Push(h, bm)
 	return bm, nil
-}
-
-func (h *blockMetaHeap) purge(upToID string) {
-	if bm, _ := h.get(upToID); bm == nil { //todo: handle error
-		return
-	}
-	for {
-		bm := heap.Pop(h).(*blockMeta)
-		if bm.id == upToID {
-			break
-		}
-	}
 }
 
 func (h *blockMetaHeap) Len() int {
