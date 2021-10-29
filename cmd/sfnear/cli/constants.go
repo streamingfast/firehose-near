@@ -12,12 +12,12 @@ const (
 	FirehoseGRPCServingAddr      string = ":15042"
 
 	ATMDirectory         string = "{sf-data-dir}/atm"
-	FirstStreamableBlock int = 3
+	FirstStreamableBlock int    = 3
 
 	MergedBlocksStoreURL string = "file://{sf-data-dir}/storage/merged-blocks"
 	OneBlockStoreURL     string = "file://{sf-data-dir}/storage/one-blocks"
 
-	//Protocol                     = pbbstream.Protocol_ETH
+	//Protocol                     = pbbstream.Protocol_NEAR
 	//TrxdbDSN              string = "badger://{sf-data-dir}/storage/trxdb"
 	//StateDBDSN            string = "badger://{sf-data-dir}/storage/statedb"
 	//IndicesStoreURL       string = "file://{sf-data-dir}/storage/indexes"
@@ -64,9 +64,9 @@ const (
 	//
 	//// Geth instance port definitions
 
-	NodeP2PPort           string = "30303"
-	NodeRPCPort           string = "3030"
-	NodeRPCAddr           string = "http://localhost:3030"
+	NodeP2PPort string = "30303"
+	NodeRPCPort string = "3030"
+	NodeRPCAddr string = "http://localhost:3030"
 
 	//devMinerAddress       string = "0x821b55d8abe79bc98f05eb675fdc50dfe796b7ab"
 )

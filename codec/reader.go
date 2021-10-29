@@ -40,10 +40,18 @@ func NewBlockReader(reader io.Reader) (out *BlockReader, err error) {
 		return nil, fmt.Errorf("unable to read file header: %s", err)
 	}
 
-	Protocol := pbbstream.Protocol(pbbstream.Protocol_value[contentType])
+	protocol := pbbstream.Protocol(pbbstream.Protocol_value[contentType])
 
-	if Protocol != pbbstream.Protocol_ETH && version != 1 {
-		return nil, fmt.Errorf("reader only knows about %s block kind at version 1, got %s at version %d", Protocol, contentType, version)
+	expectedProtocol := pbbstream.Protocol_NEAR
+	expectedVersion := int32(1)
+
+	if protocol != expectedProtocol && protocol != pbbstream.Protocol_ETH {
+		// TODO remove reference to ETH when we get rid of the block files produced before 2021-10-29 with wrong header
+		return nil, fmt.Errorf("reader expects block protocol %s at version %d, got %s at version %d", expectedProtocol, expectedVersion, contentType, version)
+	}
+
+	if version != expectedVersion {
+		return nil, fmt.Errorf("reader expects block protocol %s at version %d, got %s at version %d", expectedProtocol, expectedVersion, contentType, version)
 	}
 
 	return &BlockReader{
