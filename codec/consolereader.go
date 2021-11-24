@@ -38,7 +38,6 @@ func NewConsoleReader(lines chan string, rpcUrl string) (*ConsoleReader, error) 
 	return l, nil
 }
 
-
 //todo: WTF?
 func (r *ConsoleReader) Done() <-chan interface{} {
 	return r.done
@@ -181,10 +180,22 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 
 	//Push new block meta
 	ctx.blockMetas.Push(&blockMeta{
-		id:        block.Header.Hash.AsString(),
-		number:    block.Number(),
-		blockTime: block.Time(),
+		id:         block.Header.Hash.AsString(),
+		number:       block.Number(),
+		blockTime:    block.Time(),
 	})
+
+	//Setting previous height
+	prevHeightId := block.Header.PrevHash.AsBase58String()
+	if prevHeightId == "11111111111111111111111111111111" { // block id 0 (does not exist)
+		block.Header.PrevHeight = bstream.GetProtocolFirstStreamableBlock
+	} else {
+		prevHeightMeta, err := ctx.blockMetas.get(prevHeightId)
+		if err != nil {
+			return nil, fmt.Errorf("getting prev height meta: %w", err)
+		}
+		block.Header.PrevHeight = prevHeightMeta.number
+	}
 
 	//Setting LIB num
 	lastFinalBlockId := block.Header.LastFinalBlock.AsBase58String()
@@ -193,7 +204,7 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 	} else {
 		libBlockMeta, err := ctx.blockMetas.get(lastFinalBlockId)
 		if err != nil {
-			return nil, fmt.Errorf("getting block meta: %w", err)
+			return nil, fmt.Errorf("getting lib block meta: %w", err)
 		}
 		block.Header.LastFinalBlockHeight = libBlockMeta.number
 	}

@@ -48,22 +48,22 @@ func (g *RPCBlockMetaGetter) getBlockMeta(id string) (*blockMeta, error) {
 
 type blockMetaHeap struct {
 	metas  []*blockMeta
+	metasIndex map[string]*blockMeta
 	getter blockMetaGetter
 }
 
 func newBlockMetaHeap(getter blockMetaGetter) *blockMetaHeap {
 	h := &blockMetaHeap{
 		metas:  []*blockMeta{},
+		metasIndex: map[string]*blockMeta{},
 		getter: getter,
 	}
 	return h
 }
 
 func (h *blockMetaHeap) get(id string) (*blockMeta, error) {
-	for _, bm := range h.metas {
-		if bm.id == id {
-			return bm, nil
-		}
+	if bm, ok := h.metasIndex[id]; ok {
+		return bm, nil
 	}
 
 	bm, err := h.getter.getBlockMeta(id)
@@ -98,6 +98,7 @@ func (h *blockMetaHeap) Swap(i, j int) {
 func (h *blockMetaHeap) Push(x interface{}) {
 	bm := x.(*blockMeta)
 	h.metas = append(h.metas, bm)
+	h.metasIndex[bm.id] = bm
 }
 
 func (h *blockMetaHeap) Pop() interface{} {
@@ -108,5 +109,6 @@ func (h *blockMetaHeap) Pop() interface{} {
 	n := len(old)
 	bm := old[n-1]
 	h.metas = old[0 : n-1]
+	delete(h.metasIndex, bm.id)
 	return bm
 }
