@@ -585,8 +585,8 @@ github.com/streamingfast/pbgo v0.0.6-0.20210820205306-ba5335146052 h1:kjlGNfF3yk
 github.com/streamingfast/pbgo v0.0.6-0.20210820205306-ba5335146052/go.mod h1:fobYEIfCKwPOY+VLX7HXBVuhrn+iZrzujKrpCgfG3+Q=
 github.com/streamingfast/relayer v0.0.2-0.20211006134256-f3773fc7f46d h1:KQXFQ60kPdvormoE3dS7oZfYb2HIk88DhGwLQld5PDg=
 github.com/streamingfast/relayer v0.0.2-0.20211006134256-f3773fc7f46d/go.mod h1:IRGgqkgiIgGH4tk5M8Sle9Ov1FnjZNLJxnk/GZ8AOQI=
-github.com/streamingfast/sf-tools v0.0.0-20210823043548-13a30de7c1b1 h1:vX2J66n+4IRJ5osg96m4P3T9nzod4E3Zg0OvzeulxlU=
-github.com/streamingfast/sf-tools v0.0.0-20210823043548-13a30de7c1b1/go.mod h1:2BLLnxvk+RsGm6+W6OO9xe4PgbEHbusqiaKzpi2aWRo=
+github.com/streamingfast/sf-tools v0.0.0-20211124191345-bf0c1c2a076a h1:q7WPK7fO5l8+MgTO2zy+SwdVmtz4B4O6XsVkhslHTvk=
+github.com/streamingfast/sf-tools v0.0.0-20211124191345-bf0c1c2a076a/go.mod h1:murg5lGzFpaf9e0FlNFJXd2wgpUmDV0iL77rbpQPrwg=
 github.com/streamingfast/shutter v1.5.0 h1:NpzDYzj0HVpSiDJVO/FFSL6QIK/YKOxY0gJAtyaTOgs=
 github.com/streamingfast/shutter v1.5.0/go.mod h1:B/T6efqdeMGbGwjzPS1ToXzYZI4kDzI5/u4I+7qbjY8=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=

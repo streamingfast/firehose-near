@@ -1,0 +1,201 @@
+// Copyright 2021 dfuse Platform Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package tools
+
+import (
+	"bytes"
+	"fmt"
+	"github.com/golang/protobuf/proto"
+	"github.com/spf13/cobra"
+	"github.com/streamingfast/dbin"
+	"github.com/streamingfast/dstore"
+	pbbstream "github.com/streamingfast/pbgo/dfuse/bstream/v1"
+	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
+	sftools "github.com/streamingfast/sf-tools"
+	"go.uber.org/zap"
+	"io"
+	"regexp"
+	"strconv"
+)
+
+var numberRegex = regexp.MustCompile(`(\d{10})`)
+
+var BackfillCmd = &cobra.Command{Use: "backfill", Short: "Various tools for updating merged block files"}
+
+var backfillPrevHeightCmd = &cobra.Command{
+	Use:   "prev-height {input-store-url} {output-store-url}",
+	Short: "update merge block files to set previous height data",
+	Args:  cobra.ExactArgs(2),
+	RunE:  backfillPrevHeightE,
+}
+
+func init() {
+	Cmd.AddCommand(BackfillCmd)
+	BackfillCmd.AddCommand(backfillPrevHeightCmd)
+
+	BackfillCmd.PersistentFlags().StringP("range", "r", "", "Block range to use for the check")
+}
+
+var errStopWalk = fmt.Errorf("stop walk")
+
+func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
+	ctx := cmd.Context()
+
+	blockRange, err := sftools.Flags.GetBlockRange("range")
+	if err != nil {
+		return fmt.Errorf("error parsing block range: %w", err)
+	}
+
+	fileBlockSize := 100
+	walkPrefix := sftools.WalkBlockPrefix(blockRange, uint32(fileBlockSize))
+
+	inputBlocksStore, err := dstore.NewDBinStore(args[0])
+	if err != nil {
+		return fmt.Errorf("error opening input store %s: %w", args[0], err)
+	}
+
+	outputBlocksStore, err := dstore.NewDBinStore(args[1])
+	if err != nil {
+		return fmt.Errorf("error opening output store %s: %w", args[0], err)
+	}
+
+	var baseNum32 uint32
+	heightMap := make(map[string]uint64)
+
+	err = inputBlocksStore.Walk(ctx, walkPrefix, ".tmp", func(filename string) (err error) {
+		match := numberRegex.FindStringSubmatch(filename)
+		if match == nil {
+			return nil
+		}
+
+		baseNum, _ := strconv.ParseUint(match[1], 10, 32)
+		if baseNum+uint64(fileBlockSize)-1 < blockRange.Start {
+			return nil
+		}
+		baseNum32 = uint32(baseNum)
+
+		obj, err := inputBlocksStore.OpenObject(ctx, filename)
+		if err != nil {
+			return fmt.Errorf("error reading file %s from input store %s: %w", filename, args[0], err)
+		}
+
+		binReader := dbin.NewReader(obj)
+		contentType, version, err := binReader.ReadHeader()
+		if err != nil {
+			return fmt.Errorf("error reading file header for file %s: %w", filename, err)
+		}
+		defer binReader.Close()
+
+		buffer := bytes.NewBuffer(nil)
+		binWriter := dbin.NewWriter(buffer)
+		defer binWriter.Close()
+
+		err = binWriter.WriteHeader(contentType, int(version))
+		if err != nil {
+			return fmt.Errorf("error writing block header: %w", err)
+		}
+
+		firstSeenBlock := true
+		for {
+			line, err := binReader.ReadMessage()
+			if err == io.EOF {
+				break
+			}
+
+			if err != nil {
+				return fmt.Errorf("reading block: %w", err)
+			}
+
+			if len(line) == 0 {
+				break
+			}
+
+			// decode block data
+			bstreamBlock := new(pbbstream.Block)
+			err = proto.Unmarshal(line, bstreamBlock)
+			if err != nil {
+				return fmt.Errorf("unmarshaling block proto: %w", err)
+			}
+
+			blockBytes := bstreamBlock.GetPayloadBuffer()
+
+			block := new(pbcodec.Block)
+			err = proto.Unmarshal(blockBytes, block)
+			if err != nil {
+				return fmt.Errorf("unmarshaling block proto: %w", err)
+			}
+
+			// save current id/height
+			heightMap[block.ID()] = block.Number()
+
+			prevHeight, ok := heightMap[block.PreviousID()]
+			if !ok {
+				if firstSeenBlock {
+					firstSeenBlock = false
+				} else {
+					return fmt.Errorf("could not find previous height for block id %s", block.ID())
+				}
+			} else {
+				// update current block prev_height
+				block.Header.PrevHeight = prevHeight
+			}
+
+			// encode block data
+			backFilledBlockBytes, err := proto.Marshal(block)
+			if err != nil {
+				return fmt.Errorf("marshaling block proto: %w", err)
+			}
+
+			bstreamBlock.PayloadBuffer = backFilledBlockBytes
+
+			bstreamBlockBytes, err := proto.Marshal(bstreamBlock)
+			if err != nil {
+				return fmt.Errorf("marshaling bstream block: %w", err)
+			}
+
+			err = binWriter.WriteMessage(bstreamBlockBytes)
+			if err != nil {
+				return fmt.Errorf("error writing block: %w", err)
+			}
+		}
+
+		err = obj.Close()
+		if err != nil {
+			return fmt.Errorf("error closing object %s: %w", filename, err)
+		}
+
+		err = outputBlocksStore.WriteObject(ctx, filename, buffer)
+		if err != nil {
+			return fmt.Errorf("error writing file %s to output store %s: %w", filename, args[1], err)
+		}
+
+		// check range upper bound
+		if !blockRange.Unbounded() {
+			roundedEndBlock := sftools.RoundToBundleEndBlock(baseNum32, uint32(fileBlockSize))
+			if roundedEndBlock >= uint32(blockRange.Stop-1) {
+				return errStopWalk
+			}
+		}
+
+		zlog.Info("updated blocks", zap.String("file", filename))
+		return nil
+	})
+
+	if err != nil && err != errStopWalk {
+		return err
+	}
+
+	return nil
+}

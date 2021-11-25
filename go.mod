@@ -28,7 +28,7 @@ require (
 	github.com/streamingfast/node-manager v0.0.2-0.20211029201743-0b82ab7f9de4
 	github.com/streamingfast/pbgo v0.0.6-0.20210820205306-ba5335146052
 	github.com/streamingfast/relayer v0.0.2-0.20211006134256-f3773fc7f46d
-	github.com/streamingfast/sf-tools v0.0.0-20210823043548-13a30de7c1b1
+	github.com/streamingfast/sf-tools v0.0.0-20211124191345-bf0c1c2a076a
 	github.com/stretchr/testify v1.7.0
 	go.uber.org/zap v1.19.1
 	google.golang.org/grpc v1.39.1
