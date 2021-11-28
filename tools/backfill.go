@@ -90,9 +90,19 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 		}
 		baseNum32 = uint32(baseNum)
 
-		obj, err := inputBlocksStore.OpenObject(ctx, filename)
-		if err != nil {
-			return fmt.Errorf("error reading file %s from input store %s: %w", filename, args[0], err)
+		try := 0
+		var obj io.ReadCloser
+		for {
+			try += 1
+			obj, err = inputBlocksStore.OpenObject(ctx, filename)
+			if err != nil {
+				if try > 10 {
+					return fmt.Errorf("error reading file %s from input store %s: %w", filename, args[0], err)
+				}
+				time.Sleep(time.Duration(try) * time.Second)
+				continue
+			}
+			break
 		}
 
 		binReader := dbin.NewReader(obj)
@@ -185,12 +195,12 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 			return fmt.Errorf("error opening output store %s: %w", args[0], err)
 		}
 
-		try := 0
+		try = 0
 		for {
 			try += 1
 			err = outputBlocksStore.WriteObject(ctx, filename, buffer)
 			if err != nil {
-				if try > 3 {
+				if try > 10 {
 					return fmt.Errorf("error writing file %s to output store %s: %w", filename, args[1], err)
 				}
 				time.Sleep(time.Duration(try) * time.Second)
