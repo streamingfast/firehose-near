@@ -74,11 +74,6 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("error opening input store %s: %w", args[0], err)
 	}
 
-	outputBlocksStore, err := dstore.NewDBinStore(args[1])
-	if err != nil {
-		return fmt.Errorf("error opening output store %s: %w", args[0], err)
-	}
-
 	var baseNum32 uint32
 	heightMap := make(map[string]uint64)
 
@@ -182,6 +177,11 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 		err = obj.Close()
 		if err != nil {
 			return fmt.Errorf("error closing object %s: %w", filename, err)
+		}
+
+		outputBlocksStore, err := dstore.NewDBinStore(args[1])
+		if err != nil {
+			return fmt.Errorf("error opening output store %s: %w", args[0], err)
 		}
 
 		err = outputBlocksStore.WriteObject(ctx, filename, buffer)
