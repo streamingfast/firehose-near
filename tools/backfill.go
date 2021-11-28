@@ -28,6 +28,7 @@ import (
 	"io"
 	"regexp"
 	"strconv"
+	"time"
 )
 
 var numberRegex = regexp.MustCompile(`(\d{10})`)
@@ -184,10 +185,20 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 			return fmt.Errorf("error opening output store %s: %w", args[0], err)
 		}
 
-		err = outputBlocksStore.WriteObject(ctx, filename, buffer)
-		if err != nil {
-			return fmt.Errorf("error writing file %s to output store %s: %w", filename, args[1], err)
+		try := 0
+		for {
+			try += 1
+			err = outputBlocksStore.WriteObject(ctx, filename, buffer)
+			if err != nil {
+				if try > 3 {
+					return fmt.Errorf("error writing file %s to output store %s: %w", filename, args[1], err)
+				}
+				time.Sleep(time.Duration(try) * time.Second)
+				continue
+			}
+			break
 		}
+
 
 		// check range upper bound
 		if !blockRange.Unbounded() {
