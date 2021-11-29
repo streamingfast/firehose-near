@@ -81,11 +81,13 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 	err = inputBlocksStore.Walk(ctx, walkPrefix, ".tmp", func(filename string) (err error) {
 		match := numberRegex.FindStringSubmatch(filename)
 		if match == nil {
+			zlog.Debug("file does not match pattern", zap.String("filename", filename))
 			return nil
 		}
 
 		baseNum, _ := strconv.ParseUint(match[1], 10, 32)
 		if baseNum+uint64(fileBlockSize)-1 < blockRange.Start {
+			zlog.Debug("file is before block range start", zap.String("filename", filename), zap.Uint64("block_range_start", blockRange.Start))
 			return nil
 		}
 		baseNum32 = uint32(baseNum)
@@ -125,6 +127,7 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 		for {
 			line, err := binReader.ReadMessage()
 			if err == io.EOF {
+				zlog.Debug("eof", zap.String("filename", filename))
 				break
 			}
 
@@ -133,6 +136,7 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 			}
 
 			if len(line) == 0 {
+				zlog.Debug("empty line", zap.String("filename", filename))
 				break
 			}
 
@@ -158,12 +162,14 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 			if !ok {
 				if firstSeenBlock {
 					firstSeenBlock = false
+					zlog.Debug("skipping first block update. no prev_height data yet", zap.Uint64("block", block.Number()))
 				} else {
 					return fmt.Errorf("could not find previous height for block id %s", block.ID())
 				}
 			} else {
 				// update current block prev_height
 				block.Header.PrevHeight = prevHeight
+				zlog.Debug("updated prev_height", zap.Uint64("block", block.Number()), zap.Uint64("prev_height", prevHeight))
 			}
 
 			// encode block data
@@ -195,6 +201,8 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 			return fmt.Errorf("error opening output store %s: %w", args[0], err)
 		}
 
+		outputBlocksStore.SetOverwrite(true)
+
 		try = 0
 		for {
 			try += 1
@@ -206,6 +214,7 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 				time.Sleep(time.Duration(try) * time.Second)
 				continue
 			}
+			zlog.Debug("saved output file", zap.String("store", outputBlocksStore.BaseURL().String()), zap.String("filename", filename))
 			break
 		}
 
@@ -270,6 +279,10 @@ func backfillPrevHeightCheckE(cmd *cobra.Command, args []string) error {
 		binReader := dbin.NewReader(obj)
 		_, _, err = binReader.ReadHeader()
 		if err != nil {
+			if err == io.EOF {
+				zlog.Info("eof reading file header", zap.String("filename", filename))
+				return nil
+			}
 			return fmt.Errorf("error reading file header for file %s: %w", filename, err)
 		}
 		defer binReader.Close()
