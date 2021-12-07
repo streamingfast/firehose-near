@@ -180,7 +180,7 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 
 	//Push new block meta
 	ctx.blockMetas.Push(&blockMeta{
-		id:         block.Header.Hash.AsString(),
+		id:           block.Header.Hash.AsBase58String(),
 		number:       block.Number(),
 		blockTime:    block.Time(),
 	})
