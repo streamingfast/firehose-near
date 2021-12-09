@@ -75,7 +75,7 @@ func checkMergedBlocksE(cmd *cobra.Command, args []string) error {
 }
 
 func blockPrinter(block *bstream.Block) {
-	nearBlock := block.ToNative().(*pbcodec.BlockWrapper)
+	nearBlock := block.ToNative().(*pbcodec.Block)
 	shardCount := len(nearBlock.Shards)
 	transactionCount := 0
 

@@ -10,6 +10,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/streamingfast/bstream"
+
 	"github.com/golang/protobuf/proto"
 	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 	"go.uber.org/zap"
@@ -25,12 +27,12 @@ type ConsoleReader struct {
 	done chan interface{}
 }
 
-func NewConsoleReader(lines chan string, grpcUrl string) (*ConsoleReader, error) {
+func NewConsoleReader(lines chan string, rpcUrl string) (*ConsoleReader, error) {
 	l := &ConsoleReader{
 		lines: lines,
 		close: func() {},
 		ctx: &parseCtx{
-			blockMetas: newBlockMetaHeap(NewRPCBlockMetaGetter(grpcUrl)),
+			blockMetas: newBlockMetaHeap(NewRPCBlockMetaGetter(rpcUrl)),
 		},
 		done: make(chan interface{}),
 	}
@@ -153,7 +155,7 @@ func (r *ConsoleReader) buildScanner(reader io.Reader) *bufio.Scanner {
 
 // Formats
 // DMLOG BLOCK <NUM> <HASH> <PROTO_HEX>
-func (ctx *parseCtx) readBlock(line string) (*pbcodec.BlockWrapper, error) {
+func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 	chunks, err := SplitInChunks(line, 4)
 	if err != nil {
 		return nil, fmt.Errorf("split: %s", err)
@@ -170,7 +172,7 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.BlockWrapper, error) {
 		return nil, fmt.Errorf("invalid block bytes: %w", err)
 	}
 
-	block := &pbcodec.BlockWrapper{}
+	block := &pbcodec.Block{}
 	if err := proto.Unmarshal(protoBytes, block); err != nil {
 		return nil, fmt.Errorf("invalid block: %w", err)
 	}
@@ -179,19 +181,33 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.BlockWrapper, error) {
 
 	//Push new block meta
 	ctx.blockMetas.Push(&blockMeta{
-		id:        block.Block.Header.Hash.AsString(),
+		id:        block.Header.Hash.AsBase58String(),
 		number:    block.Number(),
 		blockTime: block.Time(),
 	})
 
+	//Setting previous height
+	prevHeightId := block.Header.PrevHash.AsBase58String()
+	if prevHeightId == "11111111111111111111111111111111" { // block id 0 (does not exist)
+		block.Header.PrevHeight = bstream.GetProtocolFirstStreamableBlock
+	} else {
+		prevHeightMeta, err := ctx.blockMetas.get(prevHeightId)
+		if err != nil {
+			return nil, fmt.Errorf("getting prev height meta: %w", err)
+		}
+		block.Header.PrevHeight = prevHeightMeta.number
+	}
+
 	//Setting LIB num
-	lastFinalBlockId := block.Block.Header.LastFinalBlock.AsBase58String()
-	if lastFinalBlockId != "11111111111111111111111111111111" { // block id 0 (does not exist)
+	lastFinalBlockId := block.Header.LastFinalBlock.AsBase58String()
+	if lastFinalBlockId == "11111111111111111111111111111111" { // block id 0 (does not exist)
+		block.Header.LastFinalBlockHeight = bstream.GetProtocolFirstStreamableBlock
+	} else {
 		libBlockMeta, err := ctx.blockMetas.get(lastFinalBlockId)
 		if err != nil {
-			return nil, fmt.Errorf("getting block meta: %w", err)
+			return nil, fmt.Errorf("getting lib block meta: %w", err)
 		}
-		block.Block.Header.LastFinalBlockHeight = libBlockMeta.number
+		block.Header.LastFinalBlockHeight = libBlockMeta.number
 	}
 
 	//Purging

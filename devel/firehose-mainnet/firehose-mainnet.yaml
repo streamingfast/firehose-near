@@ -1,0 +1,11 @@
+start:
+  args:
+  - firehose
+  flags:
+    common-atm-cache-enabled: true
+    common-atm-max-entry-by-age-bytes: 50000000
+    common-atm-max-recent-entry-bytes: 50000000
+    common-blockstream-addr: localhost:9001
+    common-blocks-store-url: gs://dfuseio-global-blocks-us/near-mainnet/v1
+    firehose-grpc-listen-addr: :9000
+    firehose-real-time-tolerance: 3m

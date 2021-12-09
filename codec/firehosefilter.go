@@ -25,7 +25,7 @@ type BlockFilter struct {
 func NewBlockFilter(includeExpression, excludeExpression string) (*BlockFilter, error) {
 	blockfilter := &BlockFilter{
 		IncludeReceivers: make(map[string]bool),
-		ExcludeReceivers:  make(map[string]bool),
+		ExcludeReceivers: make(map[string]bool),
 	}
 
 	if includeExpression != "" {
@@ -39,7 +39,6 @@ func NewBlockFilter(includeExpression, excludeExpression string) (*BlockFilter, 
 		}
 		blockfilter.IncludeReceivers = includes
 	}
-
 
 	if excludeExpression != "" {
 		filterType, excludes, err := splitExpression(excludeExpression)
@@ -88,7 +87,7 @@ func (f *BlockFilter) excluded(receiverID string) bool {
 }
 
 func (f *BlockFilter) TransformInPlace(blk *bstream.Block) error {
-	block := blk.ToNative().(*pbcodec.BlockWrapper)
+	block := blk.ToNative().(*pbcodec.Block)
 
 	if len(f.IncludeReceivers) == 0 && len(f.ExcludeReceivers) == 0 {
 		return nil

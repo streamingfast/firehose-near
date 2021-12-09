@@ -28,7 +28,7 @@ import (
 func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAddr string) {
 	cmd.Flags().String(flagPrefix+"path", "neard", "Command that will be launched by the node manager")
 	cmd.Flags().String(flagPrefix+"data-dir", "{sf-data-dir}/{node-role}/data", "Directory for node data ({node-role} is either mindreader, peering or dev-miner)")
-	cmd.Flags().String(flagPrefix+"config-file", "./{node-role}/config.json", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder Use {hostname} label to use short hostname in path")
+	cmd.Flags().String(flagPrefix+"config-file", "", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder Use {hostname} label to use short hostname in path")
 	cmd.Flags().String(flagPrefix+"genesis-file", "./{node-role}/genesis.json", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use short hostname in path")
 	cmd.Flags().String(flagPrefix+"node-key-file", "./{node-role}/node_key.json", "Node key configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use with short hostname in path")
 	cmd.Flags().Bool(flagPrefix+"debug-deep-mind", false, "[DEV] Prints deep mind instrumentation logs to standard output, should be use for debugging purposes only")
@@ -79,15 +79,19 @@ func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) er
 func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger) func(*launcher.Runtime) (launcher.App, error) {
 	return func(runtime *launcher.Runtime) (launcher.App, error) {
 		sfDataDir := runtime.AbsDataDir
+		hostname, _ := os.Hostname()
+
+		configFile := viper.GetString(flagPrefix+"config-file")
+		if configFile != "" {
+			configFile = replaceNodeRole(kind, configFile)
+			configFile = replaceHostname(hostname, configFile)
+		}
 
 		nodePath := viper.GetString(flagPrefix + "path")
 		nodeDataDir := replaceNodeRole(kind, mustReplaceDataDir(sfDataDir, viper.GetString(flagPrefix+"data-dir")))
-		configFile := replaceNodeRole(kind, viper.GetString(flagPrefix+"config-file"))
 		genesisFile := replaceNodeRole(kind, viper.GetString(flagPrefix+"genesis-file"))
 		nodeKeyFile := replaceNodeRole(kind, viper.GetString(flagPrefix+"node-key-file"))
 
-		hostname, _ := os.Hostname()
-		configFile = replaceHostname(hostname, configFile)
 		genesisFile = replaceHostname(hostname, genesisFile)
 		nodeKeyFile = replaceHostname(hostname, nodeKeyFile)
 
@@ -229,10 +233,15 @@ func (b *bootstrapper) Bootstrap() error {
 		return err
 	}
 	if !exists {
-		if err := copyFile(ctx, b.configFile, configFileInDataDir); err != nil {
-			return fmt.Errorf("unable to copy config file %q to %q: %w", b.configFile, configFileInDataDir, err)
+		if b.configFile != "" {
+			if err := copyFile(ctx, b.configFile, configFileInDataDir); err != nil {
+				return fmt.Errorf("unable to copy config file %q to %q: %w", b.configFile, configFileInDataDir, err)
+			}
+		} else {
+			return fmt.Errorf("config file %s does not exist", configFileInDataDir)
 		}
 	}
+
 	exists, err = fileExists(genesisFileInDataDir)
 	if err != nil {
 		return err

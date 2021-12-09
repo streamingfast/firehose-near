@@ -23,7 +23,7 @@ var allFlags = make(map[string]bool) // used as global because of async access t
 
 func Main() {
 	cobra.OnInitialize(func() {
-		allFlags = flags.AutoBind(RootCmd, "DFUSEETH")
+		allFlags = flags.AutoBind(RootCmd, "SFNEAR")
 	})
 
 	RootCmd.PersistentFlags().StringP("data-dir", "d", "./sf-data", "Path to data storage for all components of dfuse")

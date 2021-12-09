@@ -9,7 +9,7 @@ import (
 	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 )
 
-func BlockFromProto(b *pbcodec.BlockWrapper) (*bstream.Block, error) {
+func BlockFromProto(b *pbcodec.Block) (*bstream.Block, error) {
 	content, err := proto.Marshal(b)
 	if err != nil {
 		return nil, fmt.Errorf("unable to marshal to binary form: %s", err)
