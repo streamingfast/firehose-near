@@ -135,6 +135,7 @@
   "author": "node2",
   "header": {
     "height": 123,
+    "prev_height": 122,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -269,6 +270,7 @@
   "author": "node1",
   "header": {
     "height": 124,
+    "prev_height": 123,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -314,6 +316,7 @@
     "total_supply": {
       "bytes": "AAD70iIkgolLYenk87UPXA=="
     },
+    "last_final_block_height": 122,
     "last_final_block": {
       "bytes": "n+Up//XSaOtzPc4zC9SE1iQaUwNtjXX75TvTqYI5GTQ="
     },
@@ -400,6 +403,7 @@
   "author": "node3",
   "header": {
     "height": 125,
+    "prev_height": 124,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -445,6 +449,7 @@
     "total_supply": {
       "bytes": "AAD70iIkgolLYenk87UPXA=="
     },
+    "last_final_block_height": 123,
     "last_final_block": {
       "bytes": "BDGXbi6CEcwy+3HbaX5DMgnon6jeF5ZEok9WDW2zQMU="
     },
@@ -806,6 +811,7 @@
   "author": "node3",
   "header": {
     "height": 133,
+    "prev_height": 132,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -940,6 +946,7 @@
   "author": "node0",
   "header": {
     "height": 134,
+    "prev_height": 133,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -985,6 +992,7 @@
     "total_supply": {
       "bytes": "AAD70iIkfxYgMycRKE9NXA=="
     },
+    "last_final_block_height": 132,
     "last_final_block": {
       "bytes": "OpAY3ailyelP+l7V7qwXr5kEjkGN3pet5ojlfqPjLVE="
     },
@@ -1074,6 +1082,7 @@
   "author": "node2",
   "header": {
     "height": 135,
+    "prev_height": 134,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -1119,6 +1128,7 @@
     "total_supply": {
       "bytes": "AAD70iIkfxYgMycRKE9NXA=="
     },
+    "last_final_block_height": 133,
     "last_final_block": {
       "bytes": "43aDZI3CDa/CpsqIOSp25k39glclDC/mEgO9m7VcGXY="
     },
@@ -1208,6 +1218,7 @@
   "author": "node1",
   "header": {
     "height": 136,
+    "prev_height": 135,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -1253,6 +1264,7 @@
     "total_supply": {
       "bytes": "AAD70iIkfxYgMycRKE9NXA=="
     },
+    "last_final_block_height": 134,
     "last_final_block": {
       "bytes": "j13ucHiIUN3LnRVBRX6TuZWrrv/LBmsOTddL9rhu8Y4="
     },
@@ -1342,6 +1354,7 @@
   "author": "node3",
   "header": {
     "height": 137,
+    "prev_height": 136,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -1387,6 +1400,7 @@
     "total_supply": {
       "bytes": "AAD70iIkfxYgMycRKE9NXA=="
     },
+    "last_final_block_height": 135,
     "last_final_block": {
       "bytes": "eMda7GQEj2+BiiZrPW3YBt7/4uDmrK1z6eiuoYNisIk="
     },
@@ -1612,6 +1626,7 @@
   "author": "node3",
   "header": {
     "height": 141,
+    "prev_height": 140,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -1746,6 +1761,7 @@
   "author": "node0",
   "header": {
     "height": 142,
+    "prev_height": 141,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -1791,6 +1807,7 @@
     "total_supply": {
       "bytes": "AAD70iIkfPhuqgk14kdTXA=="
     },
+    "last_final_block_height": 140,
     "last_final_block": {
       "bytes": "gdRZjw5syLWmyMAmqcPEzrsq6gSwiX8z1YX2DdP9SJQ="
     },
@@ -1877,6 +1894,7 @@
   "author": "node2",
   "header": {
     "height": 143,
+    "prev_height": 142,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -1922,6 +1940,7 @@
     "total_supply": {
       "bytes": "AAD70iIkfPhuqgk14kdTXA=="
     },
+    "last_final_block_height": 141,
     "last_final_block": {
       "bytes": "9UmKgsA6bIXpfxRlHoT+FE4kc8FBzVe/LN/2o24KVtQ="
     },
@@ -2008,6 +2027,7 @@
   "author": "node1",
   "header": {
     "height": 144,
+    "prev_height": 143,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -2053,6 +2073,7 @@
     "total_supply": {
       "bytes": "AAD70iIkfPhuqgk14kdTXA=="
     },
+    "last_final_block_height": 142,
     "last_final_block": {
       "bytes": "GFs3Q3Hq703Lkc0FQH74gOhXr/BEP83fLLQk2Vs9+F0="
     },
@@ -2139,6 +2160,7 @@
   "author": "node3",
   "header": {
     "height": 145,
+    "prev_height": 144,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -2184,6 +2206,7 @@
     "total_supply": {
       "bytes": "AAD70iIkfPhuqgk14kdTXA=="
     },
+    "last_final_block_height": 143,
     "last_final_block": {
       "bytes": "qEw0MSNtZePiFH6MS4+CegEpiYer1+UhZzn+QwAEeTM="
     },
@@ -2403,6 +2426,7 @@
   "author": "node0",
   "header": {
     "height": 150,
+    "prev_height": 149,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -2534,6 +2558,7 @@
   "author": "node2",
   "header": {
     "height": 151,
+    "prev_height": 150,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -2579,6 +2604,7 @@
     "total_supply": {
       "bytes": "AAD70iIkfOA8Goz3fnIDXA=="
     },
+    "last_final_block_height": 149,
     "last_final_block": {
       "bytes": "WvGVPRjQS3NOwFTfmOHxKVef94JyMRJdjuLbzsdNIpI="
     },
@@ -2665,6 +2691,7 @@
   "author": "node1",
   "header": {
     "height": 152,
+    "prev_height": 151,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -2710,6 +2737,7 @@
     "total_supply": {
       "bytes": "AAD70iIkfOA8Goz3fnIDXA=="
     },
+    "last_final_block_height": 150,
     "last_final_block": {
       "bytes": "INqPQ7CjpBe53fRoR82qbRaXbrnTVu2Unq/x4Oy2xmE="
     },
@@ -2796,6 +2824,7 @@
   "author": "node3",
   "header": {
     "height": 153,
+    "prev_height": 152,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -2841,6 +2870,7 @@
     "total_supply": {
       "bytes": "AAD70iIkfOA8Goz3fnIDXA=="
     },
+    "last_final_block_height": 151,
     "last_final_block": {
       "bytes": "FxV8LkZ1Z0UmJq7xTHTo38cpokogn3OxmLCK82pr3SE="
     },
@@ -3060,6 +3090,7 @@
   "author": "node3",
   "header": {
     "height": 157,
+    "prev_height": 156,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -3191,6 +3222,7 @@
   "author": "node0",
   "header": {
     "height": 158,
+    "prev_height": 157,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -3236,6 +3268,7 @@
     "total_supply": {
       "bytes": "AAD70iIkeYRSnGk+sxtVXA=="
     },
+    "last_final_block_height": 156,
     "last_final_block": {
       "bytes": "N7KH6+01VKdfURuVlcGaFpi6t0wFkqYuKva80wwclLw="
     },
@@ -3322,6 +3355,7 @@
   "author": "node2",
   "header": {
     "height": 159,
+    "prev_height": 158,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -3367,6 +3401,7 @@
     "total_supply": {
       "bytes": "AAD70iIkeYRSnGk+sxtVXA=="
     },
+    "last_final_block_height": 157,
     "last_final_block": {
       "bytes": "dqd9UFkyQPzwNybw15hmD1ru1pUwCmL6KIfKJ1FqWAM="
     },
@@ -3453,6 +3488,7 @@
   "author": "node1",
   "header": {
     "height": 160,
+    "prev_height": 159,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -3498,6 +3534,7 @@
     "total_supply": {
       "bytes": "AAD70iIkeYRSnGk+sxtVXA=="
     },
+    "last_final_block_height": 158,
     "last_final_block": {
       "bytes": "jBqgMwpXsWzF0lcxASfEejWfW5SF6CPfmWbsSufTNwo="
     },
@@ -3584,6 +3621,7 @@
   "author": "node3",
   "header": {
     "height": 161,
+    "prev_height": 160,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -3629,6 +3667,7 @@
     "total_supply": {
       "bytes": "AAD70iIkeYRSnGk+sxtVXA=="
     },
+    "last_final_block_height": 159,
     "last_final_block": {
       "bytes": "bTZhPIxVh5wpeXbH5IBoFJFU9iMmW2uRPCfoKwIabM4="
     },
@@ -3848,6 +3887,7 @@
   "author": "node3",
   "header": {
     "height": 165,
+    "prev_height": 164,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -4112,6 +4152,7 @@
   "author": "node0",
   "header": {
     "height": 170,
+    "prev_height": 169,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -4246,6 +4287,7 @@
   "author": "node2",
   "header": {
     "height": 171,
+    "prev_height": 170,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -4291,6 +4333,7 @@
     "total_supply": {
       "bytes": "AAD70iIkd05ug88lCT4LXA=="
     },
+    "last_final_block_height": 169,
     "last_final_block": {
       "bytes": "3+Z1AijA1fKD+AY082YEnjkzR8/NUjH9MYck+fGbR7s="
     },
@@ -4377,6 +4420,7 @@
   "author": "node1",
   "header": {
     "height": 172,
+    "prev_height": 171,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -4422,6 +4466,7 @@
     "total_supply": {
       "bytes": "AAD70iIkd05ug88lCT4LXA=="
     },
+    "last_final_block_height": 170,
     "last_final_block": {
       "bytes": "1TTcIJCUNHBmVehvK23Pms9jXBxRxPfNN65KU5+5Tdk="
     },
@@ -4511,6 +4556,7 @@
   "author": "node3",
   "header": {
     "height": 173,
+    "prev_height": 172,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -4556,6 +4602,7 @@
     "total_supply": {
       "bytes": "AAD70iIkd05ug88lCT4LXA=="
     },
+    "last_final_block_height": 171,
     "last_final_block": {
       "bytes": "RTn+Qd73I97z+fBgfzrwlrX2o6pNG2I4CPTFwiM4+qU="
     },
@@ -4781,6 +4828,7 @@
   "author": "node3",
   "header": {
     "height": 177,
+    "prev_height": 176,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -4915,6 +4963,7 @@
   "author": "node0",
   "header": {
     "height": 178,
+    "prev_height": 177,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -4960,6 +5009,7 @@
     "total_supply": {
       "bytes": "AAD70iIkc/GWUwynqs6RXA=="
     },
+    "last_final_block_height": 176,
     "last_final_block": {
       "bytes": "SO/fdY8ck3/hbnpf5VCPoHeDVTVNj4T4U7qziZKqIA4="
     },
@@ -5049,6 +5099,7 @@
   "author": "node2",
   "header": {
     "height": 179,
+    "prev_height": 178,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -5094,6 +5145,7 @@
     "total_supply": {
       "bytes": "AAD70iIkc/GWUwynqs6RXA=="
     },
+    "last_final_block_height": 177,
     "last_final_block": {
       "bytes": "bR94yvmZa7/jdZdQ5V8biOACrk6GJwTpW7fbr+bY1c0="
     },
@@ -5183,6 +5235,7 @@
   "author": "node1",
   "header": {
     "height": 180,
+    "prev_height": 179,
     "epoch_id": {
       "bytes": "wPlosPzhC+Fx7APrhwX8hbLbzixlUnULGYhZ7Y+NqxQ="
     },
@@ -5228,6 +5281,7 @@
     "total_supply": {
       "bytes": "AAD70iIkc/GWUwynqs6RXA=="
     },
+    "last_final_block_height": 178,
     "last_final_block": {
       "bytes": "So+ep3m+fSV4HXR7bHTErRLtWRJuCT98H10DG/+nqXc="
     },
