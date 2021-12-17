@@ -67,6 +67,9 @@ func init() {
 			if len(firehoseBlocksStoreURLs) == 0 {
 				firehoseBlocksStoreURLs = []string{viper.GetString("common-blocks-store-url")}
 			} else if len(firehoseBlocksStoreURLs) == 1 && strings.Contains(firehoseBlocksStoreURLs[0], ",") {
+				if viper.GetBool("common-atm-cache-enabled") {
+					panic("cannot use ATM cache with firehose multi blocks store URLs")
+				}
 				// Providing multiple elements from config doesn't work with `viper.GetStringSlice`, so let's also handle the case where a single element has separator
 				firehoseBlocksStoreURLs = strings.Split(firehoseBlocksStoreURLs[0], ",")
 			}
