@@ -5,8 +5,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/streamingfast/sf-near/codec"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/streamingfast/bstream"
@@ -18,6 +16,7 @@ import (
 	firehoseApp "github.com/streamingfast/firehose/app/firehose"
 	"github.com/streamingfast/logging"
 	pbbstream "github.com/streamingfast/pbgo/dfuse/bstream/v1"
+	"github.com/streamingfast/sf-near/codec"
 	"go.uber.org/zap"
 )
 

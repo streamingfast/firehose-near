@@ -11,6 +11,7 @@ require (
 	github.com/mr-tron/base58 v1.2.0
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.8.1
+	github.com/streamingfast/atm v0.0.0-20211217182254-d1ed00f538eb // indirect
 	github.com/streamingfast/bstream v0.0.2-0.20211029201027-268abefde7b4
 	github.com/streamingfast/cli v0.0.3-0.20210811201236-5c00ec55462d
 	github.com/streamingfast/dauth v0.0.0-20210811181149-e8fd545948cc
