@@ -11,24 +11,24 @@ require (
 	github.com/mr-tron/base58 v1.2.0
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.8.1
-	github.com/streamingfast/bstream v0.0.2-0.20211217185631-18c73b493280
+	github.com/streamingfast/bstream v0.0.2-0.20211220173550-a75c21955e80
 	github.com/streamingfast/cli v0.0.3-0.20210811201236-5c00ec55462d
-	github.com/streamingfast/dauth v0.0.0-20210811181149-e8fd545948cc
+	github.com/streamingfast/dauth v0.0.0-20210812020920-1c83ba29add1
 	github.com/streamingfast/dbin v0.0.0-20210809205249-73d5eca35dc5
 	github.com/streamingfast/derr v0.0.0-20210811180100-9138d738bcec
-	github.com/streamingfast/dgrpc v0.0.0-20210901144702-c57c3701768b
-	github.com/streamingfast/dlauncher v0.0.0-20211012132205-0c9a518243bc
+	github.com/streamingfast/dgrpc v0.0.0-20211210152421-f8cec68e0383
+	github.com/streamingfast/dlauncher v0.0.0-20211210162313-cf4aa5fc4878
 	github.com/streamingfast/dmetering v0.0.0-20210811181351-eef120cfb817
 	github.com/streamingfast/dmetrics v0.0.0-20210811180524-8494aeb34447
 	github.com/streamingfast/dstore v0.1.1-0.20211012134319-16e840827e38
-	github.com/streamingfast/firehose v0.1.1-0.20210901164748-403e4d029276
+	github.com/streamingfast/firehose v0.1.1-0.20211210192158-59a582dbf6b9
 	github.com/streamingfast/logging v0.0.0-20210908162127-bdc5856d5341
-	github.com/streamingfast/merger v0.0.3-0.20210913201227-b6049773cace
+	github.com/streamingfast/merger v0.0.3-0.20211210145453-1cc2fa8425ea
 	github.com/streamingfast/near-go v0.0.0-20211020152412-468d98de11a1
 	github.com/streamingfast/node-manager v0.0.2-0.20211029201743-0b82ab7f9de4
-	github.com/streamingfast/pbgo v0.0.6-0.20210820205306-ba5335146052
-	github.com/streamingfast/relayer v0.0.2-0.20211006134256-f3773fc7f46d
-	github.com/streamingfast/sf-tools v0.0.0-20211124191345-bf0c1c2a076a
+	github.com/streamingfast/pbgo v0.0.6-0.20211209212750-753f0acb6553
+	github.com/streamingfast/relayer v0.0.2-0.20211210154316-8a6048581873
+	github.com/streamingfast/sf-tools v0.0.0-20211220202659-41d9c449ba58
 	github.com/stretchr/testify v1.7.0
 	go.uber.org/zap v1.19.1
 	google.golang.org/grpc v1.39.1

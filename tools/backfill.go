@@ -17,18 +17,19 @@ package tools
 import (
 	"bytes"
 	"fmt"
-	"github.com/golang/protobuf/proto"
-	"github.com/spf13/cobra"
-	"github.com/streamingfast/dbin"
-	"github.com/streamingfast/dstore"
-	pbbstream "github.com/streamingfast/pbgo/dfuse/bstream/v1"
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
-	sftools "github.com/streamingfast/sf-tools"
-	"go.uber.org/zap"
 	"io"
 	"regexp"
 	"strconv"
 	"time"
+
+	"github.com/golang/protobuf/proto"
+	"github.com/spf13/cobra"
+	"github.com/streamingfast/dbin"
+	"github.com/streamingfast/dstore"
+	pbbstream "github.com/streamingfast/pbgo/sf/bstream/v1"
+	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
+	sftools "github.com/streamingfast/sf-tools"
+	"go.uber.org/zap"
 )
 
 var numberRegex = regexp.MustCompile(`(\d{10})`)
@@ -217,7 +218,6 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 			zlog.Debug("saved output file", zap.String("store", outputBlocksStore.BaseURL().String()), zap.String("filename", filename))
 			break
 		}
-
 
 		// check range upper bound
 		if !blockRange.Unbounded() {

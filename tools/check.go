@@ -85,8 +85,9 @@ func blockPrinter(block *bstream.Block) {
 		}
 	}
 
-	fmt.Printf("Block %s: %d shards, %d transactions\n",
+	fmt.Printf("Block %s, Prev: %s: %d shards, %d transactions\n",
 		block.AsRef(),
+		block.PreviousRef(),
 		shardCount,
 		transactionCount,
 	)

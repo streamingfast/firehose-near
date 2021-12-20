@@ -17,8 +17,8 @@ import (
 	nodeManagerApp "github.com/streamingfast/node-manager/app/node_manager2"
 	"github.com/streamingfast/node-manager/metrics"
 	"github.com/streamingfast/node-manager/operator"
-	pbbstream "github.com/streamingfast/pbgo/dfuse/bstream/v1"
-	pbheadinfo "github.com/streamingfast/pbgo/dfuse/headinfo/v1"
+	pbbstream "github.com/streamingfast/pbgo/sf/bstream/v1"
+	pbheadinfo "github.com/streamingfast/pbgo/sf/headinfo/v1"
 	"github.com/streamingfast/sf-near/nodemanager"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -81,7 +81,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 		sfDataDir := runtime.AbsDataDir
 		hostname, _ := os.Hostname()
 
-		configFile := viper.GetString(flagPrefix+"config-file")
+		configFile := viper.GetString(flagPrefix + "config-file")
 		if configFile != "" {
 			configFile = replaceNodeRole(kind, configFile)
 			configFile = replaceHostname(hostname, configFile)
