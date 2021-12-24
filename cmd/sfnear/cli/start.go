@@ -40,7 +40,7 @@ func nearStartE(cmd *cobra.Command, args []string) (err error) {
 	userLog.Debug("dfuseeth binary started", zap.String("data_dir", dataDir))
 
 	configFile := viper.GetString("global-config-file")
-	userLog.Printf("Starting dfuse for Ethereum with config file '%s'", configFile)
+	userLog.Printf("Starting StreamingFast on NEAR with config file '%s'", configFile)
 
 	err = Start(configFile, dataDir, args)
 	if err != nil {
