@@ -8,8 +8,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/streamingfast/dgrpc"
 	"github.com/spf13/viper"
+	"github.com/streamingfast/dgrpc"
 	"github.com/streamingfast/dlauncher/launcher"
 )
 
@@ -33,7 +33,7 @@ func setupCmd(cmd *cobra.Command) error {
 		}
 
 		if !exists && isMatchingCommand(cmds, forceConfigOn) {
-			return fmt.Errorf("Config file %q not found. Did you 'dfuseeth init'?", configFile)
+			return fmt.Errorf("Config file %q not found. Did you 'sfnear init'?", configFile)
 		}
 
 		if exists {

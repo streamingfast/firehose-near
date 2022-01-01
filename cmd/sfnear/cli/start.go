@@ -37,7 +37,7 @@ func nearStartE(cmd *cobra.Command, args []string) (err error) {
 	cmd.SilenceUsage = true
 
 	dataDir := viper.GetString("global-data-dir")
-	userLog.Debug("dfuseeth binary started", zap.String("data_dir", dataDir))
+	userLog.Debug("sfnear binary started", zap.String("data_dir", dataDir))
 
 	configFile := viper.GetString("global-config-file")
 	userLog.Printf("Starting StreamingFast on NEAR with config file '%s'", configFile)

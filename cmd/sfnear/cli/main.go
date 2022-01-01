@@ -27,7 +27,7 @@ func Main() {
 	})
 
 	RootCmd.PersistentFlags().StringP("data-dir", "d", "./sf-data", "Path to data storage for all components of dfuse")
-	RootCmd.PersistentFlags().StringP("config-file", "c", "./sf.yaml", "dfuse configuration file to use. No config file loaded if set to an empty string.")
+	RootCmd.PersistentFlags().StringP("config-file", "c", "./sf.yaml", "Configuration file to use. No config file loaded if set to an empty string.")
 	RootCmd.PersistentFlags().String("log-format", "text", "Format for logging to stdout. Either 'text' or 'stackdriver'")
 	RootCmd.PersistentFlags().Bool("log-to-file", true, "Also write logs to {data-dir}/dfuse.log.json ")
 	RootCmd.PersistentFlags().CountP("verbose", "v", "Enables verbose output (-vvvv for max verbosity)")
@@ -52,7 +52,7 @@ func Main() {
 		}
 		startupDelay := viper.GetDuration("global-startup-delay")
 		if startupDelay.Microseconds() > 0 {
-			zlog.Info("sleeping before starting dfuse", zap.Duration("delay", startupDelay))
+			zlog.Info("sleeping before starting apps", zap.Duration("delay", startupDelay))
 			time.Sleep(startupDelay)
 		}
 		return nil
