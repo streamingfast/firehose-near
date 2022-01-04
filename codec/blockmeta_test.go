@@ -9,21 +9,22 @@ import (
 )
 
 func TestBlockHeap_Push_Get(t *testing.T) {
+	now := time.Now()
 	blockMetas := []*blockMeta{
 		{
 			id:        "id.1",
 			number:    1,
-			blockTime: time.Now(),
+			blockTime: now.Add(1 * time.Second),
 		},
 		{
 			id:        "id.2",
 			number:    2,
-			blockTime: time.Now(),
+			blockTime: now.Add(2 * time.Second),
 		},
 		{
 			id:        "id.3",
 			number:    3,
-			blockTime: time.Now(),
+			blockTime: now.Add(3 * time.Second),
 		},
 	}
 
@@ -59,12 +60,11 @@ func TestBlockHeap_Push_Get(t *testing.T) {
 }
 
 func TestBlockHeap_BlockGetter(t *testing.T) {
-
 	getterCallCount := 0
 	getter := blockMetaGetterFunc(func(id string) (*blockMeta, error) {
 		getterCallCount += 1
 		return &blockMeta{
-			id:        "id.1",
+			id:        id,
 			number:    1,
 			blockTime: time.Now(),
 		}, nil
@@ -76,7 +76,10 @@ func TestBlockHeap_BlockGetter(t *testing.T) {
 
 	require.Equal(t, 1, getterCallCount)
 
+	h.get("id.1")
+
+	require.Equal(t, 1, getterCallCount)
+
 	bm := heap.Pop(h).(*blockMeta)
 	require.Equal(t, "id.1", bm.id)
-
 }

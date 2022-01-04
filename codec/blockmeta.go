@@ -4,6 +4,7 @@ import (
 	"container/heap"
 	"context"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/streamingfast/near-go/rpc"
@@ -13,6 +14,21 @@ type blockMeta struct {
 	id        string
 	number    uint64
 	blockTime time.Time
+}
+
+func (m *blockMeta) String() string {
+	return fmt.Sprintf("#%d (%s @ %s)", m.number, m.id, m.blockTime)
+}
+
+type blockMetas []*blockMeta
+
+func (ms blockMetas) String() string {
+	out := make([]string, len(ms))
+	for i, m := range ms {
+		out[i] = m.String()
+	}
+
+	return strings.Join(out, ", ")
 }
 
 type blockMetaGetter interface {
@@ -47,16 +63,16 @@ func (g *RPCBlockMetaGetter) getBlockMeta(id string) (*blockMeta, error) {
 }
 
 type blockMetaHeap struct {
-	metas  []*blockMeta
+	metas      []*blockMeta
 	metasIndex map[string]*blockMeta
-	getter blockMetaGetter
+	getter     blockMetaGetter
 }
 
 func newBlockMetaHeap(getter blockMetaGetter) *blockMetaHeap {
 	h := &blockMetaHeap{
-		metas:  []*blockMeta{},
+		metas:      []*blockMeta{},
 		metasIndex: map[string]*blockMeta{},
-		getter: getter,
+		getter:     getter,
 	}
 	return h
 }
