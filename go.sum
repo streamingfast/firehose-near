@@ -671,6 +671,8 @@ github.com/streamingfast/bstream v0.0.2-0.20211217185631-18c73b493280 h1:5Nd3x2P
 github.com/streamingfast/bstream v0.0.2-0.20211217185631-18c73b493280/go.mod h1:bbzeXx/Ow/6SKNjlOKScquCI6A3W3tR3TjKgDvxWJg8=
 github.com/streamingfast/bstream v0.0.2-0.20211220173550-a75c21955e80 h1:UyxZrrOGpvIS2itQ7CGNYnr3vHypM7vi6EeiIfIbe7c=
 github.com/streamingfast/bstream v0.0.2-0.20211220173550-a75c21955e80/go.mod h1:SyI0vRStRzRKrzYbuT/MrFvMv4K3VkUkClKl2eKS4cc=
+github.com/streamingfast/bstream v0.0.2-0.20220110200944-b8fdce6e0f12 h1:YO1HGcRTW8euQQQpYgKEjNZtyU22ynEVHnU4sAtqKEE=
+github.com/streamingfast/bstream v0.0.2-0.20220110200944-b8fdce6e0f12/go.mod h1:SyI0vRStRzRKrzYbuT/MrFvMv4K3VkUkClKl2eKS4cc=
 github.com/streamingfast/cli v0.0.3-0.20210811201236-5c00ec55462d h1:ZEqHQMyAI9PSziBHNUiGdtvnpPnPQlyT8HHW/OLmrgc=
 github.com/streamingfast/cli v0.0.3-0.20210811201236-5c00ec55462d/go.mod h1:8TWHl1oWEu0JNNUz79R7e9dLPeCJhHmAys4g8cl6L/U=
 github.com/streamingfast/dauth v0.0.0-20210811181149-e8fd545948cc h1:UHQWJm2df+kNauxV2Gk+0s438Cz051FOiXn4nLr2Pyg=
@@ -725,6 +727,8 @@ github.com/streamingfast/merger v0.0.3-0.20211222185803-be94ba68b3dd h1:Xh9xQLAu
 github.com/streamingfast/merger v0.0.3-0.20211222185803-be94ba68b3dd/go.mod h1:yyZHCZlqtH2Cd0kY4fJYhg1OeZKlpAO170mXg7LMgMg=
 github.com/streamingfast/merger v0.0.3-0.20220104164834-a16e880f780e h1:emaU1KTNZADhBcujQkvGNV2m1vZyddPacK0zw+pSgRY=
 github.com/streamingfast/merger v0.0.3-0.20220104164834-a16e880f780e/go.mod h1:yyZHCZlqtH2Cd0kY4fJYhg1OeZKlpAO170mXg7LMgMg=
+github.com/streamingfast/merger v0.0.3-0.20220110210221-0d1b862b1d80 h1:hCUqC2Ze25Bo4W6fbCR/ZPlky/f2wKRza8fBuGYQGnc=
+github.com/streamingfast/merger v0.0.3-0.20220110210221-0d1b862b1d80/go.mod h1:+8goe/YZI3MmXOu3oiSmHhHFqwYIZvOio5ak/rt+sGg=
 github.com/streamingfast/near-go v0.0.0-20211020152412-468d98de11a1 h1:sVQIh3uf9yoBwNFc/6yWSf6kRsBwtzr0cOL4QRYxr5Q=
 github.com/streamingfast/near-go v0.0.0-20211020152412-468d98de11a1/go.mod h1:Y2axBEx9FEUEXA5CT2KLljsHgSjI4metzl+qkaLHg6s=
 github.com/streamingfast/node-manager v0.0.2-0.20211029201743-0b82ab7f9de4 h1:LieKH18VsLsZh62MpU1du5w7ZZ72+UHtDq9kTSjCPv8=
