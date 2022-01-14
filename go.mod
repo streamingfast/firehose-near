@@ -11,7 +11,7 @@ require (
 	github.com/mr-tron/base58 v1.2.0
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.8.1
-	github.com/streamingfast/bstream v0.0.2-0.20220110200944-b8fdce6e0f12
+	github.com/streamingfast/bstream v0.0.2-0.20220113132902-e4dc9ed53d86
 	github.com/streamingfast/cli v0.0.3-0.20210811201236-5c00ec55462d
 	github.com/streamingfast/dauth v0.0.0-20210812020920-1c83ba29add1
 	github.com/streamingfast/dbin v0.0.0-20210809205249-73d5eca35dc5
@@ -21,9 +21,9 @@ require (
 	github.com/streamingfast/dmetering v0.0.0-20210811181351-eef120cfb817
 	github.com/streamingfast/dmetrics v0.0.0-20210811180524-8494aeb34447
 	github.com/streamingfast/dstore v0.1.1-0.20211012134319-16e840827e38
-	github.com/streamingfast/firehose v0.1.1-0.20211224035952-b6f9fe820474
+	github.com/streamingfast/firehose v0.1.1-0.20220114160935-8c52fe577b57
 	github.com/streamingfast/logging v0.0.0-20210908162127-bdc5856d5341
-	github.com/streamingfast/merger v0.0.3-0.20220111193505-74ca06396be5
+	github.com/streamingfast/merger v0.0.3-0.20220113161439-b31552a6aa77
 	github.com/streamingfast/near-go v0.0.0-20211020152412-468d98de11a1
 	github.com/streamingfast/node-manager v0.0.2-0.20211029201743-0b82ab7f9de4
 	github.com/streamingfast/pbgo v0.0.6-0.20211209212750-753f0acb6553
