@@ -1,0 +1,5 @@
+#!/bin/bash
+
+port=${RPC_PORT:-3030}
+
+curl -sS -X GET "http://localhost:$RPC_PORT/network_info" | jq .
