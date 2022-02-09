@@ -17,4 +17,7 @@ Node manager commands (near-... <tab> to show all):
  - Stop instance                      near-maintenance
  - Start or restart instance          near-resume
 
- - RPC '/network_info' (peers)        near-rpc-network-info
+ - RPC Syncing Info                   near-rpc-sync-info
+ - RPC Peers Info                     near-rpc-network-info
+ - RPC Node Status                    near-rpc-node-status
+ - RPC Head Block                     near-rpc-head-block

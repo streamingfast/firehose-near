@@ -2,4 +2,4 @@
 
 port=${RPC_PORT:-3030}
 
-curl -sS -X GET "http://localhost:$RPC_PORT/network_info" | jq .
+curl -sS -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","id":"1","method":"network_info","params":[]}' "http://localhost:$port" | jq .
