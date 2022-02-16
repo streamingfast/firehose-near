@@ -4,6 +4,14 @@
 
 # Usage
 
+## Release
+
+Use the `./bin/release.sh` Bash script to perform a new release. It will ask you questions
+as well as driving all the required commands, performing the necessary operation automatically.
+The Bash script runs in dry-mode by default, so you can check first that everything is all right.
+
+Releases are performed using [goreleaser](https://goreleaser.com/).
+
 ## Contributing
 
 **Issues and PR in this repo related strictly to the Near on StreamingFast.**
