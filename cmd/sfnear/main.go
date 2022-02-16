@@ -1,38 +1,43 @@
 package main
 
-import "github.com/streamingfast/sf-near/cmd/sfnear/cli"
+import (
+	"fmt"
+	"strings"
+	"time"
+
+	"github.com/streamingfast/sf-near/cmd/sfnear/cli"
+)
 
 // Commit sha1 value, injected via go build `ldflags` at build time
-var Commit = ""
+var commit = ""
 
 // Version value, injected via go build `ldflags` at build time
-var Version = "dev"
+var version = "dev"
 
-// IsDirty value, injected via go build `ldflags` at build time
-var IsDirty = ""
+// Date value, injected via go build `ldflags` at build time
+var date = time.Now().Format(time.RFC3339)
 
 func init() {
-	cli.RootCmd.Version = version()
+	cli.RootCmd.Version = versionString()
 }
 
 func main() {
 	cli.Main()
 }
 
-func version() string {
-	shortCommit := Commit
-	if len(shortCommit) >= 7 {
-		shortCommit = shortCommit[0:7]
+func versionString() string {
+	var labels []string
+	if len(commit) >= 7 {
+		labels = append(labels, fmt.Sprintf("Commit %s", commit[0:7]))
 	}
 
-	if len(shortCommit) == 0 {
-		shortCommit = "adhoc"
+	if date != "" {
+		labels = append(labels, fmt.Sprintf("Built %s", date))
 	}
 
-	out := Version + "-" + shortCommit
-	if IsDirty != "" {
-		out += "-dirty"
+	if len(labels) == 0 {
+		return version
 	}
 
-	return out
+	return fmt.Sprintf("%s (%s)", version, strings.Join(labels, ", "))
 }
