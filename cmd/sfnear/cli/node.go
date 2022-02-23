@@ -8,6 +8,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/streamingfast/dlauncher/flags"
+
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/streamingfast/bstream/blockstream"
@@ -35,6 +37,7 @@ func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAd
 	cmd.Flags().Bool(flagPrefix+"log-to-zap", true, "Enable all node logs to transit into node's logger directly, when false, prints node logs directly to stdout")
 	cmd.Flags().String(flagPrefix+"manager-api-addr", managerAPIAddr, "Near node manager API address")
 	cmd.Flags().Duration(flagPrefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")
+	cmd.Flags().StringSlice(flagPrefix+"backups", []string{}, "Repeatable, space-separated key=values definitions for backups. Example: 'type=gke-pvc-snapshot prefix= tag=v1 freq-blocks=1000 freq-time= project=myproj'")
 	cmd.Flags().String(flagPrefix+"arguments", "", "If not empty, overrides the list of default node arguments (computed from node type and role). Start with '+' to append to default args instead of replacing. ")
 
 	// FIXME: Right now our near-dm-indexer doesn't support it, we should plan on adding it!
@@ -100,6 +103,11 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 		logToZap := viper.GetBool(flagPrefix + "log-to-zap")
 		shutdownDelay := viper.GetDuration("common-system-shutdown-signal-delay") // we reuse this global value
 		httpAddr := viper.GetString(flagPrefix + "manager-api-addr")
+		backupConfigs := viper.GetStringSlice(flagPrefix + "backups")
+
+		backupModules, backupSchedules, err := parseBackupConfigs(backupConfigs)
+		_ = backupModules
+		_ = backupSchedules
 
 		arguments := viper.GetString(flagPrefix + "arguments")
 		nodeArguments, err := buildNodeArguments(
@@ -142,6 +150,18 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 			})
 		if err != nil {
 			return nil, fmt.Errorf("unable to create chain operator: %w", err)
+		}
+		for name, mod := range backupModules {
+			zlog.Info("registering backup module", zap.String("name", name), zap.Any("module", mod))
+			err := chainOperator.RegisterBackupModule(name, mod)
+			if err != nil {
+				return nil, fmt.Errorf("unable to register backup module %s: %w", name, err)
+			}
+			zlog.Info("backup module registered", zap.String("name", name), zap.Any("module", mod))
+		}
+
+		for _, sched := range backupSchedules {
+			chainOperator.RegisterBackupSchedule(sched)
 		}
 
 		if kind != "mindreader" {
@@ -315,4 +335,36 @@ func replaceNodeRole(nodeRole, in string) string {
 
 func replaceHostname(hostname, in string) string {
 	return strings.Replace(in, "{hostname}", hostname, -1)
+}
+
+func parseBackupConfigs(backupConfigs []string) (mods map[string]operator.BackupModule, scheds []*operator.BackupSchedule, err error) {
+	mods = make(map[string]operator.BackupModule)
+	for _, confStr := range backupConfigs {
+		conf, err := flags.ParseKVConfigString(confStr)
+		if err != nil {
+			return nil, nil, err
+		}
+		t := conf["type"]
+		switch t {
+		case "gke-pvc-snapshot":
+			mod, err := nodemanager.NewGKEPVCSnapshotter(conf)
+			if err != nil {
+				return nil, nil, err
+			}
+			mods[t] = mod
+		default:
+			return nil, nil, fmt.Errorf("unknown backup module type: %s", t)
+		}
+
+		if conf["freq-blocks"] != "" || conf["freq-time"] != "" {
+			newSched, err := operator.NewBackupSchedule(conf["freq-blocks"], conf["freq-time"], conf["required-hostname"], t)
+			if err != nil {
+				return nil, nil, fmt.Errorf("error setting up backup schedule for %s, %w", t, err)
+			}
+
+			scheds = append(scheds, newSched)
+		}
+
+	}
+	return
 }
