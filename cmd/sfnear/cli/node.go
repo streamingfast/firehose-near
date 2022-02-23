@@ -28,25 +28,26 @@ import (
 )
 
 func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAddr string) {
-	cmd.Flags().String(flagPrefix+"path", "neard", "Command that will be launched by the node manager")
-	cmd.Flags().String(flagPrefix+"data-dir", "{sf-data-dir}/{node-role}/data", "Directory for node data ({node-role} is either mindreader, peering or dev-miner)")
-	cmd.Flags().String(flagPrefix+"config-file", "", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder Use {hostname} label to use short hostname in path")
-	cmd.Flags().String(flagPrefix+"genesis-file", "./{node-role}/genesis.json", "Node configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use short hostname in path")
-	cmd.Flags().String(flagPrefix+"node-key-file", "./{node-role}/node_key.json", "Node key configuration file where ({node-role} is either mindreader, peering or dev-miner), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use with short hostname in path")
+	defaultBin := "neard"
+	if strings.Contains(flagPrefix, "mindreader") {
+		defaultBin = "near-dm-indexer"
+	}
+	cmd.Flags().String(flagPrefix+"path", defaultBin, "Command that will be launched by the node manager")
+	cmd.Flags().String(flagPrefix+"data-dir", "{sf-data-dir}/{node-role}/data", "Directory for node data ({node-role} is either mindreader or archive)")
+	cmd.Flags().String(flagPrefix+"config-file", "", "Node configuration file where ({node-role} is either mindreader or archive), the file is copied inside the {sf-data-dir}/{node-role}/data folder Use {hostname} label to use short hostname in path")
+	cmd.Flags().String(flagPrefix+"genesis-file", "./{node-role}/genesis.json", "Node configuration file where ({node-role} is either mindreader or archive), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use short hostname in path")
+	cmd.Flags().String(flagPrefix+"node-key-file", "./{node-role}/node_key.json", "Node key configuration file where ({node-role} is either mindreader or archive ), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use with short hostname in path")
 	cmd.Flags().Bool(flagPrefix+"debug-deep-mind", false, "[DEV] Prints deep mind instrumentation logs to standard output, should be use for debugging purposes only")
 	cmd.Flags().Bool(flagPrefix+"log-to-zap", true, "Enable all node logs to transit into node's logger directly, when false, prints node logs directly to stdout")
 	cmd.Flags().String(flagPrefix+"manager-api-addr", managerAPIAddr, "Near node manager API address")
 	cmd.Flags().Duration(flagPrefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")
 	cmd.Flags().StringSlice(flagPrefix+"backups", []string{}, "Repeatable, space-separated key=values definitions for backups. Example: 'type=gke-pvc-snapshot prefix= tag=v1 freq-blocks=1000 freq-time= project=myproj'")
 	cmd.Flags().String(flagPrefix+"arguments", "", "If not empty, overrides the list of default node arguments (computed from node type and role). Start with '+' to append to default args instead of replacing. ")
-
-	// FIXME: Right now our near-dm-indexer doesn't support it, we should plan on adding it!
-	// cmd.Flags().String(flagPrefix+"node-boot-nodes", "", "Set the node's boot nodes to bootstrap network from")
 }
 
 func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) error, managerAPIaddr string) {
-	if kind != "mindreader" && kind != "peering" {
-		panic(fmt.Errorf("invalid kind value, must be either 'mindreader' or 'peering', got %q", kind))
+	if kind != "mindreader" && kind != "archive" {
+		panic(fmt.Errorf("invalid kind value, must be either 'mindreader' or 'archive', got %q", kind))
 	}
 
 	app := fmt.Sprintf("%s-node", kind)
@@ -106,8 +107,8 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 		backupConfigs := viper.GetStringSlice(flagPrefix + "backups")
 
 		backupModules, backupSchedules, err := parseBackupConfigs(backupConfigs)
-		_ = backupModules
-		_ = backupSchedules
+
+		isMindreader := kind == "mindreader"
 
 		arguments := viper.GetString(flagPrefix + "arguments")
 		nodeArguments, err := buildNodeArguments(
@@ -123,6 +124,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 
 		superviser := nodemanager.NewSuperviser(
 			nodePath,
+			isMindreader,
 			nodeArguments,
 			nodeDataDir,
 			metricsAndReadinessManager.UpdateHeadBlock,
@@ -288,7 +290,7 @@ type nodeArgsByRole map[string]string
 
 func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, args string) ([]string, error) {
 	typeRoles := nodeArgsByRole{
-		"peering":    "--home={node-data-dir} {extra-arg} run",
+		"archive":    "--home={node-data-dir} {extra-arg} run",
 		"mindreader": "--home={node-data-dir} {extra-arg} run",
 	}
 

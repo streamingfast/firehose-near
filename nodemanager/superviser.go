@@ -1,17 +1,22 @@
 package nodemanager
 
 import (
+	"bytes"
 	"fmt"
+	"io/ioutil"
 	"net"
+	"net/http"
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/ShinyTrinkets/overseer"
 	nodeManager "github.com/streamingfast/node-manager"
 	logplugin "github.com/streamingfast/node-manager/log_plugin"
 	"github.com/streamingfast/node-manager/metrics"
 	"github.com/streamingfast/node-manager/superviser"
+	"github.com/tidwall/gjson"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
@@ -31,11 +36,12 @@ type Superviser struct {
 }
 
 func (s *Superviser) GetName() string {
-	return "neard"
+	return "near"
 }
 
 func NewSuperviser(
 	binary string,
+	isMindreader bool,
 	arguments []string,
 	dataDir string,
 	headBlockUpdateFunc nodeManager.HeadBlockUpdater,
@@ -56,7 +62,11 @@ func NewSuperviser(
 		headBlockUpdateFunc: headBlockUpdateFunc,
 	}
 
-	supervisor.RegisterLogPlugin(logplugin.LogPluginFunc(supervisor.lastBlockSeenLogPlugin))
+	if isMindreader {
+		supervisor.RegisterLogPlugin(logplugin.LogPluginFunc(supervisor.lastBlockSeenLogPlugin))
+	} else {
+		go supervisor.WatchLastBlock()
+	}
 
 	if logToZap {
 		supervisor.RegisterLogPlugin(newToZapLogPlugin(debugDeepMind, nodelogger))
@@ -114,6 +124,47 @@ func (s *Superviser) MarshalLogObject(enc zapcore.ObjectEncoder) error {
 	return nil
 }
 
+func (s *Superviser) sendRPCCommand(content string) ([]byte, error) {
+	addr := "http://localhost:3030"
+
+	bytesObj := []byte(content)
+	reqBody := bytes.NewBuffer(bytesObj)
+
+	resp, err := http.Post(addr, "application/json", reqBody)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	return body, nil
+}
+
+func (s *Superviser) getHead() (headNum uint64, headTime time.Time) {
+	resp, err := s.sendRPCCommand(`{"jsonrpc":"2.0","id":"dontcare","method":"status","params":[]}'`)
+	if err != nil {
+		return
+	}
+	headNum = gjson.GetBytes(resp, "result.sync_info").Uint()
+	headTime = gjson.GetBytes(resp, "result.sync_info.latest_block_height").Time()
+	return
+}
+
+func (s *Superviser) WatchLastBlock() {
+	for {
+		if s.IsRunning() {
+			headNum, headTime := s.getHead()
+			if headNum != 0 {
+				s.headBlockUpdateFunc(headNum, "", headTime) // used by operator and metrics
+				s.lastBlockSeen = headNum                    // exported from Superviser as LastSeenBlockNum() for backups
+			}
+		}
+		time.Sleep(2 * time.Second)
+	}
+}
+
 func (s *Superviser) lastBlockSeenLogPlugin(line string) {
 	// DMLOG BLOCK <HEIGHT> <HASH> <PROTO_HEX>
 	if !strings.HasPrefix(line, "DMLOG BLOCK") {
@@ -132,27 +183,8 @@ func (s *Superviser) lastBlockSeenLogPlugin(line string) {
 		return
 	}
 
-	//metrics.SetHeadBlockNumber(blockNum)
 	s.lastBlockSeen = blockNum
 }
-
-// AddPeer sends a command through IPC socket to connect geth to the given peer
-
-//func (s *Superviser) sendGethCommand(cmd string) (string, error) {
-//	c, err := net.Dial("unix", s.ipcFilePath)
-//	if err != nil {
-//		return "", err
-//	}
-//	defer c.Close()
-//
-//	_, err = c.Write([]byte(cmd))
-//	if err != nil {
-//		return "", err
-//	}
-//
-//	resp, err := readString(c)
-//	return resp, err
-//}
 
 func getIPAddress() string {
 	ifaces, err := net.Interfaces()

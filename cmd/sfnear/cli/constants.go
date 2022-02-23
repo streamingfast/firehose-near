@@ -5,8 +5,7 @@ const (
 	MindreaderGRPCAddr           string = ":15010"
 	NodeManagerAPIAddr           string = ":15041"
 	MindreaderNodeManagerAPIAddr string = ":15009"
-	MindreaderNodeP2PPort        string = "30305"
-	MindreaderNodeRPCPort        string = "8547"
+	ArchiveNodeManagerAPIAddr    string = ":15014"
 	MergerServingAddr            string = ":15012"
 	RelayerServingAddr           string = ":15011"
 	FirehoseGRPCServingAddr      string = ":15042"
@@ -61,12 +60,8 @@ const (
 	//DashboardHTTPListenAddr        string = ":8081"
 	//APIProxyHTTPListenAddr         string = ":8080"
 
-	//
-	//// Geth instance port definitions
-
-	NodeP2PPort string = "30303"
 	NodeRPCPort string = "3030"
-	NodeRPCAddr string = "http://localhost:3030"
+	NodeRPCAddr string = "http://localhost:" + NodeRPCPort
 
 	//devMinerAddress       string = "0x821b55d8abe79bc98f05eb675fdc50dfe796b7ab"
 )

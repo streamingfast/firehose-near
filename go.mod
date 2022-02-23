@@ -31,6 +31,7 @@ require (
 	github.com/streamingfast/sf-tools v0.0.0-20211222184149-d5ac7ff965f7
 	github.com/streamingfast/snapshotter v0.0.0-20210906180247-1ec27a37764f
 	github.com/stretchr/testify v1.7.0
+	github.com/tidwall/gjson v1.9.3 // indirect
 	go.uber.org/zap v1.19.1
 	google.golang.org/grpc v1.39.1
 	google.golang.org/protobuf v1.27.1
