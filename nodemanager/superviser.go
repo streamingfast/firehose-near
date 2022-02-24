@@ -142,23 +142,24 @@ func (s *Superviser) sendRPCCommand(content string) ([]byte, error) {
 	return body, nil
 }
 
-func (s *Superviser) getHead() (headNum uint64, headTime time.Time) {
-	resp, err := s.sendRPCCommand(`{"jsonrpc":"2.0","id":"dontcare","method":"status","params":[]}'`)
+func (s *Superviser) getHead() (headNum uint64, headID string, headTime time.Time) {
+	resp, err := s.sendRPCCommand(`{"jsonrpc":"2.0","id":"dontcare","method":"status","params":[]}`)
 	if err != nil {
 		return
 	}
-	headNum = gjson.GetBytes(resp, "result.sync_info").Uint()
-	headTime = gjson.GetBytes(resp, "result.sync_info.latest_block_height").Time()
+	headNum = gjson.GetBytes(resp, "result.sync_info.latest_block_height").Uint()
+	headID = gjson.GetBytes(resp, "result.sync_info.latest_block_hash").String()
+	headTime = gjson.GetBytes(resp, "result.sync_info.latest_block_time").Time()
 	return
 }
 
 func (s *Superviser) WatchLastBlock() {
 	for {
 		if s.IsRunning() {
-			headNum, headTime := s.getHead()
+			headNum, headID, headTime := s.getHead()
 			if headNum != 0 {
-				s.headBlockUpdateFunc(headNum, "", headTime) // used by operator and metrics
-				s.lastBlockSeen = headNum                    // exported from Superviser as LastSeenBlockNum() for backups
+				s.headBlockUpdateFunc(headNum, headID, headTime) // used by operator and metrics
+				s.lastBlockSeen = headNum                        // exported from Superviser as LastSeenBlockNum() for backups
 			}
 		}
 		time.Sleep(2 * time.Second)
