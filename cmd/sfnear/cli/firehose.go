@@ -134,6 +134,7 @@ func init() {
 				HeadTimeDriftMetric:   headTimeDriftmetric,
 				HeadBlockNumberMetric: headBlockNumMetric,
 				Tracker:               tracker,
+				TransformRegistry:     registry,
 			}), nil
 		},
 	})
