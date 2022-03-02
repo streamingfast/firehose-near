@@ -3,6 +3,7 @@ module github.com/streamingfast/sf-near
 go 1.16
 
 require (
+	github.com/RoaringBitmap/roaring v0.9.4 // indirect
 	github.com/ShinyTrinkets/overseer v0.3.0
 	github.com/abourget/llerrgroup v0.2.0 // indirect
 	github.com/golang/protobuf v1.5.2

@@ -27,6 +27,7 @@ function main() {
   pushd "$ROOT/pb" &> /dev/null
 
   generate "sf/near/codec/v1/codec.proto"
+  generate "sf/near/transforms/v1/transforms.proto"
 
   echo "generate.sh - `date` - `whoami`" > $ROOT/pb/last_generate.txt
   echo "streamingfast/proto revision: `GIT_DIR=$PROTO/.git git rev-parse HEAD`" >> $ROOT/pb/last_generate.txt
