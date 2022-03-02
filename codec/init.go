@@ -25,7 +25,6 @@ func init() {
 	bstream.GetBlockReaderFactory = bstream.BlockReaderFactoryFunc(blockReaderFactory)
 	bstream.GetBlockDecoder = bstream.BlockDecoderFunc(BlockDecoder)
 	bstream.GetProtocolFirstStreamableBlock = 3
-	bstream.GetProtocolGenesisBlock = 0
 	bstream.GetBlockWriterHeaderLen = 10
 
 	bstream.GetBlockPayloadSetter = bstream.MemoryBlockPayloadSetter

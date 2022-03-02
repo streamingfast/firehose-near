@@ -5,8 +5,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/streamingfast/sf-near/codec"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/streamingfast/bstream"
@@ -82,16 +80,6 @@ func init() {
 				grcpShutdownGracePeriod = shutdownSignalDelay - (5 * time.Second)
 			}
 
-			filterPreprocessorFactory := func(includeExpr, excludeExpr string) (bstream.PreprocessFunc, error) {
-				filter, err := codec.NewBlockFilter(includeExpr, excludeExpr)
-				if err != nil {
-					return nil, fmt.Errorf("parsing filter expressions: %w", err)
-				}
-
-				preproc := &codec.FilteringPreprocessor{Filter: filter}
-				return preproc.PreprocessBlock, nil
-			}
-
 			return firehoseApp.New(appLogger, &firehoseApp.Config{
 				BlockStoreURLs:          firehoseBlocksStoreURLs,
 				BlockStreamAddr:         blockstreamAddr,
@@ -101,10 +89,9 @@ func init() {
 			}, &firehoseApp.Modules{
 				Authenticator: authenticator,
 				//				BlockTrimmer:              blockstreamv2.BlockTrimmerFunc(trimBlock),
-				FilterPreprocessorFactory: filterPreprocessorFactory,
-				HeadTimeDriftMetric:       headTimeDriftmetric,
-				HeadBlockNumberMetric:     headBlockNumMetric,
-				Tracker:                   tracker,
+				HeadTimeDriftMetric:   headTimeDriftmetric,
+				HeadBlockNumberMetric: headBlockNumMetric,
+				Tracker:               tracker,
 			}), nil
 		},
 	})
