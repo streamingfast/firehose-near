@@ -11,7 +11,7 @@ func (x *Block) ID() string {
 	return x.Header.Hash.AsString()
 }
 
-func (x *Block) Number() uint64 {
+func (x *Block) Num() uint64 {
 	return x.Header.Height
 }
 

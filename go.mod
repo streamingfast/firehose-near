@@ -3,7 +3,7 @@ module github.com/streamingfast/sf-near
 go 1.16
 
 require (
-	github.com/RoaringBitmap/roaring v0.9.4 // indirect
+	github.com/RoaringBitmap/roaring v0.9.4
 	github.com/ShinyTrinkets/overseer v0.3.0
 	github.com/abourget/llerrgroup v0.2.0 // indirect
 	github.com/golang/protobuf v1.5.2
@@ -12,7 +12,7 @@ require (
 	github.com/mr-tron/base58 v1.2.0
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.8.1
-	github.com/streamingfast/bstream v0.0.2-0.20220301162141-6630bbe5996c
+	github.com/streamingfast/bstream v0.0.2-0.20220303152911-1db2bc621583
 	github.com/streamingfast/cli v0.0.3-0.20210811201236-5c00ec55462d
 	github.com/streamingfast/dauth v0.0.0-20210812020920-1c83ba29add1
 	github.com/streamingfast/dbin v0.0.0-20210809205249-73d5eca35dc5
@@ -22,7 +22,7 @@ require (
 	github.com/streamingfast/dmetering v0.0.0-20220301165106-a642bb6a21bd
 	github.com/streamingfast/dmetrics v0.0.0-20210811180524-8494aeb34447
 	github.com/streamingfast/dstore v0.1.1-0.20220203133825-30eb2f9c5cd3
-	github.com/streamingfast/firehose v0.1.1-0.20220301165907-a8296f77f3bd
+	github.com/streamingfast/firehose v0.1.1-0.20220303153047-161af394ee22
 	github.com/streamingfast/logging v0.0.0-20220222131651-12c3943aac2e
 	github.com/streamingfast/merger v0.0.3-0.20220301162603-c0129b6f1ad4
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d

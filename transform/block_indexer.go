@@ -14,15 +14,15 @@ type NearBlockIndexer struct {
 	BlockIndexer blockIndexer
 }
 
-func NewNearBlockIndexer(indexStore dstore.Store, indexSize uint64) *NearBlockIndexer {
-	bi := transform.NewBlockIndexer(indexStore, indexSize, ReceiptAddressIndexShortName)
+func NewNearBlockIndexer(indexStore dstore.Store, indexSize uint64, startBlock uint64) *NearBlockIndexer {
+	bi := transform.NewBlockIndexer(indexStore, indexSize, ReceiptAddressIndexShortName, transform.WithDefinedStartBlock(startBlock))
 	return &NearBlockIndexer{
 		BlockIndexer: bi,
 	}
 }
 
 func (i *NearBlockIndexer) ProcessBlock(blk *pbcodec.Block) {
-	var keyMap map[string]bool
+	keyMap := make(map[string]bool)
 	for _, shard := range blk.Shards {
 		for _, outcome := range shard.ReceiptExecutionOutcomes {
 			if outcome.Receipt.GetAction() != nil {
@@ -35,6 +35,6 @@ func (i *NearBlockIndexer) ProcessBlock(blk *pbcodec.Block) {
 		keys = append(keys, key)
 	}
 
-	i.BlockIndexer.Add(keys, blk.Number())
+	i.BlockIndexer.Add(keys, blk.Num())
 	return
 }

@@ -5,11 +5,12 @@ import (
 	"container/heap"
 	"encoding/hex"
 	"fmt"
-	"github.com/streamingfast/bstream"
 	"io"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/streamingfast/bstream"
 
 	"github.com/golang/protobuf/proto"
 	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
@@ -180,9 +181,9 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 
 	//Push new block meta
 	ctx.blockMetas.Push(&blockMeta{
-		id:           block.Header.Hash.AsBase58String(),
-		number:       block.Number(),
-		blockTime:    block.Time(),
+		id:        block.Header.Hash.AsBase58String(),
+		number:    block.Num(),
+		blockTime: block.Time(),
 	})
 
 	//Setting previous height

@@ -157,20 +157,20 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 			}
 
 			// save current id/height
-			heightMap[block.ID()] = block.Number()
+			heightMap[block.ID()] = block.Num()
 
 			prevHeight, ok := heightMap[block.PreviousID()]
 			if !ok {
 				if firstSeenBlock {
 					firstSeenBlock = false
-					zlog.Debug("skipping first block update. no prev_height data yet", zap.Uint64("block", block.Number()))
+					zlog.Debug("skipping first block update. no prev_height data yet", zap.Uint64("block", block.Num()))
 				} else {
 					return fmt.Errorf("could not find previous height for block id %s", block.ID())
 				}
 			} else {
 				// update current block prev_height
 				block.Header.PrevHeight = prevHeight
-				zlog.Debug("updated prev_height", zap.Uint64("block", block.Number()), zap.Uint64("prev_height", prevHeight))
+				zlog.Debug("updated prev_height", zap.Uint64("block", block.Num()), zap.Uint64("prev_height", prevHeight))
 			}
 
 			// encode block data
@@ -319,11 +319,11 @@ func backfillPrevHeightCheckE(cmd *cobra.Command, args []string) error {
 			prevHeight := block.Header.PrevHeight
 			if prevHeight == 0 {
 				if firstBlockSeen {
-					zlog.Debug("first block, skipping check", zap.Uint64("block", block.Number()))
+					zlog.Debug("first block, skipping check", zap.Uint64("block", block.Num()))
 					firstBlockSeen = false
 					continue
 				}
-				return fmt.Errorf("previous height not set for block number %d in file %s", block.Number(), filename)
+				return fmt.Errorf("previous height not set for block number %d in file %s", block.Num(), filename)
 			}
 		}
 

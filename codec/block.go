@@ -17,7 +17,7 @@ func BlockFromProto(b *pbcodec.Block) (*bstream.Block, error) {
 
 	block := &bstream.Block{
 		Id:             b.ID(),
-		Number:         b.Number(),
+		Number:         b.Num(),
 		PreviousId:     b.PreviousID(),
 		Timestamp:      b.Time(),
 		LibNum:         b.LIBNum(),
