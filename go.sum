@@ -631,6 +631,8 @@ github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d h1:qaIxiajgU
 github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d/go.mod h1:24+rnDf/tjrOC2ZlC3CjC5x6DWehS0LQGdDxeTXYapM=
 github.com/streamingfast/node-manager v0.0.2-0.20211029201743-0b82ab7f9de4 h1:LieKH18VsLsZh62MpU1du5w7ZZ72+UHtDq9kTSjCPv8=
 github.com/streamingfast/node-manager v0.0.2-0.20211029201743-0b82ab7f9de4/go.mod h1:h1UUzSlmRCTRrKakqzoshn0XkkFmJX/uVXGR1bofAuE=
+github.com/streamingfast/node-manager v0.0.2-0.20220303235054-feb0a534ea04 h1:AepYu8t/ylHKrKimA19vSqu4bKMiiIh7WVS+6ulme0w=
+github.com/streamingfast/node-manager v0.0.2-0.20220303235054-feb0a534ea04/go.mod h1:I2dKCYRxKFQtGeJUO5q62I+VXGYwv7SKz65+g92WpKI=
 github.com/streamingfast/opaque v0.0.0-20210811180740-0c01d37ea308 h1:xlWSfi1BoPfsHtPb0VEHGUcAdBF208LUiFCwfaVPfLA=
 github.com/streamingfast/opaque v0.0.0-20210811180740-0c01d37ea308/go.mod h1:K1p8Bj/wG34KJvYzPUqtzpndffmpkrVY11u2hkyxCWQ=
 github.com/streamingfast/pbgo v0.0.6-0.20210811160400-7c146c2db8cc/go.mod h1:mSi3+mIAffPq/McZ3TqLSmDr8f1v3mi5RHE+zmBHJGk=
@@ -646,6 +648,8 @@ github.com/streamingfast/shutter v1.5.0 h1:NpzDYzj0HVpSiDJVO/FFSL6QIK/YKOxY0gJAt
 github.com/streamingfast/shutter v1.5.0/go.mod h1:B/T6efqdeMGbGwjzPS1ToXzYZI4kDzI5/u4I+7qbjY8=
 github.com/streamingfast/snapshotter v0.0.0-20210906180247-1ec27a37764f h1:NlJN/D/1BqvKicNMyYRKUmTnEzTdVaPmeqxB6GDMel4=
 github.com/streamingfast/snapshotter v0.0.0-20210906180247-1ec27a37764f/go.mod h1:I0FiH/5qdxYiToQhFM3tfr7foRncDEeHb6KsxSg9z6s=
+github.com/streamingfast/snapshotter v0.0.0-20220303234820-951103ec4407 h1:XypgmE7DmEvKwb5iPbiDTe6/pbW9Px73XGxS0wg3IBA=
+github.com/streamingfast/snapshotter v0.0.0-20220303234820-951103ec4407/go.mod h1:I0FiH/5qdxYiToQhFM3tfr7foRncDEeHb6KsxSg9z6s=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.1.1/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.2.0/go.mod h1:qt09Ya8vawLte6SNmTgCsAVtYtaKzEcn8ATUoHMkEqE=

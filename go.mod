@@ -18,6 +18,7 @@ require (
 	github.com/streamingfast/dbin v0.0.0-20210809205249-73d5eca35dc5
 	github.com/streamingfast/derr v0.0.0-20210811180100-9138d738bcec
 	github.com/streamingfast/dgrpc v0.0.0-20220301153539-536adf71b594
+	github.com/streamingfast/dhammer v0.0.0-20210811180702-456c4cf0a840 // indirect
 	github.com/streamingfast/dlauncher v0.0.0-20211210162313-cf4aa5fc4878
 	github.com/streamingfast/dmetering v0.0.0-20220301165106-a642bb6a21bd
 	github.com/streamingfast/dmetrics v0.0.0-20210811180524-8494aeb34447
@@ -26,11 +27,11 @@ require (
 	github.com/streamingfast/logging v0.0.0-20220222131651-12c3943aac2e
 	github.com/streamingfast/merger v0.0.3-0.20220301162603-c0129b6f1ad4
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d
-	github.com/streamingfast/node-manager v0.0.2-0.20211029201743-0b82ab7f9de4
+	github.com/streamingfast/node-manager v0.0.2-0.20220303235054-feb0a534ea04
 	github.com/streamingfast/pbgo v0.0.6-0.20220228185940-1bbaafec7d8a
 	github.com/streamingfast/relayer v0.0.2-0.20220301162545-2db510359d2a
 	github.com/streamingfast/sf-tools v0.0.0-20211222184149-d5ac7ff965f7
-	github.com/streamingfast/snapshotter v0.0.0-20210906180247-1ec27a37764f
+	github.com/streamingfast/snapshotter v0.0.0-20220303234820-951103ec4407
 	github.com/stretchr/testify v1.7.0
 	github.com/tidwall/gjson v1.9.3
 	go.uber.org/zap v1.21.0
