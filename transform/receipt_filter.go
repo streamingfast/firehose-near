@@ -42,6 +42,7 @@ func BasicReceiptFilterFactory(indexStore dstore.Store, possibleIndexSizes []uin
 			f := &BasicReceiptFilter{
 				Accounts:           accountMap,
 				possibleIndexSizes: possibleIndexSizes,
+				indexStore:         indexStore,
 			}
 			return f, nil
 		},
