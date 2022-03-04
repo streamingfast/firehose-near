@@ -8,9 +8,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/streamingfast/dlauncher/flags"
-	"github.com/streamingfast/snapshotter"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/streamingfast/bstream/blockstream"
@@ -23,6 +20,7 @@ import (
 	pbbstream "github.com/streamingfast/pbgo/sf/bstream/v1"
 	pbheadinfo "github.com/streamingfast/pbgo/sf/headinfo/v1"
 	"github.com/streamingfast/sf-near/nodemanager"
+	"github.com/streamingfast/snapshotter"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"google.golang.org/grpc"
@@ -107,7 +105,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 		httpAddr := viper.GetString(flagPrefix + "manager-api-addr")
 		backupConfigs := viper.GetStringSlice(flagPrefix + "backups")
 
-		backupModules, backupSchedules, err := parseBackupConfigs(*appLogger, backupConfigs, map[string]operator.BackupModuleFactory{
+		backupModules, backupSchedules, err := operator.ParseBackupConfigs(*appLogger, backupConfigs, map[string]operator.BackupModuleFactory{
 			"gke-volume-snapshot": gkeSnapshotterFactory,
 		})
 
@@ -344,43 +342,6 @@ func replaceNodeRole(nodeRole, in string) string {
 
 func replaceHostname(hostname, in string) string {
 	return strings.Replace(in, "{hostname}", hostname, -1)
-}
-
-func parseBackupConfigs(logger *zap.Logger, backupConfigs []string, backupModuleFactories map[string]operator.BackupModuleFactory) (mods map[string]operator.BackupModule, scheds []*operator.BackupSchedule, err error) {
-	logger.Info("parsing backup configs", zap.Strings("configs", backupConfigs), zap.Int("factory_count", len(backupModuleFactories)))
-	for key := range backupModuleFactories {
-		logger.Info("parsing backup known factory", zap.String("name", key))
-	}
-
-	mods = make(map[string]operator.BackupModule)
-	for _, confStr := range backupConfigs {
-		conf, err := flags.ParseKVConfigString(confStr)
-		if err != nil {
-			return nil, nil, err
-		}
-
-		t := conf["type"]
-		factory, found := backupModuleFactories[t]
-		if !found {
-			return nil, nil, fmt.Errorf("unknown backup module type %q", t)
-		}
-
-		mods[t], err = factory(conf)
-		if err != nil {
-			return nil, nil, fmt.Errorf("backup module %q factory: %w", t, err)
-		}
-
-		if conf["freq-blocks"] != "" || conf["freq-time"] != "" {
-			newSched, err := operator.NewBackupSchedule(conf["freq-blocks"], conf["freq-time"], conf["required-hostname"], t)
-			if err != nil {
-				return nil, nil, fmt.Errorf("error setting up backup schedule for %s, %w", t, err)
-			}
-
-			scheds = append(scheds, newSched)
-		}
-
-	}
-	return
 }
 
 func gkeSnapshotterFactory(conf operator.BackupModuleConfig) (operator.BackupModule, error) {

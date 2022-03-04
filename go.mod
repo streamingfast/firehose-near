@@ -27,7 +27,7 @@ require (
 	github.com/streamingfast/logging v0.0.0-20220222131651-12c3943aac2e
 	github.com/streamingfast/merger v0.0.3-0.20220301162603-c0129b6f1ad4
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d
-	github.com/streamingfast/node-manager v0.0.2-0.20220303235054-feb0a534ea04
+	github.com/streamingfast/node-manager v0.0.2-0.20220304000605-53b995bb111e
 	github.com/streamingfast/pbgo v0.0.6-0.20220228185940-1bbaafec7d8a
 	github.com/streamingfast/relayer v0.0.2-0.20220301162545-2db510359d2a
 	github.com/streamingfast/sf-tools v0.0.0-20211222184149-d5ac7ff965f7
