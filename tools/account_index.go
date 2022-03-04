@@ -18,6 +18,7 @@ import (
 	"context"
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/spf13/cobra"
@@ -59,7 +60,9 @@ func toIndexFilename(bundleSize, baseBlockNum uint64, shortname string) string {
 func skipToNextUnindexed(ctx context.Context, blockNum uint64, possibleIndexSizes []uint64, shortName string, store dstore.Store) (next uint64) {
 	next = blockNum
 
-	for {
+	var skippedCount int
+	now := time.Now()
+	for i := 0; ; i++ {
 		var found bool
 		for _, size := range possibleIndexSizes {
 			base := lowBoundary(next, size)
@@ -71,7 +74,13 @@ func skipToNextUnindexed(ctx context.Context, blockNum uint64, possibleIndexSize
 			}
 			if exists {
 				found = true
+				skippedCount++
+				if time.Since(now) > time.Second*3 {
+					zlog.Info("looking for end of existing range...", zap.Uint64("last_found", base), zap.Uint64("index_size", size), zap.Int("skipped indexes", skippedCount))
+					now = time.Now()
+				}
 				next = base + size
+				zlog.Debug("skipping to next range...", zap.Uint64("next", next), zap.Uint64("index_size", size))
 				break
 			}
 		}
