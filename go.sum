@@ -655,8 +655,9 @@ github.com/streamingfast/opaque v0.0.0-20210811180740-0c01d37ea308/go.mod h1:K1p
 github.com/streamingfast/pbgo v0.0.6-0.20210811160400-7c146c2db8cc/go.mod h1:mSi3+mIAffPq/McZ3TqLSmDr8f1v3mi5RHE+zmBHJGk=
 github.com/streamingfast/pbgo v0.0.6-0.20210812023556-e996f9c4fb86/go.mod h1:XKLPtwRtO9JRVfcymM8IIHiJTVIERR+O8uBbdOol3l0=
 github.com/streamingfast/pbgo v0.0.6-0.20211209212750-753f0acb6553/go.mod h1:fobYEIfCKwPOY+VLX7HXBVuhrn+iZrzujKrpCgfG3+Q=
-github.com/streamingfast/pbgo v0.0.6-0.20220228185940-1bbaafec7d8a h1:PM5DDR1KTcesYkHhLg5UkodBlXYytFmiHvaSIsSBabY=
 github.com/streamingfast/pbgo v0.0.6-0.20220228185940-1bbaafec7d8a/go.mod h1:huKwfgTGFIFZMKSVbD5TywClM7zAeBUG/zePZMqvXQQ=
+github.com/streamingfast/pbgo v0.0.6-0.20220304191603-f73822f471ff h1:5TLhw8wM95iyTTdpaGHm1TMml4Xy2ZoL/eK9zjaU0FI=
+github.com/streamingfast/pbgo v0.0.6-0.20220304191603-f73822f471ff/go.mod h1:huKwfgTGFIFZMKSVbD5TywClM7zAeBUG/zePZMqvXQQ=
 github.com/streamingfast/relayer v0.0.2-0.20220301162545-2db510359d2a h1:FQb3m3X8catNkka0hO+872lfYJ8ORK7X++Z0qTCqjKo=
 github.com/streamingfast/relayer v0.0.2-0.20220301162545-2db510359d2a/go.mod h1:yGMMytaxZSa0WdUFRMCxll5h0a2yYWmmUk2in93EliE=
 github.com/streamingfast/sf-tools v0.0.0-20211222184149-d5ac7ff965f7 h1:d2XZV9/Rz6stOP3b1wiGlbY0PTtDEmrXtvTO3MV1YQ0=

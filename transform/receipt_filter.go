@@ -5,7 +5,7 @@ import (
 
 	"github.com/streamingfast/dstore"
 	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
-	pbtransforms "github.com/streamingfast/sf-near/pb/sf/near/transforms/v1"
+	pbtransform "github.com/streamingfast/sf-near/pb/sf/near/transform/v1"
 
 	"google.golang.org/protobuf/types/known/anypb"
 
@@ -14,18 +14,18 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var ReceiptFilterMessageName = proto.MessageName(&pbtransforms.BasicReceiptFilter{})
+var ReceiptFilterMessageName = proto.MessageName(&pbtransform.BasicReceiptFilter{})
 
 func BasicReceiptFilterFactory(indexStore dstore.Store, possibleIndexSizes []uint64) *transform.Factory {
 	return &transform.Factory{
-		Obj: &pbtransforms.BasicReceiptFilter{},
+		Obj: &pbtransform.BasicReceiptFilter{},
 		NewFunc: func(message *anypb.Any) (transform.Transform, error) {
 			mname := message.MessageName()
 			if mname != ReceiptFilterMessageName {
 				return nil, fmt.Errorf("expected type url %q, received %q", ReceiptFilterMessageName, message.TypeUrl)
 			}
 
-			filter := &pbtransforms.BasicReceiptFilter{}
+			filter := &pbtransform.BasicReceiptFilter{}
 			err := proto.Unmarshal(message.Value, filter)
 			if err != nil {
 				return nil, fmt.Errorf("unexpected unmarshall error: %w", err)
