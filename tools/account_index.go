@@ -18,7 +18,6 @@ import (
 	"context"
 	"fmt"
 	"strconv"
-	"time"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/spf13/cobra"
@@ -55,39 +54,6 @@ func lowBoundary(i uint64, mod uint64) uint64 {
 
 func toIndexFilename(bundleSize, baseBlockNum uint64, shortname string) string {
 	return fmt.Sprintf("%010d.%d.%s.idx", baseBlockNum, bundleSize, shortname)
-}
-
-func skipToNextUnindexed(ctx context.Context, blockNum uint64, possibleIndexSizes []uint64, shortName string, store dstore.Store) (next uint64) {
-	next = blockNum
-
-	var skippedCount int
-	now := time.Now()
-	for i := 0; ; i++ {
-		var found bool
-		for _, size := range possibleIndexSizes {
-			base := lowBoundary(next, size)
-			filename := toIndexFilename(size, base, shortName)
-
-			exists, err := store.FileExists(ctx, filename)
-			if err != nil && err != dstore.ErrNotFound {
-				zlog.Warn("store lookup returned an error", zap.Error(err))
-			}
-			if exists {
-				found = true
-				skippedCount++
-				if time.Since(now) > time.Second*3 {
-					zlog.Info("looking for end of existing range...", zap.Uint64("last_found", base), zap.Uint64("index_size", size), zap.Int("skipped indexes", skippedCount))
-					now = time.Now()
-				}
-				next = base + size
-				zlog.Debug("skipping to next range...", zap.Uint64("next", next), zap.Uint64("index_size", size))
-				break
-			}
-		}
-		if !found {
-			return
-		}
-	}
 }
 
 func generateAccIdxE(cmd *cobra.Command, args []string) error {
@@ -174,14 +140,22 @@ func generateAccIdxE(cmd *cobra.Command, args []string) error {
 
 	ctx := context.Background()
 
-	irrStart := skipToNextUnindexed(ctx, uint64(startBlockNum), irrIdxSizes, "irr", irrIndexStore)
-	accStart := skipToNextUnindexed(ctx, uint64(startBlockNum), lookupAccountIdxSizes, transform.ReceiptAddressIndexShortName, accountIndexStore)
+	var irrStart uint64
+	done := make(chan struct{})
+	go func() { // both checks in parallel
+		irrStart = bstransform.FindNextUnindexed(ctx, uint64(startBlockNum), irrIdxSizes, "irr", irrIndexStore)
+		close(done)
+	}()
+	accStart := bstransform.FindNextUnindexed(ctx, uint64(startBlockNum), lookupAccountIdxSizes, transform.ReceiptAddressIndexShortName, accountIndexStore)
+	<-done
 
 	if irrStart < accStart {
 		startBlockNum = irrStart
 	} else {
 		startBlockNum = accStart
 	}
+
+	zlog.Info("resolved next unindexed regions", zap.Uint64("account_start", accStart), zap.Uint64("irreversible_start", irrStart), zap.Uint64("resolved_start", startBlockNum))
 	var irreversibleIndexer *bstransform.IrreversibleBlocksIndexer
 	if createIrr {
 		irreversibleIndexer = bstransform.NewIrreversibleBlocksIndexer(irrIndexStore, irrIdxSizes, bstransform.IrrWithDefinedStartBlock(startBlockNum))
