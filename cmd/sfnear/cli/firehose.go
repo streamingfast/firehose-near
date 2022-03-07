@@ -86,7 +86,7 @@ func init() {
 			}
 
 			shutdownSignalDelay := viper.GetDuration("common-system-shutdown-signal-delay")
-			grcpShutdownGracePeriod := time.Duration(0)
+			grcpShutdownGracePeriod := time.Second // we don't want 0 here
 			if shutdownSignalDelay.Seconds() > 5 {
 				grcpShutdownGracePeriod = shutdownSignalDelay - (5 * time.Second)
 			}
