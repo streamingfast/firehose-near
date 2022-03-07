@@ -106,7 +106,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 		backupConfigs := viper.GetStringSlice(flagPrefix + "backups")
 
 		backupModules, backupSchedules, err := operator.ParseBackupConfigs(*appLogger, backupConfigs, map[string]operator.BackupModuleFactory{
-			"gke-volume-snapshot": gkeSnapshotterFactory,
+			"gke-pvc-snapshot": gkeSnapshotterFactory,
 		})
 
 		if err != nil {
