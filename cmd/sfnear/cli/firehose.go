@@ -85,12 +85,6 @@ func init() {
 				firehoseBlocksStoreURLs[i] = mustReplaceDataDir(sfDataDir, url)
 			}
 
-			shutdownSignalDelay := viper.GetDuration("common-system-shutdown-signal-delay")
-			grcpShutdownGracePeriod := time.Second // we don't want 0 here
-			if shutdownSignalDelay.Seconds() > 5 {
-				grcpShutdownGracePeriod = shutdownSignalDelay - (5 * time.Second)
-			}
-
 			indexStoreUrl := viper.GetString("firehose-block-index-url")
 			var indexStore dstore.Store
 			if indexStoreUrl != "" {
@@ -124,7 +118,7 @@ func init() {
 				BlockStoreURLs:                  firehoseBlocksStoreURLs,
 				BlockStreamAddr:                 blockstreamAddr,
 				GRPCListenAddr:                  viper.GetString("firehose-grpc-listen-addr"),
-				GRPCShutdownGracePeriod:         grcpShutdownGracePeriod,
+				GRPCShutdownGracePeriod:         time.Second,
 				IrreversibleBlocksIndexStoreURL: viper.GetString("firehose-irreversible-blocks-index-url"),
 				IrreversibleBlocksBundleSizes:   possibleIrreversibleIndexSizes,
 				RealtimeTolerance:               viper.GetDuration("firehose-real-time-tolerance"),
