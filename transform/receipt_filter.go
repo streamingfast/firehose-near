@@ -56,6 +56,10 @@ type BasicReceiptFilter struct {
 	possibleIndexSizes []uint64
 }
 
+func (p *BasicReceiptFilter) String() string {
+	return fmt.Sprintf("%v", p.Accounts)
+}
+
 func (p *BasicReceiptFilter) Transform(readOnlyBlk *bstream.Block, in transform.Input) (transform.Output, error) {
 	nearBlock := readOnlyBlk.ToProtocol().(*pbcodec.Block)
 	var outShards []*pbcodec.IndexerShard
