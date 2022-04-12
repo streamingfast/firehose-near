@@ -16,6 +16,7 @@ package codec
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/streamingfast/bstream"
 	"io"
 	"io/ioutil"
 	"os"
@@ -25,7 +26,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/golang/protobuf/proto"
 	"github.com/streamingfast/logging"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -35,14 +35,14 @@ func init() {
 	logging.TestingOverride()
 }
 
-type ObjectReader func() (interface{}, error)
+type ObjectReader func() (*bstream.Block, error)
 
 //func TestReadRealBlock(t *testing.T) {
 //	fl := strings.NewReader(dmlogblock)
 //	cr := testReaderConsoleReader(t, make(chan string, 10000), func() {})
 //	cr.ProcessData(fl)
 //
-//	r, err := cr.Read()
+//	r, err := cr.ReadBlock()
 //	assert.NoError(t, err)
 //	fmt.Println(r)
 //}
@@ -68,12 +68,15 @@ func TestParseFromFile(t *testing.T) {
 			buf.Write([]byte("["))
 
 			for first := true; true; first = false {
-				var reader ObjectReader = cr.Read
+				var reader ObjectReader = cr.ReadBlock
 				out, err := reader()
-				if v, ok := out.(proto.Message); ok && !isNil(v) {
+				if out != nil {
 					if !first {
 						buf.Write([]byte(","))
 					}
+
+					v, err := BlockDecoder(out)
+					require.NoError(t, err)
 
 					// FIXMME: jsonpb needs to be updated to latest version of used gRPC
 					//         elements. We are disaligned and using that breaks now.
@@ -85,7 +88,7 @@ func TestParseFromFile(t *testing.T) {
 					value, err := json.MarshalIndent(v, "", "  ")
 					require.NoError(t, err)
 
-					buf.Write([]byte(value))
+					buf.Write(value)
 				}
 
 				if err == io.EOF {

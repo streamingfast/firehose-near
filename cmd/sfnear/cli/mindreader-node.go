@@ -16,7 +16,6 @@ package cli
 
 import (
 	"context"
-	"fmt"
 	"math"
 	"time"
 
@@ -26,7 +25,6 @@ import (
 	nodeManager "github.com/streamingfast/node-manager"
 	"github.com/streamingfast/node-manager/mindreader"
 	"github.com/streamingfast/sf-near/codec"
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 	"go.uber.org/zap"
 )
 
@@ -78,13 +76,8 @@ func getMindreaderLogPlugin(
 		return codec.NewConsoleReader(lines, NodeRPCAddr)
 	}
 
-	consoleReaderTransformer := func(obj interface{}) (*bstream.Block, error) {
-		blk, ok := obj.(*pbcodec.Block)
-		if !ok {
-			return nil, fmt.Errorf("expected *pbcodec.Block, got %T", obj)
-		}
-
-		return codec.BlockFromProto(blk)
+	consoleReaderTransformer := func(obj *bstream.Block) (*bstream.Block, error) {
+		return obj, nil
 	}
 
 	return mindreader.NewMindReaderPlugin(

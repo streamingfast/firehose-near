@@ -85,7 +85,7 @@ type parseCtx struct {
 	stats      *parsingStats
 }
 
-func (r *ConsoleReader) Read() (out interface{}, err error) {
+func (r *ConsoleReader) ReadBlock() (out *bstream.Block, err error) {
 	return r.next(readBlock)
 }
 
@@ -93,7 +93,7 @@ const (
 	readBlock = 1
 )
 
-func (r *ConsoleReader) next(readType int) (out interface{}, err error) {
+func (r *ConsoleReader) next(readType int) (out *bstream.Block, err error) {
 	ctx := r.ctx
 
 	zlog.Debug("next", zap.Int("read_type", readType))
@@ -155,7 +155,7 @@ func (r *ConsoleReader) buildScanner(reader io.Reader) *bufio.Scanner {
 
 // Formats
 // DMLOG BLOCK <NUM> <HASH> <PROTO_HEX>
-func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
+func (ctx *parseCtx) readBlock(line string) (*bstream.Block, error) {
 	chunks, err := SplitInChunks(line, 4)
 	if err != nil {
 		return nil, fmt.Errorf("split: %s", err)
@@ -217,7 +217,8 @@ func (ctx *parseCtx) readBlock(line string) (*pbcodec.Block, error) {
 		}
 		heap.Pop(ctx.blockMetas)
 	}
-	return block, err
+
+	return BlockFromProto(block)
 }
 
 // splitInChunks split the line in `count` chunks and returns the slice `chunks[1:count]` (so exclusive end), but verifies

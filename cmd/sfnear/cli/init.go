@@ -7,7 +7,6 @@ import (
 
 var initCmd = &cobra.Command{Use: "init", Short: "Initializes streaming fast's local environment", RunE: dfuseInitE}
 
-
 func init() {
 	RootCmd.AddCommand(initCmd)
 }
