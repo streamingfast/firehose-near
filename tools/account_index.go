@@ -157,6 +157,11 @@ func generateAccIdxE(cmd *cobra.Command, args []string) error {
 	}
 
 	zlog.Info("resolved next unindexed regions", zap.Uint64("account_start", accStart), zap.Uint64("irreversible_start", irrStart), zap.Uint64("resolved_start", startBlockNum))
+
+	if stopBlockNum != 0 && startBlockNum > stopBlockNum {
+		zlog.Info("resolved start block higher than stop block: nothing to do")
+		return nil
+	}
 	var irreversibleIndexer *bstransform.IrreversibleBlocksIndexer
 	if createIrr {
 		irreversibleIndexer = bstransform.NewIrreversibleBlocksIndexer(irrIndexStore, irrIdxSizes, bstransform.IrrWithDefinedStartBlock(startBlockNum))
