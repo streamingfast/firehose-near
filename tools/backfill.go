@@ -79,7 +79,7 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 	var baseNum32 uint32
 	heightMap := make(map[string]uint64)
 
-	err = inputBlocksStore.Walk(ctx, walkPrefix, ".tmp", func(filename string) (err error) {
+	err = inputBlocksStore.Walk(ctx, walkPrefix, func(filename string) (err error) {
 		match := numberRegex.FindStringSubmatch(filename)
 		if match == nil {
 			zlog.Debug("file does not match pattern", zap.String("filename", filename))
@@ -257,7 +257,7 @@ func backfillPrevHeightCheckE(cmd *cobra.Command, args []string) error {
 	var baseNum32 uint32
 	firstBlockSeen := true
 
-	err = inputBlocksStore.Walk(ctx, walkPrefix, ".tmp", func(filename string) (err error) {
+	err = inputBlocksStore.Walk(ctx, walkPrefix, func(filename string) (err error) {
 		match := numberRegex.FindStringSubmatch(filename)
 		if match == nil {
 			return nil

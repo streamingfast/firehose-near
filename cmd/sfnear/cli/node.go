@@ -26,6 +26,12 @@ import (
 	"google.golang.org/grpc"
 )
 
+var archiveNodeLogger, _ = logging.PackageLogger("archive.node", "github.com/streamingfast/sf-near/archive/node")
+var archiveAppLogger, archiveAppTracer = logging.PackageLogger("archive", "github.com/streamingfast/sf-near/archive")
+
+var mindreaderNodeLogger, _ = logging.PackageLogger("mindreader.node", "github.com/streamingfast/sf-near/mindreader/node")
+var mindreaderAppLogger, mindreaderAppTracer = logging.PackageLogger("mindreader", "github.com/streamingfast/sf-near/mindreader")
+
 func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAddr string) {
 	defaultBin := "neard"
 	if strings.Contains(flagPrefix, "mindreader") {
@@ -45,17 +51,25 @@ func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAd
 }
 
 func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) error, managerAPIaddr string) {
-	if kind != "mindreader" && kind != "archive" {
+	var appLogger *zap.Logger
+	var nodeLogger *zap.Logger
+	var appTracer logging.Tracer
+	switch kind {
+	case "mindreader":
+		appLogger = mindreaderAppLogger
+		nodeLogger = mindreaderNodeLogger
+		appTracer = mindreaderAppTracer
+	case "archive":
+		appLogger = archiveAppLogger
+		nodeLogger = archiveNodeLogger
+		appTracer = archiveAppTracer
+
+	default:
 		panic(fmt.Errorf("invalid kind value, must be either 'mindreader' or 'archive', got %q", kind))
 	}
 
 	app := fmt.Sprintf("%s-node", kind)
 	flagPrefix := fmt.Sprintf("%s-", app)
-	appLogger := zap.NewNop()
-	nodeLogger := zap.NewNop()
-
-	logging.Register(fmt.Sprintf("github.com/streamingfast/sf-near/%s", app), &appLogger)
-	logging.Register(fmt.Sprintf("github.com/streamingfast/sf-near/%s/node", app), &nodeLogger)
 
 	launcher.RegisterApp(&launcher.AppDef{
 		ID:          app,
@@ -74,12 +88,12 @@ func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) er
 		InitFunc: func(runtime *launcher.Runtime) error {
 			return nil
 		},
-		FactoryFunc: nodeFactoryFunc(flagPrefix, kind, &appLogger, &nodeLogger),
+		FactoryFunc: nodeFactoryFunc(flagPrefix, kind, appLogger, nodeLogger, appTracer),
 	})
 
 }
 
-func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger) func(*launcher.Runtime) (launcher.App, error) {
+func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger, appTracer logging.Tracer) func(*launcher.Runtime) (launcher.App, error) {
 	return func(runtime *launcher.Runtime) (launcher.App, error) {
 		sfDataDir := runtime.AbsDataDir
 		hostname, _ := os.Hostname()
@@ -105,7 +119,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 		httpAddr := viper.GetString(flagPrefix + "manager-api-addr")
 		backupConfigs := viper.GetStringSlice(flagPrefix + "backups")
 
-		backupModules, backupSchedules, err := operator.ParseBackupConfigs(*appLogger, backupConfigs, map[string]operator.BackupModuleFactory{
+		backupModules, backupSchedules, err := operator.ParseBackupConfigs(appLogger, backupConfigs, map[string]operator.BackupModuleFactory{
 			"gke-pvc-snapshot": gkeSnapshotterFactory,
 		})
 
@@ -135,8 +149,8 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 			metricsAndReadinessManager.UpdateHeadBlock,
 			debugDeepMind,
 			logToZap,
-			*appLogger,
-			*nodeLogger,
+			appLogger,
+			nodeLogger,
 		)
 
 		bootstrapper := &bootstrapper{
@@ -147,7 +161,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 		}
 
 		chainOperator, err := operator.New(
-			*appLogger,
+			appLogger,
 			superviser,
 			metricsAndReadinessManager,
 			&operator.Options{
@@ -177,41 +191,36 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 			}, &nodeManagerApp.Modules{
 				Operator:                   chainOperator,
 				MetricsAndReadinessManager: metricsAndReadinessManager,
-			}, *appLogger), nil
+			}, appLogger), nil
 		}
 
-		blockStreamServer := blockstream.NewUnmanagedServer(blockstream.ServerOptionWithLogger(*appLogger))
+		blockStreamServer := blockstream.NewUnmanagedServer(blockstream.ServerOptionWithLogger(appLogger))
 		oneBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-oneblock-store-url"))
 		mergedBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-blocks-store-url"))
 		workingDir := mustReplaceDataDir(sfDataDir, viper.GetString("mindreader-node-working-dir"))
 		gprcListenAdrr := viper.GetString("mindreader-node-grpc-listen-addr")
-		mergeAndStoreDirectly := viper.GetBool("mindreader-node-merge-and-store-directly")
-		mergeThresholdBlockAge := viper.GetDuration("mindreader-node-merge-threshold-block-age")
+		mergeThresholdBlockAge := viper.GetString("mindreader-node-merge-threshold-block-age")
 		batchStartBlockNum := viper.GetUint64("mindreader-node-start-block-num")
 		batchStopBlockNum := viper.GetUint64("mindreader-node-stop-block-num")
 		waitTimeForUploadOnShutdown := viper.GetDuration("mindreader-node-wait-upload-complete-on-shutdown")
 		oneBlockFileSuffix := viper.GetString("mindreader-node-oneblock-suffix")
 		blocksChanCapacity := viper.GetInt("mindreader-node-blocks-chan-capacity")
 
-		tracker := runtime.Tracker.Clone()
-
 		mindreaderPlugin, err := getMindreaderLogPlugin(
 			blockStreamServer,
 			oneBlockStoreURL,
 			mergedBlockStoreURL,
-			mergeAndStoreDirectly,
 			mergeThresholdBlockAge,
 			workingDir,
 			batchStartBlockNum,
 			batchStopBlockNum,
 			blocksChanCapacity,
-			false,
 			waitTimeForUploadOnShutdown,
 			oneBlockFileSuffix,
 			chainOperator.Shutdown,
 			metricsAndReadinessManager,
-			tracker,
-			*appLogger,
+			appLogger,
+			appTracer,
 		)
 		if err != nil {
 			return nil, fmt.Errorf("new mindreader plugin: %w", err)
@@ -232,7 +241,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger **zap.Logger
 
 				return nil
 			},
-		}, *appLogger), nil
+		}, appLogger), nil
 	}
 }
 

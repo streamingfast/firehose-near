@@ -15,13 +15,11 @@
 package cli
 
 import (
-	"context"
-	"math"
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/streamingfast/bstream"
 	"github.com/streamingfast/bstream/blockstream"
+	"github.com/streamingfast/logging"
 	nodeManager "github.com/streamingfast/node-manager"
 	"github.com/streamingfast/node-manager/mindreader"
 	"github.com/streamingfast/sf-near/codec"
@@ -42,7 +40,7 @@ func registerMindreaderNodeFlags(cmd *cobra.Command) error {
 	cmd.Flags().Int("mindreader-node-blocks-chan-capacity", 100, "Capacity of the channel holding blocks read by the mindreader. Process will shutdown superviser/geth if the channel gets over 90% of that capacity to prevent horrible consequences. Raise this number when processing tiny blocks very quickly")
 	cmd.Flags().String("mindreader-node-oneblock-suffix", "default", "Unique identifier for that mindreader, so that it can produce 'oneblock files' in the same store as another instance without competing for writes.")
 	cmd.Flags().Duration("mindreader-node-wait-upload-complete-on-shutdown", 30*time.Second, "When the mindreader is shutting down, it will wait up to that amount of time for the archiver to finish uploading the blocks before leaving anyway")
-	cmd.Flags().Duration("mindreader-node-merge-threshold-block-age", time.Duration(math.MaxInt64), "When processing blocks with a blocktime older than this threshold, they will be automatically merged")
+	cmd.Flags().String("mindreader-node-merge-threshold-block-age", "24h", "When processing blocks with a blocktime older than this threshold, they will be automatically merged (you can also use \"always\" or \"never\")")
 
 	return nil
 }
@@ -51,44 +49,29 @@ func getMindreaderLogPlugin(
 	blockStreamServer *blockstream.Server,
 	oneBlockStoreURL string,
 	mergedBlockStoreURL string,
-	mergeAndStoreDirectly bool,
-	mergeThresholdBlockAge time.Duration,
+	mergeThresholdBlockAge string,
 	workingDir string,
 	batchStartBlockNum uint64,
 	batchStopBlockNum uint64,
 	blocksChanCapacity int,
-	failOnNonContiguousBlock bool,
 	waitTimeForUploadOnShutdown time.Duration,
 	oneBlockFileSuffix string,
 	operatorShutdownFunc func(error),
 	metricsAndReadinessManager *nodeManager.MetricsAndReadinessManager,
-	tracker *bstream.Tracker,
 	appLogger *zap.Logger,
+	appTracer logging.Tracer,
 ) (*mindreader.MindReaderPlugin, error) {
-	// blockmetaAddr := viper.GetString("common-blockmeta-addr")
-	tracker.AddGetter(bstream.NetworkLIBTarget, func(ctx context.Context) (bstream.BlockRef, error) {
-		// FIXME: Need to re-enable the tracker through blockmeta later on (see commented code below), might need to tweak some stuff to make mindreader work...
-		return bstream.BlockRefEmpty, nil
-	})
-	// tracker.AddGetter(bstream.NetworkLIBTarget, bstream.NetworkLIBBlockRefGetter(blockmetaAddr))
 
 	consoleReaderFactory := func(lines chan string) (mindreader.ConsolerReader, error) {
 		return codec.NewConsoleReader(lines, NodeRPCAddr)
 	}
 
-	consoleReaderTransformer := func(obj *bstream.Block) (*bstream.Block, error) {
-		return obj, nil
-	}
-
 	return mindreader.NewMindReaderPlugin(
 		oneBlockStoreURL,
 		mergedBlockStoreURL,
-		mergeAndStoreDirectly,
 		mergeThresholdBlockAge,
 		workingDir,
 		consoleReaderFactory,
-		consoleReaderTransformer,
-		tracker,
 		batchStartBlockNum,
 		batchStopBlockNum,
 		blocksChanCapacity,
@@ -96,10 +79,10 @@ func getMindreaderLogPlugin(
 		func(error) {
 			operatorShutdownFunc(nil)
 		},
-		failOnNonContiguousBlock,
 		waitTimeForUploadOnShutdown,
 		oneBlockFileSuffix,
 		blockStreamServer,
 		appLogger,
+		appTracer,
 	)
 }

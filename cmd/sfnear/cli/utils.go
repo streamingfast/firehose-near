@@ -25,8 +25,11 @@ import (
 	"github.com/lithammer/dedent"
 	"github.com/logrusorgru/aurora"
 	"github.com/streamingfast/dstore"
+	"github.com/streamingfast/logging"
 	"go.uber.org/zap"
 )
+
+var DefaultLevelInfo = logging.LoggerDefaultLevel(zap.InfoLevel)
 
 func mustReplaceDataDir(dataDir, in string) string {
 	d, err := filepath.Abs(dataDir)

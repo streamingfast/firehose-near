@@ -22,10 +22,10 @@ func NewNearBlockIndexProvider(
 }
 
 func getFilterFunc(accounts map[string]bool) func(transform.BitmapGetter) []uint64 {
-	return func(getBitmap transform.BitmapGetter) (matchingBlocks []uint64) {
+	return func(bitmaps transform.BitmapGetter) (matchingBlocks []uint64) {
 		out := roaring64.NewBitmap()
 		for a := range accounts {
-			if bm := getBitmap(a); bm != nil {
+			if bm := bitmaps.Get(a); bm != nil {
 				out.Or(bm)
 			}
 		}

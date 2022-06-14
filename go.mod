@@ -11,9 +11,9 @@ require (
 	github.com/lithammer/dedent v1.1.0
 	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/mr-tron/base58 v1.2.0
-	github.com/spf13/cobra v1.2.1
+	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.8.1
-	github.com/streamingfast/bstream v0.0.2-0.20220422191302-97360ce7e422
+	github.com/streamingfast/bstream v0.0.2-0.20220614134008-8e1d8f2e3fba
 	github.com/streamingfast/cli v0.0.3-0.20210811201236-5c00ec55462d
 	github.com/streamingfast/dauth v0.0.0-20210812020920-1c83ba29add1
 	github.com/streamingfast/dbin v0.0.0-20210809205249-73d5eca35dc5
@@ -22,15 +22,15 @@ require (
 	github.com/streamingfast/dlauncher v0.0.0-20211210162313-cf4aa5fc4878
 	github.com/streamingfast/dmetering v0.0.0-20220301165106-a642bb6a21bd
 	github.com/streamingfast/dmetrics v0.0.0-20210811180524-8494aeb34447
-	github.com/streamingfast/dstore v0.1.1-0.20220315134935-980696943a79
+	github.com/streamingfast/dstore v0.1.1-0.20220607202639-35118aeaf648
 	github.com/streamingfast/firehose v0.1.1-0.20220331194041-2bf2b9689682
 	github.com/streamingfast/logging v0.0.0-20220304214715-bc750a74b424
-	github.com/streamingfast/merger v0.0.3-0.20220412144000-3ad818763ec5
+	github.com/streamingfast/merger v0.0.3-0.20220510150626-2e0bad630abf
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d
-	github.com/streamingfast/node-manager v0.0.2-0.20220412154458-7cacfb2b8560
-	github.com/streamingfast/pbgo v0.0.6-0.20220304191603-f73822f471ff
+	github.com/streamingfast/node-manager v0.0.2-0.20220607203459-eb51a943d516
+	github.com/streamingfast/pbgo v0.0.6-0.20220428192744-f80aee7d4688
 	github.com/streamingfast/relayer v0.0.2-0.20220301162545-2db510359d2a
-	github.com/streamingfast/sf-tools v0.0.0-20220401210238-2ed0d760a4c5
+	github.com/streamingfast/sf-tools v0.0.0-20220607203155-f40739ab46fc
 	github.com/streamingfast/snapshotter v0.0.0-20220303234820-951103ec4407
 	github.com/stretchr/testify v1.7.0
 	github.com/tidwall/gjson v1.9.3
