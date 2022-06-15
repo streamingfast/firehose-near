@@ -32,8 +32,8 @@ func BasicReceiptFilterFactory(indexStore dstore.Store, possibleIndexSizes []uin
 				return nil, fmt.Errorf("unexpected unmarshall error: %w", err)
 			}
 
-			if len(filter.Accounts) == 0 {
-				return nil, fmt.Errorf("a basic account filter requires at least one account")
+			if len(filter.Accounts) == 0 && len(filter.PrefixAndSuffixPairs) == 0 {
+				return nil, fmt.Errorf("a basic account filter requires at least one account or one prefix/suffix pair")
 			}
 
 			accountMap := make(map[string]bool)
@@ -65,7 +65,7 @@ type BasicReceiptFilter struct {
 }
 
 func (p *BasicReceiptFilter) String() string {
-	return fmt.Sprintf("%v", p.Accounts)
+	return fmt.Sprintf("accounts: %v, prefix/suffix: %v", p.Accounts, p.PrefixSuffixPairs)
 }
 
 func matchesPrefixSuffix(receiverID string, prefixSuffixPairs []*pbtransform.PrefixSuffixPair) bool {
@@ -109,7 +109,7 @@ func (p *BasicReceiptFilter) GetIndexProvider() bstream.BlockIndexProvider {
 		return nil
 	}
 
-	if len(p.Accounts) == 0 {
+	if len(p.Accounts) == 0 && len(p.PrefixSuffixPairs) == 0 {
 		return nil
 	}
 
