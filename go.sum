@@ -613,6 +613,8 @@ github.com/streamingfast/bstream v0.0.2-0.20220422191302-97360ce7e422/go.mod h1:
 github.com/streamingfast/bstream v0.0.2-0.20220607202937-611660228ea2/go.mod h1:0sqqhWoeKV+YXP31unQHjAPNssh0YUrN9rbo7s3Jkl0=
 github.com/streamingfast/bstream v0.0.2-0.20220614134008-8e1d8f2e3fba h1:vkLtp7EFLqAZiTJ3lBg3o0/l7nFGYm79I1obO1LNSYs=
 github.com/streamingfast/bstream v0.0.2-0.20220614134008-8e1d8f2e3fba/go.mod h1:0sqqhWoeKV+YXP31unQHjAPNssh0YUrN9rbo7s3Jkl0=
+github.com/streamingfast/bstream v0.0.2-0.20220614181057-05d45af5ffcb h1:E77JKHoNeGow9ZrBwu0SKOfgZle81B3nPS2Ebc4l3u0=
+github.com/streamingfast/bstream v0.0.2-0.20220614181057-05d45af5ffcb/go.mod h1:0sqqhWoeKV+YXP31unQHjAPNssh0YUrN9rbo7s3Jkl0=
 github.com/streamingfast/cli v0.0.3-0.20210811201236-5c00ec55462d h1:ZEqHQMyAI9PSziBHNUiGdtvnpPnPQlyT8HHW/OLmrgc=
 github.com/streamingfast/cli v0.0.3-0.20210811201236-5c00ec55462d/go.mod h1:8TWHl1oWEu0JNNUz79R7e9dLPeCJhHmAys4g8cl6L/U=
 github.com/streamingfast/dauth v0.0.0-20210812020920-1c83ba29add1 h1:jZrytO3UXSEQEG1pTHDEfnLkc5JK5KEY7urxhV7bvSw=
@@ -650,6 +652,8 @@ github.com/streamingfast/dtracing v0.0.0-20210811175635-d55665d3622a h1:/7Rw3pYp
 github.com/streamingfast/dtracing v0.0.0-20210811175635-d55665d3622a/go.mod h1:bqiYZaX6L/MoXNfFQeAdau6g9HLA3yKHkX8KzStt58Q=
 github.com/streamingfast/firehose v0.1.1-0.20220331194041-2bf2b9689682 h1:xW77QwHTM6EEYzMw6/yQqC59sEISNdmb+H9SRfe8eJ4=
 github.com/streamingfast/firehose v0.1.1-0.20220331194041-2bf2b9689682/go.mod h1:yIxH+h6vGjBiltJPbLK+3O+B1iub1BvVmhG11qrs1uk=
+github.com/streamingfast/firehose v0.1.1-0.20220601134123-59f857d9b75e h1:EqQH7lojgVxKu1JbFooxt0Xvnkx8kcljGWC92mwlEgg=
+github.com/streamingfast/firehose v0.1.1-0.20220601134123-59f857d9b75e/go.mod h1:yIxH+h6vGjBiltJPbLK+3O+B1iub1BvVmhG11qrs1uk=
 github.com/streamingfast/jsonpb v0.0.0-20210811021341-3670f0aa02d0 h1:g8eEYbFSykyzIyuxNMmHEUGGUvJE0ivmqZagLDK42gw=
 github.com/streamingfast/jsonpb v0.0.0-20210811021341-3670f0aa02d0/go.mod h1:cTNObq2Uofb330y05JbbZZ6RwE6QUXw5iVcHk1Fx3fk=
 github.com/streamingfast/logging v0.0.0-20210811175431-f3b44b61606a/go.mod h1:4GdqELhZOXj4xwc4IaBmzofzdErGynnaSzuzxy0ZIBo=

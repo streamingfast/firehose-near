@@ -2,6 +2,7 @@ package transform
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/streamingfast/dstore"
 	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
@@ -31,16 +32,22 @@ func BasicReceiptFilterFactory(indexStore dstore.Store, possibleIndexSizes []uin
 				return nil, fmt.Errorf("unexpected unmarshall error: %w", err)
 			}
 
-			if len(filter.Accounts) == 0 {
-				return nil, fmt.Errorf("a basic account filter requires at least one account")
+			if len(filter.Accounts) == 0 && len(filter.PrefixAndSuffixPairs) == 0 {
+				return nil, fmt.Errorf("a basic account filter requires at least one account or one prefix/suffix pair")
 			}
 
 			accountMap := make(map[string]bool)
 			for _, acc := range filter.Accounts {
 				accountMap[acc] = true
 			}
+			for _, pair := range filter.PrefixAndSuffixPairs {
+				if pair.Prefix == "" && pair.Suffix == "" {
+					return nil, fmt.Errorf("invalid prefix_and_suffix_pairs: either prefix or suffix must be non-empty")
+				}
+			}
 			f := &BasicReceiptFilter{
 				Accounts:           accountMap,
+				PrefixSuffixPairs:  filter.PrefixAndSuffixPairs,
 				possibleIndexSizes: possibleIndexSizes,
 				indexStore:         indexStore,
 			}
@@ -50,14 +57,30 @@ func BasicReceiptFilterFactory(indexStore dstore.Store, possibleIndexSizes []uin
 }
 
 type BasicReceiptFilter struct {
-	Accounts map[string]bool
+	Accounts          map[string]bool
+	PrefixSuffixPairs []*pbtransform.PrefixSuffixPair
 
 	indexStore         dstore.Store
 	possibleIndexSizes []uint64
 }
 
 func (p *BasicReceiptFilter) String() string {
-	return fmt.Sprintf("%v", p.Accounts)
+	return fmt.Sprintf("accounts: %v, prefix/suffix: %v", p.Accounts, p.PrefixSuffixPairs)
+}
+
+func matchesPrefixSuffix(receiverID string, prefixSuffixPairs []*pbtransform.PrefixSuffixPair) bool {
+	for _, pair := range prefixSuffixPairs {
+		if pair.Prefix == "" && strings.HasSuffix(receiverID, pair.Suffix) {
+			return true
+		}
+		if pair.Suffix == "" && strings.HasPrefix(receiverID, pair.Prefix) {
+			return true
+		}
+		if strings.HasPrefix(receiverID, pair.Prefix) && strings.HasSuffix(receiverID, pair.Suffix) {
+			return true
+		}
+	}
+	return false
 }
 
 func (p *BasicReceiptFilter) Transform(readOnlyBlk *bstream.Block, in transform.Input) (transform.Output, error) {
@@ -66,8 +89,10 @@ func (p *BasicReceiptFilter) Transform(readOnlyBlk *bstream.Block, in transform.
 	for _, shard := range nearBlock.Shards {
 		var outcomes []*pbcodec.IndexerExecutionOutcomeWithReceipt
 		for _, outcome := range shard.ReceiptExecutionOutcomes {
-			if outcome.Receipt.GetAction() != nil && p.Accounts[outcome.Receipt.ReceiverId] {
-				outcomes = append(outcomes, outcome)
+			if outcome.Receipt.GetAction() != nil {
+				if p.Accounts[outcome.Receipt.ReceiverId] || matchesPrefixSuffix(outcome.Receipt.ReceiverId, p.PrefixSuffixPairs) {
+					outcomes = append(outcomes, outcome)
+				}
 			}
 		}
 		if len(outcomes) != 0 {
@@ -84,7 +109,7 @@ func (p *BasicReceiptFilter) GetIndexProvider() bstream.BlockIndexProvider {
 		return nil
 	}
 
-	if len(p.Accounts) == 0 {
+	if len(p.Accounts) == 0 && len(p.PrefixSuffixPairs) == 0 {
 		return nil
 	}
 
@@ -92,5 +117,6 @@ func (p *BasicReceiptFilter) GetIndexProvider() bstream.BlockIndexProvider {
 		p.indexStore,
 		p.possibleIndexSizes,
 		p.Accounts,
+		p.PrefixSuffixPairs,
 	)
 }

@@ -19,9 +19,4 @@ import (
 	"go.uber.org/zap"
 )
 
-var traceEnabled = logging.IsTraceEnabled("tools", "github.com/streamingfast/sf-near/tools")
-var zlog = zap.NewNop()
-
-func init() {
-	logging.Register("github.com/streamingfast/sf-near/tools", &zlog)
-}
+var zlog, tracer = logging.PackageLogger("tools", "github.com/streamingfast/sf-near/tools", logging.LoggerDefaultLevel(zap.InfoLevel))
