@@ -47,6 +47,7 @@ func downloadFromFirehoseE(cmd *cobra.Command, args []string) error {
 	apiTokenEnvVar := mustGetString(cmd, "api-token-env-var")
 	apiToken := os.Getenv(apiTokenEnvVar)
 
+	var fixerFunc func(*bstream.Block) (*bstream.Block, error)
 	plaintext := mustGetBool(cmd, "plaintext")
 	insecure := mustGetBool(cmd, "insecure")
 
@@ -60,6 +61,7 @@ func downloadFromFirehoseE(cmd *cobra.Command, args []string) error {
 		stop,
 		destFolder,
 		decodeAnyPB,
+		fixerFunc,
 		zlog,
 	)
 }

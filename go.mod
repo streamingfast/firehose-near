@@ -13,7 +13,7 @@ require (
 	github.com/mr-tron/base58 v1.2.0
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.8.1
-	github.com/streamingfast/bstream v0.0.2-0.20220614181057-05d45af5ffcb
+	github.com/streamingfast/bstream v0.0.2-0.20220622120622-82cc2635749d
 	github.com/streamingfast/cli v0.0.3-0.20210811201236-5c00ec55462d
 	github.com/streamingfast/dauth v0.0.0-20210812020920-1c83ba29add1
 	github.com/streamingfast/dbin v0.0.0-20210809205249-73d5eca35dc5
@@ -23,14 +23,14 @@ require (
 	github.com/streamingfast/dmetering v0.0.0-20220301165106-a642bb6a21bd
 	github.com/streamingfast/dmetrics v0.0.0-20210811180524-8494aeb34447
 	github.com/streamingfast/dstore v0.1.1-0.20220607202639-35118aeaf648
-	github.com/streamingfast/firehose v0.1.1-0.20220601134123-59f857d9b75e
+	github.com/streamingfast/firehose v0.1.1-0.20220623154002-1457dae0055d
 	github.com/streamingfast/logging v0.0.0-20220304214715-bc750a74b424
 	github.com/streamingfast/merger v0.0.3-0.20220510150626-2e0bad630abf
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d
 	github.com/streamingfast/node-manager v0.0.2-0.20220607203459-eb51a943d516
-	github.com/streamingfast/pbgo v0.0.6-0.20220428192744-f80aee7d4688
+	github.com/streamingfast/pbgo v0.0.6-0.20220630154121-2e8bba36234e
 	github.com/streamingfast/relayer v0.0.2-0.20220301162545-2db510359d2a
-	github.com/streamingfast/sf-tools v0.0.0-20220607203155-f40739ab46fc
+	github.com/streamingfast/sf-tools v0.0.0-20220801161824-7c521cab4586
 	github.com/streamingfast/snapshotter v0.0.0-20220303234820-951103ec4407
 	github.com/stretchr/testify v1.7.0
 	github.com/tidwall/gjson v1.9.3
