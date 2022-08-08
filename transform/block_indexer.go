@@ -14,8 +14,8 @@ type NearBlockIndexer struct {
 	BlockIndexer blockIndexer
 }
 
-func NewNearBlockIndexer(indexStore dstore.Store, indexSize uint64, startBlock uint64) *NearBlockIndexer {
-	bi := transform.NewBlockIndexer(indexStore, indexSize, ReceiptAddressIndexShortName, transform.WithDefinedStartBlock(startBlock))
+func NewNearBlockIndexer(indexStore dstore.Store, indexSize uint64) *NearBlockIndexer {
+	bi := transform.NewBlockIndexer(indexStore, indexSize, ReceiptAddressIndexShortName)
 	return &NearBlockIndexer{
 		BlockIndexer: bi,
 	}
