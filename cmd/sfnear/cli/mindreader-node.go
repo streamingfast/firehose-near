@@ -68,8 +68,6 @@ func getMindreaderLogPlugin(
 
 	return mindreader.NewMindReaderPlugin(
 		oneBlockStoreURL,
-		mergedBlockStoreURL,
-		mergeThresholdBlockAge,
 		workingDir,
 		consoleReaderFactory,
 		batchStartBlockNum,
@@ -79,7 +77,6 @@ func getMindreaderLogPlugin(
 		func(error) {
 			operatorShutdownFunc(nil)
 		},
-		waitTimeForUploadOnShutdown,
 		oneBlockFileSuffix,
 		blockStreamServer,
 		appLogger,

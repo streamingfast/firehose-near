@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/ShinyTrinkets/overseer"
+	"github.com/streamingfast/bstream"
 	nodeManager "github.com/streamingfast/node-manager"
 	logplugin "github.com/streamingfast/node-manager/log_plugin"
 	"github.com/streamingfast/node-manager/metrics"
@@ -158,8 +159,13 @@ func (s *Superviser) WatchLastBlock() {
 		if s.IsRunning() {
 			headNum, headID, headTime := s.getHead()
 			if headNum != 0 {
-				s.headBlockUpdateFunc(headNum, headID, headTime) // used by operator and metrics
-				s.lastBlockSeen = headNum                        // exported from Superviser as LastSeenBlockNum() for backups
+				blk := &bstream.Block{
+					Id:        headID,
+					Number:    headNum,
+					Timestamp: headTime,
+				}
+				s.headBlockUpdateFunc(blk) // used by operator and metrics
+				s.lastBlockSeen = headNum  // exported from Superviser as LastSeenBlockNum() for backups
 			}
 		}
 		time.Sleep(2 * time.Second)

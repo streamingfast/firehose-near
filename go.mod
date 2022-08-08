@@ -7,32 +7,35 @@ require (
 	github.com/RoaringBitmap/roaring v0.9.4
 	github.com/ShinyTrinkets/overseer v0.3.0
 	github.com/abourget/llerrgroup v0.2.0 // indirect
+	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.2
+	github.com/kr/text v0.2.0 // indirect
 	github.com/lithammer/dedent v1.1.0
 	github.com/logrusorgru/aurora v2.0.3+incompatible
+	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mr-tron/base58 v1.2.0
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.8.1
-	github.com/streamingfast/bstream v0.0.2-0.20220803210204-bae6190bdfe8
-	github.com/streamingfast/cli v0.0.3-0.20210811201236-5c00ec55462d
-	github.com/streamingfast/dauth v0.0.0-20210812020920-1c83ba29add1
+	github.com/streamingfast/bstream v0.0.2-0.20220807143416-6b46ab6f418b
+	github.com/streamingfast/cli v0.0.3
+	github.com/streamingfast/dauth v0.0.0-20220404140613-a40f4cd81626
 	github.com/streamingfast/dbin v0.0.0-20210809205249-73d5eca35dc5
-	github.com/streamingfast/derr v0.0.0-20220301163149-de09cb18fc70
+	github.com/streamingfast/derr v0.0.0-20220526184630-695c21740145
 	github.com/streamingfast/dgrpc v0.0.0-20220301153539-536adf71b594
 	github.com/streamingfast/dlauncher v0.0.0-20211210162313-cf4aa5fc4878
-	github.com/streamingfast/dmetering v0.0.0-20220301165106-a642bb6a21bd
+	github.com/streamingfast/dmetering v0.0.0-20220307162406-37261b4b3de9
 	github.com/streamingfast/dmetrics v0.0.0-20210811180524-8494aeb34447
 	github.com/streamingfast/dstore v0.1.1-0.20220607202639-35118aeaf648
-	github.com/streamingfast/firehose v0.1.1-0.20220623154002-1457dae0055d
-	github.com/streamingfast/logging v0.0.0-20220304214715-bc750a74b424
-	github.com/streamingfast/merger v0.0.3-0.20220510150626-2e0bad630abf
+	github.com/streamingfast/firehose v0.1.1-0.20220804184723-a790c529fe15
+	github.com/streamingfast/logging v0.0.0-20220511154537-ce373d264338
+	github.com/streamingfast/merger v0.0.3-0.20220803202246-1277c51d3487
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d
-	github.com/streamingfast/node-manager v0.0.2-0.20220607203459-eb51a943d516
-	github.com/streamingfast/pbgo v0.0.6-0.20220630154121-2e8bba36234e
-	github.com/streamingfast/relayer v0.0.2-0.20220301162545-2db510359d2a
-	github.com/streamingfast/sf-tools v0.0.0-20220801161824-7c521cab4586
+	github.com/streamingfast/node-manager v0.0.2-0.20220804015313-01ef0ea2678c
+	github.com/streamingfast/pbgo v0.0.6-0.20220801202203-c32e42ac42a8
+	github.com/streamingfast/relayer v0.0.2-0.20220802193804-8c63614023a9
+	github.com/streamingfast/sf-tools v0.0.0-20220808190933-7bf947e2cc81
 	github.com/streamingfast/snapshotter v0.0.0-20220303234820-951103ec4407
-	github.com/stretchr/testify v1.7.0
+	github.com/stretchr/testify v1.7.1
 	github.com/tidwall/gjson v1.9.3
 	go.uber.org/zap v1.21.0
 	google.golang.org/grpc v1.44.0

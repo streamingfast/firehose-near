@@ -63,30 +63,8 @@ func Start(configFile string, dataDir string, args []string) (err error) {
 		return err
 	}
 
-	//meshClient, err := dmeshClient.New(viper.GetString("search-common-mesh-dsn"))
-	//if err != nil {
-	//	return fmt.Errorf("unable to create dmesh client: %w", err)
-	//}
-
-	tracker := bstream.NewTracker(50)
-
-	//blockmetaAddr := viper.GetString("common-blockmeta-addr")
-	//if blockmetaAddr != "" {
-	//	conn, err := dgrpc.NewInternalClient(blockmetaAddr)
-	//	if err != nil {
-	//		userLog.Warn("cannot get grpc connection to blockmeta, disabling this startBlockResolver for search indexer", zap.Error(err), zap.String("blockmeta_addr", blockmetaAddr))
-	//	} else {
-	//		blockmetaCli := pbblockmeta.NewBlockIDClient(conn)
-	//		tracker.AddResolver(pbblockmeta.StartBlockResolver(blockmetaCli))
-	//	}
-	//}
-
-	tracker.AddResolver(bstream.OffsetStartBlockResolver(200))
-
 	modules := &launcher.Runtime{
-		//SearchDmeshClient: meshClient,
 		AbsDataDir: dataDirAbs,
-		Tracker:    tracker,
 	}
 
 	atmCacheEnabled := viper.GetBool("common-atm-cache-enabled")
