@@ -27,12 +27,10 @@ func init() {
 	appLogger := zap.NewNop()
 	logging.Register("github.com/streamingfast/sf-near/firehose", &appLogger)
 
-	launcher.RegisterApp(&launcher.AppDef{
+	launcher.RegisterApp(zlog, &launcher.AppDef{
 		ID:          "firehose",
 		Title:       "Block Firehose",
 		Description: "Provides on-demand filtered blocks, depends on common-blocks-store-url and common-blockstream-addr",
-		MetricsID:   "merged-filter",
-		Logger:      launcher.NewLoggingDef("github.com/streamingfast/sf-near/firehose.*", nil),
 		RegisterFlags: func(cmd *cobra.Command) error {
 			cmd.Flags().String("firehose-grpc-listen-addr", FirehoseGRPCServingAddr, "Address on which the firehose will listen")
 

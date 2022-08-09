@@ -37,7 +37,7 @@ func Main() {
 	RootCmd.PersistentFlags().String("pprof-listen-addr", "localhost:6060", "If non-empty, the process will listen on this address for pprof analysis (see https://golang.org/pkg/net/http/pprof/)")
 	RootCmd.PersistentFlags().Duration("startup-delay", 0, "delay before launching dfuse process")
 
-	derr.Check("registering application flags", launcher.RegisterFlags(StartCmd))
+	derr.Check("registering application flags", launcher.RegisterFlags(zlog, StartCmd))
 
 	var availableCmds []string
 	for app := range launcher.AppRegistry {

@@ -42,7 +42,7 @@ func mustReplaceDataDir(dataDir, in string) string {
 }
 
 func mkdirStorePathIfLocal(storeURL string) (err error) {
-	userLog.Debug("creating directory and its parent(s)", zap.String("directory", storeURL))
+	zlog.Debug("creating directory and its parent(s)", zap.String("directory", storeURL))
 	if dirs := getDirsToMake(storeURL); len(dirs) > 0 {
 		err = makeDirs(dirs)
 	}

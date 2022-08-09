@@ -10,12 +10,10 @@ import (
 )
 
 func init() {
-	launcher.RegisterApp(&launcher.AppDef{
+	launcher.RegisterApp(zlog, &launcher.AppDef{
 		ID:          "merger",
 		Title:       "Merger",
 		Description: "Produces merged block files from single-block files",
-		MetricsID:   "merger",
-		Logger:      launcher.NewLoggingDef("github.com/streamingfast/merger.*", nil),
 		RegisterFlags: func(cmd *cobra.Command) error {
 			cmd.Flags().Duration("merger-time-between-store-lookups", 1*time.Second, "Delay between source store polling (should be higher for remote storage)")
 			cmd.Flags().Duration("merger-time-between-store-pruning", time.Minute, "Delay between source store pruning loops")

@@ -37,10 +37,10 @@ func nearStartE(cmd *cobra.Command, args []string) (err error) {
 	cmd.SilenceUsage = true
 
 	dataDir := viper.GetString("global-data-dir")
-	userLog.Debug("sfnear binary started", zap.String("data_dir", dataDir))
+	zlog.Debug("sfnear binary started", zap.String("data_dir", dataDir))
 
 	configFile := viper.GetString("global-config-file")
-	userLog.Printf("Starting StreamingFast on NEAR with config file '%s'", configFile)
+	zlog.Info(fmt.Sprintf("Starting StreamingFast on NEAR with config file '%s'", configFile))
 
 	err = Start(configFile, dataDir, args)
 	if err != nil {
@@ -48,7 +48,7 @@ func nearStartE(cmd *cobra.Command, args []string) (err error) {
 	}
 
 	// If an error occurred, saying Goodbye is not greate
-	userLog.Printf("Goodbye")
+	zlog.Info(fmt.Sprintf("Goodbye"))
 	return
 }
 
@@ -85,8 +85,8 @@ func Start(configFile string, dataDir string, args []string) (err error) {
 		return fmt.Errorf("protocol specific hooks not configured correctly: %w", err)
 	}
 
-	launch := launcher.NewLauncher(modules)
-	userLog.Debug("launcher created")
+	launch := launcher.NewLauncher(zlog, modules)
+	zlog.Debug("launcher created")
 
 	runByDefault := func(app string) bool {
 		if app == "archive-node" {
@@ -97,9 +97,9 @@ func Start(configFile string, dataDir string, args []string) (err error) {
 
 	apps := launcher.ParseAppsFromArgs(args, runByDefault)
 	if len(args) == 0 {
-		apps = launcher.ParseAppsFromArgs(launcher.DfuseConfig["start"].Args, runByDefault)
+		apps = launcher.ParseAppsFromArgs(launcher.Config["start"].Args, runByDefault)
 	}
-	userLog.Printf("Launching applications: %s", strings.Join(apps, ","))
+	zlog.Info(fmt.Sprintf("Launching applications: %s", strings.Join(apps, ",")))
 	if err = launch.Launch(apps); err != nil {
 		return err
 	}
@@ -107,13 +107,13 @@ func Start(configFile string, dataDir string, args []string) (err error) {
 	signalHandler := derr.SetupSignalHandler(viper.GetDuration("common-system-shutdown-signal-delay"))
 	select {
 	case <-signalHandler:
-		userLog.Printf("Received termination signal, quitting")
+		zlog.Info(fmt.Sprintf("Received termination signal, quitting"))
 		go launch.Close()
 	case appID := <-launch.Terminating():
 		if launch.Err() == nil {
-			userLog.Printf("Application %s triggered a clean shutdown, quitting", appID)
+			zlog.Info(fmt.Sprintf("Application %s triggered a clean shutdown, quitting", appID))
 		} else {
-			userLog.Printf("Application %s shutdown unexpectedly, quitting", appID)
+			zlog.Info(fmt.Sprintf("Application %s shutdown unexpectedly, quitting", appID))
 			err = launch.Err()
 		}
 	}

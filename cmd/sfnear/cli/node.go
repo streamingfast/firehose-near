@@ -22,7 +22,6 @@ import (
 	"github.com/streamingfast/sf-near/nodemanager"
 	"github.com/streamingfast/snapshotter"
 	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 	"google.golang.org/grpc"
 )
 
@@ -71,15 +70,10 @@ func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) er
 	app := fmt.Sprintf("%s-node", kind)
 	flagPrefix := fmt.Sprintf("%s-", app)
 
-	launcher.RegisterApp(&launcher.AppDef{
+	launcher.RegisterApp(zlog, &launcher.AppDef{
 		ID:          app,
 		Title:       fmt.Sprintf("NEAR Node (%s)", kind),
 		Description: fmt.Sprintf("NEAR %s node with built-in operational manager", kind),
-		MetricsID:   app,
-		Logger: launcher.NewLoggingDef(
-			fmt.Sprintf("github.com/streamingfast/sf-near/%s.*", app),
-			[]zapcore.Level{zap.WarnLevel, zap.WarnLevel, zap.InfoLevel, zap.DebugLevel},
-		),
 		RegisterFlags: func(cmd *cobra.Command) error {
 			registerCommonNodeFlags(cmd, flagPrefix, managerAPIaddr)
 			extraFlagRegistration(cmd)
