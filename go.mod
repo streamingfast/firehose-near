@@ -21,7 +21,7 @@ require (
 	github.com/streamingfast/dbin v0.0.0-20210809205249-73d5eca35dc5
 	github.com/streamingfast/derr v0.0.0-20220526184630-695c21740145
 	github.com/streamingfast/dgrpc v0.0.0-20220307180102-b2d417ac8da7
-	github.com/streamingfast/dlauncher v0.0.0-20211210162313-cf4aa5fc4878
+	github.com/streamingfast/dlauncher v0.0.0-20220510190546-3b2b932ceac8
 	github.com/streamingfast/dmetering v0.0.0-20220307162406-37261b4b3de9
 	github.com/streamingfast/dmetrics v0.0.0-20220307162521-2389094ab4a1
 	github.com/streamingfast/dstore v0.1.1-0.20220607202639-35118aeaf648

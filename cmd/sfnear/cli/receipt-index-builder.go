@@ -17,7 +17,7 @@ import (
 )
 
 func init() {
-	launcher.RegisterApp(&launcher.AppDef{
+	launcher.RegisterApp(zlog, &launcher.AppDef{
 		ID:          "receipt-index-builder",
 		Title:       "Receipt Index Builder",
 		Description: "Produces a receipt index for a given set of blocks",
