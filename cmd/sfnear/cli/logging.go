@@ -1,12 +1,5 @@
 package cli
 
-import (
-	"github.com/streamingfast/logging"
-	"go.uber.org/zap"
-)
+import "github.com/streamingfast/logging"
 
-var zlog *zap.Logger
-
-func init() {
-	logging.Register("github.com/streamingfast/dfuse-ethereum/cmd/dfuseeth", &zlog)
-}
+var zlog, _ = logging.RootLogger("sfnear", "github.com/streamingfast/sf-near/cmd/sfnear")
