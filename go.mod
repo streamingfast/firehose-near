@@ -33,7 +33,7 @@ require (
 	github.com/streamingfast/node-manager v0.0.2-0.20220804015313-01ef0ea2678c
 	github.com/streamingfast/pbgo v0.0.6-0.20220801202203-c32e42ac42a8
 	github.com/streamingfast/relayer v0.0.2-0.20220802193804-8c63614023a9
-	github.com/streamingfast/sf-tools v0.0.0-20220810180155-3dc5cf48fafc
+	github.com/streamingfast/sf-tools v0.0.0-20220810183745-b514ffd4aa46
 	github.com/streamingfast/snapshotter v0.0.0-20220303234820-951103ec4407
 	github.com/stretchr/testify v1.7.1
 	github.com/tidwall/gjson v1.9.3
