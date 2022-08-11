@@ -486,6 +486,8 @@ github.com/openzipkin/zipkin-go v0.1.6 h1:yXiysv1CSK7Q5yjGy1710zZGnsbMUIjluWBxtL
 github.com/openzipkin/zipkin-go v0.1.6/go.mod h1:QgAqvLzwWbR/WpD4A3cGpPtJrZXNIiJc5AZX7/PBEpw=
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
 github.com/patrickmn/go-cache v2.1.0+incompatible/go.mod h1:3Qf8kWWT7OJRJbdiICTKqZju1ZixQ/KpMGzzAfe6+WQ=
+github.com/paulbellamy/ratecounter v0.2.0 h1:2L/RhJq+HA8gBQImDXtLPrDXK5qAj6ozWVK/zFXVJGs=
+github.com/paulbellamy/ratecounter v0.2.0/go.mod h1:Hfx1hDpSGoqxkVVpBi/IlYD7kChlfo5C6hzIHwPqfFE=
 github.com/pelletier/go-toml v1.2.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/94hg7ilaic=
 github.com/pelletier/go-toml v1.9.3 h1:zeC5b1GviRUyKYd6OJPvBU/mcVDVoL1OhT17FCt5dSQ=
 github.com/pelletier/go-toml v1.9.3/go.mod h1:u1nR/EPcESfeI/szUZKdtJ0xRNbUoANCkoOuaOx1Y+c=
@@ -610,6 +612,8 @@ github.com/streamingfast/dmetering v0.0.0-20220307162406-37261b4b3de9/go.mod h1:
 github.com/streamingfast/dmetrics v0.0.0-20210811180524-8494aeb34447/go.mod h1:VLdQY/FwczmC/flqWkcsBbqXO4BhU4zQDSK7GMrpcjY=
 github.com/streamingfast/dmetrics v0.0.0-20220307162521-2389094ab4a1 h1:dcYZRENz/O1ostsC1wTEfQnd+L7z3j+COez9f4zjfUQ=
 github.com/streamingfast/dmetrics v0.0.0-20220307162521-2389094ab4a1/go.mod h1:00BG0rcFw1QTNectj/pdY6P8+2Kc/WU452vNVJmRApc=
+github.com/streamingfast/dmetrics v0.0.0-20220811180000-3e513057d17c h1:ln4WzAU3kewbxeK2ygZXVx1cyHa9VdCPagasmu8hD1s=
+github.com/streamingfast/dmetrics v0.0.0-20220811180000-3e513057d17c/go.mod h1:fWoyaD76fE7mXZfkfcAfNeU/Hv/y6yJ/RgEcInQLwSw=
 github.com/streamingfast/dstore v0.1.1-0.20211012134319-16e840827e38/go.mod h1:Jcr8TZ2XOAAFB7/7UeN6Zr8LM+Qv3cg36CsXpVDoAuU=
 github.com/streamingfast/dstore v0.1.1-0.20220607202639-35118aeaf648 h1:xpy3HNXeUHaZexf42duj7NeOmXcGfDMJXlZaj3CX18Y=
 github.com/streamingfast/dstore v0.1.1-0.20220607202639-35118aeaf648/go.mod h1:SHSEIPowGeE1TfNNmGeAUUnlO3dwevmX5kFOSazU60M=
@@ -622,6 +626,8 @@ github.com/streamingfast/firehose v0.1.1-0.20220804184723-a790c529fe15 h1:j/AELj
 github.com/streamingfast/firehose v0.1.1-0.20220804184723-a790c529fe15/go.mod h1:OGb8noKOMRrx3kOqZCfSVowr9lVyaUtvovDDH0Rl470=
 github.com/streamingfast/firehose v0.1.1-0.20220810182727-6f3191de9804 h1:zKKMqfigTHRJyDXo4ixlnzBJd/DaLgBhISJT0P8Ii6o=
 github.com/streamingfast/firehose v0.1.1-0.20220810182727-6f3191de9804/go.mod h1:L31zyyw1r7uYyPwoaVHsKXB2Jd9MO3rDIPNtfoZ+jSM=
+github.com/streamingfast/firehose v0.1.1-0.20220811184718-dfb47249e9ae h1:bWJYg4leJ8K6MJms4ZoYz27nBs1y3gCrzc6Z/39F+mA=
+github.com/streamingfast/firehose v0.1.1-0.20220811184718-dfb47249e9ae/go.mod h1:GsXsvqqKZ/wLD58sqsrUTTojAEyAQp0impPtXfWa7+w=
 github.com/streamingfast/index-builder v0.0.0-20220803183104-a4e268586503 h1:/8A5s1LoLDXq5Lwf6YeZMMNJZaAhktUp3AuWtMBix1s=
 github.com/streamingfast/index-builder v0.0.0-20220803183104-a4e268586503/go.mod h1:7o8qQwgojm/95YCz6ka49on5revPiMUjvcXltZ3D/zI=
 github.com/streamingfast/index-builder v0.0.0-20220810183227-6de1a5d962c7 h1:bOWUrBsBWAeAzfslrB/xc4CkcXXsqOslV59LPKXIK6A=
@@ -639,10 +645,14 @@ github.com/streamingfast/merger v0.0.3-0.20220803202246-1277c51d3487 h1:dzUg2NGo
 github.com/streamingfast/merger v0.0.3-0.20220803202246-1277c51d3487/go.mod h1:poAOzquaxaFT7v0O0G6V0F2uffdUsgE8UUkXrO55EiQ=
 github.com/streamingfast/merger v0.0.3-0.20220810200312-347dc7cc5e9a h1:mq/0NFOuBFd1p5eYb1pnzEjEhaTf/OhlAZmm0OHhvN8=
 github.com/streamingfast/merger v0.0.3-0.20220810200312-347dc7cc5e9a/go.mod h1:poAOzquaxaFT7v0O0G6V0F2uffdUsgE8UUkXrO55EiQ=
+github.com/streamingfast/merger v0.0.3-0.20220811184329-ce81549bd619 h1:gp4Hd0TW0tY5wEcRB00TW8ky355Em4awINOnTs6gcC8=
+github.com/streamingfast/merger v0.0.3-0.20220811184329-ce81549bd619/go.mod h1:y9tNAAdBCLUBZJcG9W1gYNrwRldA2TxZPnqa+A4VxrA=
 github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d h1:qaIxiajgUitO2bk9QaMwH+K6y9zopWKgw4D8HplTbXI=
 github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d/go.mod h1:24+rnDf/tjrOC2ZlC3CjC5x6DWehS0LQGdDxeTXYapM=
 github.com/streamingfast/node-manager v0.0.2-0.20220804015313-01ef0ea2678c h1:+/CHGxHvZGGjldmd5OTAW9zZUtcoSqHxW1hyxxDSckw=
 github.com/streamingfast/node-manager v0.0.2-0.20220804015313-01ef0ea2678c/go.mod h1:SlfQf3TwkX591DmmeBL2hrG1H/cz7p2ndl0JdE5+W8A=
+github.com/streamingfast/node-manager v0.0.2-0.20220811195019-694930bda9cb h1:3stLxmgbwhBJjePuu9Fpw8FL7MX7iKEsMu1/IAef9b4=
+github.com/streamingfast/node-manager v0.0.2-0.20220811195019-694930bda9cb/go.mod h1:TBZx9OqYAq4hAUZYm1WpBkcB54Sx3CvON+4N5hBc6jo=
 github.com/streamingfast/opaque v0.0.0-20210811180740-0c01d37ea308 h1:xlWSfi1BoPfsHtPb0VEHGUcAdBF208LUiFCwfaVPfLA=
 github.com/streamingfast/opaque v0.0.0-20210811180740-0c01d37ea308/go.mod h1:K1p8Bj/wG34KJvYzPUqtzpndffmpkrVY11u2hkyxCWQ=
 github.com/streamingfast/pbgo v0.0.6-0.20220228185940-1bbaafec7d8a/go.mod h1:huKwfgTGFIFZMKSVbD5TywClM7zAeBUG/zePZMqvXQQ=
@@ -652,6 +662,8 @@ github.com/streamingfast/pbgo v0.0.6-0.20220801202203-c32e42ac42a8 h1:jp7pJV9WQK
 github.com/streamingfast/pbgo v0.0.6-0.20220801202203-c32e42ac42a8/go.mod h1:huKwfgTGFIFZMKSVbD5TywClM7zAeBUG/zePZMqvXQQ=
 github.com/streamingfast/relayer v0.0.2-0.20220802193804-8c63614023a9 h1:YlzaoC+USj1zCaBamPtvnzOX87cOPLF1/yh1ND+Oaps=
 github.com/streamingfast/relayer v0.0.2-0.20220802193804-8c63614023a9/go.mod h1:n7m1p/EDE5YH75h/Alkqt1eG/I9e0aqr5OU9EjKBFnU=
+github.com/streamingfast/relayer v0.0.2-0.20220811185139-02ee222c9277 h1:9Nfgg45tCcgnci3WVlNJZCO0LKcYBnPt3chEODIltEg=
+github.com/streamingfast/relayer v0.0.2-0.20220811185139-02ee222c9277/go.mod h1:0cDXJdtPkm2fuMmbj5bdUz59dexgJZKKKxooO4EgF5o=
 github.com/streamingfast/sf-tools v0.0.0-20220810180155-3dc5cf48fafc h1:jwSCDJ2iPztCuPpmPrx9dE8IslTUPZXE/bpUpq8QkBo=
 github.com/streamingfast/sf-tools v0.0.0-20220810180155-3dc5cf48fafc/go.mod h1:IK3diyADf5yhBl0JecFZRdOVbXKleVzAhje3Eag8+2w=
 github.com/streamingfast/sf-tools v0.0.0-20220810183745-b514ffd4aa46 h1:up80oljMQVr+uspMmmxGNcMaUShf6MObJ6Zjfvx9ick=

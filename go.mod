@@ -23,16 +23,16 @@ require (
 	github.com/streamingfast/dgrpc v0.0.0-20220307180102-b2d417ac8da7
 	github.com/streamingfast/dlauncher v0.0.0-20220510190546-3b2b932ceac8
 	github.com/streamingfast/dmetering v0.0.0-20220307162406-37261b4b3de9
-	github.com/streamingfast/dmetrics v0.0.0-20220307162521-2389094ab4a1
+	github.com/streamingfast/dmetrics v0.0.0-20220811180000-3e513057d17c
 	github.com/streamingfast/dstore v0.1.1-0.20220607202639-35118aeaf648
-	github.com/streamingfast/firehose v0.1.1-0.20220810182727-6f3191de9804
+	github.com/streamingfast/firehose v0.1.1-0.20220811184718-dfb47249e9ae
 	github.com/streamingfast/index-builder v0.0.0-20220810183227-6de1a5d962c7
 	github.com/streamingfast/logging v0.0.0-20220511154537-ce373d264338
-	github.com/streamingfast/merger v0.0.3-0.20220810200312-347dc7cc5e9a
+	github.com/streamingfast/merger v0.0.3-0.20220811184329-ce81549bd619
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d
-	github.com/streamingfast/node-manager v0.0.2-0.20220804015313-01ef0ea2678c
+	github.com/streamingfast/node-manager v0.0.2-0.20220811195019-694930bda9cb
 	github.com/streamingfast/pbgo v0.0.6-0.20220801202203-c32e42ac42a8
-	github.com/streamingfast/relayer v0.0.2-0.20220802193804-8c63614023a9
+	github.com/streamingfast/relayer v0.0.2-0.20220811185139-02ee222c9277
 	github.com/streamingfast/sf-tools v0.0.0-20220810183745-b514ffd4aa46
 	github.com/streamingfast/snapshotter v0.0.0-20220303234820-951103ec4407
 	github.com/stretchr/testify v1.7.1

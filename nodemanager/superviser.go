@@ -15,7 +15,6 @@ import (
 	"github.com/streamingfast/bstream"
 	nodeManager "github.com/streamingfast/node-manager"
 	logplugin "github.com/streamingfast/node-manager/log_plugin"
-	"github.com/streamingfast/node-manager/metrics"
 	"github.com/streamingfast/node-manager/superviser"
 	"github.com/tidwall/gjson"
 	"go.uber.org/zap"
@@ -93,18 +92,6 @@ func (s *Superviser) setServerId(serverId string) error {
 
 func (s *Superviser) GetCommand() string {
 	return s.binary + " " + strings.Join(s.arguments, " ")
-}
-
-func (s *Superviser) IsRunning() bool {
-	isRunning := s.Superviser.IsRunning()
-	isRunningMetricsValue := float64(0)
-	if isRunning {
-		isRunningMetricsValue = float64(1)
-	}
-
-	metrics.NodeosCurrentStatus.SetFloat64(isRunningMetricsValue)
-
-	return isRunning
 }
 
 func (s *Superviser) LastSeenBlockNum() uint64 {

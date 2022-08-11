@@ -330,10 +330,12 @@ func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, args string) (
 func buildMetricsAndReadinessManager(name string, maxLatency time.Duration) *nodeManager.MetricsAndReadinessManager {
 	headBlockTimeDrift := metrics.NewHeadBlockTimeDrift(name)
 	headBlockNumber := metrics.NewHeadBlockNumber(name)
+	appReadiness := metrics.NewAppReadiness(name)
 
 	metricsAndReadinessManager := nodeManager.NewMetricsAndReadinessManager(
 		headBlockTimeDrift,
 		headBlockNumber,
+		appReadiness,
 		maxLatency,
 	)
 	return metricsAndReadinessManager
