@@ -628,6 +628,8 @@ github.com/streamingfast/firehose v0.1.1-0.20220810182727-6f3191de9804 h1:zKKMqf
 github.com/streamingfast/firehose v0.1.1-0.20220810182727-6f3191de9804/go.mod h1:L31zyyw1r7uYyPwoaVHsKXB2Jd9MO3rDIPNtfoZ+jSM=
 github.com/streamingfast/firehose v0.1.1-0.20220811184718-dfb47249e9ae h1:bWJYg4leJ8K6MJms4ZoYz27nBs1y3gCrzc6Z/39F+mA=
 github.com/streamingfast/firehose v0.1.1-0.20220811184718-dfb47249e9ae/go.mod h1:GsXsvqqKZ/wLD58sqsrUTTojAEyAQp0impPtXfWa7+w=
+github.com/streamingfast/firehose v0.1.1-0.20220812162323-b98d71964619 h1:sryK4+6ocSMAmc9wveM+8JNWGc50UOj2ksgXqKUOVrY=
+github.com/streamingfast/firehose v0.1.1-0.20220812162323-b98d71964619/go.mod h1:GsXsvqqKZ/wLD58sqsrUTTojAEyAQp0impPtXfWa7+w=
 github.com/streamingfast/index-builder v0.0.0-20220803183104-a4e268586503 h1:/8A5s1LoLDXq5Lwf6YeZMMNJZaAhktUp3AuWtMBix1s=
 github.com/streamingfast/index-builder v0.0.0-20220803183104-a4e268586503/go.mod h1:7o8qQwgojm/95YCz6ka49on5revPiMUjvcXltZ3D/zI=
 github.com/streamingfast/index-builder v0.0.0-20220810183227-6de1a5d962c7 h1:bOWUrBsBWAeAzfslrB/xc4CkcXXsqOslV59LPKXIK6A=
