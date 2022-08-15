@@ -47,6 +47,7 @@ func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAd
 	cmd.Flags().Duration(flagPrefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")
 	cmd.Flags().StringSlice(flagPrefix+"backups", []string{}, "Repeatable, space-separated key=values definitions for backups. Example: 'type=gke-pvc-snapshot prefix= tag=v1 freq-blocks=1000 freq-time= project=myproj'")
 	cmd.Flags().String(flagPrefix+"arguments", "", "If not empty, overrides the list of default node arguments (computed from node type and role). Start with '+' to append to default args instead of replacing. ")
+	cmd.Flags().Bool(flagPrefix+"overwrite-node-files", false, "force download of node-key and config files even if they already exist on the machine.")
 }
 
 func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) error, managerAPIaddr string) {
@@ -112,6 +113,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 		shutdownDelay := viper.GetDuration("common-system-shutdown-signal-delay") // we reuse this global value
 		httpAddr := viper.GetString(flagPrefix + "manager-api-addr")
 		backupConfigs := viper.GetStringSlice(flagPrefix + "backups")
+		overwriteNodeFiles := viper.GetBool(flagPrefix + "overwrite-node-files")
 
 		backupModules, backupSchedules, err := operator.ParseBackupConfigs(appLogger, backupConfigs, map[string]operator.BackupModuleFactory{
 			"gke-pvc-snapshot": gkeSnapshotterFactory,
@@ -152,6 +154,8 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 			genesisFile: genesisFile,
 			nodeKeyFile: nodeKeyFile,
 			nodeDataDir: nodeDataDir,
+
+			forceOverwrite: overwriteNodeFiles,
 		}
 
 		chainOperator, err := operator.New(
@@ -244,6 +248,8 @@ type bootstrapper struct {
 	genesisFile string
 	nodeKeyFile string
 	nodeDataDir string
+
+	forceOverwrite bool
 }
 
 func (b *bootstrapper) Bootstrap() error {
@@ -262,13 +268,23 @@ func (b *bootstrapper) Bootstrap() error {
 	if err != nil {
 		return err
 	}
-	if !exists {
+	if !exists || b.forceOverwrite {
 		if b.configFile != "" {
 			if err := copyFile(ctx, b.configFile, configFileInDataDir); err != nil {
 				return fmt.Errorf("unable to copy config file %q to %q: %w", b.configFile, configFileInDataDir, err)
 			}
 		} else {
 			return fmt.Errorf("config file %s does not exist", configFileInDataDir)
+		}
+	}
+
+	exists, err = fileExists(nodeKeyFileInDataDir)
+	if err != nil {
+		return err
+	}
+	if !exists || b.forceOverwrite {
+		if err := copyFile(ctx, b.nodeKeyFile, nodeKeyFileInDataDir); err != nil {
+			return fmt.Errorf("unable to copy node key file %q to %q: %w", b.nodeKeyFile, nodeKeyFileInDataDir, err)
 		}
 	}
 
@@ -279,15 +295,6 @@ func (b *bootstrapper) Bootstrap() error {
 	if !exists {
 		if err := copyFile(ctx, b.genesisFile, genesisFileInDataDir); err != nil {
 			return fmt.Errorf("unable to copy genesis file %q to %q: %w", b.genesisFile, genesisFileInDataDir, err)
-		}
-	}
-	exists, err = fileExists(nodeKeyFileInDataDir)
-	if err != nil {
-		return err
-	}
-	if !exists {
-		if err := copyFile(ctx, b.nodeKeyFile, nodeKeyFileInDataDir); err != nil {
-			return fmt.Errorf("unable to copy node key file %q to %q: %w", b.nodeKeyFile, nodeKeyFileInDataDir, err)
 		}
 	}
 
