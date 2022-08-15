@@ -16,7 +16,7 @@ require (
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.8.1
 	github.com/streamingfast/bstream v0.0.2-0.20220810182344-114d9f8705b2
-	github.com/streamingfast/cli v0.0.3
+	github.com/streamingfast/cli v0.0.4-0.20220419231930-a555cea243fc
 	github.com/streamingfast/dauth v0.0.0-20220404140613-a40f4cd81626
 	github.com/streamingfast/dbin v0.0.0-20210809205249-73d5eca35dc5
 	github.com/streamingfast/derr v0.0.0-20220526184630-695c21740145
@@ -34,7 +34,7 @@ require (
 	github.com/streamingfast/pbgo v0.0.6-0.20220801202203-c32e42ac42a8
 	github.com/streamingfast/relayer v0.0.2-0.20220811185139-02ee222c9277
 	github.com/streamingfast/sf-tools v0.0.0-20220810183745-b514ffd4aa46
-	github.com/streamingfast/snapshotter v0.0.0-20220303234820-951103ec4407
+	github.com/streamingfast/snapshotter v0.0.0-20220511035139-9c8d907b1c49
 	github.com/stretchr/testify v1.7.1
 	github.com/tidwall/gjson v1.9.3
 	go.uber.org/zap v1.21.0
