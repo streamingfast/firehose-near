@@ -63,7 +63,7 @@ func newParsingStats(block uint64) *parsingStats {
 }
 
 func (s *parsingStats) log() {
-	zlog.Info("mindreader block stats",
+	zlog.Info("reader block stats",
 		zap.Uint64("block_num", s.blockNum),
 		zap.Int64("duration", int64(time.Since(s.startAt))),
 		zap.Reflect("stats", s.data),
@@ -99,7 +99,7 @@ func (r *ConsoleReader) next(readType int) (out *bstream.Block, err error) {
 	zlog.Debug("next", zap.Int("read_type", readType))
 
 	for line := range r.lines {
-		if !strings.HasPrefix(line, "DMLOG ") {
+		if !strings.HasPrefix(line, "FIRE ") {
 			continue
 		}
 
@@ -110,7 +110,7 @@ func (r *ConsoleReader) next(readType int) (out *bstream.Block, err error) {
 			out, err = ctx.readBlock(line)
 		default:
 			if traceEnabled {
-				zlog.Debug("skipping unknown deep mind log line", zap.String("line", line))
+				zlog.Debug("skipping unknown reader log line", zap.String("line", line))
 			}
 
 			continue
@@ -154,7 +154,7 @@ func (r *ConsoleReader) buildScanner(reader io.Reader) *bufio.Scanner {
 }
 
 // Formats
-// DMLOG BLOCK <NUM> <HASH> <PROTO_HEX>
+// FIRE BLOCK <NUM> <HASH> <PROTO_HEX>
 func (ctx *parseCtx) readBlock(line string) (*bstream.Block, error) {
 	chunks, err := SplitInChunks(line, 4)
 	if err != nil {

@@ -28,20 +28,20 @@ import (
 var archiveNodeLogger, _ = logging.PackageLogger("archive.node", "github.com/streamingfast/sf-near/archive/node")
 var archiveAppLogger, archiveAppTracer = logging.PackageLogger("archive", "github.com/streamingfast/sf-near/archive")
 
-var mindreaderNodeLogger, _ = logging.PackageLogger("mindreader.node", "github.com/streamingfast/sf-near/mindreader/node")
-var mindreaderAppLogger, mindreaderAppTracer = logging.PackageLogger("mindreader", "github.com/streamingfast/sf-near/mindreader")
+var readerNodeLogger, _ = logging.PackageLogger("reader.node", "github.com/streamingfast/sf-near/reader/node")
+var readerAppLogger, readerAppTracer = logging.PackageLogger("reader", "github.com/streamingfast/sf-near/reader")
 
 func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAddr string) {
 	defaultBin := "neard"
-	if strings.Contains(flagPrefix, "mindreader") {
+	if strings.Contains(flagPrefix, "reader") {
 		defaultBin = "near-dm-indexer"
 	}
 	cmd.Flags().String(flagPrefix+"path", defaultBin, "Command that will be launched by the node manager")
-	cmd.Flags().String(flagPrefix+"data-dir", "{sf-data-dir}/{node-role}/data", "Directory for node data ({node-role} is either mindreader or archive)")
-	cmd.Flags().String(flagPrefix+"config-file", "", "Node configuration file where ({node-role} is either mindreader or archive), the file is copied inside the {sf-data-dir}/{node-role}/data folder Use {hostname} label to use short hostname in path")
-	cmd.Flags().String(flagPrefix+"genesis-file", "./{node-role}/genesis.json", "Node configuration file where ({node-role} is either mindreader or archive), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use short hostname in path")
-	cmd.Flags().String(flagPrefix+"node-key-file", "./{node-role}/node_key.json", "Node key configuration file where ({node-role} is either mindreader or archive ), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use with short hostname in path")
-	cmd.Flags().Bool(flagPrefix+"debug-deep-mind", false, "[DEV] Prints deep mind instrumentation logs to standard output, should be use for debugging purposes only")
+	cmd.Flags().String(flagPrefix+"data-dir", "{sf-data-dir}/{node-role}/data", "Directory for node data ({node-role} is either reader or archive)")
+	cmd.Flags().String(flagPrefix+"config-file", "", "Node configuration file where ({node-role} is either reader or archive), the file is copied inside the {sf-data-dir}/{node-role}/data folder Use {hostname} label to use short hostname in path")
+	cmd.Flags().String(flagPrefix+"genesis-file", "./{node-role}/genesis.json", "Node configuration file where ({node-role} is either reader or archive), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use short hostname in path")
+	cmd.Flags().String(flagPrefix+"node-key-file", "./{node-role}/node_key.json", "Node key configuration file where ({node-role} is either reader or archive ), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use with short hostname in path")
+	cmd.Flags().Bool(flagPrefix+"debug-firehose-logs", false, "[DEV] Prints firehose instrumentation logs to standard output, should be use for debugging purposes only")
 	cmd.Flags().Bool(flagPrefix+"log-to-zap", true, "Enable all node logs to transit into node's logger directly, when false, prints node logs directly to stdout")
 	cmd.Flags().String(flagPrefix+"manager-api-addr", managerAPIAddr, "Near node manager API address")
 	cmd.Flags().Duration(flagPrefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")
@@ -55,17 +55,17 @@ func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) er
 	var nodeLogger *zap.Logger
 	var appTracer logging.Tracer
 	switch kind {
-	case "mindreader":
-		appLogger = mindreaderAppLogger
-		nodeLogger = mindreaderNodeLogger
-		appTracer = mindreaderAppTracer
+	case "reader":
+		appLogger = readerAppLogger
+		nodeLogger = readerNodeLogger
+		appTracer = readerAppTracer
 	case "archive":
 		appLogger = archiveAppLogger
 		nodeLogger = archiveNodeLogger
 		appTracer = archiveAppTracer
 
 	default:
-		panic(fmt.Errorf("invalid kind value, must be either 'mindreader' or 'archive', got %q", kind))
+		panic(fmt.Errorf("invalid kind value, must be either 'reader' or 'archive', got %q", kind))
 	}
 
 	app := fmt.Sprintf("%s-node", kind)
@@ -108,7 +108,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 		nodeKeyFile = replaceHostname(hostname, nodeKeyFile)
 
 		readinessMaxLatency := viper.GetDuration(flagPrefix + "readiness-max-latency")
-		debugDeepMind := viper.GetBool(flagPrefix + "debug-deep-mind")
+		debugFirehose := viper.GetBool(flagPrefix + "debug-firehose-logs")
 		logToZap := viper.GetBool(flagPrefix + "log-to-zap")
 		shutdownDelay := viper.GetDuration("common-system-shutdown-signal-delay") // we reuse this global value
 		httpAddr := viper.GetString(flagPrefix + "manager-api-addr")
@@ -123,7 +123,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 			return nil, fmt.Errorf("parse backup configs: %w", err)
 		}
 
-		isMindreader := kind == "mindreader"
+		isReader := kind == "reader"
 
 		arguments := viper.GetString(flagPrefix + "arguments")
 		nodeArguments, err := buildNodeArguments(
@@ -139,11 +139,11 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 
 		superviser := nodemanager.NewSuperviser(
 			nodePath,
-			isMindreader,
+			isReader,
 			nodeArguments,
 			nodeDataDir,
 			metricsAndReadinessManager.UpdateHeadBlock,
-			debugDeepMind,
+			debugFirehose,
 			logToZap,
 			appLogger,
 			nodeLogger,
@@ -183,7 +183,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 			chainOperator.RegisterBackupSchedule(sched)
 		}
 
-		if kind != "mindreader" {
+		if kind != "reader" {
 			return nodeManagerApp.New(&nodeManagerApp.Config{
 				HTTPAddr: httpAddr,
 			}, &nodeManagerApp.Modules{
@@ -195,16 +195,16 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 		blockStreamServer := blockstream.NewUnmanagedServer(blockstream.ServerOptionWithLogger(appLogger))
 		oneBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-oneblock-store-url"))
 		mergedBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-blocks-store-url"))
-		workingDir := mustReplaceDataDir(sfDataDir, viper.GetString("mindreader-node-working-dir"))
-		gprcListenAdrr := viper.GetString("mindreader-node-grpc-listen-addr")
-		mergeThresholdBlockAge := viper.GetString("mindreader-node-merge-threshold-block-age")
-		batchStartBlockNum := viper.GetUint64("mindreader-node-start-block-num")
-		batchStopBlockNum := viper.GetUint64("mindreader-node-stop-block-num")
-		waitTimeForUploadOnShutdown := viper.GetDuration("mindreader-node-wait-upload-complete-on-shutdown")
-		oneBlockFileSuffix := viper.GetString("mindreader-node-oneblock-suffix")
-		blocksChanCapacity := viper.GetInt("mindreader-node-blocks-chan-capacity")
+		workingDir := mustReplaceDataDir(sfDataDir, viper.GetString("reader-node-working-dir"))
+		gprcListenAdrr := viper.GetString("reader-node-grpc-listen-addr")
+		mergeThresholdBlockAge := viper.GetString("reader-node-merge-threshold-block-age")
+		batchStartBlockNum := viper.GetUint64("reader-node-start-block-num")
+		batchStopBlockNum := viper.GetUint64("reader-node-stop-block-num")
+		waitTimeForUploadOnShutdown := viper.GetDuration("reader-node-wait-upload-complete-on-shutdown")
+		oneBlockFileSuffix := viper.GetString("reader-node-oneblock-suffix")
+		blocksChanCapacity := viper.GetInt("reader-node-blocks-chan-capacity")
 
-		mindreaderPlugin, err := getMindreaderLogPlugin(
+		readerPlugin, err := getReaderLogPlugin(
 			blockStreamServer,
 			oneBlockStoreURL,
 			mergedBlockStoreURL,
@@ -221,17 +221,17 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 			appTracer,
 		)
 		if err != nil {
-			return nil, fmt.Errorf("new mindreader plugin: %w", err)
+			return nil, fmt.Errorf("new reader plugin: %w", err)
 		}
 
-		superviser.RegisterLogPlugin(mindreaderPlugin)
+		superviser.RegisterLogPlugin(readerPlugin)
 
 		return nodeManagerApp.New(&nodeManagerApp.Config{
 			HTTPAddr: httpAddr,
 			GRPCAddr: gprcListenAdrr,
 		}, &nodeManagerApp.Modules{
 			Operator:                   chainOperator,
-			MindreaderPlugin:           mindreaderPlugin,
+			MindreaderPlugin:           readerPlugin,
 			MetricsAndReadinessManager: metricsAndReadinessManager,
 			RegisterGRPCService: func(server *grpc.Server) error {
 				pbheadinfo.RegisterHeadInfoServer(server, blockStreamServer)
@@ -305,8 +305,8 @@ type nodeArgsByRole map[string]string
 
 func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, args string) ([]string, error) {
 	typeRoles := nodeArgsByRole{
-		"archive":    "--home={node-data-dir} {extra-arg} run",
-		"mindreader": "--home={node-data-dir} {extra-arg} run",
+		"archive": "--home={node-data-dir} {extra-arg} run",
+		"reader":  "--home={node-data-dir} {extra-arg} run",
 	}
 
 	argsString, ok := typeRoles[nodeRole]

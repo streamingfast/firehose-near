@@ -41,16 +41,16 @@ func (s *Superviser) GetName() string {
 
 func NewSuperviser(
 	binary string,
-	isMindreader bool,
+	isReader bool,
 	arguments []string,
 	dataDir string,
 	headBlockUpdateFunc nodeManager.HeadBlockUpdater,
-	debugDeepMind bool,
+	debugFirehose bool,
 	logToZap bool,
 	appLogger *zap.Logger,
 	nodelogger *zap.Logger,
 ) *Superviser {
-	// Ensure process manager line buffer is large enough (50 MiB) for our Deep Mind instrumentation outputting lot's of text.
+	// Ensure process manager line buffer is large enough (50 MiB) for our Firehose instrumentation outputting lot's of text.
 	overseer.DEFAULT_LINE_BUFFER_SIZE = 50 * 1024 * 1024
 
 	supervisor := &Superviser{
@@ -62,16 +62,16 @@ func NewSuperviser(
 		headBlockUpdateFunc: headBlockUpdateFunc,
 	}
 
-	if isMindreader {
+	if isReader {
 		supervisor.RegisterLogPlugin(logplugin.LogPluginFunc(supervisor.lastBlockSeenLogPlugin))
 	} else {
 		go supervisor.WatchLastBlock()
 	}
 
 	if logToZap {
-		supervisor.RegisterLogPlugin(newToZapLogPlugin(debugDeepMind, nodelogger))
+		supervisor.RegisterLogPlugin(newToZapLogPlugin(debugFirehose, nodelogger))
 	} else {
-		supervisor.RegisterLogPlugin(logplugin.NewToConsoleLogPlugin(debugDeepMind))
+		supervisor.RegisterLogPlugin(logplugin.NewToConsoleLogPlugin(debugFirehose))
 	}
 
 	appLogger.Info("created near superviser", zap.Object("superviser", supervisor))
@@ -160,8 +160,8 @@ func (s *Superviser) WatchLastBlock() {
 }
 
 func (s *Superviser) lastBlockSeenLogPlugin(line string) {
-	// DMLOG BLOCK <HEIGHT> <HASH> <PROTO_HEX>
-	if !strings.HasPrefix(line, "DMLOG BLOCK") {
+	// FIRE BLOCK <HEIGHT> <HASH> <PROTO_HEX>
+	if !strings.HasPrefix(line, "FIRE BLOCK") {
 		return
 	}
 

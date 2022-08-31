@@ -1,14 +1,14 @@
 package cli
 
 const (
-	MetricsListenAddr            string = ":9102"
-	MindreaderGRPCAddr           string = ":15010"
-	NodeManagerAPIAddr           string = ":15041"
-	MindreaderNodeManagerAPIAddr string = ":15009"
-	ArchiveNodeManagerAPIAddr    string = ":15014"
-	MergerServingAddr            string = ":15012"
-	RelayerServingAddr           string = ":15011"
-	FirehoseGRPCServingAddr      string = ":15042"
+	MetricsListenAddr         string = ":9102"
+	ReaderGRPCAddr            string = ":15010"
+	NodeManagerAPIAddr        string = ":15041"
+	ReaderNodeManagerAPIAddr  string = ":15009"
+	ArchiveNodeManagerAPIAddr string = ":15014"
+	MergerServingAddr         string = ":15012"
+	RelayerServingAddr        string = ":15011"
+	FirehoseGRPCServingAddr   string = ":15042"
 
 	ATMDirectory         string = "{sf-data-dir}/atm"
 	FirstStreamableBlock int    = 3
@@ -27,7 +27,7 @@ const (
 	//DefaultNetworkID      uint32 = 123
 	//DefaultDfuseNetworkID string = "eth-local"
 	//
-	//MindreaderNodeManagerAPIAddr   string = ":15009"
+	//ReaderNodeManagerAPIAddr   string = ":15009"
 
 	//AbiServingAddr                 string = ":15013"
 	//BlockmetaServingAddr           string = ":15014"
