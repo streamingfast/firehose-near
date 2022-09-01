@@ -20,7 +20,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/streamingfast/bstream"
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
+	pbcodec "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1"
 	sftools "github.com/streamingfast/sf-tools"
 )
 

@@ -68,7 +68,7 @@ func setupCmd(cmd *cobra.Command) error {
 		LogToFile:     isMatchingCommand(cmds, logToFileOn) && viper.GetBool("global-log-to-file"),
 		LogListenAddr: viper.GetString("global-log-level-switcher-listen-addr"),
 	})
-	launcher.SetupTracing("sf-near")
+	launcher.SetupTracing("firehose-near")
 	launcher.SetupAnalyticsMetrics(zlog, viper.GetString("global-metrics-listen-addr"), viper.GetString("global-pprof-listen-addr"))
 
 	return nil

@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
+	pbcodec "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -13,7 +13,7 @@ import (
 	"github.com/streamingfast/dlauncher/launcher"
 	"github.com/streamingfast/dstore"
 	indexerApp "github.com/streamingfast/index-builder/app/index-builder"
-	"github.com/streamingfast/sf-near/transform"
+	"github.com/streamingfast/firehose-near/transform"
 )
 
 func init() {

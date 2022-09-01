@@ -19,9 +19,9 @@ import (
 	"go.uber.org/zap"
 )
 
-var traceEnabled = logging.IsTraceEnabled("near-sf", "github.com/streamingfast/sf-near/codec")
+var traceEnabled = logging.IsTraceEnabled("near-sf", "github.com/streamingfast/firehose-near/codec")
 var zlog *zap.Logger
 
 func init() {
-	logging.Register("github.com/streamingfast/sf-near/codec", &zlog)
+	logging.Register("github.com/streamingfast/firehose-near/codec", &zlog)
 }

@@ -3,7 +3,7 @@ package transform
 import (
 	"github.com/streamingfast/bstream/transform"
 	"github.com/streamingfast/dstore"
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
+	pbcodec "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1"
 )
 
 type blockIndexer interface {

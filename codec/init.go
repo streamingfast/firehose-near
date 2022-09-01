@@ -16,7 +16,7 @@ package codec
 
 import (
 	"github.com/streamingfast/bstream"
-	"github.com/streamingfast/sf-near/types"
+	"github.com/streamingfast/firehose-near/types"
 	"time"
 )
 

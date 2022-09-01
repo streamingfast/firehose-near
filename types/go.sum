@@ -572,8 +572,8 @@ github.com/streamingfast/pbgo v0.0.6-0.20220104194237-6534a2f6320b/go.mod h1:fob
 github.com/streamingfast/pbgo v0.0.6-0.20220629184423-cfd0608e0cf4 h1:VsXTYU57m0zz4VldGBmmolCnNV55BoXCWqE1vkgRHLc=
 github.com/streamingfast/pbgo v0.0.6-0.20220629184423-cfd0608e0cf4/go.mod h1:huKwfgTGFIFZMKSVbD5TywClM7zAeBUG/zePZMqvXQQ=
 github.com/streamingfast/relayer v0.0.2-0.20220120224524-84b9578c9323/go.mod h1:oPNEK44AoXma5MPHrWG0QWbA3RkRpbhP9ODnLxGOmH4=
-github.com/streamingfast/sf-near v0.3.0 h1:bQ+tXhrvPsTeDuVZjmlh8/0fNGg4dKjpzOIw9Wk555Q=
-github.com/streamingfast/sf-near v0.3.0/go.mod h1:vnjy1tmAgrtvqVc/kpjbKoetJ+B2uMTxhiay8ODCVGw=
+github.com/streamingfast/firehose-near v0.3.0 h1:bQ+tXhrvPsTeDuVZjmlh8/0fNGg4dKjpzOIw9Wk555Q=
+github.com/streamingfast/firehose-near v0.3.0/go.mod h1:vnjy1tmAgrtvqVc/kpjbKoetJ+B2uMTxhiay8ODCVGw=
 github.com/streamingfast/sf-tools v0.0.0-20211222184149-d5ac7ff965f7/go.mod h1:28RUphsO45C7Pmxe5P+K/MK9EsBeIItsc/eG/f9PQCY=
 github.com/streamingfast/shutter v1.5.0 h1:NpzDYzj0HVpSiDJVO/FFSL6QIK/YKOxY0gJAtyaTOgs=
 github.com/streamingfast/shutter v1.5.0/go.mod h1:B/T6efqdeMGbGwjzPS1ToXzYZI4kDzI5/u4I+7qbjY8=

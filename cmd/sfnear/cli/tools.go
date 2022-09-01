@@ -14,7 +14,7 @@
 
 package cli
 
-import "github.com/streamingfast/sf-near/tools"
+import "github.com/streamingfast/firehose-near/tools"
 
 func init() {
 	RootCmd.AddCommand(tools.Cmd)

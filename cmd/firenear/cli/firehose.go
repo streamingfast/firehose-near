@@ -15,7 +15,7 @@ import (
 	"github.com/streamingfast/dstore"
 	firehoseApp "github.com/streamingfast/firehose/app/firehose"
 	"github.com/streamingfast/logging"
-	sftransform "github.com/streamingfast/sf-near/transform"
+	sftransform "github.com/streamingfast/firehose-near/transform"
 	"go.uber.org/zap"
 )
 
@@ -25,7 +25,7 @@ var headTimeDriftmetric = metricset.NewHeadTimeDrift("firehose")
 
 func init() {
 	appLogger := zap.NewNop()
-	logging.Register("github.com/streamingfast/sf-near/firehose", &appLogger)
+	logging.Register("github.com/streamingfast/firehose-near/firehose", &appLogger)
 
 	launcher.RegisterApp(zlog, &launcher.AppDef{
 		ID:          "firehose",

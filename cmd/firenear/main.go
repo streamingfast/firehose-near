@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/streamingfast/sf-near/cmd/firenear/cli"
+	"github.com/streamingfast/firehose-near/cmd/firenear/cli"
 )
 
 // Commit sha1 value, injected via go build `ldflags` at build time

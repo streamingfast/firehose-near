@@ -4,7 +4,7 @@ import (
 	"github.com/RoaringBitmap/roaring/roaring64"
 	"github.com/streamingfast/bstream/transform"
 	"github.com/streamingfast/dstore"
-	pbtransform "github.com/streamingfast/sf-near/pb/sf/near/transform/v1"
+	pbtransform "github.com/streamingfast/firehose-near/pb/sf/near/transform/v1"
 )
 
 const ReceiptAddressIndexShortName = "rcptaddr"

@@ -19,17 +19,17 @@ import (
 	"github.com/streamingfast/node-manager/operator"
 	pbbstream "github.com/streamingfast/pbgo/sf/bstream/v1"
 	pbheadinfo "github.com/streamingfast/pbgo/sf/headinfo/v1"
-	"github.com/streamingfast/sf-near/nodemanager"
+	"github.com/streamingfast/firehose-near/nodemanager"
 	"github.com/streamingfast/snapshotter"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 )
 
-var archiveNodeLogger, _ = logging.PackageLogger("archive.node", "github.com/streamingfast/sf-near/archive/node")
-var archiveAppLogger, archiveAppTracer = logging.PackageLogger("archive", "github.com/streamingfast/sf-near/archive")
+var archiveNodeLogger, _ = logging.PackageLogger("archive.node", "github.com/streamingfast/firehose-near/archive/node")
+var archiveAppLogger, archiveAppTracer = logging.PackageLogger("archive", "github.com/streamingfast/firehose-near/archive")
 
-var readerNodeLogger, _ = logging.PackageLogger("reader.node", "github.com/streamingfast/sf-near/reader/node")
-var readerAppLogger, readerAppTracer = logging.PackageLogger("reader", "github.com/streamingfast/sf-near/reader")
+var readerNodeLogger, _ = logging.PackageLogger("reader.node", "github.com/streamingfast/firehose-near/reader/node")
+var readerAppLogger, readerAppTracer = logging.PackageLogger("reader", "github.com/streamingfast/firehose-near/reader")
 
 func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAddr string) {
 	defaultBin := "neard"

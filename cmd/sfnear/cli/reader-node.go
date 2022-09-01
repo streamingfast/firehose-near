@@ -22,7 +22,7 @@ import (
 	"github.com/streamingfast/logging"
 	nodeManager "github.com/streamingfast/node-manager"
 	"github.com/streamingfast/node-manager/mindreader"
-	"github.com/streamingfast/sf-near/codec"
+	"github.com/streamingfast/firehose-near/codec"
 	"go.uber.org/zap"
 )
 

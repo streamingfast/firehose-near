@@ -3,8 +3,8 @@ package tools
 import (
 	"context"
 	"fmt"
-	"github.com/streamingfast/sf-near/types"
-	pbnear "github.com/streamingfast/sf-near/types/pb/sf/near/type/v1"
+	"github.com/streamingfast/firehose-near/types"
+	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 	"os"
 	"strconv"
 

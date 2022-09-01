@@ -18,12 +18,12 @@ import (
 	"go.uber.org/zap"
 )
 
-var RootCmd = &cobra.Command{Use: "sfnear", Short: "NEAR on StreamingFast"}
+var RootCmd = &cobra.Command{Use: "firenear", Short: "NEAR on StreamingFast"}
 var allFlags = make(map[string]bool) // used as global because of async access to cobra init functions
 
 func Main() {
 	cobra.OnInitialize(func() {
-		allFlags = flags.AutoBind(RootCmd, "SFNEAR")
+		allFlags = flags.AutoBind(RootCmd, "FIRENEAR")
 	})
 
 	RootCmd.PersistentFlags().StringP("data-dir", "d", "./sf-data", "Path to data storage for all components of dfuse")
@@ -61,7 +61,7 @@ func Main() {
 	derr.Check("neard", RootCmd.Execute())
 }
 
-var startCmdExample = `sfnear start reader`
+var startCmdExample = `firenear start reader`
 var startCmdHelpTemplate = `Usage:{{if .Runnable}}
   {{.UseLine}}{{end}} [all|command1 [command2...]]{{if gt (len .Aliases) 0}}
 

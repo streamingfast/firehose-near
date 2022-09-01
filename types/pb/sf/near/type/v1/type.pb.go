@@ -35,7 +35,7 @@ type Block struct {
 func (x *Block) Reset() {
 	*x = Block{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_acme_type_v1_type_proto_msgTypes[0]
+		mi := &file_firehose_acme_type_v1_type_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -48,7 +48,7 @@ func (x *Block) String() string {
 func (*Block) ProtoMessage() {}
 
 func (x *Block) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_acme_type_v1_type_proto_msgTypes[0]
+	mi := &file_firehose_acme_type_v1_type_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61,7 +61,7 @@ func (x *Block) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Block.ProtoReflect.Descriptor instead.
 func (*Block) Descriptor() ([]byte, []int) {
-	return file_sf_acme_type_v1_type_proto_rawDescGZIP(), []int{0}
+	return file_firehose_acme_type_v1_type_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Block) GetHeight() uint64 {
@@ -117,7 +117,7 @@ type Transaction struct {
 func (x *Transaction) Reset() {
 	*x = Transaction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_acme_type_v1_type_proto_msgTypes[1]
+		mi := &file_firehose_acme_type_v1_type_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -130,7 +130,7 @@ func (x *Transaction) String() string {
 func (*Transaction) ProtoMessage() {}
 
 func (x *Transaction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_acme_type_v1_type_proto_msgTypes[1]
+	mi := &file_firehose_acme_type_v1_type_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -143,7 +143,7 @@ func (x *Transaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Transaction.ProtoReflect.Descriptor instead.
 func (*Transaction) Descriptor() ([]byte, []int) {
-	return file_sf_acme_type_v1_type_proto_rawDescGZIP(), []int{1}
+	return file_firehose_acme_type_v1_type_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Transaction) GetType() string {
@@ -214,7 +214,7 @@ type Event struct {
 func (x *Event) Reset() {
 	*x = Event{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_acme_type_v1_type_proto_msgTypes[2]
+		mi := &file_firehose_acme_type_v1_type_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -227,7 +227,7 @@ func (x *Event) String() string {
 func (*Event) ProtoMessage() {}
 
 func (x *Event) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_acme_type_v1_type_proto_msgTypes[2]
+	mi := &file_firehose_acme_type_v1_type_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -240,7 +240,7 @@ func (x *Event) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Event.ProtoReflect.Descriptor instead.
 func (*Event) Descriptor() ([]byte, []int) {
-	return file_sf_acme_type_v1_type_proto_rawDescGZIP(), []int{2}
+	return file_firehose_acme_type_v1_type_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Event) GetType() string {
@@ -269,7 +269,7 @@ type Attribute struct {
 func (x *Attribute) Reset() {
 	*x = Attribute{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_acme_type_v1_type_proto_msgTypes[3]
+		mi := &file_firehose_acme_type_v1_type_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -282,7 +282,7 @@ func (x *Attribute) String() string {
 func (*Attribute) ProtoMessage() {}
 
 func (x *Attribute) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_acme_type_v1_type_proto_msgTypes[3]
+	mi := &file_firehose_acme_type_v1_type_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -295,7 +295,7 @@ func (x *Attribute) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Attribute.ProtoReflect.Descriptor instead.
 func (*Attribute) Descriptor() ([]byte, []int) {
-	return file_sf_acme_type_v1_type_proto_rawDescGZIP(), []int{3}
+	return file_firehose_acme_type_v1_type_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Attribute) GetKey() string {
@@ -323,7 +323,7 @@ type BigInt struct {
 func (x *BigInt) Reset() {
 	*x = BigInt{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_acme_type_v1_type_proto_msgTypes[4]
+		mi := &file_firehose_acme_type_v1_type_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -336,7 +336,7 @@ func (x *BigInt) String() string {
 func (*BigInt) ProtoMessage() {}
 
 func (x *BigInt) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_acme_type_v1_type_proto_msgTypes[4]
+	mi := &file_firehose_acme_type_v1_type_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -349,7 +349,7 @@ func (x *BigInt) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BigInt.ProtoReflect.Descriptor instead.
 func (*BigInt) Descriptor() ([]byte, []int) {
-	return file_sf_acme_type_v1_type_proto_rawDescGZIP(), []int{4}
+	return file_firehose_acme_type_v1_type_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *BigInt) GetBytes() []byte {
@@ -359,9 +359,9 @@ func (x *BigInt) GetBytes() []byte {
 	return nil
 }
 
-var File_sf_acme_type_v1_type_proto protoreflect.FileDescriptor
+var file_firehose_acme_type_v1_type_proto protoreflect.FileDescriptor
 
-var file_sf_acme_type_v1_type_proto_rawDesc = []byte{
+var file_firehose_acme_type_v1_type_proto_rawDesc = []byte{
 	0x0a, 0x1a, 0x73, 0x66, 0x2f, 0x61, 0x63, 0x6d, 0x65, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x2f, 0x76,
 	0x31, 0x2f, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0f, 0x73, 0x66,
 	0x2e, 0x61, 0x63, 0x6d, 0x65, 0x2e, 0x74, 0x79, 0x70, 0x65, 0x2e, 0x76, 0x31, 0x22, 0xaf, 0x01,
@@ -412,26 +412,26 @@ var file_sf_acme_type_v1_type_proto_rawDesc = []byte{
 }
 
 var (
-	file_sf_acme_type_v1_type_proto_rawDescOnce sync.Once
-	file_sf_acme_type_v1_type_proto_rawDescData = file_sf_acme_type_v1_type_proto_rawDesc
+	file_firehose_acme_type_v1_type_proto_rawDescOnce sync.Once
+	file_firehose_acme_type_v1_type_proto_rawDescData = file_firehose_acme_type_v1_type_proto_rawDesc
 )
 
-func file_sf_acme_type_v1_type_proto_rawDescGZIP() []byte {
-	file_sf_acme_type_v1_type_proto_rawDescOnce.Do(func() {
-		file_sf_acme_type_v1_type_proto_rawDescData = protoimpl.X.CompressGZIP(file_sf_acme_type_v1_type_proto_rawDescData)
+func file_firehose_acme_type_v1_type_proto_rawDescGZIP() []byte {
+	file_firehose_acme_type_v1_type_proto_rawDescOnce.Do(func() {
+		file_firehose_acme_type_v1_type_proto_rawDescData = protoimpl.X.CompressGZIP(file_firehose_acme_type_v1_type_proto_rawDescData)
 	})
-	return file_sf_acme_type_v1_type_proto_rawDescData
+	return file_firehose_acme_type_v1_type_proto_rawDescData
 }
 
-var file_sf_acme_type_v1_type_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
-var file_sf_acme_type_v1_type_proto_goTypes = []interface{}{
+var file_firehose_acme_type_v1_type_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_firehose_acme_type_v1_type_proto_goTypes = []interface{}{
 	(*Block)(nil),       // 0: sf.acme.type.v1.Block
 	(*Transaction)(nil), // 1: sf.acme.type.v1.Transaction
 	(*Event)(nil),       // 2: sf.acme.type.v1.Event
 	(*Attribute)(nil),   // 3: sf.acme.type.v1.Attribute
 	(*BigInt)(nil),      // 4: sf.acme.type.v1.BigInt
 }
-var file_sf_acme_type_v1_type_proto_depIdxs = []int32{
+var file_firehose_acme_type_v1_type_proto_depIdxs = []int32{
 	1, // 0: sf.acme.type.v1.Block.transactions:type_name -> sf.acme.type.v1.Transaction
 	4, // 1: sf.acme.type.v1.Transaction.amount:type_name -> sf.acme.type.v1.BigInt
 	4, // 2: sf.acme.type.v1.Transaction.fee:type_name -> sf.acme.type.v1.BigInt
@@ -444,13 +444,13 @@ var file_sf_acme_type_v1_type_proto_depIdxs = []int32{
 	0, // [0:5] is the sub-list for field type_name
 }
 
-func init() { file_sf_acme_type_v1_type_proto_init() }
-func file_sf_acme_type_v1_type_proto_init() {
-	if File_sf_acme_type_v1_type_proto != nil {
+func init() { file_firehose_acme_type_v1_type_proto_init() }
+func file_firehose_acme_type_v1_type_proto_init() {
+	if file_firehose_acme_type_v1_type_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_sf_acme_type_v1_type_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_acme_type_v1_type_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Block); i {
 			case 0:
 				return &v.state
@@ -462,7 +462,7 @@ func file_sf_acme_type_v1_type_proto_init() {
 				return nil
 			}
 		}
-		file_sf_acme_type_v1_type_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_acme_type_v1_type_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Transaction); i {
 			case 0:
 				return &v.state
@@ -474,7 +474,7 @@ func file_sf_acme_type_v1_type_proto_init() {
 				return nil
 			}
 		}
-		file_sf_acme_type_v1_type_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_acme_type_v1_type_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Event); i {
 			case 0:
 				return &v.state
@@ -486,7 +486,7 @@ func file_sf_acme_type_v1_type_proto_init() {
 				return nil
 			}
 		}
-		file_sf_acme_type_v1_type_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_acme_type_v1_type_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Attribute); i {
 			case 0:
 				return &v.state
@@ -498,7 +498,7 @@ func file_sf_acme_type_v1_type_proto_init() {
 				return nil
 			}
 		}
-		file_sf_acme_type_v1_type_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_acme_type_v1_type_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BigInt); i {
 			case 0:
 				return &v.state
@@ -515,18 +515,18 @@ func file_sf_acme_type_v1_type_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_sf_acme_type_v1_type_proto_rawDesc,
+			RawDescriptor: file_firehose_acme_type_v1_type_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_sf_acme_type_v1_type_proto_goTypes,
-		DependencyIndexes: file_sf_acme_type_v1_type_proto_depIdxs,
-		MessageInfos:      file_sf_acme_type_v1_type_proto_msgTypes,
+		GoTypes:           file_firehose_acme_type_v1_type_proto_goTypes,
+		DependencyIndexes: file_firehose_acme_type_v1_type_proto_depIdxs,
+		MessageInfos:      file_firehose_acme_type_v1_type_proto_msgTypes,
 	}.Build()
-	File_sf_acme_type_v1_type_proto = out.File
-	file_sf_acme_type_v1_type_proto_rawDesc = nil
-	file_sf_acme_type_v1_type_proto_goTypes = nil
-	file_sf_acme_type_v1_type_proto_depIdxs = nil
+	file_firehose_acme_type_v1_type_proto = out.File
+	file_firehose_acme_type_v1_type_proto_rawDesc = nil
+	file_firehose_acme_type_v1_type_proto_goTypes = nil
+	file_firehose_acme_type_v1_type_proto_depIdxs = nil
 }

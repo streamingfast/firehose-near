@@ -719,9 +719,9 @@ github.com/streamingfast/pbgo v0.0.6-0.20220801202203-c32e42ac42a8/go.mod h1:huK
 github.com/streamingfast/relayer v0.0.2-0.20220120224524-84b9578c9323/go.mod h1:oPNEK44AoXma5MPHrWG0QWbA3RkRpbhP9ODnLxGOmH4=
 github.com/streamingfast/relayer v0.0.2-0.20220811185139-02ee222c9277 h1:9Nfgg45tCcgnci3WVlNJZCO0LKcYBnPt3chEODIltEg=
 github.com/streamingfast/relayer v0.0.2-0.20220811185139-02ee222c9277/go.mod h1:0cDXJdtPkm2fuMmbj5bdUz59dexgJZKKKxooO4EgF5o=
-github.com/streamingfast/sf-near v0.3.0/go.mod h1:vnjy1tmAgrtvqVc/kpjbKoetJ+B2uMTxhiay8ODCVGw=
-github.com/streamingfast/sf-near/types v0.0.0-20220901160911-467017d06d91 h1:pYIt2F9PmrXRFfC17HpblkcDL8f8hJxDDhefd1G8guE=
-github.com/streamingfast/sf-near/types v0.0.0-20220901160911-467017d06d91/go.mod h1:2IYFIKpurw4zG26CwndzObSNBmrx1/lfyJ6doEeXWRY=
+github.com/streamingfast/firehose-near v0.3.0/go.mod h1:vnjy1tmAgrtvqVc/kpjbKoetJ+B2uMTxhiay8ODCVGw=
+github.com/streamingfast/firehose-near/types v0.0.0-20220901160911-467017d06d91 h1:pYIt2F9PmrXRFfC17HpblkcDL8f8hJxDDhefd1G8guE=
+github.com/streamingfast/firehose-near/types v0.0.0-20220901160911-467017d06d91/go.mod h1:2IYFIKpurw4zG26CwndzObSNBmrx1/lfyJ6doEeXWRY=
 github.com/streamingfast/sf-tools v0.0.0-20211222184149-d5ac7ff965f7/go.mod h1:28RUphsO45C7Pmxe5P+K/MK9EsBeIItsc/eG/f9PQCY=
 github.com/streamingfast/sf-tools v0.0.0-20220810183745-b514ffd4aa46 h1:up80oljMQVr+uspMmmxGNcMaUShf6MObJ6Zjfvx9ick=
 github.com/streamingfast/sf-tools v0.0.0-20220810183745-b514ffd4aa46/go.mod h1:IK3diyADf5yhBl0JecFZRdOVbXKleVzAhje3Eag8+2w=

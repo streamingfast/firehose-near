@@ -50,11 +50,11 @@ func (x CurveKind) String() string {
 }
 
 func (CurveKind) Descriptor() protoreflect.EnumDescriptor {
-	return file_sf_near_codec_v1_codec_proto_enumTypes[0].Descriptor()
+	return file_firehose_near_codec_v1_codec_proto_enumTypes[0].Descriptor()
 }
 
 func (CurveKind) Type() protoreflect.EnumType {
-	return &file_sf_near_codec_v1_codec_proto_enumTypes[0]
+	return &file_firehose_near_codec_v1_codec_proto_enumTypes[0]
 }
 
 func (x CurveKind) Number() protoreflect.EnumNumber {
@@ -63,7 +63,7 @@ func (x CurveKind) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use CurveKind.Descriptor instead.
 func (CurveKind) EnumDescriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{0}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{0}
 }
 
 type ExecutionMetadata int32
@@ -93,11 +93,11 @@ func (x ExecutionMetadata) String() string {
 }
 
 func (ExecutionMetadata) Descriptor() protoreflect.EnumDescriptor {
-	return file_sf_near_codec_v1_codec_proto_enumTypes[1].Descriptor()
+	return file_firehose_near_codec_v1_codec_proto_enumTypes[1].Descriptor()
 }
 
 func (ExecutionMetadata) Type() protoreflect.EnumType {
-	return &file_sf_near_codec_v1_codec_proto_enumTypes[1]
+	return &file_firehose_near_codec_v1_codec_proto_enumTypes[1]
 }
 
 func (x ExecutionMetadata) Number() protoreflect.EnumNumber {
@@ -106,7 +106,7 @@ func (x ExecutionMetadata) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ExecutionMetadata.Descriptor instead.
 func (ExecutionMetadata) EnumDescriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{1}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{1}
 }
 
 type FunctionCallErrorSer int32
@@ -157,11 +157,11 @@ func (x FunctionCallErrorSer) String() string {
 }
 
 func (FunctionCallErrorSer) Descriptor() protoreflect.EnumDescriptor {
-	return file_sf_near_codec_v1_codec_proto_enumTypes[2].Descriptor()
+	return file_firehose_near_codec_v1_codec_proto_enumTypes[2].Descriptor()
 }
 
 func (FunctionCallErrorSer) Type() protoreflect.EnumType {
-	return &file_sf_near_codec_v1_codec_proto_enumTypes[2]
+	return &file_firehose_near_codec_v1_codec_proto_enumTypes[2]
 }
 
 func (x FunctionCallErrorSer) Number() protoreflect.EnumNumber {
@@ -170,7 +170,7 @@ func (x FunctionCallErrorSer) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use FunctionCallErrorSer.Descriptor instead.
 func (FunctionCallErrorSer) EnumDescriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{2}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{2}
 }
 
 type ReceiptValidationError int32
@@ -218,11 +218,11 @@ func (x ReceiptValidationError) String() string {
 }
 
 func (ReceiptValidationError) Descriptor() protoreflect.EnumDescriptor {
-	return file_sf_near_codec_v1_codec_proto_enumTypes[3].Descriptor()
+	return file_firehose_near_codec_v1_codec_proto_enumTypes[3].Descriptor()
 }
 
 func (ReceiptValidationError) Type() protoreflect.EnumType {
-	return &file_sf_near_codec_v1_codec_proto_enumTypes[3]
+	return &file_firehose_near_codec_v1_codec_proto_enumTypes[3]
 }
 
 func (x ReceiptValidationError) Number() protoreflect.EnumNumber {
@@ -231,7 +231,7 @@ func (x ReceiptValidationError) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ReceiptValidationError.Descriptor instead.
 func (ReceiptValidationError) EnumDescriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3}
 }
 
 type InvalidTxError int32
@@ -300,11 +300,11 @@ func (x InvalidTxError) String() string {
 }
 
 func (InvalidTxError) Descriptor() protoreflect.EnumDescriptor {
-	return file_sf_near_codec_v1_codec_proto_enumTypes[4].Descriptor()
+	return file_firehose_near_codec_v1_codec_proto_enumTypes[4].Descriptor()
 }
 
 func (InvalidTxError) Type() protoreflect.EnumType {
-	return &file_sf_near_codec_v1_codec_proto_enumTypes[4]
+	return &file_firehose_near_codec_v1_codec_proto_enumTypes[4]
 }
 
 func (x InvalidTxError) Number() protoreflect.EnumNumber {
@@ -313,7 +313,7 @@ func (x InvalidTxError) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use InvalidTxError.Descriptor instead.
 func (InvalidTxError) EnumDescriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{4}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{4}
 }
 
 type Direction int32
@@ -346,11 +346,11 @@ func (x Direction) String() string {
 }
 
 func (Direction) Descriptor() protoreflect.EnumDescriptor {
-	return file_sf_near_codec_v1_codec_proto_enumTypes[5].Descriptor()
+	return file_firehose_near_codec_v1_codec_proto_enumTypes[5].Descriptor()
 }
 
 func (Direction) Type() protoreflect.EnumType {
-	return &file_sf_near_codec_v1_codec_proto_enumTypes[5]
+	return &file_firehose_near_codec_v1_codec_proto_enumTypes[5]
 }
 
 func (x Direction) Number() protoreflect.EnumNumber {
@@ -359,7 +359,7 @@ func (x Direction) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Direction.Descriptor instead.
 func (Direction) EnumDescriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{5}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{5}
 }
 
 type Block struct {
@@ -377,7 +377,7 @@ type Block struct {
 func (x *Block) Reset() {
 	*x = Block{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[0]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -390,7 +390,7 @@ func (x *Block) String() string {
 func (*Block) ProtoMessage() {}
 
 func (x *Block) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[0]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -403,7 +403,7 @@ func (x *Block) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Block.ProtoReflect.Descriptor instead.
 func (*Block) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{0}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Block) GetAuthor() string {
@@ -458,7 +458,7 @@ type HeaderOnlyBlock struct {
 func (x *HeaderOnlyBlock) Reset() {
 	*x = HeaderOnlyBlock{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[1]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -471,7 +471,7 @@ func (x *HeaderOnlyBlock) String() string {
 func (*HeaderOnlyBlock) ProtoMessage() {}
 
 func (x *HeaderOnlyBlock) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[1]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -484,7 +484,7 @@ func (x *HeaderOnlyBlock) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HeaderOnlyBlock.ProtoReflect.Descriptor instead.
 func (*HeaderOnlyBlock) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{1}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *HeaderOnlyBlock) GetHeader() *BlockHeader {
@@ -506,7 +506,7 @@ type StateChangeWithCause struct {
 func (x *StateChangeWithCause) Reset() {
 	*x = StateChangeWithCause{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[2]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -519,7 +519,7 @@ func (x *StateChangeWithCause) String() string {
 func (*StateChangeWithCause) ProtoMessage() {}
 
 func (x *StateChangeWithCause) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[2]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -532,7 +532,7 @@ func (x *StateChangeWithCause) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateChangeWithCause.ProtoReflect.Descriptor instead.
 func (*StateChangeWithCause) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{2}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *StateChangeWithCause) GetValue() *StateChangeValue {
@@ -571,7 +571,7 @@ type StateChangeCause struct {
 func (x *StateChangeCause) Reset() {
 	*x = StateChangeCause{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[3]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -584,7 +584,7 @@ func (x *StateChangeCause) String() string {
 func (*StateChangeCause) ProtoMessage() {}
 
 func (x *StateChangeCause) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[3]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -597,7 +597,7 @@ func (x *StateChangeCause) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateChangeCause.ProtoReflect.Descriptor instead.
 func (*StateChangeCause) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3}
 }
 
 func (m *StateChangeCause) GetCause() isStateChangeCause_Cause {
@@ -761,7 +761,7 @@ type StateChangeValue struct {
 func (x *StateChangeValue) Reset() {
 	*x = StateChangeValue{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[4]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -774,7 +774,7 @@ func (x *StateChangeValue) String() string {
 func (*StateChangeValue) ProtoMessage() {}
 
 func (x *StateChangeValue) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[4]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -787,7 +787,7 @@ func (x *StateChangeValue) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateChangeValue.ProtoReflect.Descriptor instead.
 func (*StateChangeValue) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{4}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{4}
 }
 
 func (m *StateChangeValue) GetValue() isStateChangeValue_Value {
@@ -919,7 +919,7 @@ type Account struct {
 func (x *Account) Reset() {
 	*x = Account{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[5]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -932,7 +932,7 @@ func (x *Account) String() string {
 func (*Account) ProtoMessage() {}
 
 func (x *Account) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[5]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -945,7 +945,7 @@ func (x *Account) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Account.ProtoReflect.Descriptor instead.
 func (*Account) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{5}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Account) GetAmount() *BigInt {
@@ -1018,7 +1018,7 @@ type BlockHeader struct {
 func (x *BlockHeader) Reset() {
 	*x = BlockHeader{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[6]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1031,7 +1031,7 @@ func (x *BlockHeader) String() string {
 func (*BlockHeader) ProtoMessage() {}
 
 func (x *BlockHeader) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[6]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1044,7 +1044,7 @@ func (x *BlockHeader) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockHeader.ProtoReflect.Descriptor instead.
 func (*BlockHeader) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{6}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *BlockHeader) GetHeight() uint64 {
@@ -1282,7 +1282,7 @@ type BigInt struct {
 func (x *BigInt) Reset() {
 	*x = BigInt{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[7]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1295,7 +1295,7 @@ func (x *BigInt) String() string {
 func (*BigInt) ProtoMessage() {}
 
 func (x *BigInt) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[7]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1308,7 +1308,7 @@ func (x *BigInt) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BigInt.ProtoReflect.Descriptor instead.
 func (*BigInt) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{7}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *BigInt) GetBytes() []byte {
@@ -1329,7 +1329,7 @@ type CryptoHash struct {
 func (x *CryptoHash) Reset() {
 	*x = CryptoHash{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[8]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1342,7 +1342,7 @@ func (x *CryptoHash) String() string {
 func (*CryptoHash) ProtoMessage() {}
 
 func (x *CryptoHash) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[8]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1355,7 +1355,7 @@ func (x *CryptoHash) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CryptoHash.ProtoReflect.Descriptor instead.
 func (*CryptoHash) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{8}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CryptoHash) GetBytes() []byte {
@@ -1377,7 +1377,7 @@ type Signature struct {
 func (x *Signature) Reset() {
 	*x = Signature{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[9]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1390,7 +1390,7 @@ func (x *Signature) String() string {
 func (*Signature) ProtoMessage() {}
 
 func (x *Signature) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[9]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1403,7 +1403,7 @@ func (x *Signature) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Signature.ProtoReflect.Descriptor instead.
 func (*Signature) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{9}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Signature) GetType() CurveKind {
@@ -1432,7 +1432,7 @@ type PublicKey struct {
 func (x *PublicKey) Reset() {
 	*x = PublicKey{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[10]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1445,7 +1445,7 @@ func (x *PublicKey) String() string {
 func (*PublicKey) ProtoMessage() {}
 
 func (x *PublicKey) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[10]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1458,7 +1458,7 @@ func (x *PublicKey) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublicKey.ProtoReflect.Descriptor instead.
 func (*PublicKey) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{10}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *PublicKey) GetType() CurveKind {
@@ -1488,7 +1488,7 @@ type ValidatorStake struct {
 func (x *ValidatorStake) Reset() {
 	*x = ValidatorStake{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[11]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1501,7 +1501,7 @@ func (x *ValidatorStake) String() string {
 func (*ValidatorStake) ProtoMessage() {}
 
 func (x *ValidatorStake) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[11]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1514,7 +1514,7 @@ func (x *ValidatorStake) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidatorStake.ProtoReflect.Descriptor instead.
 func (*ValidatorStake) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{11}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ValidatorStake) GetAccountId() string {
@@ -1550,7 +1550,7 @@ type SlashedValidator struct {
 func (x *SlashedValidator) Reset() {
 	*x = SlashedValidator{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[12]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1563,7 +1563,7 @@ func (x *SlashedValidator) String() string {
 func (*SlashedValidator) ProtoMessage() {}
 
 func (x *SlashedValidator) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[12]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1576,7 +1576,7 @@ func (x *SlashedValidator) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SlashedValidator.ProtoReflect.Descriptor instead.
 func (*SlashedValidator) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{12}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SlashedValidator) GetAccountId() string {
@@ -1620,7 +1620,7 @@ type ChunkHeader struct {
 func (x *ChunkHeader) Reset() {
 	*x = ChunkHeader{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[13]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1633,7 +1633,7 @@ func (x *ChunkHeader) String() string {
 func (*ChunkHeader) ProtoMessage() {}
 
 func (x *ChunkHeader) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[13]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1646,7 +1646,7 @@ func (x *ChunkHeader) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChunkHeader.ProtoReflect.Descriptor instead.
 func (*ChunkHeader) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{13}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ChunkHeader) GetChunkHash() []byte {
@@ -1781,7 +1781,7 @@ type IndexerShard struct {
 func (x *IndexerShard) Reset() {
 	*x = IndexerShard{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[14]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1794,7 +1794,7 @@ func (x *IndexerShard) String() string {
 func (*IndexerShard) ProtoMessage() {}
 
 func (x *IndexerShard) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[14]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1807,7 +1807,7 @@ func (x *IndexerShard) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IndexerShard.ProtoReflect.Descriptor instead.
 func (*IndexerShard) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{14}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *IndexerShard) GetShardId() uint64 {
@@ -1843,7 +1843,7 @@ type IndexerExecutionOutcomeWithReceipt struct {
 func (x *IndexerExecutionOutcomeWithReceipt) Reset() {
 	*x = IndexerExecutionOutcomeWithReceipt{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[15]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1856,7 +1856,7 @@ func (x *IndexerExecutionOutcomeWithReceipt) String() string {
 func (*IndexerExecutionOutcomeWithReceipt) ProtoMessage() {}
 
 func (x *IndexerExecutionOutcomeWithReceipt) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[15]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1869,7 +1869,7 @@ func (x *IndexerExecutionOutcomeWithReceipt) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use IndexerExecutionOutcomeWithReceipt.ProtoReflect.Descriptor instead.
 func (*IndexerExecutionOutcomeWithReceipt) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{15}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *IndexerExecutionOutcomeWithReceipt) GetExecutionOutcome() *ExecutionOutcomeWithId {
@@ -1900,7 +1900,7 @@ type IndexerChunk struct {
 func (x *IndexerChunk) Reset() {
 	*x = IndexerChunk{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[16]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1913,7 +1913,7 @@ func (x *IndexerChunk) String() string {
 func (*IndexerChunk) ProtoMessage() {}
 
 func (x *IndexerChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[16]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1926,7 +1926,7 @@ func (x *IndexerChunk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IndexerChunk.ProtoReflect.Descriptor instead.
 func (*IndexerChunk) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{16}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *IndexerChunk) GetAuthor() string {
@@ -1969,7 +1969,7 @@ type IndexerTransactionWithOutcome struct {
 func (x *IndexerTransactionWithOutcome) Reset() {
 	*x = IndexerTransactionWithOutcome{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[17]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1982,7 +1982,7 @@ func (x *IndexerTransactionWithOutcome) String() string {
 func (*IndexerTransactionWithOutcome) ProtoMessage() {}
 
 func (x *IndexerTransactionWithOutcome) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[17]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1995,7 +1995,7 @@ func (x *IndexerTransactionWithOutcome) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IndexerTransactionWithOutcome.ProtoReflect.Descriptor instead.
 func (*IndexerTransactionWithOutcome) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{17}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *IndexerTransactionWithOutcome) GetTransaction() *SignedTransaction {
@@ -2029,7 +2029,7 @@ type SignedTransaction struct {
 func (x *SignedTransaction) Reset() {
 	*x = SignedTransaction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[18]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2042,7 +2042,7 @@ func (x *SignedTransaction) String() string {
 func (*SignedTransaction) ProtoMessage() {}
 
 func (x *SignedTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[18]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2055,7 +2055,7 @@ func (x *SignedTransaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignedTransaction.ProtoReflect.Descriptor instead.
 func (*SignedTransaction) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{18}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *SignedTransaction) GetSignerId() string {
@@ -2119,7 +2119,7 @@ type IndexerExecutionOutcomeWithOptionalReceipt struct {
 func (x *IndexerExecutionOutcomeWithOptionalReceipt) Reset() {
 	*x = IndexerExecutionOutcomeWithOptionalReceipt{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[19]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2132,7 +2132,7 @@ func (x *IndexerExecutionOutcomeWithOptionalReceipt) String() string {
 func (*IndexerExecutionOutcomeWithOptionalReceipt) ProtoMessage() {}
 
 func (x *IndexerExecutionOutcomeWithOptionalReceipt) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[19]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2145,7 +2145,7 @@ func (x *IndexerExecutionOutcomeWithOptionalReceipt) ProtoReflect() protoreflect
 
 // Deprecated: Use IndexerExecutionOutcomeWithOptionalReceipt.ProtoReflect.Descriptor instead.
 func (*IndexerExecutionOutcomeWithOptionalReceipt) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{19}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *IndexerExecutionOutcomeWithOptionalReceipt) GetExecutionOutcome() *ExecutionOutcomeWithId {
@@ -2179,7 +2179,7 @@ type Receipt struct {
 func (x *Receipt) Reset() {
 	*x = Receipt{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[20]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2192,7 +2192,7 @@ func (x *Receipt) String() string {
 func (*Receipt) ProtoMessage() {}
 
 func (x *Receipt) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[20]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2205,7 +2205,7 @@ func (x *Receipt) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Receipt.ProtoReflect.Descriptor instead.
 func (*Receipt) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{20}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *Receipt) GetPredecessorId() string {
@@ -2278,7 +2278,7 @@ type ReceiptData struct {
 func (x *ReceiptData) Reset() {
 	*x = ReceiptData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[21]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2291,7 +2291,7 @@ func (x *ReceiptData) String() string {
 func (*ReceiptData) ProtoMessage() {}
 
 func (x *ReceiptData) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[21]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2304,7 +2304,7 @@ func (x *ReceiptData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReceiptData.ProtoReflect.Descriptor instead.
 func (*ReceiptData) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{21}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ReceiptData) GetDataId() *CryptoHash {
@@ -2337,7 +2337,7 @@ type ReceiptAction struct {
 func (x *ReceiptAction) Reset() {
 	*x = ReceiptAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[22]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2350,7 +2350,7 @@ func (x *ReceiptAction) String() string {
 func (*ReceiptAction) ProtoMessage() {}
 
 func (x *ReceiptAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[22]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2363,7 +2363,7 @@ func (x *ReceiptAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReceiptAction.ProtoReflect.Descriptor instead.
 func (*ReceiptAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{22}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ReceiptAction) GetSignerId() string {
@@ -2420,7 +2420,7 @@ type DataReceiver struct {
 func (x *DataReceiver) Reset() {
 	*x = DataReceiver{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[23]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2433,7 +2433,7 @@ func (x *DataReceiver) String() string {
 func (*DataReceiver) ProtoMessage() {}
 
 func (x *DataReceiver) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[23]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2446,7 +2446,7 @@ func (x *DataReceiver) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataReceiver.ProtoReflect.Descriptor instead.
 func (*DataReceiver) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{23}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *DataReceiver) GetDataId() *CryptoHash {
@@ -2477,7 +2477,7 @@ type ExecutionOutcomeWithId struct {
 func (x *ExecutionOutcomeWithId) Reset() {
 	*x = ExecutionOutcomeWithId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[24]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2490,7 +2490,7 @@ func (x *ExecutionOutcomeWithId) String() string {
 func (*ExecutionOutcomeWithId) ProtoMessage() {}
 
 func (x *ExecutionOutcomeWithId) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[24]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2503,7 +2503,7 @@ func (x *ExecutionOutcomeWithId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecutionOutcomeWithId.ProtoReflect.Descriptor instead.
 func (*ExecutionOutcomeWithId) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{24}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ExecutionOutcomeWithId) GetProof() *MerklePath {
@@ -2556,7 +2556,7 @@ type ExecutionOutcome struct {
 func (x *ExecutionOutcome) Reset() {
 	*x = ExecutionOutcome{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[25]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2569,7 +2569,7 @@ func (x *ExecutionOutcome) String() string {
 func (*ExecutionOutcome) ProtoMessage() {}
 
 func (x *ExecutionOutcome) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[25]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2582,7 +2582,7 @@ func (x *ExecutionOutcome) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecutionOutcome.ProtoReflect.Descriptor instead.
 func (*ExecutionOutcome) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{25}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ExecutionOutcome) GetLogs() []string {
@@ -2701,7 +2701,7 @@ type SuccessValueExecutionStatus struct {
 func (x *SuccessValueExecutionStatus) Reset() {
 	*x = SuccessValueExecutionStatus{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[26]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2714,7 +2714,7 @@ func (x *SuccessValueExecutionStatus) String() string {
 func (*SuccessValueExecutionStatus) ProtoMessage() {}
 
 func (x *SuccessValueExecutionStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[26]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2727,7 +2727,7 @@ func (x *SuccessValueExecutionStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuccessValueExecutionStatus.ProtoReflect.Descriptor instead.
 func (*SuccessValueExecutionStatus) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{26}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *SuccessValueExecutionStatus) GetValue() []byte {
@@ -2748,7 +2748,7 @@ type SuccessReceiptIdExecutionStatus struct {
 func (x *SuccessReceiptIdExecutionStatus) Reset() {
 	*x = SuccessReceiptIdExecutionStatus{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[27]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2761,7 +2761,7 @@ func (x *SuccessReceiptIdExecutionStatus) String() string {
 func (*SuccessReceiptIdExecutionStatus) ProtoMessage() {}
 
 func (x *SuccessReceiptIdExecutionStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[27]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2774,7 +2774,7 @@ func (x *SuccessReceiptIdExecutionStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuccessReceiptIdExecutionStatus.ProtoReflect.Descriptor instead.
 func (*SuccessReceiptIdExecutionStatus) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{27}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *SuccessReceiptIdExecutionStatus) GetId() *CryptoHash {
@@ -2793,7 +2793,7 @@ type UnknownExecutionStatus struct {
 func (x *UnknownExecutionStatus) Reset() {
 	*x = UnknownExecutionStatus{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[28]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2806,7 +2806,7 @@ func (x *UnknownExecutionStatus) String() string {
 func (*UnknownExecutionStatus) ProtoMessage() {}
 
 func (x *UnknownExecutionStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[28]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2819,7 +2819,7 @@ func (x *UnknownExecutionStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnknownExecutionStatus.ProtoReflect.Descriptor instead.
 func (*UnknownExecutionStatus) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{28}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{28}
 }
 
 type FailureExecutionStatus struct {
@@ -2836,7 +2836,7 @@ type FailureExecutionStatus struct {
 func (x *FailureExecutionStatus) Reset() {
 	*x = FailureExecutionStatus{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[29]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2849,7 +2849,7 @@ func (x *FailureExecutionStatus) String() string {
 func (*FailureExecutionStatus) ProtoMessage() {}
 
 func (x *FailureExecutionStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[29]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2862,7 +2862,7 @@ func (x *FailureExecutionStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FailureExecutionStatus.ProtoReflect.Descriptor instead.
 func (*FailureExecutionStatus) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{29}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{29}
 }
 
 func (m *FailureExecutionStatus) GetFailure() isFailureExecutionStatus_Failure {
@@ -2931,7 +2931,7 @@ type ActionError struct {
 func (x *ActionError) Reset() {
 	*x = ActionError{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[30]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2944,7 +2944,7 @@ func (x *ActionError) String() string {
 func (*ActionError) ProtoMessage() {}
 
 func (x *ActionError) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[30]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2957,7 +2957,7 @@ func (x *ActionError) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionError.ProtoReflect.Descriptor instead.
 func (*ActionError) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{30}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ActionError) GetIndex() uint64 {
@@ -3197,7 +3197,7 @@ type AccountAlreadyExistsErrorKind struct {
 func (x *AccountAlreadyExistsErrorKind) Reset() {
 	*x = AccountAlreadyExistsErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[31]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3210,7 +3210,7 @@ func (x *AccountAlreadyExistsErrorKind) String() string {
 func (*AccountAlreadyExistsErrorKind) ProtoMessage() {}
 
 func (x *AccountAlreadyExistsErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[31]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3223,7 +3223,7 @@ func (x *AccountAlreadyExistsErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountAlreadyExistsErrorKind.ProtoReflect.Descriptor instead.
 func (*AccountAlreadyExistsErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{31}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *AccountAlreadyExistsErrorKind) GetAccountId() string {
@@ -3244,7 +3244,7 @@ type AccountDoesNotExistErrorKind struct {
 func (x *AccountDoesNotExistErrorKind) Reset() {
 	*x = AccountDoesNotExistErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[32]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3257,7 +3257,7 @@ func (x *AccountDoesNotExistErrorKind) String() string {
 func (*AccountDoesNotExistErrorKind) ProtoMessage() {}
 
 func (x *AccountDoesNotExistErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[32]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3270,7 +3270,7 @@ func (x *AccountDoesNotExistErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountDoesNotExistErrorKind.ProtoReflect.Descriptor instead.
 func (*AccountDoesNotExistErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{32}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *AccountDoesNotExistErrorKind) GetAccountId() string {
@@ -3294,7 +3294,7 @@ type CreateAccountOnlyByRegistrarErrorKind struct {
 func (x *CreateAccountOnlyByRegistrarErrorKind) Reset() {
 	*x = CreateAccountOnlyByRegistrarErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[33]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3307,7 +3307,7 @@ func (x *CreateAccountOnlyByRegistrarErrorKind) String() string {
 func (*CreateAccountOnlyByRegistrarErrorKind) ProtoMessage() {}
 
 func (x *CreateAccountOnlyByRegistrarErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[33]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3320,7 +3320,7 @@ func (x *CreateAccountOnlyByRegistrarErrorKind) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use CreateAccountOnlyByRegistrarErrorKind.ProtoReflect.Descriptor instead.
 func (*CreateAccountOnlyByRegistrarErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{33}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *CreateAccountOnlyByRegistrarErrorKind) GetAccountId() string {
@@ -3356,7 +3356,7 @@ type CreateAccountNotAllowedErrorKind struct {
 func (x *CreateAccountNotAllowedErrorKind) Reset() {
 	*x = CreateAccountNotAllowedErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[34]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3369,7 +3369,7 @@ func (x *CreateAccountNotAllowedErrorKind) String() string {
 func (*CreateAccountNotAllowedErrorKind) ProtoMessage() {}
 
 func (x *CreateAccountNotAllowedErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[34]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3382,7 +3382,7 @@ func (x *CreateAccountNotAllowedErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAccountNotAllowedErrorKind.ProtoReflect.Descriptor instead.
 func (*CreateAccountNotAllowedErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{34}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *CreateAccountNotAllowedErrorKind) GetAccountId() string {
@@ -3411,7 +3411,7 @@ type ActorNoPermissionErrorKind struct {
 func (x *ActorNoPermissionErrorKind) Reset() {
 	*x = ActorNoPermissionErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[35]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3424,7 +3424,7 @@ func (x *ActorNoPermissionErrorKind) String() string {
 func (*ActorNoPermissionErrorKind) ProtoMessage() {}
 
 func (x *ActorNoPermissionErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[35]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3437,7 +3437,7 @@ func (x *ActorNoPermissionErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActorNoPermissionErrorKind.ProtoReflect.Descriptor instead.
 func (*ActorNoPermissionErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{35}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ActorNoPermissionErrorKind) GetAccountId() string {
@@ -3466,7 +3466,7 @@ type DeleteKeyDoesNotExistErrorKind struct {
 func (x *DeleteKeyDoesNotExistErrorKind) Reset() {
 	*x = DeleteKeyDoesNotExistErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[36]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3479,7 +3479,7 @@ func (x *DeleteKeyDoesNotExistErrorKind) String() string {
 func (*DeleteKeyDoesNotExistErrorKind) ProtoMessage() {}
 
 func (x *DeleteKeyDoesNotExistErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[36]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3492,7 +3492,7 @@ func (x *DeleteKeyDoesNotExistErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteKeyDoesNotExistErrorKind.ProtoReflect.Descriptor instead.
 func (*DeleteKeyDoesNotExistErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{36}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *DeleteKeyDoesNotExistErrorKind) GetAccountId() string {
@@ -3521,7 +3521,7 @@ type AddKeyAlreadyExistsErrorKind struct {
 func (x *AddKeyAlreadyExistsErrorKind) Reset() {
 	*x = AddKeyAlreadyExistsErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[37]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3534,7 +3534,7 @@ func (x *AddKeyAlreadyExistsErrorKind) String() string {
 func (*AddKeyAlreadyExistsErrorKind) ProtoMessage() {}
 
 func (x *AddKeyAlreadyExistsErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[37]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3547,7 +3547,7 @@ func (x *AddKeyAlreadyExistsErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddKeyAlreadyExistsErrorKind.ProtoReflect.Descriptor instead.
 func (*AddKeyAlreadyExistsErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{37}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *AddKeyAlreadyExistsErrorKind) GetAccountId() string {
@@ -3575,7 +3575,7 @@ type DeleteAccountStakingErrorKind struct {
 func (x *DeleteAccountStakingErrorKind) Reset() {
 	*x = DeleteAccountStakingErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[38]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3588,7 +3588,7 @@ func (x *DeleteAccountStakingErrorKind) String() string {
 func (*DeleteAccountStakingErrorKind) ProtoMessage() {}
 
 func (x *DeleteAccountStakingErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[38]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3601,7 +3601,7 @@ func (x *DeleteAccountStakingErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccountStakingErrorKind.ProtoReflect.Descriptor instead.
 func (*DeleteAccountStakingErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{38}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *DeleteAccountStakingErrorKind) GetAccountId() string {
@@ -3623,7 +3623,7 @@ type LackBalanceForStateErrorKind struct {
 func (x *LackBalanceForStateErrorKind) Reset() {
 	*x = LackBalanceForStateErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[39]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3636,7 +3636,7 @@ func (x *LackBalanceForStateErrorKind) String() string {
 func (*LackBalanceForStateErrorKind) ProtoMessage() {}
 
 func (x *LackBalanceForStateErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[39]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3649,7 +3649,7 @@ func (x *LackBalanceForStateErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LackBalanceForStateErrorKind.ProtoReflect.Descriptor instead.
 func (*LackBalanceForStateErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{39}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *LackBalanceForStateErrorKind) GetAccountId() string {
@@ -3677,7 +3677,7 @@ type TriesToUnstakeErrorKind struct {
 func (x *TriesToUnstakeErrorKind) Reset() {
 	*x = TriesToUnstakeErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[40]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3690,7 +3690,7 @@ func (x *TriesToUnstakeErrorKind) String() string {
 func (*TriesToUnstakeErrorKind) ProtoMessage() {}
 
 func (x *TriesToUnstakeErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[40]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3703,7 +3703,7 @@ func (x *TriesToUnstakeErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TriesToUnstakeErrorKind.ProtoReflect.Descriptor instead.
 func (*TriesToUnstakeErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{40}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *TriesToUnstakeErrorKind) GetAccountId() string {
@@ -3727,7 +3727,7 @@ type TriesToStakeErrorKind struct {
 func (x *TriesToStakeErrorKind) Reset() {
 	*x = TriesToStakeErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[41]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[41]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3740,7 +3740,7 @@ func (x *TriesToStakeErrorKind) String() string {
 func (*TriesToStakeErrorKind) ProtoMessage() {}
 
 func (x *TriesToStakeErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[41]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[41]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3753,7 +3753,7 @@ func (x *TriesToStakeErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TriesToStakeErrorKind.ProtoReflect.Descriptor instead.
 func (*TriesToStakeErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{41}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *TriesToStakeErrorKind) GetAccountId() string {
@@ -3797,7 +3797,7 @@ type InsufficientStakeErrorKind struct {
 func (x *InsufficientStakeErrorKind) Reset() {
 	*x = InsufficientStakeErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[42]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[42]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3810,7 +3810,7 @@ func (x *InsufficientStakeErrorKind) String() string {
 func (*InsufficientStakeErrorKind) ProtoMessage() {}
 
 func (x *InsufficientStakeErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[42]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[42]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3823,7 +3823,7 @@ func (x *InsufficientStakeErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsufficientStakeErrorKind.ProtoReflect.Descriptor instead.
 func (*InsufficientStakeErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{42}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *InsufficientStakeErrorKind) GetAccountId() string {
@@ -3858,7 +3858,7 @@ type FunctionCallErrorKind struct {
 func (x *FunctionCallErrorKind) Reset() {
 	*x = FunctionCallErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[43]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3871,7 +3871,7 @@ func (x *FunctionCallErrorKind) String() string {
 func (*FunctionCallErrorKind) ProtoMessage() {}
 
 func (x *FunctionCallErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[43]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3884,7 +3884,7 @@ func (x *FunctionCallErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FunctionCallErrorKind.ProtoReflect.Descriptor instead.
 func (*FunctionCallErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{43}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *FunctionCallErrorKind) GetError() FunctionCallErrorSer {
@@ -3905,7 +3905,7 @@ type NewReceiptValidationErrorKind struct {
 func (x *NewReceiptValidationErrorKind) Reset() {
 	*x = NewReceiptValidationErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[44]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[44]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3918,7 +3918,7 @@ func (x *NewReceiptValidationErrorKind) String() string {
 func (*NewReceiptValidationErrorKind) ProtoMessage() {}
 
 func (x *NewReceiptValidationErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[44]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[44]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3931,7 +3931,7 @@ func (x *NewReceiptValidationErrorKind) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewReceiptValidationErrorKind.ProtoReflect.Descriptor instead.
 func (*NewReceiptValidationErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{44}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *NewReceiptValidationErrorKind) GetError() ReceiptValidationError {
@@ -3952,7 +3952,7 @@ type OnlyImplicitAccountCreationAllowedErrorKind struct {
 func (x *OnlyImplicitAccountCreationAllowedErrorKind) Reset() {
 	*x = OnlyImplicitAccountCreationAllowedErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[45]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[45]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3965,7 +3965,7 @@ func (x *OnlyImplicitAccountCreationAllowedErrorKind) String() string {
 func (*OnlyImplicitAccountCreationAllowedErrorKind) ProtoMessage() {}
 
 func (x *OnlyImplicitAccountCreationAllowedErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[45]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[45]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3978,7 +3978,7 @@ func (x *OnlyImplicitAccountCreationAllowedErrorKind) ProtoReflect() protoreflec
 
 // Deprecated: Use OnlyImplicitAccountCreationAllowedErrorKind.ProtoReflect.Descriptor instead.
 func (*OnlyImplicitAccountCreationAllowedErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{45}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *OnlyImplicitAccountCreationAllowedErrorKind) GetAccountId() string {
@@ -3999,7 +3999,7 @@ type DeleteAccountWithLargeStateErrorKind struct {
 func (x *DeleteAccountWithLargeStateErrorKind) Reset() {
 	*x = DeleteAccountWithLargeStateErrorKind{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[46]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[46]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4012,7 +4012,7 @@ func (x *DeleteAccountWithLargeStateErrorKind) String() string {
 func (*DeleteAccountWithLargeStateErrorKind) ProtoMessage() {}
 
 func (x *DeleteAccountWithLargeStateErrorKind) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[46]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[46]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4025,7 +4025,7 @@ func (x *DeleteAccountWithLargeStateErrorKind) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use DeleteAccountWithLargeStateErrorKind.ProtoReflect.Descriptor instead.
 func (*DeleteAccountWithLargeStateErrorKind) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{46}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *DeleteAccountWithLargeStateErrorKind) GetAccountId() string {
@@ -4046,7 +4046,7 @@ type MerklePath struct {
 func (x *MerklePath) Reset() {
 	*x = MerklePath{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[47]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[47]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4059,7 +4059,7 @@ func (x *MerklePath) String() string {
 func (*MerklePath) ProtoMessage() {}
 
 func (x *MerklePath) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[47]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[47]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4072,7 +4072,7 @@ func (x *MerklePath) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MerklePath.ProtoReflect.Descriptor instead.
 func (*MerklePath) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{47}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *MerklePath) GetPath() []*MerklePathItem {
@@ -4094,7 +4094,7 @@ type MerklePathItem struct {
 func (x *MerklePathItem) Reset() {
 	*x = MerklePathItem{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[48]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[48]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4107,7 +4107,7 @@ func (x *MerklePathItem) String() string {
 func (*MerklePathItem) ProtoMessage() {}
 
 func (x *MerklePathItem) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[48]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[48]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4120,7 +4120,7 @@ func (x *MerklePathItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MerklePathItem.ProtoReflect.Descriptor instead.
 func (*MerklePathItem) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{48}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *MerklePathItem) GetHash() *CryptoHash {
@@ -4157,7 +4157,7 @@ type Action struct {
 func (x *Action) Reset() {
 	*x = Action{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[49]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[49]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4170,7 +4170,7 @@ func (x *Action) String() string {
 func (*Action) ProtoMessage() {}
 
 func (x *Action) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[49]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[49]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4183,7 +4183,7 @@ func (x *Action) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Action.ProtoReflect.Descriptor instead.
 func (*Action) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{49}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{49}
 }
 
 func (m *Action) GetAction() isAction_Action {
@@ -4310,7 +4310,7 @@ type CreateAccountAction struct {
 func (x *CreateAccountAction) Reset() {
 	*x = CreateAccountAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[50]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[50]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4323,7 +4323,7 @@ func (x *CreateAccountAction) String() string {
 func (*CreateAccountAction) ProtoMessage() {}
 
 func (x *CreateAccountAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[50]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[50]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4336,7 +4336,7 @@ func (x *CreateAccountAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAccountAction.ProtoReflect.Descriptor instead.
 func (*CreateAccountAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{50}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{50}
 }
 
 type DeployContractAction struct {
@@ -4350,7 +4350,7 @@ type DeployContractAction struct {
 func (x *DeployContractAction) Reset() {
 	*x = DeployContractAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[51]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[51]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4363,7 +4363,7 @@ func (x *DeployContractAction) String() string {
 func (*DeployContractAction) ProtoMessage() {}
 
 func (x *DeployContractAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[51]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[51]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4376,7 +4376,7 @@ func (x *DeployContractAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeployContractAction.ProtoReflect.Descriptor instead.
 func (*DeployContractAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{51}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *DeployContractAction) GetCode() []byte {
@@ -4400,7 +4400,7 @@ type FunctionCallAction struct {
 func (x *FunctionCallAction) Reset() {
 	*x = FunctionCallAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[52]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[52]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4413,7 +4413,7 @@ func (x *FunctionCallAction) String() string {
 func (*FunctionCallAction) ProtoMessage() {}
 
 func (x *FunctionCallAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[52]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[52]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4426,7 +4426,7 @@ func (x *FunctionCallAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FunctionCallAction.ProtoReflect.Descriptor instead.
 func (*FunctionCallAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{52}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *FunctionCallAction) GetMethodName() string {
@@ -4468,7 +4468,7 @@ type TransferAction struct {
 func (x *TransferAction) Reset() {
 	*x = TransferAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[53]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[53]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4481,7 +4481,7 @@ func (x *TransferAction) String() string {
 func (*TransferAction) ProtoMessage() {}
 
 func (x *TransferAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[53]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[53]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4494,7 +4494,7 @@ func (x *TransferAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferAction.ProtoReflect.Descriptor instead.
 func (*TransferAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{53}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *TransferAction) GetDeposit() *BigInt {
@@ -4516,7 +4516,7 @@ type StakeAction struct {
 func (x *StakeAction) Reset() {
 	*x = StakeAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[54]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[54]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4529,7 +4529,7 @@ func (x *StakeAction) String() string {
 func (*StakeAction) ProtoMessage() {}
 
 func (x *StakeAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[54]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[54]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4542,7 +4542,7 @@ func (x *StakeAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StakeAction.ProtoReflect.Descriptor instead.
 func (*StakeAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{54}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *StakeAction) GetStake() *BigInt {
@@ -4571,7 +4571,7 @@ type AddKeyAction struct {
 func (x *AddKeyAction) Reset() {
 	*x = AddKeyAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[55]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[55]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4584,7 +4584,7 @@ func (x *AddKeyAction) String() string {
 func (*AddKeyAction) ProtoMessage() {}
 
 func (x *AddKeyAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[55]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[55]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4597,7 +4597,7 @@ func (x *AddKeyAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddKeyAction.ProtoReflect.Descriptor instead.
 func (*AddKeyAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{55}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *AddKeyAction) GetPublicKey() *PublicKey {
@@ -4625,7 +4625,7 @@ type DeleteKeyAction struct {
 func (x *DeleteKeyAction) Reset() {
 	*x = DeleteKeyAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[56]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[56]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4638,7 +4638,7 @@ func (x *DeleteKeyAction) String() string {
 func (*DeleteKeyAction) ProtoMessage() {}
 
 func (x *DeleteKeyAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[56]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[56]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4651,7 +4651,7 @@ func (x *DeleteKeyAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteKeyAction.ProtoReflect.Descriptor instead.
 func (*DeleteKeyAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{56}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *DeleteKeyAction) GetPublicKey() *PublicKey {
@@ -4672,7 +4672,7 @@ type DeleteAccountAction struct {
 func (x *DeleteAccountAction) Reset() {
 	*x = DeleteAccountAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[57]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[57]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4685,7 +4685,7 @@ func (x *DeleteAccountAction) String() string {
 func (*DeleteAccountAction) ProtoMessage() {}
 
 func (x *DeleteAccountAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[57]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[57]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4698,7 +4698,7 @@ func (x *DeleteAccountAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccountAction.ProtoReflect.Descriptor instead.
 func (*DeleteAccountAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{57}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *DeleteAccountAction) GetBeneficiaryId() string {
@@ -4720,7 +4720,7 @@ type AccessKey struct {
 func (x *AccessKey) Reset() {
 	*x = AccessKey{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[58]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[58]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4733,7 +4733,7 @@ func (x *AccessKey) String() string {
 func (*AccessKey) ProtoMessage() {}
 
 func (x *AccessKey) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[58]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[58]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4746,7 +4746,7 @@ func (x *AccessKey) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessKey.ProtoReflect.Descriptor instead.
 func (*AccessKey) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{58}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *AccessKey) GetNonce() uint64 {
@@ -4777,7 +4777,7 @@ type AccessKeyPermission struct {
 func (x *AccessKeyPermission) Reset() {
 	*x = AccessKeyPermission{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[59]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[59]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4790,7 +4790,7 @@ func (x *AccessKeyPermission) String() string {
 func (*AccessKeyPermission) ProtoMessage() {}
 
 func (x *AccessKeyPermission) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[59]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[59]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4803,7 +4803,7 @@ func (x *AccessKeyPermission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessKeyPermission.ProtoReflect.Descriptor instead.
 func (*AccessKeyPermission) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{59}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{59}
 }
 
 func (m *AccessKeyPermission) GetPermission() isAccessKeyPermission_Permission {
@@ -4856,7 +4856,7 @@ type FunctionCallPermission struct {
 func (x *FunctionCallPermission) Reset() {
 	*x = FunctionCallPermission{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[60]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[60]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4869,7 +4869,7 @@ func (x *FunctionCallPermission) String() string {
 func (*FunctionCallPermission) ProtoMessage() {}
 
 func (x *FunctionCallPermission) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[60]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[60]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4882,7 +4882,7 @@ func (x *FunctionCallPermission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FunctionCallPermission.ProtoReflect.Descriptor instead.
 func (*FunctionCallPermission) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{60}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *FunctionCallPermission) GetAllowance() *BigInt {
@@ -4915,7 +4915,7 @@ type FullAccessPermission struct {
 func (x *FullAccessPermission) Reset() {
 	*x = FullAccessPermission{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[61]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[61]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4928,7 +4928,7 @@ func (x *FullAccessPermission) String() string {
 func (*FullAccessPermission) ProtoMessage() {}
 
 func (x *FullAccessPermission) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[61]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[61]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4941,7 +4941,7 @@ func (x *FullAccessPermission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FullAccessPermission.ProtoReflect.Descriptor instead.
 func (*FullAccessPermission) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{61}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{61}
 }
 
 type StateChangeCause_NotWritableToDisk struct {
@@ -4953,7 +4953,7 @@ type StateChangeCause_NotWritableToDisk struct {
 func (x *StateChangeCause_NotWritableToDisk) Reset() {
 	*x = StateChangeCause_NotWritableToDisk{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[62]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[62]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4966,7 +4966,7 @@ func (x *StateChangeCause_NotWritableToDisk) String() string {
 func (*StateChangeCause_NotWritableToDisk) ProtoMessage() {}
 
 func (x *StateChangeCause_NotWritableToDisk) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[62]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[62]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4979,7 +4979,7 @@ func (x *StateChangeCause_NotWritableToDisk) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use StateChangeCause_NotWritableToDisk.ProtoReflect.Descriptor instead.
 func (*StateChangeCause_NotWritableToDisk) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 0}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 0}
 }
 
 type StateChangeCause_InitialState struct {
@@ -4991,7 +4991,7 @@ type StateChangeCause_InitialState struct {
 func (x *StateChangeCause_InitialState) Reset() {
 	*x = StateChangeCause_InitialState{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[63]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[63]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5004,7 +5004,7 @@ func (x *StateChangeCause_InitialState) String() string {
 func (*StateChangeCause_InitialState) ProtoMessage() {}
 
 func (x *StateChangeCause_InitialState) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[63]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[63]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5017,7 +5017,7 @@ func (x *StateChangeCause_InitialState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateChangeCause_InitialState.ProtoReflect.Descriptor instead.
 func (*StateChangeCause_InitialState) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 1}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 1}
 }
 
 type StateChangeCause_TransactionProcessing struct {
@@ -5031,7 +5031,7 @@ type StateChangeCause_TransactionProcessing struct {
 func (x *StateChangeCause_TransactionProcessing) Reset() {
 	*x = StateChangeCause_TransactionProcessing{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[64]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[64]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5044,7 +5044,7 @@ func (x *StateChangeCause_TransactionProcessing) String() string {
 func (*StateChangeCause_TransactionProcessing) ProtoMessage() {}
 
 func (x *StateChangeCause_TransactionProcessing) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[64]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[64]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5057,7 +5057,7 @@ func (x *StateChangeCause_TransactionProcessing) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use StateChangeCause_TransactionProcessing.ProtoReflect.Descriptor instead.
 func (*StateChangeCause_TransactionProcessing) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 2}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 2}
 }
 
 func (x *StateChangeCause_TransactionProcessing) GetTxHash() *CryptoHash {
@@ -5078,7 +5078,7 @@ type StateChangeCause_ActionReceiptProcessingStarted struct {
 func (x *StateChangeCause_ActionReceiptProcessingStarted) Reset() {
 	*x = StateChangeCause_ActionReceiptProcessingStarted{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[65]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[65]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5091,7 +5091,7 @@ func (x *StateChangeCause_ActionReceiptProcessingStarted) String() string {
 func (*StateChangeCause_ActionReceiptProcessingStarted) ProtoMessage() {}
 
 func (x *StateChangeCause_ActionReceiptProcessingStarted) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[65]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[65]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5104,7 +5104,7 @@ func (x *StateChangeCause_ActionReceiptProcessingStarted) ProtoReflect() protore
 
 // Deprecated: Use StateChangeCause_ActionReceiptProcessingStarted.ProtoReflect.Descriptor instead.
 func (*StateChangeCause_ActionReceiptProcessingStarted) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 3}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 3}
 }
 
 func (x *StateChangeCause_ActionReceiptProcessingStarted) GetReceiptHash() *CryptoHash {
@@ -5125,7 +5125,7 @@ type StateChangeCause_ActionReceiptGasReward struct {
 func (x *StateChangeCause_ActionReceiptGasReward) Reset() {
 	*x = StateChangeCause_ActionReceiptGasReward{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[66]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[66]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5138,7 +5138,7 @@ func (x *StateChangeCause_ActionReceiptGasReward) String() string {
 func (*StateChangeCause_ActionReceiptGasReward) ProtoMessage() {}
 
 func (x *StateChangeCause_ActionReceiptGasReward) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[66]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[66]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5151,7 +5151,7 @@ func (x *StateChangeCause_ActionReceiptGasReward) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use StateChangeCause_ActionReceiptGasReward.ProtoReflect.Descriptor instead.
 func (*StateChangeCause_ActionReceiptGasReward) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 4}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 4}
 }
 
 func (x *StateChangeCause_ActionReceiptGasReward) GetTxHash() *CryptoHash {
@@ -5172,7 +5172,7 @@ type StateChangeCause_ReceiptProcessing struct {
 func (x *StateChangeCause_ReceiptProcessing) Reset() {
 	*x = StateChangeCause_ReceiptProcessing{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[67]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[67]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5185,7 +5185,7 @@ func (x *StateChangeCause_ReceiptProcessing) String() string {
 func (*StateChangeCause_ReceiptProcessing) ProtoMessage() {}
 
 func (x *StateChangeCause_ReceiptProcessing) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[67]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[67]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5198,7 +5198,7 @@ func (x *StateChangeCause_ReceiptProcessing) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use StateChangeCause_ReceiptProcessing.ProtoReflect.Descriptor instead.
 func (*StateChangeCause_ReceiptProcessing) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 5}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 5}
 }
 
 func (x *StateChangeCause_ReceiptProcessing) GetTxHash() *CryptoHash {
@@ -5219,7 +5219,7 @@ type StateChangeCause_PostponedReceipt struct {
 func (x *StateChangeCause_PostponedReceipt) Reset() {
 	*x = StateChangeCause_PostponedReceipt{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[68]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[68]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5232,7 +5232,7 @@ func (x *StateChangeCause_PostponedReceipt) String() string {
 func (*StateChangeCause_PostponedReceipt) ProtoMessage() {}
 
 func (x *StateChangeCause_PostponedReceipt) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[68]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[68]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5245,7 +5245,7 @@ func (x *StateChangeCause_PostponedReceipt) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use StateChangeCause_PostponedReceipt.ProtoReflect.Descriptor instead.
 func (*StateChangeCause_PostponedReceipt) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 6}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 6}
 }
 
 func (x *StateChangeCause_PostponedReceipt) GetTxHash() *CryptoHash {
@@ -5264,7 +5264,7 @@ type StateChangeCause_UpdatedDelayedReceipts struct {
 func (x *StateChangeCause_UpdatedDelayedReceipts) Reset() {
 	*x = StateChangeCause_UpdatedDelayedReceipts{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[69]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[69]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5277,7 +5277,7 @@ func (x *StateChangeCause_UpdatedDelayedReceipts) String() string {
 func (*StateChangeCause_UpdatedDelayedReceipts) ProtoMessage() {}
 
 func (x *StateChangeCause_UpdatedDelayedReceipts) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[69]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[69]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5290,7 +5290,7 @@ func (x *StateChangeCause_UpdatedDelayedReceipts) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use StateChangeCause_UpdatedDelayedReceipts.ProtoReflect.Descriptor instead.
 func (*StateChangeCause_UpdatedDelayedReceipts) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 7}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 7}
 }
 
 type StateChangeCause_ValidatorAccountsUpdate struct {
@@ -5302,7 +5302,7 @@ type StateChangeCause_ValidatorAccountsUpdate struct {
 func (x *StateChangeCause_ValidatorAccountsUpdate) Reset() {
 	*x = StateChangeCause_ValidatorAccountsUpdate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[70]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[70]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5315,7 +5315,7 @@ func (x *StateChangeCause_ValidatorAccountsUpdate) String() string {
 func (*StateChangeCause_ValidatorAccountsUpdate) ProtoMessage() {}
 
 func (x *StateChangeCause_ValidatorAccountsUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[70]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[70]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5328,7 +5328,7 @@ func (x *StateChangeCause_ValidatorAccountsUpdate) ProtoReflect() protoreflect.M
 
 // Deprecated: Use StateChangeCause_ValidatorAccountsUpdate.ProtoReflect.Descriptor instead.
 func (*StateChangeCause_ValidatorAccountsUpdate) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 8}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 8}
 }
 
 type StateChangeCause_Migration struct {
@@ -5340,7 +5340,7 @@ type StateChangeCause_Migration struct {
 func (x *StateChangeCause_Migration) Reset() {
 	*x = StateChangeCause_Migration{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[71]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[71]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5353,7 +5353,7 @@ func (x *StateChangeCause_Migration) String() string {
 func (*StateChangeCause_Migration) ProtoMessage() {}
 
 func (x *StateChangeCause_Migration) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[71]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[71]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5366,7 +5366,7 @@ func (x *StateChangeCause_Migration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateChangeCause_Migration.ProtoReflect.Descriptor instead.
 func (*StateChangeCause_Migration) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 9}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{3, 9}
 }
 
 type StateChangeValue_AccountUpdate struct {
@@ -5381,7 +5381,7 @@ type StateChangeValue_AccountUpdate struct {
 func (x *StateChangeValue_AccountUpdate) Reset() {
 	*x = StateChangeValue_AccountUpdate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[72]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[72]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5394,7 +5394,7 @@ func (x *StateChangeValue_AccountUpdate) String() string {
 func (*StateChangeValue_AccountUpdate) ProtoMessage() {}
 
 func (x *StateChangeValue_AccountUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[72]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[72]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5407,7 +5407,7 @@ func (x *StateChangeValue_AccountUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateChangeValue_AccountUpdate.ProtoReflect.Descriptor instead.
 func (*StateChangeValue_AccountUpdate) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 0}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 0}
 }
 
 func (x *StateChangeValue_AccountUpdate) GetAccountId() string {
@@ -5435,7 +5435,7 @@ type StateChangeValue_AccountDeletion struct {
 func (x *StateChangeValue_AccountDeletion) Reset() {
 	*x = StateChangeValue_AccountDeletion{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[73]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[73]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5448,7 +5448,7 @@ func (x *StateChangeValue_AccountDeletion) String() string {
 func (*StateChangeValue_AccountDeletion) ProtoMessage() {}
 
 func (x *StateChangeValue_AccountDeletion) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[73]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[73]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5461,7 +5461,7 @@ func (x *StateChangeValue_AccountDeletion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateChangeValue_AccountDeletion.ProtoReflect.Descriptor instead.
 func (*StateChangeValue_AccountDeletion) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 1}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 1}
 }
 
 func (x *StateChangeValue_AccountDeletion) GetAccountId() string {
@@ -5484,7 +5484,7 @@ type StateChangeValue_AccessKeyUpdate struct {
 func (x *StateChangeValue_AccessKeyUpdate) Reset() {
 	*x = StateChangeValue_AccessKeyUpdate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[74]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[74]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5497,7 +5497,7 @@ func (x *StateChangeValue_AccessKeyUpdate) String() string {
 func (*StateChangeValue_AccessKeyUpdate) ProtoMessage() {}
 
 func (x *StateChangeValue_AccessKeyUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[74]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[74]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5510,7 +5510,7 @@ func (x *StateChangeValue_AccessKeyUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateChangeValue_AccessKeyUpdate.ProtoReflect.Descriptor instead.
 func (*StateChangeValue_AccessKeyUpdate) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 2}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 2}
 }
 
 func (x *StateChangeValue_AccessKeyUpdate) GetAccountId() string {
@@ -5546,7 +5546,7 @@ type StateChangeValue_AccessKeyDeletion struct {
 func (x *StateChangeValue_AccessKeyDeletion) Reset() {
 	*x = StateChangeValue_AccessKeyDeletion{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[75]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[75]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5559,7 +5559,7 @@ func (x *StateChangeValue_AccessKeyDeletion) String() string {
 func (*StateChangeValue_AccessKeyDeletion) ProtoMessage() {}
 
 func (x *StateChangeValue_AccessKeyDeletion) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[75]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[75]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5572,7 +5572,7 @@ func (x *StateChangeValue_AccessKeyDeletion) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use StateChangeValue_AccessKeyDeletion.ProtoReflect.Descriptor instead.
 func (*StateChangeValue_AccessKeyDeletion) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 3}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 3}
 }
 
 func (x *StateChangeValue_AccessKeyDeletion) GetAccountId() string {
@@ -5602,7 +5602,7 @@ type StateChangeValue_DataUpdate struct {
 func (x *StateChangeValue_DataUpdate) Reset() {
 	*x = StateChangeValue_DataUpdate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[76]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[76]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5615,7 +5615,7 @@ func (x *StateChangeValue_DataUpdate) String() string {
 func (*StateChangeValue_DataUpdate) ProtoMessage() {}
 
 func (x *StateChangeValue_DataUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[76]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[76]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5628,7 +5628,7 @@ func (x *StateChangeValue_DataUpdate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateChangeValue_DataUpdate.ProtoReflect.Descriptor instead.
 func (*StateChangeValue_DataUpdate) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 4}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 4}
 }
 
 func (x *StateChangeValue_DataUpdate) GetAccountId() string {
@@ -5664,7 +5664,7 @@ type StateChangeValue_DataDeletion struct {
 func (x *StateChangeValue_DataDeletion) Reset() {
 	*x = StateChangeValue_DataDeletion{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[77]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[77]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5677,7 +5677,7 @@ func (x *StateChangeValue_DataDeletion) String() string {
 func (*StateChangeValue_DataDeletion) ProtoMessage() {}
 
 func (x *StateChangeValue_DataDeletion) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[77]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[77]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5690,7 +5690,7 @@ func (x *StateChangeValue_DataDeletion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StateChangeValue_DataDeletion.ProtoReflect.Descriptor instead.
 func (*StateChangeValue_DataDeletion) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 5}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 5}
 }
 
 func (x *StateChangeValue_DataDeletion) GetAccountId() string {
@@ -5719,7 +5719,7 @@ type StateChangeValue_ContractCodeUpdate struct {
 func (x *StateChangeValue_ContractCodeUpdate) Reset() {
 	*x = StateChangeValue_ContractCodeUpdate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[78]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[78]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5732,7 +5732,7 @@ func (x *StateChangeValue_ContractCodeUpdate) String() string {
 func (*StateChangeValue_ContractCodeUpdate) ProtoMessage() {}
 
 func (x *StateChangeValue_ContractCodeUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[78]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[78]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5745,7 +5745,7 @@ func (x *StateChangeValue_ContractCodeUpdate) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use StateChangeValue_ContractCodeUpdate.ProtoReflect.Descriptor instead.
 func (*StateChangeValue_ContractCodeUpdate) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 6}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 6}
 }
 
 func (x *StateChangeValue_ContractCodeUpdate) GetAccountId() string {
@@ -5773,7 +5773,7 @@ type StateChangeValue_ContractCodeDeletion struct {
 func (x *StateChangeValue_ContractCodeDeletion) Reset() {
 	*x = StateChangeValue_ContractCodeDeletion{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sf_near_codec_v1_codec_proto_msgTypes[79]
+		mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[79]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5786,7 +5786,7 @@ func (x *StateChangeValue_ContractCodeDeletion) String() string {
 func (*StateChangeValue_ContractCodeDeletion) ProtoMessage() {}
 
 func (x *StateChangeValue_ContractCodeDeletion) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_codec_v1_codec_proto_msgTypes[79]
+	mi := &file_firehose_near_codec_v1_codec_proto_msgTypes[79]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5799,7 +5799,7 @@ func (x *StateChangeValue_ContractCodeDeletion) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use StateChangeValue_ContractCodeDeletion.ProtoReflect.Descriptor instead.
 func (*StateChangeValue_ContractCodeDeletion) Descriptor() ([]byte, []int) {
-	return file_sf_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 7}
+	return file_firehose_near_codec_v1_codec_proto_rawDescGZIP(), []int{4, 7}
 }
 
 func (x *StateChangeValue_ContractCodeDeletion) GetAccountId() string {
@@ -5809,9 +5809,9 @@ func (x *StateChangeValue_ContractCodeDeletion) GetAccountId() string {
 	return ""
 }
 
-var File_sf_near_codec_v1_codec_proto protoreflect.FileDescriptor
+var file_firehose_near_codec_v1_codec_proto protoreflect.FileDescriptor
 
-var file_sf_near_codec_v1_codec_proto_rawDesc = []byte{
+var file_firehose_near_codec_v1_codec_proto_rawDesc = []byte{
 	0x0a, 0x1c, 0x73, 0x66, 0x2f, 0x6e, 0x65, 0x61, 0x72, 0x2f, 0x63, 0x6f, 0x64, 0x65, 0x63, 0x2f,
 	0x76, 0x31, 0x2f, 0x63, 0x6f, 0x64, 0x65, 0x63, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x10,
 	0x73, 0x66, 0x2e, 0x6e, 0x65, 0x61, 0x72, 0x2e, 0x63, 0x6f, 0x64, 0x65, 0x63, 0x2e, 0x76, 0x31,
@@ -6861,20 +6861,20 @@ var file_sf_near_codec_v1_codec_proto_rawDesc = []byte{
 }
 
 var (
-	file_sf_near_codec_v1_codec_proto_rawDescOnce sync.Once
-	file_sf_near_codec_v1_codec_proto_rawDescData = file_sf_near_codec_v1_codec_proto_rawDesc
+	file_firehose_near_codec_v1_codec_proto_rawDescOnce sync.Once
+	file_firehose_near_codec_v1_codec_proto_rawDescData = file_firehose_near_codec_v1_codec_proto_rawDesc
 )
 
-func file_sf_near_codec_v1_codec_proto_rawDescGZIP() []byte {
-	file_sf_near_codec_v1_codec_proto_rawDescOnce.Do(func() {
-		file_sf_near_codec_v1_codec_proto_rawDescData = protoimpl.X.CompressGZIP(file_sf_near_codec_v1_codec_proto_rawDescData)
+func file_firehose_near_codec_v1_codec_proto_rawDescGZIP() []byte {
+	file_firehose_near_codec_v1_codec_proto_rawDescOnce.Do(func() {
+		file_firehose_near_codec_v1_codec_proto_rawDescData = protoimpl.X.CompressGZIP(file_firehose_near_codec_v1_codec_proto_rawDescData)
 	})
-	return file_sf_near_codec_v1_codec_proto_rawDescData
+	return file_firehose_near_codec_v1_codec_proto_rawDescData
 }
 
-var file_sf_near_codec_v1_codec_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_sf_near_codec_v1_codec_proto_msgTypes = make([]protoimpl.MessageInfo, 80)
-var file_sf_near_codec_v1_codec_proto_goTypes = []interface{}{
+var file_firehose_near_codec_v1_codec_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
+var file_firehose_near_codec_v1_codec_proto_msgTypes = make([]protoimpl.MessageInfo, 80)
+var file_firehose_near_codec_v1_codec_proto_goTypes = []interface{}{
 	(CurveKind)(0),                                          // 0: sf.near.codec.v1.CurveKind
 	(ExecutionMetadata)(0),                                  // 1: sf.near.codec.v1.ExecutionMetadata
 	(FunctionCallErrorSer)(0),                               // 2: sf.near.codec.v1.FunctionCallErrorSer
@@ -6962,7 +6962,7 @@ var file_sf_near_codec_v1_codec_proto_goTypes = []interface{}{
 	(*StateChangeValue_ContractCodeUpdate)(nil),             // 84: sf.near.codec.v1.StateChangeValue.ContractCodeUpdate
 	(*StateChangeValue_ContractCodeDeletion)(nil),           // 85: sf.near.codec.v1.StateChangeValue.ContractCodeDeletion
 }
-var file_sf_near_codec_v1_codec_proto_depIdxs = []int32{
+var file_firehose_near_codec_v1_codec_proto_depIdxs = []int32{
 	12,  // 0: sf.near.codec.v1.Block.header:type_name -> sf.near.codec.v1.BlockHeader
 	19,  // 1: sf.near.codec.v1.Block.chunk_headers:type_name -> sf.near.codec.v1.ChunkHeader
 	20,  // 2: sf.near.codec.v1.Block.shards:type_name -> sf.near.codec.v1.IndexerShard
@@ -7123,13 +7123,13 @@ var file_sf_near_codec_v1_codec_proto_depIdxs = []int32{
 	0,   // [0:153] is the sub-list for field type_name
 }
 
-func init() { file_sf_near_codec_v1_codec_proto_init() }
-func file_sf_near_codec_v1_codec_proto_init() {
-	if File_sf_near_codec_v1_codec_proto != nil {
+func init() { file_firehose_near_codec_v1_codec_proto_init() }
+func file_firehose_near_codec_v1_codec_proto_init() {
+	if file_firehose_near_codec_v1_codec_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_sf_near_codec_v1_codec_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Block); i {
 			case 0:
 				return &v.state
@@ -7141,7 +7141,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*HeaderOnlyBlock); i {
 			case 0:
 				return &v.state
@@ -7153,7 +7153,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeWithCause); i {
 			case 0:
 				return &v.state
@@ -7165,7 +7165,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeCause); i {
 			case 0:
 				return &v.state
@@ -7177,7 +7177,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeValue); i {
 			case 0:
 				return &v.state
@@ -7189,7 +7189,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Account); i {
 			case 0:
 				return &v.state
@@ -7201,7 +7201,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BlockHeader); i {
 			case 0:
 				return &v.state
@@ -7213,7 +7213,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BigInt); i {
 			case 0:
 				return &v.state
@@ -7225,7 +7225,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CryptoHash); i {
 			case 0:
 				return &v.state
@@ -7237,7 +7237,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Signature); i {
 			case 0:
 				return &v.state
@@ -7249,7 +7249,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PublicKey); i {
 			case 0:
 				return &v.state
@@ -7261,7 +7261,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ValidatorStake); i {
 			case 0:
 				return &v.state
@@ -7273,7 +7273,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SlashedValidator); i {
 			case 0:
 				return &v.state
@@ -7285,7 +7285,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ChunkHeader); i {
 			case 0:
 				return &v.state
@@ -7297,7 +7297,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*IndexerShard); i {
 			case 0:
 				return &v.state
@@ -7309,7 +7309,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*IndexerExecutionOutcomeWithReceipt); i {
 			case 0:
 				return &v.state
@@ -7321,7 +7321,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*IndexerChunk); i {
 			case 0:
 				return &v.state
@@ -7333,7 +7333,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*IndexerTransactionWithOutcome); i {
 			case 0:
 				return &v.state
@@ -7345,7 +7345,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SignedTransaction); i {
 			case 0:
 				return &v.state
@@ -7357,7 +7357,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*IndexerExecutionOutcomeWithOptionalReceipt); i {
 			case 0:
 				return &v.state
@@ -7369,7 +7369,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Receipt); i {
 			case 0:
 				return &v.state
@@ -7381,7 +7381,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ReceiptData); i {
 			case 0:
 				return &v.state
@@ -7393,7 +7393,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ReceiptAction); i {
 			case 0:
 				return &v.state
@@ -7405,7 +7405,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DataReceiver); i {
 			case 0:
 				return &v.state
@@ -7417,7 +7417,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ExecutionOutcomeWithId); i {
 			case 0:
 				return &v.state
@@ -7429,7 +7429,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ExecutionOutcome); i {
 			case 0:
 				return &v.state
@@ -7441,7 +7441,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SuccessValueExecutionStatus); i {
 			case 0:
 				return &v.state
@@ -7453,7 +7453,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SuccessReceiptIdExecutionStatus); i {
 			case 0:
 				return &v.state
@@ -7465,7 +7465,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UnknownExecutionStatus); i {
 			case 0:
 				return &v.state
@@ -7477,7 +7477,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FailureExecutionStatus); i {
 			case 0:
 				return &v.state
@@ -7489,7 +7489,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ActionError); i {
 			case 0:
 				return &v.state
@@ -7501,7 +7501,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AccountAlreadyExistsErrorKind); i {
 			case 0:
 				return &v.state
@@ -7513,7 +7513,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AccountDoesNotExistErrorKind); i {
 			case 0:
 				return &v.state
@@ -7525,7 +7525,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateAccountOnlyByRegistrarErrorKind); i {
 			case 0:
 				return &v.state
@@ -7537,7 +7537,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateAccountNotAllowedErrorKind); i {
 			case 0:
 				return &v.state
@@ -7549,7 +7549,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ActorNoPermissionErrorKind); i {
 			case 0:
 				return &v.state
@@ -7561,7 +7561,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteKeyDoesNotExistErrorKind); i {
 			case 0:
 				return &v.state
@@ -7573,7 +7573,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AddKeyAlreadyExistsErrorKind); i {
 			case 0:
 				return &v.state
@@ -7585,7 +7585,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteAccountStakingErrorKind); i {
 			case 0:
 				return &v.state
@@ -7597,7 +7597,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*LackBalanceForStateErrorKind); i {
 			case 0:
 				return &v.state
@@ -7609,7 +7609,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TriesToUnstakeErrorKind); i {
 			case 0:
 				return &v.state
@@ -7621,7 +7621,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TriesToStakeErrorKind); i {
 			case 0:
 				return &v.state
@@ -7633,7 +7633,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InsufficientStakeErrorKind); i {
 			case 0:
 				return &v.state
@@ -7645,7 +7645,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FunctionCallErrorKind); i {
 			case 0:
 				return &v.state
@@ -7657,7 +7657,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NewReceiptValidationErrorKind); i {
 			case 0:
 				return &v.state
@@ -7669,7 +7669,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*OnlyImplicitAccountCreationAllowedErrorKind); i {
 			case 0:
 				return &v.state
@@ -7681,7 +7681,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteAccountWithLargeStateErrorKind); i {
 			case 0:
 				return &v.state
@@ -7693,7 +7693,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MerklePath); i {
 			case 0:
 				return &v.state
@@ -7705,7 +7705,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MerklePathItem); i {
 			case 0:
 				return &v.state
@@ -7717,7 +7717,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Action); i {
 			case 0:
 				return &v.state
@@ -7729,7 +7729,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateAccountAction); i {
 			case 0:
 				return &v.state
@@ -7741,7 +7741,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeployContractAction); i {
 			case 0:
 				return &v.state
@@ -7753,7 +7753,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FunctionCallAction); i {
 			case 0:
 				return &v.state
@@ -7765,7 +7765,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TransferAction); i {
 			case 0:
 				return &v.state
@@ -7777,7 +7777,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StakeAction); i {
 			case 0:
 				return &v.state
@@ -7789,7 +7789,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AddKeyAction); i {
 			case 0:
 				return &v.state
@@ -7801,7 +7801,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteKeyAction); i {
 			case 0:
 				return &v.state
@@ -7813,7 +7813,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteAccountAction); i {
 			case 0:
 				return &v.state
@@ -7825,7 +7825,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AccessKey); i {
 			case 0:
 				return &v.state
@@ -7837,7 +7837,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AccessKeyPermission); i {
 			case 0:
 				return &v.state
@@ -7849,7 +7849,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FunctionCallPermission); i {
 			case 0:
 				return &v.state
@@ -7861,7 +7861,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FullAccessPermission); i {
 			case 0:
 				return &v.state
@@ -7873,7 +7873,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeCause_NotWritableToDisk); i {
 			case 0:
 				return &v.state
@@ -7885,7 +7885,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeCause_InitialState); i {
 			case 0:
 				return &v.state
@@ -7897,7 +7897,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeCause_TransactionProcessing); i {
 			case 0:
 				return &v.state
@@ -7909,7 +7909,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeCause_ActionReceiptProcessingStarted); i {
 			case 0:
 				return &v.state
@@ -7921,7 +7921,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeCause_ActionReceiptGasReward); i {
 			case 0:
 				return &v.state
@@ -7933,7 +7933,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeCause_ReceiptProcessing); i {
 			case 0:
 				return &v.state
@@ -7945,7 +7945,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeCause_PostponedReceipt); i {
 			case 0:
 				return &v.state
@@ -7957,7 +7957,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeCause_UpdatedDelayedReceipts); i {
 			case 0:
 				return &v.state
@@ -7969,7 +7969,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[70].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[70].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeCause_ValidatorAccountsUpdate); i {
 			case 0:
 				return &v.state
@@ -7981,7 +7981,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[71].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[71].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeCause_Migration); i {
 			case 0:
 				return &v.state
@@ -7993,7 +7993,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[72].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[72].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeValue_AccountUpdate); i {
 			case 0:
 				return &v.state
@@ -8005,7 +8005,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[73].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[73].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeValue_AccountDeletion); i {
 			case 0:
 				return &v.state
@@ -8017,7 +8017,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[74].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[74].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeValue_AccessKeyUpdate); i {
 			case 0:
 				return &v.state
@@ -8029,7 +8029,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[75].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[75].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeValue_AccessKeyDeletion); i {
 			case 0:
 				return &v.state
@@ -8041,7 +8041,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[76].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[76].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeValue_DataUpdate); i {
 			case 0:
 				return &v.state
@@ -8053,7 +8053,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[77].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[77].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeValue_DataDeletion); i {
 			case 0:
 				return &v.state
@@ -8065,7 +8065,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[78].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[78].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeValue_ContractCodeUpdate); i {
 			case 0:
 				return &v.state
@@ -8077,7 +8077,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 				return nil
 			}
 		}
-		file_sf_near_codec_v1_codec_proto_msgTypes[79].Exporter = func(v interface{}, i int) interface{} {
+		file_firehose_near_codec_v1_codec_proto_msgTypes[79].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StateChangeValue_ContractCodeDeletion); i {
 			case 0:
 				return &v.state
@@ -8090,7 +8090,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 			}
 		}
 	}
-	file_sf_near_codec_v1_codec_proto_msgTypes[3].OneofWrappers = []interface{}{
+	file_firehose_near_codec_v1_codec_proto_msgTypes[3].OneofWrappers = []interface{}{
 		(*StateChangeCause_NotWritableToDisk_)(nil),
 		(*StateChangeCause_InitialState_)(nil),
 		(*StateChangeCause_TransactionProcessing_)(nil),
@@ -8102,7 +8102,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 		(*StateChangeCause_ValidatorAccountsUpdate_)(nil),
 		(*StateChangeCause_Migration_)(nil),
 	}
-	file_sf_near_codec_v1_codec_proto_msgTypes[4].OneofWrappers = []interface{}{
+	file_firehose_near_codec_v1_codec_proto_msgTypes[4].OneofWrappers = []interface{}{
 		(*StateChangeValue_AccountUpdate_)(nil),
 		(*StateChangeValue_AccountDeletion_)(nil),
 		(*StateChangeValue_AccessKeyUpdate_)(nil),
@@ -8112,21 +8112,21 @@ func file_sf_near_codec_v1_codec_proto_init() {
 		(*StateChangeValue_ContractCodeUpdate_)(nil),
 		(*StateChangeValue_ContractDeletion)(nil),
 	}
-	file_sf_near_codec_v1_codec_proto_msgTypes[20].OneofWrappers = []interface{}{
+	file_firehose_near_codec_v1_codec_proto_msgTypes[20].OneofWrappers = []interface{}{
 		(*Receipt_Action)(nil),
 		(*Receipt_Data)(nil),
 	}
-	file_sf_near_codec_v1_codec_proto_msgTypes[25].OneofWrappers = []interface{}{
+	file_firehose_near_codec_v1_codec_proto_msgTypes[25].OneofWrappers = []interface{}{
 		(*ExecutionOutcome_Unknown)(nil),
 		(*ExecutionOutcome_Failure)(nil),
 		(*ExecutionOutcome_SuccessValue)(nil),
 		(*ExecutionOutcome_SuccessReceiptId)(nil),
 	}
-	file_sf_near_codec_v1_codec_proto_msgTypes[29].OneofWrappers = []interface{}{
+	file_firehose_near_codec_v1_codec_proto_msgTypes[29].OneofWrappers = []interface{}{
 		(*FailureExecutionStatus_ActionError)(nil),
 		(*FailureExecutionStatus_InvalidTxError)(nil),
 	}
-	file_sf_near_codec_v1_codec_proto_msgTypes[30].OneofWrappers = []interface{}{
+	file_firehose_near_codec_v1_codec_proto_msgTypes[30].OneofWrappers = []interface{}{
 		(*ActionError_AccountAlreadyExist)(nil),
 		(*ActionError_AccountDoesNotExist)(nil),
 		(*ActionError_CreateAccountOnlyByRegistrar)(nil),
@@ -8144,7 +8144,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 		(*ActionError_OnlyImplicitAccountCreationAllowed)(nil),
 		(*ActionError_DeleteAccountWithLargeState)(nil),
 	}
-	file_sf_near_codec_v1_codec_proto_msgTypes[49].OneofWrappers = []interface{}{
+	file_firehose_near_codec_v1_codec_proto_msgTypes[49].OneofWrappers = []interface{}{
 		(*Action_CreateAccount)(nil),
 		(*Action_DeployContract)(nil),
 		(*Action_FunctionCall)(nil),
@@ -8154,7 +8154,7 @@ func file_sf_near_codec_v1_codec_proto_init() {
 		(*Action_DeleteKey)(nil),
 		(*Action_DeleteAccount)(nil),
 	}
-	file_sf_near_codec_v1_codec_proto_msgTypes[59].OneofWrappers = []interface{}{
+	file_firehose_near_codec_v1_codec_proto_msgTypes[59].OneofWrappers = []interface{}{
 		(*AccessKeyPermission_FunctionCall)(nil),
 		(*AccessKeyPermission_FullAccess)(nil),
 	}
@@ -8162,19 +8162,19 @@ func file_sf_near_codec_v1_codec_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_sf_near_codec_v1_codec_proto_rawDesc,
+			RawDescriptor: file_firehose_near_codec_v1_codec_proto_rawDesc,
 			NumEnums:      6,
 			NumMessages:   80,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_sf_near_codec_v1_codec_proto_goTypes,
-		DependencyIndexes: file_sf_near_codec_v1_codec_proto_depIdxs,
-		EnumInfos:         file_sf_near_codec_v1_codec_proto_enumTypes,
-		MessageInfos:      file_sf_near_codec_v1_codec_proto_msgTypes,
+		GoTypes:           file_firehose_near_codec_v1_codec_proto_goTypes,
+		DependencyIndexes: file_firehose_near_codec_v1_codec_proto_depIdxs,
+		EnumInfos:         file_firehose_near_codec_v1_codec_proto_enumTypes,
+		MessageInfos:      file_firehose_near_codec_v1_codec_proto_msgTypes,
 	}.Build()
-	File_sf_near_codec_v1_codec_proto = out.File
-	file_sf_near_codec_v1_codec_proto_rawDesc = nil
-	file_sf_near_codec_v1_codec_proto_goTypes = nil
-	file_sf_near_codec_v1_codec_proto_depIdxs = nil
+	file_firehose_near_codec_v1_codec_proto = out.File
+	file_firehose_near_codec_v1_codec_proto_rawDesc = nil
+	file_firehose_near_codec_v1_codec_proto_goTypes = nil
+	file_firehose_near_codec_v1_codec_proto_depIdxs = nil
 }

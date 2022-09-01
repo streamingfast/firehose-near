@@ -20,7 +20,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/streamingfast/bstream"
 	pbbstream "github.com/streamingfast/pbgo/sf/bstream/v1"
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
+	pbcodec "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1"
 )
 
 func BlockDecoder(blk *bstream.Block) (interface{}, error) {

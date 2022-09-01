@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/streamingfast/dstore"
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
-	pbtransform "github.com/streamingfast/sf-near/pb/sf/near/transform/v1"
+	pbcodec "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1"
+	pbtransform "github.com/streamingfast/firehose-near/pb/sf/near/transform/v1"
 
 	"google.golang.org/protobuf/types/known/anypb"
 

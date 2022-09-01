@@ -27,7 +27,7 @@ import (
 	"github.com/streamingfast/dbin"
 	"github.com/streamingfast/dstore"
 	pbbstream "github.com/streamingfast/pbgo/sf/bstream/v1"
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
+	pbcodec "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1"
 	sftools "github.com/streamingfast/sf-tools"
 	"go.uber.org/zap"
 )

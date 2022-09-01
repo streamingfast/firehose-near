@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package sf.near.codec.v1;
 
-option go_package = "github.com/streamingfast/sf-near/pb/sf/near/codec/v1;pbcodec";
+option go_package = "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1;pbcodec";
 
 message Block {
   string author = 1;

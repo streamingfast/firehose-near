@@ -17,7 +17,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/streamingfast/bstream"
-	"github.com/streamingfast/sf-near/types"
+	"github.com/streamingfast/firehose-near/types"
 	"io"
 	"io/ioutil"
 	"os"
