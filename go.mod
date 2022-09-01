@@ -25,7 +25,6 @@ require (
 	github.com/streamingfast/dmetrics v0.0.0-20220811180000-3e513057d17c
 	github.com/streamingfast/dstore v0.1.1-0.20220607202639-35118aeaf648
 	github.com/streamingfast/firehose v0.1.1-0.20220812162323-b98d71964619
-	github.com/streamingfast/firehose-acme/types v0.0.0-20220901005555-99c1df91c222
 	github.com/streamingfast/index-builder v0.0.0-20220810183227-6de1a5d962c7
 	github.com/streamingfast/logging v0.0.0-20220511154537-ce373d264338
 	github.com/streamingfast/merger v0.0.3-0.20220811184329-ce81549bd619
@@ -33,7 +32,7 @@ require (
 	github.com/streamingfast/node-manager v0.0.2-0.20220811195019-694930bda9cb
 	github.com/streamingfast/pbgo v0.0.6-0.20220801202203-c32e42ac42a8
 	github.com/streamingfast/relayer v0.0.2-0.20220811185139-02ee222c9277
-	github.com/streamingfast/sf-near/types v0.0.0-20220901151747-ff41fd4070cb
+	github.com/streamingfast/sf-near/types v0.0.0-20220901160911-467017d06d91
 	github.com/streamingfast/sf-tools v0.0.0-20220810183745-b514ffd4aa46
 	github.com/streamingfast/snapshotter v0.0.0-20220511035139-9c8d907b1c49
 	github.com/stretchr/testify v1.7.1

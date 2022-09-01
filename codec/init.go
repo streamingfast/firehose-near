@@ -15,10 +15,9 @@
 package codec
 
 import (
-	"github.com/streamingfast/firehose-acme/types"
-	"time"
-
 	"github.com/streamingfast/bstream"
+	"github.com/streamingfast/sf-near/types"
+	"time"
 )
 
 func init() {
