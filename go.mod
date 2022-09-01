@@ -29,10 +29,9 @@ require (
 	github.com/streamingfast/logging v0.0.0-20220511154537-ce373d264338
 	github.com/streamingfast/merger v0.0.3-0.20220811184329-ce81549bd619
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d
-	github.com/streamingfast/node-manager v0.0.2-0.20220811195019-694930bda9cb
+	github.com/streamingfast/node-manager v0.0.2-0.20220824133130-154a66c99ab9
 	github.com/streamingfast/pbgo v0.0.6-0.20220801202203-c32e42ac42a8
 	github.com/streamingfast/relayer v0.0.2-0.20220811185139-02ee222c9277
-	github.com/streamingfast/firehose-near/types v0.0.0-20220901160911-467017d06d91
 	github.com/streamingfast/sf-tools v0.0.0-20220810183745-b514ffd4aa46
 	github.com/streamingfast/snapshotter v0.0.0-20220511035139-9c8d907b1c49
 	github.com/stretchr/testify v1.7.1
