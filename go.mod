@@ -6,7 +6,6 @@ require (
 	cloud.google.com/go/iam v0.3.0 // indirect
 	github.com/RoaringBitmap/roaring v0.9.4
 	github.com/ShinyTrinkets/overseer v0.3.0
-	github.com/abourget/llerrgroup v0.2.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.2
 	github.com/lithammer/dedent v1.1.0
@@ -34,6 +33,7 @@ require (
 	github.com/streamingfast/node-manager v0.0.2-0.20220811195019-694930bda9cb
 	github.com/streamingfast/pbgo v0.0.6-0.20220801202203-c32e42ac42a8
 	github.com/streamingfast/relayer v0.0.2-0.20220811185139-02ee222c9277
+	github.com/streamingfast/sf-near/types v0.0.0-20220901151747-ff41fd4070cb
 	github.com/streamingfast/sf-tools v0.0.0-20220810183745-b514ffd4aa46
 	github.com/streamingfast/snapshotter v0.0.0-20220511035139-9c8d907b1c49
 	github.com/stretchr/testify v1.7.1

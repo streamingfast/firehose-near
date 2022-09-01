@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 	"github.com/streamingfast/firehose-acme/types"
+	pbnear "github.com/streamingfast/sf-near/types/pb/sf/near/type/v1"
 	"os"
 	"strconv"
 
 	"github.com/spf13/cobra"
 	"github.com/streamingfast/bstream"
-	pbnear "github.com/streamingfast/sf-near/types/pb/sf/near/type/v1"
 	sftools "github.com/streamingfast/sf-tools"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
@@ -72,5 +72,5 @@ func decodeAnyPB(in *anypb.Any) (*bstream.Block, error) {
 		return nil, fmt.Errorf("unmarshal anypb: %w", err)
 	}
 
-	return types.BlockFromProto(block)
+	return types.BlockFromProtoNear(block)
 }

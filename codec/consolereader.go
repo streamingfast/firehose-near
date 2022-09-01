@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"github.com/streamingfast/firehose-acme/types"
+	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 	"io"
 	"strconv"
 	"strings"
@@ -14,7 +15,6 @@ import (
 	"github.com/streamingfast/bstream"
 
 	"github.com/golang/protobuf/proto"
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 	"go.uber.org/zap"
 )
 
@@ -219,7 +219,7 @@ func (ctx *parseCtx) readBlock(line string) (*bstream.Block, error) {
 		heap.Pop(ctx.blockMetas)
 	}
 
-	return types.BlockFromProto(block)
+	return types.BlockFromProtoCodec(block)
 }
 
 // splitInChunks split the line in `count` chunks and returns the slice `chunks[1:count]` (so exclusive end), but verifies
