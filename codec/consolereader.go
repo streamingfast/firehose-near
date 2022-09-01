@@ -5,6 +5,7 @@ import (
 	"container/heap"
 	"encoding/hex"
 	"fmt"
+	"github.com/streamingfast/firehose-acme/types"
 	"io"
 	"strconv"
 	"strings"
@@ -218,7 +219,7 @@ func (ctx *parseCtx) readBlock(line string) (*bstream.Block, error) {
 		heap.Pop(ctx.blockMetas)
 	}
 
-	return BlockFromProto(block)
+	return types.BlockFromProto(block)
 }
 
 // splitInChunks split the line in `count` chunks and returns the slice `chunks[1:count]` (so exclusive end), but verifies

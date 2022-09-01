@@ -15,7 +15,7 @@ require (
 	github.com/mr-tron/base58 v1.2.0
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.8.1
-	github.com/streamingfast/bstream v0.0.2-0.20220815145332-9f75c0660e4f
+	github.com/streamingfast/bstream v0.0.2-0.20220831142019-0a0b0caa04c3
 	github.com/streamingfast/cli v0.0.4-0.20220419231930-a555cea243fc
 	github.com/streamingfast/dauth v0.0.0-20220404140613-a40f4cd81626
 	github.com/streamingfast/dbin v0.0.0-20210809205249-73d5eca35dc5
@@ -26,6 +26,7 @@ require (
 	github.com/streamingfast/dmetrics v0.0.0-20220811180000-3e513057d17c
 	github.com/streamingfast/dstore v0.1.1-0.20220607202639-35118aeaf648
 	github.com/streamingfast/firehose v0.1.1-0.20220812162323-b98d71964619
+	github.com/streamingfast/firehose-acme/types v0.0.0-20220901005555-99c1df91c222
 	github.com/streamingfast/index-builder v0.0.0-20220810183227-6de1a5d962c7
 	github.com/streamingfast/logging v0.0.0-20220511154537-ce373d264338
 	github.com/streamingfast/merger v0.0.3-0.20220811184329-ce81549bd619

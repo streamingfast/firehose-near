@@ -17,6 +17,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/streamingfast/bstream"
+	"github.com/streamingfast/firehose-acme/types"
 	"io"
 	"io/ioutil"
 	"os"
@@ -74,7 +75,7 @@ func TestParseFromFile(t *testing.T) {
 				}
 				require.NoError(t, err)
 
-				block, err := BlockDecoder(out)
+				block, err := types.BlockDecoder(out)
 				require.NoError(t, err)
 
 				if !first {
