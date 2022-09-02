@@ -1,7 +1,8 @@
 syntax = "proto3";
 
 package sf.near.transform.v1;
-option go_package = "github.com/streamingfast/firehose-near/pb/sf/near/transform/v1;pbtransform";
+
+option go_package = "github.com/streamingfast/firehose-near/types/pb/sf/near/transform/v1;pbtransform";
 
 // BasicReceiptFilter applies a logical OR everywhere it can
 message BasicReceiptFilter {

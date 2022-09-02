@@ -19,8 +19,8 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/streamingfast/bstream"
+	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 	pbbstream "github.com/streamingfast/pbgo/sf/bstream/v1"
-	pbcodec "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1"
 )
 
 func BlockDecoder(blk *bstream.Block) (interface{}, error) {
@@ -32,7 +32,7 @@ func BlockDecoder(blk *bstream.Block) (interface{}, error) {
 		return nil, fmt.Errorf("this decoder only knows about version 1, got %d", blk.Version())
 	}
 
-	block := new(pbcodec.Block)
+	block := new(pbnear.Block)
 	payload, err := blk.Payload.Get()
 	if err != nil {
 		return nil, fmt.Errorf("getting payload: %w", err)
