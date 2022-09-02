@@ -27,7 +27,7 @@ import (
 	"go.uber.org/zap"
 )
 
-var StartCmd = &cobra.Command{Use: "start", Short: "Starts `sfnear` services all at once", RunE: nearStartE, Args: cobra.ArbitraryArgs}
+var StartCmd = &cobra.Command{Use: "start", Short: "Starts `firenear` services all at once", RunE: nearStartE, Args: cobra.ArbitraryArgs}
 
 func init() {
 	RootCmd.AddCommand(StartCmd)
@@ -37,7 +37,7 @@ func nearStartE(cmd *cobra.Command, args []string) (err error) {
 	cmd.SilenceUsage = true
 
 	dataDir := viper.GetString("global-data-dir")
-	zlog.Debug("sfnear binary started", zap.String("data_dir", dataDir))
+	zlog.Debug("firenear binary started", zap.String("data_dir", dataDir))
 
 	configFile := viper.GetString("global-config-file")
 	zlog.Info(fmt.Sprintf("Starting StreamingFast on NEAR with config file '%s'", configFile))
