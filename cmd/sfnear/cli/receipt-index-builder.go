@@ -3,8 +3,7 @@ package cli
 import (
 	"context"
 	"fmt"
-
-	pbcodec "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1"
+	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -12,8 +11,8 @@ import (
 	bstransform "github.com/streamingfast/bstream/transform"
 	"github.com/streamingfast/dlauncher/launcher"
 	"github.com/streamingfast/dstore"
-	indexerApp "github.com/streamingfast/index-builder/app/index-builder"
 	"github.com/streamingfast/firehose-near/transform"
+	indexerApp "github.com/streamingfast/index-builder/app/index-builder"
 )
 
 func init() {
@@ -73,7 +72,7 @@ func init() {
 
 			receiptIndexer := transform.NewNearBlockIndexer(indexStore, viper.GetUint64("receipt-index-builder-index-size"))
 			handler := bstream.HandlerFunc(func(blk *bstream.Block, obj interface{}) error {
-				receiptIndexer.ProcessBlock(blk.ToNative().(*pbcodec.Block))
+				receiptIndexer.ProcessBlock(blk.ToNative().(*pbnear.Block))
 				return nil
 			})
 

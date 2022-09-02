@@ -17,6 +17,7 @@ package tools
 import (
 	"bytes"
 	"fmt"
+	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 	"io"
 	"regexp"
 	"strconv"
@@ -27,7 +28,6 @@ import (
 	"github.com/streamingfast/dbin"
 	"github.com/streamingfast/dstore"
 	pbbstream "github.com/streamingfast/pbgo/sf/bstream/v1"
-	pbcodec "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1"
 	sftools "github.com/streamingfast/sf-tools"
 	"go.uber.org/zap"
 )
@@ -150,7 +150,7 @@ func backfillPrevHeightE(cmd *cobra.Command, args []string) error {
 
 			blockBytes := bstreamBlock.GetPayloadBuffer()
 
-			block := new(pbcodec.Block)
+			block := new(pbnear.Block)
 			err = proto.Unmarshal(blockBytes, block)
 			if err != nil {
 				return fmt.Errorf("unmarshaling block proto: %w", err)
@@ -310,7 +310,7 @@ func backfillPrevHeightCheckE(cmd *cobra.Command, args []string) error {
 
 			blockBytes := bstreamBlock.GetPayloadBuffer()
 
-			block := new(pbcodec.Block)
+			block := new(pbnear.Block)
 			err = proto.Unmarshal(blockBytes, block)
 			if err != nil {
 				return fmt.Errorf("unmarshaling block proto: %w", err)

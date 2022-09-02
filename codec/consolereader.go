@@ -5,8 +5,8 @@ import (
 	"container/heap"
 	"encoding/hex"
 	"fmt"
-	pbcodec "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1"
 	"github.com/streamingfast/firehose-near/types"
+	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 	"io"
 	"strconv"
 	"strings"
@@ -173,7 +173,7 @@ func (ctx *parseCtx) readBlock(line string) (*bstream.Block, error) {
 		return nil, fmt.Errorf("invalid block bytes: %w", err)
 	}
 
-	block := &pbcodec.Block{}
+	block := &pbnear.Block{}
 	if err := proto.Unmarshal(protoBytes, block); err != nil {
 		return nil, fmt.Errorf("invalid block: %w", err)
 	}

@@ -11,7 +11,6 @@ require (
 	github.com/lithammer/dedent v1.1.0
 	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/mattn/go-colorable v0.1.12 // indirect
-	github.com/mr-tron/base58 v1.2.0
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.8.1
 	github.com/streamingfast/bstream v0.0.2-0.20220831142019-0a0b0caa04c3
@@ -25,6 +24,7 @@ require (
 	github.com/streamingfast/dmetrics v0.0.0-20220811180000-3e513057d17c
 	github.com/streamingfast/dstore v0.1.1-0.20220607202639-35118aeaf648
 	github.com/streamingfast/firehose v0.1.1-0.20220812162323-b98d71964619
+	github.com/streamingfast/firehose-near/types v0.0.0-20220902032032-e9defb8cd43f
 	github.com/streamingfast/index-builder v0.0.0-20220810183227-6de1a5d962c7
 	github.com/streamingfast/logging v0.0.0-20220511154537-ce373d264338
 	github.com/streamingfast/merger v0.0.3-0.20220811184329-ce81549bd619

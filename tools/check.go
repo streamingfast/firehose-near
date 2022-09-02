@@ -16,11 +16,11 @@ package tools
 
 import (
 	"fmt"
+	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/streamingfast/bstream"
-	pbcodec "github.com/streamingfast/firehose-near/pb/sf/near/codec/v1"
 	sftools "github.com/streamingfast/sf-tools"
 )
 
@@ -75,7 +75,7 @@ func checkMergedBlocksE(cmd *cobra.Command, args []string) error {
 }
 
 func blockPrinter(block *bstream.Block) {
-	nearBlock := block.ToNative().(*pbcodec.Block)
+	nearBlock := block.ToNative().(*pbnear.Block)
 	shardCount := len(nearBlock.Shards)
 	transactionCount := 0
 
