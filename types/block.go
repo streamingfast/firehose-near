@@ -9,23 +9,7 @@ import (
 	pbbstream "github.com/streamingfast/pbgo/sf/bstream/v1"
 )
 
-func BlockFromProtoCodec(b *pbnear.Block) (*bstream.Block, error) {
-	content, err := proto.Marshal(b)
-	if err != nil {
-		return nil, fmt.Errorf("unable to marshal to binary form: %s", err)
-	}
-
-	block := &bstream.Block{
-		Id:             b.ID(),
-		PreviousId:     b.PreviousID(),
-		Timestamp:      b.Time(),
-		PayloadKind:    pbbstream.Protocol_NEAR,
-		PayloadVersion: 1,
-	}
-	return bstream.GetBlockPayloadSetter(block, content)
-}
-
-func BlockFromProtoNear(b *pbnear.Block) (*bstream.Block, error) {
+func BlockFromProto(b *pbnear.Block) (*bstream.Block, error) {
 	content, err := proto.Marshal(b)
 	if err != nil {
 		return nil, fmt.Errorf("unable to marshal to binary form: %s", err)
