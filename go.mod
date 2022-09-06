@@ -24,7 +24,7 @@ require (
 	github.com/streamingfast/dmetrics v0.0.0-20220811180000-3e513057d17c
 	github.com/streamingfast/dstore v0.1.1-0.20220607202639-35118aeaf648
 	github.com/streamingfast/firehose v0.1.1-0.20220812162323-b98d71964619
-	github.com/streamingfast/firehose-near/types v0.0.0-20220902032032-e9defb8cd43f
+	github.com/streamingfast/firehose-near/types v0.0.0-20220906143314-cd1a739fc58f
 	github.com/streamingfast/index-builder v0.0.0-20220810183227-6de1a5d962c7
 	github.com/streamingfast/logging v0.0.0-20220511154537-ce373d264338
 	github.com/streamingfast/merger v0.0.3-0.20220811184329-ce81549bd619
