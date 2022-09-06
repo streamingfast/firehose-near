@@ -13,7 +13,7 @@ Welcome to this node manager pod, common commands:
 Node manager commands (near-... <tab> to show all):
  - Check if running                   near-is-running
 
- - Debug Firehose logs for 30s       near-debug-firehose-30s
+ - Debug Firehose logs for 30s       near-debug-firehose-logs-30s
  - Stop instance                      near-maintenance
  - Start or restart instance          near-resume
 

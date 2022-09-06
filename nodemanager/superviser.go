@@ -45,7 +45,7 @@ func NewSuperviser(
 	arguments []string,
 	dataDir string,
 	headBlockUpdateFunc nodeManager.HeadBlockUpdater,
-	debugFirehose bool,
+	debugFirehoseLogs bool,
 	logToZap bool,
 	appLogger *zap.Logger,
 	nodelogger *zap.Logger,
@@ -69,9 +69,9 @@ func NewSuperviser(
 	}
 
 	if logToZap {
-		supervisor.RegisterLogPlugin(newToZapLogPlugin(debugFirehose, nodelogger))
+		supervisor.RegisterLogPlugin(newToZapLogPlugin(debugFirehoseLogs, nodelogger))
 	} else {
-		supervisor.RegisterLogPlugin(logplugin.NewToConsoleLogPlugin(debugFirehose))
+		supervisor.RegisterLogPlugin(logplugin.NewToConsoleLogPlugin(debugFirehoseLogs))
 	}
 
 	appLogger.Info("created near superviser", zap.Object("superviser", supervisor))

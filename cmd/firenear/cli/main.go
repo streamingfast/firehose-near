@@ -61,7 +61,7 @@ func Main() {
 	derr.Check("neard", RootCmd.Execute())
 }
 
-var startCmdExample = `firenear start reader`
+var startCmdExample = `firenear start reader-node`
 var startCmdHelpTemplate = `Usage:{{if .Runnable}}
   {{.UseLine}}{{end}} [all|command1 [command2...]]{{if gt (len .Aliases) 0}}
 

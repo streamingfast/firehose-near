@@ -11,8 +11,8 @@ import (
 
 var logLevelRegex = regexp.MustCompile("^(INFO|WARN|ERROR)")
 
-func newToZapLogPlugin(debugFirehose bool, logger *zap.Logger) *logplugin.ToZapLogPlugin {
-	return logplugin.NewToZapLogPlugin(debugFirehose, logger, logplugin.ToZapLogPluginLogLevel(logLevelReader))
+func newToZapLogPlugin(debugFirehoseLogs bool, logger *zap.Logger) *logplugin.ToZapLogPlugin {
+	return logplugin.NewToZapLogPlugin(debugFirehoseLogs, logger, logplugin.ToZapLogPluginLogLevel(logLevelReader))
 }
 
 func logLevelReader(in string) zapcore.Level {

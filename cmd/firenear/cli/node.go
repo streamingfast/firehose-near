@@ -12,6 +12,7 @@ import (
 	"github.com/spf13/viper"
 	"github.com/streamingfast/bstream/blockstream"
 	"github.com/streamingfast/dlauncher/launcher"
+	"github.com/streamingfast/firehose-near/nodemanager"
 	"github.com/streamingfast/logging"
 	nodeManager "github.com/streamingfast/node-manager"
 	nodeManagerApp "github.com/streamingfast/node-manager/app/node_manager2"
@@ -19,7 +20,6 @@ import (
 	"github.com/streamingfast/node-manager/operator"
 	pbbstream "github.com/streamingfast/pbgo/sf/bstream/v1"
 	pbheadinfo "github.com/streamingfast/pbgo/sf/headinfo/v1"
-	"github.com/streamingfast/firehose-near/nodemanager"
 	"github.com/streamingfast/snapshotter"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -108,7 +108,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 		nodeKeyFile = replaceHostname(hostname, nodeKeyFile)
 
 		readinessMaxLatency := viper.GetDuration(flagPrefix + "readiness-max-latency")
-		debugFirehose := viper.GetBool(flagPrefix + "debug-firehose-logs")
+		debugFirehoseLogs := viper.GetBool(flagPrefix + "debug-firehose-logs")
 		logToZap := viper.GetBool(flagPrefix + "log-to-zap")
 		shutdownDelay := viper.GetDuration("common-system-shutdown-signal-delay") // we reuse this global value
 		httpAddr := viper.GetString(flagPrefix + "manager-api-addr")
@@ -143,7 +143,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 			nodeArguments,
 			nodeDataDir,
 			metricsAndReadinessManager.UpdateHeadBlock,
-			debugFirehose,
+			debugFirehoseLogs,
 			logToZap,
 			appLogger,
 			nodeLogger,
