@@ -15,6 +15,7 @@
 package types
 
 import (
+	"fmt"
 	"io"
 	"time"
 
@@ -31,16 +32,15 @@ func init() {
 	bstream.GetMemoizeMaxAge = 20 * time.Second
 }
 
-//func blockReaderFactory(reader io.Reader) (bstream.BlockReader, error) {
-//	return bstream.NewDBinBlockReader(reader, func(contentType string, version int32) error {
-//		protocol := pbbstream.Protocol(pbbstream.Protocol_value[contentType])
-//		if protocol != pbbstream.Protocol_ETH && version != 1 {
-//			return fmt.Errorf("reader only knows about %s block kind at version 1, got %s at version %d", protocol, contentType, version)
-//		}
-//
-//		return nil
-//	})
-//}
+func blockReaderFactory(reader io.Reader) (bstream.BlockReader, error) {
+	return bstream.NewDBinBlockReader(reader, func(contentType string, version int32) error {
+		if (contentType != "ETH" && contentType != "NEA") || version != 1 {
+			return fmt.Errorf("reader expects block protocol NEA at version 1, got %s at version %d", contentType, version)
+		}
+
+		return nil
+	})
+}
 
 func blockWriterFactory(writer io.Writer) (bstream.BlockWriter, error) {
 	return bstream.NewDBinBlockWriter(writer, pbbstream.Protocol_ETH.String(), 1)
