@@ -72,5 +72,5 @@ func decodeAnyPB(in *anypb.Any) (*bstream.Block, error) {
 		return nil, fmt.Errorf("unmarshal anypb: %w", err)
 	}
 
-	return types.BlockFromProtoNear(block)
+	return types.BlockFromProto(block)
 }
