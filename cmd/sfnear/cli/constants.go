@@ -15,6 +15,7 @@ const (
 
 	MergedBlocksStoreURL string = "file://{sf-data-dir}/storage/merged-blocks"
 	OneBlockStoreURL     string = "file://{sf-data-dir}/storage/one-blocks"
+	ForkedBlocksStoreURL string = "file://{sf-data-dir}/storage/forked-blocks"
 
 	//Protocol                     = pbbstream.Protocol_NEAR
 	//TrxdbDSN              string = "badger://{sf-data-dir}/storage/trxdb"
