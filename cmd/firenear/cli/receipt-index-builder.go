@@ -36,7 +36,7 @@ func init() {
 			sfDataDir := runtime.AbsDataDir
 
 			indexStoreURL := MustReplaceDataDir(sfDataDir, viper.GetString("receipt-index-builder-index-store-url"))
-			blockStoreURL := MustReplaceDataDir(sfDataDir, viper.GetString("common-blocks-store-url"))
+			blockStoreURL := MustReplaceDataDir(sfDataDir, viper.GetString("common-merged-blocks-store-url"))
 
 			indexStore, err := dstore.NewStore(indexStoreURL, "", "", false)
 			if err != nil {

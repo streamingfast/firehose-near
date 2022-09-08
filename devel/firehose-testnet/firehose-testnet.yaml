@@ -2,7 +2,7 @@ start:
   args:
   - firehose
   flags:
-    common-blocks-store-url: gs://dfuseio-global-blocks-us/near-testnet/v1
+    common-merged-blocks-store-url: gs://dfuseio-global-blocks-us/near-testnet/v1
     common-blockstream-addr: ""
     common-first-streamable-block: 42376923
     common-atm-cache-enabled: true

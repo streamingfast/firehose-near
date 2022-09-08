@@ -13,9 +13,9 @@ import (
 	"github.com/streamingfast/dmetering"
 	"github.com/streamingfast/dmetrics"
 	"github.com/streamingfast/dstore"
+	sftransform "github.com/streamingfast/firehose-near/transform"
 	firehoseApp "github.com/streamingfast/firehose/app/firehose"
 	"github.com/streamingfast/logging"
-	sftransform "github.com/streamingfast/firehose-near/transform"
 	"go.uber.org/zap"
 )
 
@@ -30,7 +30,7 @@ func init() {
 	launcher.RegisterApp(zlog, &launcher.AppDef{
 		ID:          "firehose",
 		Title:       "Block Firehose",
-		Description: "Provides on-demand filtered blocks, depends on common-blocks-store-url and common-blockstream-addr",
+		Description: "Provides on-demand filtered blocks, depends on common-merged-blocks-store-url and common-blockstream-addr",
 		RegisterFlags: func(cmd *cobra.Command) error {
 			cmd.Flags().String("firehose-grpc-listen-addr", FirehoseGRPCServingAddr, "Address on which the firehose will listen")
 
@@ -55,9 +55,9 @@ func init() {
 			}
 			dmetering.SetDefaultMeter(metering)
 
-			mergedBlocksStoreURL := MustReplaceDataDir(sfDataDir, viper.GetString("common-blocks-store-url"))
-			oneBlocksStoreURL := MustReplaceDataDir(sfDataDir, viper.GetString("common-oneblock-store-url"))
-			forkedBlocksStoreURL := MustReplaceDataDir(sfDataDir, viper.GetString("common-forkedblocks-store-url"))
+			mergedBlocksStoreURL := MustReplaceDataDir(sfDataDir, viper.GetString("common-merged-blocks-store-url"))
+			oneBlocksStoreURL := MustReplaceDataDir(sfDataDir, viper.GetString("common-one-block-store-url"))
+			forkedBlocksStoreURL := MustReplaceDataDir(sfDataDir, viper.GetString("common-forked-blocks-store-url"))
 
 			indexStoreUrl := viper.GetString("firehose-block-index-url")
 			var indexStore dstore.Store

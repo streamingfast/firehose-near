@@ -22,26 +22,27 @@ import (
 
 func init() {
 	launcher.RegisterCommonFlags = func(_ *zap.Logger, cmd *cobra.Command) error {
+
 		//Common stores configuration flags
-		cmd.Flags().String("common-blocks-store-url", MergedBlocksStoreURL, "[COMMON] Store URL (with prefix) where to read/write. Used by: relayer, fluxdb, trxdb-loader, blockmeta, search-indexer, search-live, search-forkresolver")
-		cmd.Flags().String("common-oneblock-store-url", OneBlockStoreURL, "[COMMON] Store URL (with prefix) to read/write one-block files. Used by: reader-node, merger")
-		cmd.Flags().String("common-forkedblocks-store-url", OneBlockStoreURL, "[COMMON] Store URL (with prefix) to read/write one-block files. Used by: reader-node, merger")
-		cmd.Flags().String("common-blockstream-addr", RelayerServingAddr, "[COMMON] gRPC endpoint to get real-time blocks. Used by: fluxdb, trxdb-loader, blockmeta, search-indexer, search-live (relayer uses its own --relayer-blockstream-addr)")
+		cmd.Flags().String("common-merged-blocks-store-url", MergedBlocksStoreURL, "[COMMON] Store URL (with prefix) where to read/write merged blocks.")
+		cmd.Flags().String("common-one-block-store-url", OneBlockStoreURL, "[COMMON] Store URL (with prefix) to read/write one-block files.")
+		cmd.Flags().String("common-forked-blocks-store-url", OneBlockStoreURL, "[COMMON] Store URL (with prefix) to read/write index files.")
+		cmd.Flags().String("common-live-blocks-addr", RelayerServingAddr, "[COMMON] gRPC endpoint to get real-time blocks.")
 
 		cmd.Flags().Bool("common-atm-cache-enabled", false, "[COMMON] enable ATM caching")
 		cmd.Flags().String("common-atm-cache-dir", ATMDirectory, "[COMMON] ATM cache file directory.")
-		cmd.Flags().Int("common-atm-max-recent-entry-bytes", 21474836480, "[COMMON] ATM cache max size in bytes of recent entry heap")
-		cmd.Flags().Int("common-atm-max-entry-by-age-bytes", 21474836480, "[COMMON] ATM cache max size in bytes of age entry heap")
+		cmd.Flags().Int("common-atm-max-recent-entry-bytes", 21474836480, "[COMMON] ATM cache max size in bytes of recent entry heap.")
+		cmd.Flags().Int("common-atm-max-entry-by-age-bytes", 21474836480, "[COMMON] ATM cache max size in bytes of age entry heap.")
 
-		cmd.Flags().Int("common-first-streamable-block", FirstStreamableBlock, "[COMMON] first streamable block number")
+		cmd.Flags().Int("common-first-streamable-block", FirstStreamableBlock, "[COMMON] first streamable block number.")
 
 		// Authentication, metering and rate limiter plugins
-		cmd.Flags().String("common-auth-plugin", "null://", "[COMMON] Auth plugin URI, see dfuse-io/dauth repository")
-		cmd.Flags().String("common-metering-plugin", "null://", "[COMMON] Metering plugin URI, see dfuse-io/dmetering repository")
+		cmd.Flags().String("common-auth-plugin", "null://", "[COMMON] Auth plugin URI, see streamingfast/dauth repository.")
+		cmd.Flags().String("common-metering-plugin", "null://", "[COMMON] Metering plugin URI, see streamingfast/dmetering repository.")
 		// cmd.Flags().String("common-ratelimiter-plugin", "null://", "[COMMON] Rate Limiter plugin URI, see dfuse-io/dauth repository")
 
 		// System Behavior
-		cmd.Flags().Duration("common-system-shutdown-signal-delay", 0, "[COMMON] Add a delay between receiving SIGTERM signal and shutting down apps. Apps will respond negatively to /healthz during this period")
+		cmd.Flags().Duration("common-system-shutdown-signal-delay", 0, "[COMMON] Add a delay between receiving SIGTERM signal and shutting down apps. Apps will respond negatively to /healthz during this period.")
 
 		return nil
 	}

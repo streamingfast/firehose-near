@@ -193,15 +193,15 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 		}
 
 		blockStreamServer := blockstream.NewUnmanagedServer(blockstream.ServerOptionWithLogger(appLogger))
-		oneBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-oneblock-store-url"))
-		mergedBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-blocks-store-url"))
+		oneBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-one-block-store-url"))
+		mergedBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-merged-blocks-store-url"))
 		workingDir := mustReplaceDataDir(sfDataDir, viper.GetString("reader-node-working-dir"))
 		gprcListenAdrr := viper.GetString("reader-node-grpc-listen-addr")
 		mergeThresholdBlockAge := viper.GetString("reader-node-merge-threshold-block-age")
 		batchStartBlockNum := viper.GetUint64("reader-node-start-block-num")
 		batchStopBlockNum := viper.GetUint64("reader-node-stop-block-num")
 		waitTimeForUploadOnShutdown := viper.GetDuration("reader-node-wait-upload-complete-on-shutdown")
-		oneBlockFileSuffix := viper.GetString("reader-node-oneblock-suffix")
+		oneBlockFileSuffix := viper.GetString("reader-node-one-block-suffix")
 		blocksChanCapacity := viper.GetInt("reader-node-blocks-chan-capacity")
 
 		readerPlugin, err := getReaderLogPlugin(
