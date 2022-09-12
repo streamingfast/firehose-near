@@ -9,4 +9,4 @@ start:
     reader-node-log-to-zap: false
     reader-node-config-file: ./reader/config.json
     reader-node-genesis-file: ./reader/genesis.json
-    reader-node-node-key-file: ./reader/node_key.json
+    reader-node-key-file: ./reader/node_key.json
