@@ -24,7 +24,7 @@ func init() {
 
 var DownloadFromFirehoseCmd = &cobra.Command{
 	Use:     "download-from-firehose",
-	Short:   "download blocks from firehose and save them to merged-blocks",
+	Short:   "download blocks from Firehose and save them to merged-blocks",
 	Args:    cobra.ExactArgs(4),
 	RunE:    downloadFromFirehoseE,
 	Example: "firenear tools download-from-firehose api.streamingfast.io 1000 2000 ./outputdir",

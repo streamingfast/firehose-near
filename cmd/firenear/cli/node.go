@@ -41,7 +41,7 @@ func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAd
 	cmd.Flags().String(flagPrefix+"config-file", "", "Node configuration file where ({node-role} is either reader or archive), the file is copied inside the {sf-data-dir}/{node-role}/data folder Use {hostname} label to use short hostname in path")
 	cmd.Flags().String(flagPrefix+"genesis-file", "./{node-role}/genesis.json", "Node configuration file where ({node-role} is either reader or archive), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use short hostname in path")
 	cmd.Flags().String(flagPrefix+"node-key-file", "./{node-role}/node_key.json", "Node key configuration file where ({node-role} is either reader or archive ), the file is copied inside the {sf-data-dir}/{node-role}/data folder. Use {hostname} label to use with short hostname in path")
-	cmd.Flags().Bool(flagPrefix+"debug-firehose-logs", false, "[DEV] Prints firehose instrumentation logs to standard output, should be use for debugging purposes only")
+	cmd.Flags().Bool(flagPrefix+"debug-firehose-logs", false, "[DEV] Prints Firehose instrumentation logs to standard output, should be use for debugging purposes only")
 	cmd.Flags().Bool(flagPrefix+"log-to-zap", true, "Enable all node logs to transit into node's logger directly, when false, prints node logs directly to stdout")
 	cmd.Flags().String(flagPrefix+"manager-api-addr", managerAPIAddr, "Near node manager API address")
 	cmd.Flags().Duration(flagPrefix+"readiness-max-latency", 30*time.Second, "Determine the maximum head block latency at which the instance will be determined healthy. Some chains have more regular block production than others.")

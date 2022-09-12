@@ -32,7 +32,7 @@ func init() {
 		Title:       "Block Firehose",
 		Description: "Provides on-demand filtered blocks, depends on common-merged-blocks-store-url and common-blockstream-addr",
 		RegisterFlags: func(cmd *cobra.Command) error {
-			cmd.Flags().String("firehose-grpc-listen-addr", FirehoseGRPCServingAddr, "Address on which the firehose will listen")
+			cmd.Flags().String("firehose-grpc-listen-addr", FirehoseGRPCServingAddr, "Address on which the Firehose will listen")
 
 			cmd.Flags().String("firehose-block-index-url", "", "If non-empty, will use this URL as a store to load index data used by some transforms")
 			cmd.Flags().IntSlice("firehose-block-index-sizes", []int{100000, 10000, 1000, 100}, "list of sizes for block indices")
