@@ -29,10 +29,10 @@ func init() {
 		cmd.Flags().String("common-forked-blocks-store-url", OneBlockStoreURL, "[COMMON] Store URL (with prefix) to read/write index files.")
 		cmd.Flags().String("common-live-blocks-addr", RelayerServingAddr, "[COMMON] gRPC endpoint to get real-time blocks.")
 
-		cmd.Flags().Bool("common-atm-cache-enabled", false, "[COMMON] enable ATM caching")
-		cmd.Flags().String("common-atm-cache-dir", ATMDirectory, "[COMMON] ATM cache file directory.")
-		cmd.Flags().Int("common-atm-max-recent-entry-bytes", 21474836480, "[COMMON] ATM cache max size in bytes of recent entry heap.")
-		cmd.Flags().Int("common-atm-max-entry-by-age-bytes", 21474836480, "[COMMON] ATM cache max size in bytes of age entry heap.")
+		cmd.Flags().Bool("common-blocks-cache-enabled", false, "[COMMON] enable ATM caching")
+		cmd.Flags().String("common-blocks-cache-dir", ATMDirectory, "[COMMON] ATM cache file directory.")
+		cmd.Flags().Int("common-blocks-cache-max-recent-entry-bytes", 21474836480, "[COMMON] ATM cache max size in bytes of recent entry heap.")
+		cmd.Flags().Int("common-blocks-cache-max-entry-by-age-bytes", 21474836480, "[COMMON] ATM cache max size in bytes of age entry heap.")
 
 		cmd.Flags().Int("common-first-streamable-block", FirstStreamableBlock, "[COMMON] first streamable block number.")
 

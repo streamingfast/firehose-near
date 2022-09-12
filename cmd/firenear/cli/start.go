@@ -67,14 +67,14 @@ func Start(configFile string, dataDir string, args []string) (err error) {
 		AbsDataDir: dataDirAbs,
 	}
 
-	atmCacheEnabled := viper.GetBool("common-atm-cache-enabled")
+	atmCacheEnabled := viper.GetBool("common-blocks-cache-enabled")
 	if atmCacheEnabled {
 		bstream.GetBlockPayloadSetter = bstream.ATMCachedPayloadSetter
 
-		cacheDir := MustReplaceDataDir(modules.AbsDataDir, viper.GetString("common-atm-cache-dir"))
+		cacheDir := MustReplaceDataDir(modules.AbsDataDir, viper.GetString("common-blocks-cache-dir"))
 		storeUrl := MustReplaceDataDir(modules.AbsDataDir, viper.GetString("common-merged-blocks-store-url"))
-		maxRecentEntryBytes := viper.GetInt("common-atm-max-recent-entry-bytes")
-		maxEntryByAgeBytes := viper.GetInt("common-atm-max-entry-by-age-bytes")
+		maxRecentEntryBytes := viper.GetInt("common-blocks-cache-max-recent-entry-bytes")
+		maxEntryByAgeBytes := viper.GetInt("common-blocks-cache-max-entry-by-age-bytes")
 		bstream.InitCache(storeUrl, cacheDir, maxRecentEntryBytes, maxEntryByAgeBytes)
 	}
 
