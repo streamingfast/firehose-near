@@ -34,16 +34,16 @@ func registerReaderNodeFlags(cmd *cobra.Command) error {
 	cmd.Flags().String("reader-node-grpc-listen-addr", ReaderGRPCAddr, "gRPC listening address to use for serving real-time blocks")
 	cmd.Flags().Bool("reader-node-merge-and-store-directly", false, "[BATCH] When enabled, do not write oneblock files, sidestep the merger and write the merged 100-blocks logs directly to --common-merged-blocks-store-url")
 	cmd.Flags().Bool("reader-node-discard-after-stop-num", false, "Ignore remaining blocks being processed after stop num (only useful if we discard the reader data after reprocessing a chunk of blocks)")
-	cmd.Flags().String("reader-node-working-dir", "{sf-data-dir}/reader/work", "Path where reader will stores its files")
+	cmd.Flags().String("reader-node-working-dir", "{sf-data-dir}/reader/work", "Path where the reader node will stores its files")
 	cmd.Flags().Uint("reader-node-start-block-num", 0, "Blocks that were produced with smaller block number then the given block num are skipped")
-	cmd.Flags().Uint("reader-node-stop-block-num", 0, "Shutdown reader when we the following 'stop-block-num' has been reached, inclusively.")
-	cmd.Flags().Int("reader-node-blocks-chan-capacity", 100, "Capacity of the channel holding blocks read by the reader. Process will shutdown superviser/geth if the channel gets over 90% of that capacity to prevent horrible consequences. Raise this number when processing tiny blocks very quickly")
-	cmd.Flags().String("reader-node-one-block-suffix", "default", "Unique identifier for that reader, so that it can produce 'oneblock files' in the same store as another instance without competing for writes.")
-	cmd.Flags().Duration("reader-node-wait-upload-complete-on-shutdown", 30*time.Second, "When the reader is shutting down, it will wait up to that amount of time for the archiver to finish uploading the blocks before leaving anyway")
+	cmd.Flags().Uint("reader-node-stop-block-num", 0, "Shutdown the reader node when we the following 'stop-block-num' has been reached, inclusively.")
+	cmd.Flags().Int("reader-node-blocks-chan-capacity", 100, "Capacity of the channel holding blocks read by the reader node. Process will shutdown superviser/geth if the channel gets over 90% of that capacity to prevent horrible consequences. Raise this number when processing tiny blocks very quickly")
+	cmd.Flags().String("reader-node-one-block-suffix", "default", "Unique identifier for that reader node, so that it can produce 'oneblock files' in the same store as another instance without competing for writes.")
+	cmd.Flags().Duration("reader-node-wait-upload-complete-on-shutdown", 30*time.Second, "When the reader node is shutting down, it will wait up to that amount of time for the archiver to finish uploading the blocks before leaving anyway")
 	cmd.Flags().String("reader-node-merge-threshold-block-age", "24h", "When processing blocks with a blocktime older than this threshold, they will be automatically merged (you can also use \"always\" or \"never\")")
 
 	return nil
-}
+}ack read
 
 func getReaderLogPlugin(
 	blockStreamServer *blockstream.Server,
