@@ -111,7 +111,7 @@ func (r *ConsoleReader) next(readType int) (out *bstream.Block, err error) {
 			out, err = ctx.readBlock(line)
 		default:
 			if traceEnabled {
-				zlog.Debug("skipping unknown reader log line", zap.String("line", line))
+				zlog.Debug("skipping unknown Firehose log line", zap.String("line", line))
 			}
 
 			continue

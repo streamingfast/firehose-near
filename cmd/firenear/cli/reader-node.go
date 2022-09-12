@@ -43,7 +43,7 @@ func registerReaderNodeFlags(cmd *cobra.Command) error {
 	cmd.Flags().String("reader-node-merge-threshold-block-age", "24h", "When processing blocks with a blocktime older than this threshold, they will be automatically merged (you can also use \"always\" or \"never\")")
 
 	return nil
-}ack read
+}
 
 func getReaderLogPlugin(
 	blockStreamServer *blockstream.Server,

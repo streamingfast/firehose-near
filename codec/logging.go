@@ -19,7 +19,7 @@ import (
 	"go.uber.org/zap"
 )
 
-var traceEnabled = logging.IsTraceEnabled("near-fire", "github.com/streamingfast/firehose-near/codec")
+var traceEnabled = logging.IsTraceEnabled("firenear", "github.com/streamingfast/firehose-near/codec")
 var zlog *zap.Logger
 
 func init() {
