@@ -30,7 +30,7 @@ func init() {
 	launcher.RegisterApp(zlog, &launcher.AppDef{
 		ID:          "firehose",
 		Title:       "Block Firehose",
-		Description: "Provides on-demand filtered blocks, depends on common-merged-blocks-store-url and common-blockstream-addr",
+		Description: "Provides on-demand filtered blocks, depends on common-merged-blocks-store-url and common-live-blocks-addr",
 		RegisterFlags: func(cmd *cobra.Command) error {
 			cmd.Flags().String("firehose-grpc-listen-addr", FirehoseGRPCServingAddr, "Address on which the Firehose will listen")
 
@@ -42,7 +42,7 @@ func init() {
 
 		FactoryFunc: func(runtime *launcher.Runtime) (launcher.App, error) {
 			sfDataDir := runtime.AbsDataDir
-			blockstreamAddr := viper.GetString("common-blockstream-addr")
+			blockstreamAddr := viper.GetString("common-live-blocks-addr")
 
 			authenticator, err := dauthAuthenticator.New(viper.GetString("common-auth-plugin"))
 			if err != nil {

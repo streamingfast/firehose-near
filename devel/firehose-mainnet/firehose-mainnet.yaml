@@ -3,7 +3,7 @@ start:
   - firehose
   flags:
     common-merged-blocks-store-url: gs://dfuseio-global-blocks-us/near-mainnet/v3
-    common-blockstream-addr: localhost:9001
+    common-live-blocks-addr: localhost:9001
     common-first-streamable-block: 9820214
     common-blocks-cache-enabled: true
     common-blocks-cache-max-recent-entry-bytes: 594967296
