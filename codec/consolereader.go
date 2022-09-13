@@ -5,18 +5,21 @@ import (
 	"container/heap"
 	"encoding/hex"
 	"fmt"
-	"github.com/streamingfast/firehose-near/types"
-	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 	"io"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/streamingfast/firehose-near/types"
+	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 
 	"github.com/streamingfast/bstream"
 
 	"github.com/golang/protobuf/proto"
 	"go.uber.org/zap"
 )
+
+const FirePrefixLen = len("FIRE ")
 
 // ConsoleReader is what reads the `geth` output directly. It builds
 // up some LogEntry objects. See `LogReader to read those entries .
@@ -40,7 +43,7 @@ func NewConsoleReader(lines chan string, rpcUrl string) (*ConsoleReader, error) 
 	return l, nil
 }
 
-//todo: WTF?
+// todo: WTF?
 func (r *ConsoleReader) Done() <-chan interface{} {
 	return r.done
 }
@@ -104,7 +107,7 @@ func (r *ConsoleReader) next(readType int) (out *bstream.Block, err error) {
 			continue
 		}
 
-		line = strings.TrimPrefix(line, "FIRE ")
+		line = line[FirePrefixLen:]
 
 		switch {
 		case strings.HasPrefix(line, "BLOCK"):
