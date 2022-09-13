@@ -16,7 +16,6 @@ package codec
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/streamingfast/bstream"
 	"github.com/streamingfast/firehose-near/types"
 	"io"
 	"io/ioutil"
@@ -35,8 +34,6 @@ import (
 func init() {
 	logging.TestingOverride()
 }
-
-type ObjectReader func() (*bstream.Block, error)
 
 //func TestReadRealBlock(t *testing.T) {
 //	fl := strings.NewReader(fireblock)

@@ -104,7 +104,7 @@ func (r *ConsoleReader) next(readType int) (out *bstream.Block, err error) {
 			continue
 		}
 
-		line = line[6:]
+		line = strings.TrimPrefix(line, "FIRE ")
 
 		switch {
 		case strings.HasPrefix(line, "BLOCK"):
