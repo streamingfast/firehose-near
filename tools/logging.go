@@ -19,4 +19,4 @@ import (
 	"go.uber.org/zap"
 )
 
-var zlog, tracer = logging.PackageLogger("tools", "github.com/streamingfast/sf-near/tools", logging.LoggerDefaultLevel(zap.InfoLevel))
+var zlog, tracer = logging.PackageLogger("tools", "github.com/streamingfast/firehose-near/tools", logging.LoggerDefaultLevel(zap.InfoLevel))

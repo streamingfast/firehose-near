@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	pbtransform "github.com/streamingfast/sf-near/pb/sf/near/transform/v1"
+	pbtransform "github.com/streamingfast/firehose-near/types/pb/sf/near/transform/v1"
 	sftools "github.com/streamingfast/sf-tools"
 	"google.golang.org/protobuf/types/known/anypb"
 )

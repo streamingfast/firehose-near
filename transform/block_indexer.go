@@ -3,7 +3,7 @@ package transform
 import (
 	"github.com/streamingfast/bstream/transform"
 	"github.com/streamingfast/dstore"
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
+	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 )
 
 type blockIndexer interface {
@@ -21,7 +21,7 @@ func NewNearBlockIndexer(indexStore dstore.Store, indexSize uint64) *NearBlockIn
 	}
 }
 
-func (i *NearBlockIndexer) ProcessBlock(blk *pbcodec.Block) {
+func (i *NearBlockIndexer) ProcessBlock(blk *pbnear.Block) {
 	keyMap := make(map[string]bool)
 	for _, shard := range blk.Shards {
 		for _, outcome := range shard.ReceiptExecutionOutcomes {

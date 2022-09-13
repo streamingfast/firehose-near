@@ -2,11 +2,11 @@ package transform
 
 import (
 	"fmt"
+	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 	"strings"
 
 	"github.com/streamingfast/dstore"
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
-	pbtransform "github.com/streamingfast/sf-near/pb/sf/near/transform/v1"
+	pbtransform "github.com/streamingfast/firehose-near/types/pb/sf/near/transform/v1"
 
 	"google.golang.org/protobuf/types/known/anypb"
 
@@ -84,10 +84,10 @@ func matchesPrefixSuffix(receiverID string, prefixSuffixPairs []*pbtransform.Pre
 }
 
 func (p *BasicReceiptFilter) Transform(readOnlyBlk *bstream.Block, in transform.Input) (transform.Output, error) {
-	nearBlock := readOnlyBlk.ToProtocol().(*pbcodec.Block)
-	var outShards []*pbcodec.IndexerShard
+	nearBlock := readOnlyBlk.ToProtocol().(*pbnear.Block)
+	var outShards []*pbnear.IndexerShard
 	for _, shard := range nearBlock.Shards {
-		var outcomes []*pbcodec.IndexerExecutionOutcomeWithReceipt
+		var outcomes []*pbnear.IndexerExecutionOutcomeWithReceipt
 		for _, outcome := range shard.ReceiptExecutionOutcomes {
 			if outcome.Receipt.GetAction() != nil {
 				if p.Accounts[outcome.Receipt.ReceiverId] || matchesPrefixSuffix(outcome.Receipt.ReceiverId, p.PrefixSuffixPairs) {

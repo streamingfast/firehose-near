@@ -22,5 +22,5 @@ import (
 var zlog = zap.NewNop()
 
 func init() {
-	logging.Register("github.com/streamingfast/sf-near/transforms", &zlog)
+	logging.Register("github.com/streamingfast/firehose-near/transforms", &zlog)
 }

@@ -10,12 +10,16 @@ import (
 	"strings"
 	"time"
 
+	"github.com/streamingfast/firehose-near/types"
+	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
+
 	"github.com/streamingfast/bstream"
 
 	"github.com/golang/protobuf/proto"
-	pbcodec "github.com/streamingfast/sf-near/pb/sf/near/codec/v1"
 	"go.uber.org/zap"
 )
+
+const FirePrefixLen = len("FIRE ")
 
 // ConsoleReader is what reads the `geth` output directly. It builds
 // up some LogEntry objects. See `LogReader to read those entries .
@@ -39,7 +43,7 @@ func NewConsoleReader(lines chan string, rpcUrl string) (*ConsoleReader, error) 
 	return l, nil
 }
 
-//todo: WTF?
+// todo: WTF?
 func (r *ConsoleReader) Done() <-chan interface{} {
 	return r.done
 }
@@ -63,7 +67,7 @@ func newParsingStats(block uint64) *parsingStats {
 }
 
 func (s *parsingStats) log() {
-	zlog.Info("mindreader block stats",
+	zlog.Info("reader block stats",
 		zap.Uint64("block_num", s.blockNum),
 		zap.Int64("duration", int64(time.Since(s.startAt))),
 		zap.Reflect("stats", s.data),
@@ -99,18 +103,18 @@ func (r *ConsoleReader) next(readType int) (out *bstream.Block, err error) {
 	zlog.Debug("next", zap.Int("read_type", readType))
 
 	for line := range r.lines {
-		if !strings.HasPrefix(line, "DMLOG ") {
+		if !strings.HasPrefix(line, "FIRE ") {
 			continue
 		}
 
-		line = line[6:]
+		line = line[FirePrefixLen:]
 
 		switch {
 		case strings.HasPrefix(line, "BLOCK"):
 			out, err = ctx.readBlock(line)
 		default:
 			if traceEnabled {
-				zlog.Debug("skipping unknown deep mind log line", zap.String("line", line))
+				zlog.Debug("skipping unknown Firehose log line", zap.String("line", line))
 			}
 
 			continue
@@ -154,7 +158,7 @@ func (r *ConsoleReader) buildScanner(reader io.Reader) *bufio.Scanner {
 }
 
 // Formats
-// DMLOG BLOCK <NUM> <HASH> <PROTO_HEX>
+// FIRE BLOCK <NUM> <HASH> <PROTO_HEX>
 func (ctx *parseCtx) readBlock(line string) (*bstream.Block, error) {
 	chunks, err := SplitInChunks(line, 4)
 	if err != nil {
@@ -172,7 +176,7 @@ func (ctx *parseCtx) readBlock(line string) (*bstream.Block, error) {
 		return nil, fmt.Errorf("invalid block bytes: %w", err)
 	}
 
-	block := &pbcodec.Block{}
+	block := &pbnear.Block{}
 	if err := proto.Unmarshal(protoBytes, block); err != nil {
 		return nil, fmt.Errorf("invalid block: %w", err)
 	}
@@ -218,7 +222,7 @@ func (ctx *parseCtx) readBlock(line string) (*bstream.Block, error) {
 		heap.Pop(ctx.blockMetas)
 	}
 
-	return BlockFromProto(block)
+	return types.BlockFromProto(block)
 }
 
 // splitInChunks split the line in `count` chunks and returns the slice `chunks[1:count]` (so exclusive end), but verifies

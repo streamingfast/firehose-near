@@ -11,11 +11,11 @@ import (
 
 var logLevelRegex = regexp.MustCompile("^(INFO|WARN|ERROR)")
 
-func newToZapLogPlugin(debugDeepMind bool, logger *zap.Logger) *logplugin.ToZapLogPlugin {
-	return logplugin.NewToZapLogPlugin(debugDeepMind, logger, logplugin.ToZapLogPluginLogLevel(logLevelExtractor))
+func newToZapLogPlugin(debugFirehoseLogs bool, logger *zap.Logger) *logplugin.ToZapLogPlugin {
+	return logplugin.NewToZapLogPlugin(debugFirehoseLogs, logger, logplugin.ToZapLogPluginLogLevel(logLevelReader))
 }
 
-func logLevelExtractor(in string) zapcore.Level {
+func logLevelReader(in string) zapcore.Level {
 	if strings.Contains(in, "Upgrade blockchain database version") {
 		return zap.InfoLevel
 	}
