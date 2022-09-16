@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       indexer_version:
-        description: 'version of near-dm-indexer to use (if not specified, will use latest)'
+        description: 'version of near-firehose-indexer to use (if not specified, will use latest)'
         required: false
         type: string
 
@@ -133,8 +133,8 @@ jobs:
       - name: Set versions
         shell: bash
         run: |
-          docker pull ghcr.io/streamingfast/near-dm-indexer:${{ env.INDEXER_VERSION }}
-          echo VERSION=$(docker inspect --format='{{index .Config.Labels "org.opencontainers.image.version"}}' 'ghcr.io/streamingfast/near-dm-indexer':${{ env.INDEXER_VERSION }}) >> $GITHUB_ENV
+          docker pull ghcr.io/streamingfast/near-firehose-indexer:${{ env.INDEXER_VERSION }}
+          echo VERSION=$(docker inspect --format='{{index .Config.Labels "org.opencontainers.image.version"}}' 'ghcr.io/streamingfast/near-firehose-indexer':${{ env.INDEXER_VERSION }}) >> $GITHUB_ENV
           echo SF_VERSION=$(echo "${{ needs.build-vanilla.outputs.tags }}" | grep -Ev "(develop)" | head -n 1 |cut -d: -f2) >> $GITHUB_ENV
 
       - name: Generate docker tags/labels from github build context

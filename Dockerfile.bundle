@@ -1,10 +1,10 @@
 ARG INDEXER_VERSION=latest
 ARG SF_VERSION=latest
 
-FROM ghcr.io/streamingfast/near-dm-indexer:$INDEXER_VERSION as chain
+FROM ghcr.io/streamingfast/near-firehose-indexer:$INDEXER_VERSION as chain
 FROM ghcr.io/streamingfast/firehose-near:$SF_VERSION
 
-COPY --from=chain /app/near-dm-indexer /app/near-dm-indexer
+COPY --from=chain /app/near-firehose-indexer /app/near-firehose-indexer
 COPY --from=chain /app/neard /app/neard
 COPY --from=chain /usr/bin/s5cmd /app/s5cmd
 

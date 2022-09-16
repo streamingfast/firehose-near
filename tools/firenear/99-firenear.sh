@@ -7,7 +7,7 @@ export PATH=$PATH:/app
 # If we are in a "node-manager" image, display special scripts motd#
 #
 # *Note* Our (i.e. firehose-near) Reader data directory is at the root
-#        `/data` mount point. Inside it, the `near-dm-indexer` binary
+#        `/data` mount point. Inside it, the `near-firehose-indexer` binary
 #        itself creates a `data` subfolder. This is why we have `/data/data`
 #        here as the path to check if we are inside a Node Manager instance
 #        or a pure process (i.e. without Node Manager)

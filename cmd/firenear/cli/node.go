@@ -34,7 +34,7 @@ var readerAppLogger, readerAppTracer = logging.PackageLogger("reader", "github.c
 func registerCommonNodeFlags(cmd *cobra.Command, flagPrefix string, managerAPIAddr string) {
 	defaultBin := "neard"
 	if strings.Contains(flagPrefix, "reader") {
-		defaultBin = "near-dm-indexer"
+		defaultBin = "near-firehose-indexer"
 	}
 	cmd.Flags().String(flagPrefix+"path", defaultBin, "Command that will be launched by the node manager")
 	cmd.Flags().String(flagPrefix+"data-dir", "{sf-data-dir}/{node-role}/data", "Directory for node data ({node-role} is either reader or archive)")

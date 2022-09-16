@@ -5,7 +5,7 @@ start:
   - reader-node
   - relayer
   flags:
-    reader-node-path: near-dm-indexer
+    reader-node-path: near-firehose-indexer
     reader-node-log-to-zap: false
     reader-node-config-file: ./reader/config.json
     reader-node-genesis-file: ./reader/genesis.json
