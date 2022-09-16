@@ -9,6 +9,7 @@ import (
 	"github.com/streamingfast/bstream"
 	"github.com/streamingfast/bstream/transform"
 	dauthAuthenticator "github.com/streamingfast/dauth/authenticator"
+	_ "github.com/streamingfast/dauth/authenticator/gcp"
 	"github.com/streamingfast/dlauncher/launcher"
 	"github.com/streamingfast/dmetering"
 	"github.com/streamingfast/dmetrics"
