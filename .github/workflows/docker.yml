@@ -9,9 +9,8 @@ on:
   workflow_dispatch:
     inputs:
       indexer_version:
-        description: 'version of near-dm-indexer to use'
+        description: 'version of near-dm-indexer to use (if not specified, will use latest)'
         required: false
-        default: 'latest'
         type: string
 
 env:
@@ -117,12 +116,26 @@ jobs:
           echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
           echo "##[set-output name=release_train;]$(echo ${GITHUB_REF#refs/heads/release/})"
 
-      - run: |
-          docker pull ghcr.io/streamingfast/near-dm-indexer:${INDEXER_VERSION}
+      - name: Set default indexer version
+        if: ${{ github.event.inputs.indexer_version == '' }}
+        id: indexer_version_default
+        run: |
+          echo INDEXER_VERSION=latest >> $GITHUB_ENV
+
+      - name: Set indexer version from input
+        if: ${{ github.event.inputs.indexer_version != '' }}
+        id: indexer_version_input
+        run: |
+          echo INDEXER_VERSION=$(echo "${INDEXER_VERSION_INPUT}") >> $GITHUB_ENV
+        env:
+          INDEXER_VERSION_INPUT: ${{ github.event.inputs.indexer_version }}
+
+      - name: Set versions
+        shell: bash
+        run: |
+          docker pull ghcr.io/streamingfast/near-dm-indexer:${env.INDEXER_VERSION}
           echo VERSION=$(docker inspect --format='{{index .Config.Labels "org.opencontainers.image.version"}}' 'ghcr.io/streamingfast/near-dm-indexer':${INDEXER_VERSION}) >> $GITHUB_ENV
           echo SF_VERSION=$(echo "${{ needs.build-vanilla.outputs.tags }}" | grep -Ev "(develop)" | head -n 1 |cut -d: -f2) >> $GITHUB_ENV
-        env:
-          INDEXER_VERSION: ${{ github.event.inputs.indexer_version }}
 
       - name: Generate docker tags/labels from github build context
         id: meta
