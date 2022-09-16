@@ -7,6 +7,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
        rm -rf /var/cache/apt /var/lib/apt/lists/*
 
 RUN rm /etc/localtime && ln -snf /usr/share/zoneinfo/America/Montreal /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+RUN mkdir -p /app/ && curl -Lo /app/grpc_health_probe https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/v0.4.12/grpc_health_probe-linux-amd64 && chmod +x /app/grpc_health_probe
 
 ADD /firenear /app/firenear
 
