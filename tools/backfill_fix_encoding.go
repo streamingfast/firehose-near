@@ -118,7 +118,7 @@ func backfillFixEncodingE(cmd *cobra.Command, args []string) error {
 
 			// check range
 			if bstreamBlock.Number < blockRange.Start || bstreamBlock.Number > blockRange.Stop {
-				zlog.Debug("block is outside block range, skipping post-processing")
+				zlog.Debug("block is outside block range, skipping post-processing", zap.Int64("block_num", int64(bstreamBlock.Number)), zap.Stringer("range", blockRange))
 				if err := binWriter.WriteMessage(line); err != nil {
 					return fmt.Errorf("error writing block: %w", err)
 				}
@@ -139,7 +139,34 @@ func backfillFixEncodingE(cmd *cobra.Command, args []string) error {
 					continue
 				}
 
+				for _, outcomeWithReceipt := range shard.ReceiptExecutionOutcomes {
+					receiptID := outcomeWithReceipt.Receipt.ReceiptId.Bytes
+
+					if v := outcomeWithReceipt.Receipt.GetAction(); v != nil {
+						fixActions(block, "receiptExecutionOutcomes.Receipt", receiptID, v.Actions)
+					}
+
+					if v := outcomeWithReceipt.ExecutionOutcome.Outcome.GetSuccessValue(); v != nil {
+						data, err := base64.StdEncoding.DecodeString(string(v.Value))
+						if err != nil {
+							return fmt.Errorf("unable to base64 outcomeWithReceipt.ExecutionOutcome.Outcome.SuccessValue.value for receiptExecutionOutcomes.Receipt %q decode: %w", hex.EncodeToString(receiptID), err)
+						}
+
+						v.Value = data
+					}
+				}
+
+				for _, receipt := range shard.Chunk.Receipts {
+					if v := receipt.GetAction(); v != nil {
+						fixActions(block, "chunk.Receipt", receipt.ReceiptId.Bytes, v.Actions)
+					}
+				}
+
 				for _, trx := range shard.Chunk.Transactions {
+					if v := trx.Outcome.Receipt.GetAction(); v != nil {
+						fixActions(block, "trx.Outcome.Receipt", trx.Transaction.Hash.Bytes, v.Actions)
+					}
+
 					if v := trx.Outcome.ExecutionOutcome.Outcome.GetSuccessValue(); v != nil {
 						data, err := base64.StdEncoding.DecodeString(string(v.Value))
 						if err != nil {
@@ -149,24 +176,7 @@ func backfillFixEncodingE(cmd *cobra.Command, args []string) error {
 						v.Value = data
 					}
 
-					for _, action := range trx.Transaction.Actions {
-
-						if v := action.GetFunctionCall(); v != nil {
-							data, err := base64.StdEncoding.DecodeString(string(v.Args))
-							if err != nil {
-								return fmt.Errorf("unable to base64 functionCall.args for receipt %q in block %d decode: %w", hex.EncodeToString(trx.Transaction.Hash.Bytes), block.Num(), err)
-							}
-
-							v.Args = data
-						} else if v := action.GetDeployContract(); v != nil {
-							data, err := base64.StdEncoding.DecodeString(string(v.Code))
-							if err != nil {
-								return fmt.Errorf("unable to base64 deployContractCall.code for receipt %q decode: %w", hex.EncodeToString(trx.Transaction.Hash.Bytes), err)
-							}
-
-							v.Code = data
-						}
-					}
+					fixActions(block, "trx", trx.Transaction.Hash.Bytes, trx.Transaction.Actions)
 				}
 			}
 
@@ -230,6 +240,28 @@ func backfillFixEncodingE(cmd *cobra.Command, args []string) error {
 
 	if err != nil && err != errStopWalk {
 		return err
+	}
+
+	return nil
+}
+
+func fixActions(block *pbnear.Block, tag string, id []byte, actions []*pbnear.Action) error {
+	for _, action := range actions {
+		if v := action.GetFunctionCall(); v != nil {
+			data, err := base64.StdEncoding.DecodeString(string(v.Args))
+			if err != nil {
+				return fmt.Errorf("unable to base64 receipt.functionCall.args for %s %q in block %d decode: %w", tag, hex.EncodeToString(id), block.Num(), err)
+			}
+
+			v.Args = data
+		} else if v := action.GetDeployContract(); v != nil {
+			data, err := base64.StdEncoding.DecodeString(string(v.Code))
+			if err != nil {
+				return fmt.Errorf("unable to base64 receipt.deployContractCall.code for %s %q in block %d decode: %w", tag, hex.EncodeToString(id), block.Num(), err)
+			}
+
+			v.Code = data
+		}
 	}
 
 	return nil
