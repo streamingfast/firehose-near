@@ -3,6 +3,7 @@ package tools
 import (
 	"bytes"
 	"encoding/base64"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"strconv"
@@ -115,6 +116,16 @@ func backfillFixEncodingE(cmd *cobra.Command, args []string) error {
 				return fmt.Errorf("unmarshaling block proto: %w", err)
 			}
 
+			// check range
+			if bstreamBlock.Number < blockRange.Start || bstreamBlock.Number > blockRange.Stop {
+				zlog.Debug("block is outside block range, skipping post-processing")
+				if err := binWriter.WriteMessage(line); err != nil {
+					return fmt.Errorf("error writing block: %w", err)
+				}
+
+				continue
+			}
+
 			blockBytes := bstreamBlock.GetPayloadBuffer()
 
 			block := new(pbnear.Block)
@@ -123,30 +134,41 @@ func backfillFixEncodingE(cmd *cobra.Command, args []string) error {
 				return fmt.Errorf("unmarshaling block proto: %w", err)
 			}
 
-			for i, shard := range block.Shards {
-				outcomes := shard.ReceiptExecutionOutcomes
-				for j, outcome := range outcomes {
-					receipt := outcome.Receipt
-					if receipt == nil {
-						continue
-					}
+			for _, shard := range block.Shards {
+				if shard.Chunk == nil {
+					continue
+				}
 
-					receiptAction := receipt.GetAction()
-					for k, as := range receiptAction.Actions {
-						fc, ok := as.GetAction().(*pbnear.Action_FunctionCall)
-						if !ok {
-							continue
+				for _, trx := range shard.Chunk.Transactions {
+					if v := trx.Outcome.ExecutionOutcome.Outcome.GetSuccessValue(); v != nil {
+						data, err := base64.StdEncoding.DecodeString(string(v.Value))
+						if err != nil {
+							return fmt.Errorf("unable to base64 executionOutcome.SuccessValue.value for receipt %q decode: %w", hex.EncodeToString(trx.Transaction.Hash.Bytes), err)
 						}
 
-						UpdateactionFunctionCallArgs(fc)
+						v.Value = data
+					}
 
-						zlog.Info("updated function call in block", zap.Uint64("file", block.Num()), zap.Int("shard", i), zap.Int("outcome", j), zap.Int("action", k))
+					for _, action := range trx.Transaction.Actions {
+
+						if v := action.GetFunctionCall(); v != nil {
+							data, err := base64.StdEncoding.DecodeString(string(v.Args))
+							if err != nil {
+								return fmt.Errorf("unable to base64 functionCall.args for receipt %q in block %d decode: %w", hex.EncodeToString(trx.Transaction.Hash.Bytes), block.Num(), err)
+							}
+
+							v.Args = data
+						} else if v := action.GetDeployContract(); v != nil {
+							data, err := base64.StdEncoding.DecodeString(string(v.Code))
+							if err != nil {
+								return fmt.Errorf("unable to base64 deployContractCall.code for receipt %q decode: %w", hex.EncodeToString(trx.Transaction.Hash.Bytes), err)
+							}
+
+							v.Code = data
+						}
 					}
 				}
-				block.Shards[i] = shard
 			}
-
-			///// CHECK RANGE
 
 			// encode block data
 			backFilledBlockBytes, err := proto.Marshal(block)
@@ -211,20 +233,4 @@ func backfillFixEncodingE(cmd *cobra.Command, args []string) error {
 	}
 
 	return nil
-}
-
-func UpdateactionFunctionCallArgs(f *pbnear.Action_FunctionCall) {
-	args := f.FunctionCall.GetArgs()
-	if len(args) == 0 {
-		return
-	}
-
-	dst := bytes.NewBuffer(nil)
-	decoder := base64.NewDecoder(base64.StdEncoding, bytes.NewReader(args))
-	_, err := io.Copy(dst, decoder)
-	if err != nil {
-		panic(err)
-	}
-
-	f.FunctionCall.Args = dst.Bytes()
 }
