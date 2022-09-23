@@ -123,30 +123,30 @@ func backfillFixEncodingE(cmd *cobra.Command, args []string) error {
 				return fmt.Errorf("unmarshaling block proto: %w", err)
 			}
 
-			/////////
-			/// UPDATE ENCODING HERE IF NECESSARY
-			/////////
-			for _, shard := range block.GetShards() {
-				outcomes := shard.GetReceiptExecutionOutcomes()
-				receiptAction := outcomes[0].GetReceipt().GetAction()
-				for _, as := range receiptAction.Actions {
-					fc, ok := as.GetAction().(*pbnear.Action_FunctionCall)
-					if !ok {
+			for i, shard := range block.Shards {
+				outcomes := shard.ReceiptExecutionOutcomes
+				for j, outcome := range outcomes {
+					receipt := outcome.Receipt
+					if receipt == nil {
 						continue
 					}
 
-					args := fc.FunctionCall.GetArgs()
-					if len(args) == 0 {
-						continue
-					}
+					receiptAction := receipt.GetAction()
+					for k, as := range receiptAction.Actions {
+						fc, ok := as.GetAction().(*pbnear.Action_FunctionCall)
+						if !ok {
+							continue
+						}
 
-					if args[0] == 0x7b {
-						continue
-					}
+						UpdateactionFunctionCallArgs(fc)
 
-					base64.NewDecoder(base64.StdEncoding, bytes.NewReader(args)).Read(args)
+						zlog.Info("updated function call in block", zap.Uint64("file", block.Num()), zap.Int("shard", i), zap.Int("outcome", j), zap.Int("action", k))
+					}
 				}
+				block.Shards[i] = shard
 			}
+
+			///// CHECK RANGE
 
 			// encode block data
 			backFilledBlockBytes, err := proto.Marshal(block)
@@ -211,4 +211,20 @@ func backfillFixEncodingE(cmd *cobra.Command, args []string) error {
 	}
 
 	return nil
+}
+
+func UpdateactionFunctionCallArgs(f *pbnear.Action_FunctionCall) {
+	args := f.FunctionCall.GetArgs()
+	if len(args) == 0 {
+		return
+	}
+
+	dst := bytes.NewBuffer(nil)
+	decoder := base64.NewDecoder(base64.StdEncoding, bytes.NewReader(args))
+	_, err := io.Copy(dst, decoder)
+	if err != nil {
+		panic(err)
+	}
+
+	f.FunctionCall.Args = dst.Bytes()
 }
