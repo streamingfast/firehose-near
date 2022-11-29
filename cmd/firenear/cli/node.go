@@ -233,7 +233,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 			Operator:                   chainOperator,
 			MindreaderPlugin:           readerPlugin,
 			MetricsAndReadinessManager: metricsAndReadinessManager,
-			RegisterGRPCService: func(server *grpc.Server) error {
+			RegisterGRPCService: func(server grpc.ServiceRegistrar) error {
 				pbheadinfo.RegisterHeadInfoServer(server, blockStreamServer)
 				pbbstream.RegisterBlockStreamServer(server, blockStreamServer)
 

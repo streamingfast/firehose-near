@@ -8,4 +8,4 @@ func init() {
 	Cmd.AddCommand(NormalizeMergedBlocksCmd)
 }
 
-var NormalizeMergedBlocksCmd = sftools.GetMergedBlocksNormalizer(zlog, tracer, nil)
+var NormalizeMergedBlocksCmd = sftools.GetMergedBlocksUpgrader(zlog, tracer, nil)
