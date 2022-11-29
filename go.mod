@@ -29,7 +29,7 @@ require (
 	github.com/streamingfast/node-manager v0.0.2-0.20221115101723-d9823ffd7ad5
 	github.com/streamingfast/pbgo v0.0.6-0.20221014191646-3a05d7bc30c8
 	github.com/streamingfast/relayer v0.0.2-0.20220909122435-e67fbc964fd9
-	github.com/streamingfast/sf-tools v0.0.0-20221128214400-488b07dafb12
+	github.com/streamingfast/sf-tools v0.0.0-20221129150749-9a8582eb4a04
 	github.com/streamingfast/sf-tracing v0.0.0-20221104190152-7f721cb9b60c // indirect
 	github.com/streamingfast/snapshotter v0.0.0-20220901201120-f4b8e3920987
 	github.com/stretchr/testify v1.8.0
