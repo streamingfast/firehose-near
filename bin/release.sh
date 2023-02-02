@@ -27,6 +27,9 @@ main() {
 
   version="$1"; shift
 
+  # 'shift' can fail above, so we put bash in non failure mode after calling it
+  set -e
+
   while true; do
    if [[ "$version" == "" ]]; then
       printf "What version do you want to release (current latest is `git describe --tags --abbrev=0`)? "
@@ -58,11 +61,9 @@ main() {
   trap "git tag -d $version > /dev/null" EXIT
 
   ## Substreams .spkg building
-
   substreams pack -o "build/substreams-near-$version.spkg" substreams
 
   ## Release Notes Generation
-
   start_at=$(grep -n -m 1 -E '^## .+' CHANGELOG.md | cut -f 1 -d :)
   changelod_trimmed=$(skip $start_at CHANGELOG.md | skip 1)
 
@@ -88,10 +89,6 @@ main() {
 		-w "/go/src/${package_name}" \
 		"goreleaser/goreleaser-cross:${golang_cross_version}" \
 		$args
-
-  if [[ "$publish" == "false" ]]; then
-    exit 0
-  fi
 
   echo "Release draft has been created succesuflly, but it's not published"
   echo "yet. You must now review the release and publish it if everything is"
