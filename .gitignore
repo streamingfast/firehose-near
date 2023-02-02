@@ -1,6 +1,9 @@
+.env.release
+.release_notes.md
 .idea/
 .DS_Store
 /firenear
+/build
 /dist
 /nearsf
 /sf-data
