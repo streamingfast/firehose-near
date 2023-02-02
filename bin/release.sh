@@ -47,7 +47,7 @@ main() {
   git push
   echo ""
 
-  mode="Dry run (build artifact and leaver GitHub release in draft mode for review), use -p flag to publish release right now"
+  mode="Dry run, builds artifact and creates a GitHub release in draft mode, use -p flag to publish release right now"
   if [[ "$publish" == "true" ]]; then
     mode="Publishing"
   fi

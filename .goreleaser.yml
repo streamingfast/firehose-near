@@ -7,7 +7,7 @@ release:
     name: firehose-near
   name_template: '{{.Tag}}'
   extra_files:
-    - glob: build/substreams-near-{{.Version}}.spkg
+    - glob: build/substreams-near-{{.Tag}}.spkg
 
 builds:
   - id: darwin-amd64
