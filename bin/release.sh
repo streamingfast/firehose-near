@@ -75,10 +75,6 @@ main() {
   printf "$changelod_trimmed" | head -n$end_at | skip -2 > .release_notes.md
 
   args="--rm-dist --release-notes=.release_notes.md"
-  if [[ "$publish" == "false" ]]; then
-    args="--skip-publish --skip-validate $args"
-  fi
-
   package_name="github.com/streamingfast/firehose-near"
   golang_cross_version="v1.19.4"
 
