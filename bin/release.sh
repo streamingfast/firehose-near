@@ -45,6 +45,7 @@ main() {
 
   echo "Pushing to ensure GitHub knowns about the latest commit(s)"
   git push
+  echo ""
 
   mode="Dry run (build artifact and leaver GitHub release in draft mode for review), use -p flag to publish release right now"
   if [[ "$publish" == "true" ]]; then
@@ -62,6 +63,7 @@ main() {
 
   ## Substreams .spkg building
   substreams pack -o "build/substreams-near-$version.spkg" substreams
+  echo ""
 
   ## Release Notes Generation
   start_at=$(grep -n -m 1 -E '^## .+' CHANGELOG.md | cut -f 1 -d :)
