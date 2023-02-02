@@ -21,3 +21,19 @@ message PrefixSuffixPair {
   string prefix = 1;
   string suffix = 2;
 }
+
+
+// HeaderOnly returns only the block's header and few top-level core information for the block. Useful
+// for cases where no transactions information is required at all.
+//
+// The structure that would will have access to after:
+//
+// ```
+// Block {
+//  BlockHeader header = 2;
+// }
+// ```
+//
+// Everything else will be empty.
+message HeaderOnly {
+}
