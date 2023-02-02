@@ -100,7 +100,7 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 		}
 
 		nodePath := viper.GetString(flagPrefix + "path")
-		nodeDataDir := replaceNodeRole(kind, mustReplaceDataDir(sfDataDir, viper.GetString(flagPrefix+"data-dir")))
+		nodeDataDir := replaceNodeRole(kind, MustReplaceDataDir(sfDataDir, viper.GetString(flagPrefix+"data-dir")))
 		genesisFile := replaceNodeRole(kind, viper.GetString(flagPrefix+"genesis-file"))
 		nodeKeyFile := replaceNodeRole(kind, viper.GetString(flagPrefix+"node-key-file"))
 
@@ -193,9 +193,9 @@ func nodeFactoryFunc(flagPrefix, kind string, appLogger, nodeLogger *zap.Logger,
 		}
 
 		blockStreamServer := blockstream.NewUnmanagedServer(blockstream.ServerOptionWithLogger(appLogger))
-		oneBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-one-block-store-url"))
-		mergedBlockStoreURL := mustReplaceDataDir(sfDataDir, viper.GetString("common-merged-blocks-store-url"))
-		workingDir := mustReplaceDataDir(sfDataDir, viper.GetString("reader-node-working-dir"))
+		oneBlockStoreURL := MustReplaceDataDir(sfDataDir, viper.GetString("common-one-block-store-url"))
+		mergedBlockStoreURL := MustReplaceDataDir(sfDataDir, viper.GetString("common-merged-blocks-store-url"))
+		workingDir := MustReplaceDataDir(sfDataDir, viper.GetString("reader-node-working-dir"))
 		gprcListenAdrr := viper.GetString("reader-node-grpc-listen-addr")
 		mergeThresholdBlockAge := viper.GetString("reader-node-merge-threshold-block-age")
 		batchStartBlockNum := viper.GetUint64("reader-node-start-block-num")

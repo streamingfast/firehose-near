@@ -2,8 +2,6 @@
 
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
 
-set -x
-
 main() {
   pushd "$ROOT" &> /dev/null
 

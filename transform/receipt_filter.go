@@ -2,17 +2,16 @@ package transform
 
 import (
 	"fmt"
-	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 	"strings"
 
-	"github.com/streamingfast/dstore"
-	pbtransform "github.com/streamingfast/firehose-near/types/pb/sf/near/transform/v1"
-
-	"google.golang.org/protobuf/types/known/anypb"
+	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 
 	"github.com/streamingfast/bstream"
 	"github.com/streamingfast/bstream/transform"
+	"github.com/streamingfast/dstore"
+	pbtransform "github.com/streamingfast/firehose-near/types/pb/sf/near/transform/v1"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
 var ReceiptFilterMessageName = proto.MessageName(&pbtransform.BasicReceiptFilter{})

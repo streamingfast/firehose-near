@@ -28,15 +28,15 @@ func init() {
 		InitFunc: func(runtime *launcher.Runtime) (err error) {
 			sfDataDir := runtime.AbsDataDir
 
-			if err = mkdirStorePathIfLocal(mustReplaceDataDir(sfDataDir, viper.GetString("common-merged-blocks-store-url"))); err != nil {
+			if err = mkdirStorePathIfLocal(MustReplaceDataDir(sfDataDir, viper.GetString("common-merged-blocks-store-url"))); err != nil {
 				return
 			}
 
-			if err = mkdirStorePathIfLocal(mustReplaceDataDir(sfDataDir, viper.GetString("common-one-block-store-url"))); err != nil {
+			if err = mkdirStorePathIfLocal(MustReplaceDataDir(sfDataDir, viper.GetString("common-one-block-store-url"))); err != nil {
 				return
 			}
 
-			if err = mkdirStorePathIfLocal(mustReplaceDataDir(sfDataDir, viper.GetString("common-forked-blocks-store-url"))); err != nil {
+			if err = mkdirStorePathIfLocal(MustReplaceDataDir(sfDataDir, viper.GetString("common-forked-blocks-store-url"))); err != nil {
 				return
 			}
 
