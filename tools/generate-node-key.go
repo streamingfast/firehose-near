@@ -31,9 +31,9 @@ var GenerateNodeKeyCmd = &cobra.Command{
 
 func generateNodeKeyE(cmd *cobra.Command, args []string) error {
 	type NodeKey struct {
-		AccountID  string `json:"account_id"`
-		PublicKey  string `json:"public_key"`
-		PrivateKey string `json:"private_key"`
+		AccountID string `json:"account_id"`
+		PublicKey string `json:"public_key"`
+		SecretKey string `json:"secret_key"`
 	}
 
 	outputFile := "node_key.json"
@@ -45,9 +45,9 @@ func generateNodeKeyE(cmd *cobra.Command, args []string) error {
 	cli.NoError(err, "Unable to generate ed25519 public/private key pair")
 
 	out, err := json.MarshalIndent(NodeKey{
-		AccountID:  "node",
-		PublicKey:  fmt.Sprintf("ed25519:%s", base58.Encode([]byte(publicKey))),
-		PrivateKey: fmt.Sprintf("ed25519:%s", base58.Encode([]byte(privateKey))),
+		AccountID: "node",
+		PublicKey: fmt.Sprintf("ed25519:%s", base58.Encode([]byte(publicKey))),
+		SecretKey: fmt.Sprintf("ed25519:%s", base58.Encode([]byte(privateKey))),
 	}, "", "  ")
 	cli.NoError(err, "Unable to marshal node key")
 
