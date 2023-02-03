@@ -6,6 +6,7 @@ release:
     owner: streamingfast
     name: firehose-near
   name_template: '{{.Tag}}'
+  target_commitish: '{{ .Commit }}'
   extra_files:
     - glob: build/substreams-near-{{.Tag}}.spkg
 
