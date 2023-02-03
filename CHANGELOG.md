@@ -6,6 +6,10 @@ for instructions to keep up to date.
 
 ## Unreleased
 
+### Added
+
+* Added `firenear tools generate-node-key` command to easily generate a new `node_key.json` file.
+
 ## [1.0.0](https://github.com/streamingfast/firehose-near/releases/tag/v1.0.0)
 
 ### Added

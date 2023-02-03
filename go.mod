@@ -6,6 +6,7 @@ require (
 	github.com/RoaringBitmap/roaring v0.9.4
 	github.com/ShinyTrinkets/overseer v0.3.0
 	github.com/golang/protobuf v1.5.2
+	github.com/mr-tron/base58 v1.2.0
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.8.1
 	github.com/streamingfast/bstream v0.0.2-0.20230202150636-acd638a62663
