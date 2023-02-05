@@ -19,7 +19,7 @@ env:
 
 jobs:
   build-vanilla:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-18.04
 
     permissions:
       contents: read
@@ -91,7 +91,7 @@ jobs:
 
   build-bundle:
     needs: build-vanilla
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-18.04
     if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
 
     permissions:
@@ -171,7 +171,7 @@ jobs:
   slack-notifications-vanilla:
     if: ${{ !startsWith(github.ref, 'refs/tags/') && github.event_name != 'workflow_dispatch' }}
     needs: [build-vanilla]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     steps:
       - name: Slack notification
         env:
@@ -184,7 +184,7 @@ jobs:
   slack-notifications:
     if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
     needs: [build-vanilla, build-bundle]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     steps:
       - name: Slack notification
         env:
