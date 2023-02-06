@@ -35,6 +35,10 @@
 
 1. Run the [./bin/release.sh](./bin/release.sh) Bash script to perform a new release. It will ask you questions as well as driving all the required commands, performing the necessary operation automatically. The Bash script publishes a GitHub release by default, so you can check first that everything is all right.
 
+    ```bash
+    ./bin/release.sh v$version
+    ```
+
 ## Contributing
 
 **Issues and PR in this repo related strictly to the NEAR on StreamingFast.**
