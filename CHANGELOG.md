@@ -6,6 +6,17 @@ for instructions to keep up to date.
 
 ## Unreleased
 
+### Changed
+
+* **Breaking** Flag `receipt-index-builder-lookup-index-sizes` has been replaced by `common-block-index-sizes`.
+    * Migration path is to replace any flag or configuration value named `receipt-index-builder-lookup-index-sizes` by `common-block-index-sizes`.
+
+* **Breaking** Flag `receipt-index-builder-index-store-url` has been replaced by `common-index-store-url`.
+    * Migration path is to replace any flag or configuration value named `receipt-index-builder-index-store-url` by `common-index-store-url`.
+
+* **Breaking** Flag `firehose-block-index-url` has been replaced by `common-index-store-url`.
+    * Migration path is to replace any flag or configuration value named `firehose-block-index-url` by `common-index-store-url`.
+
 ### Added
 
 * Added `firenear tools generate-node-key` command to easily generate a new `node_key.json` file.
