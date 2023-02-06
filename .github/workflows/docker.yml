@@ -134,7 +134,7 @@ jobs:
         shell: bash
         run: |
           docker pull ghcr.io/streamingfast/near-firehose-indexer:${{ env.INDEXER_VERSION }}
-          echo VERSION=$(docker inspect --format='{{index .Config.Labels "org.opencontainers.image.version"}}' 'ghcr.io/streamingfast/near-firehose-indexer':${{ env.INDEXER_VERSION }}) >> $GITHUB_ENV
+          echo VERSION=$(echo "${INDEXER_VERSION}") >> $GITHUB_ENV
           echo SF_VERSION=$(echo "${{ needs.build-vanilla.outputs.tags }}" | grep -Ev "(develop)" | head -n 1 |cut -d: -f2) >> $GITHUB_ENV
 
       - name: Generate docker tags/labels from github build context
