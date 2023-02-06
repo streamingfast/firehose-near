@@ -1,4 +1,4 @@
-# Near on StreamingFast
+# NEAR on StreamingFast
 [![reference](https://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square)](https://pkg.go.dev/github.com/streamingfast/firehose-near)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -9,12 +9,12 @@
 1. Define the version information that we are about to release:
 
     ```bash
-    version=1.0.1 # Use correct version
+    version=1.0.0 # Use correct version, latest released is given by 'git describe --tags --abbrev=0'
     ```
 
     > **Note** Those instructions uses [sd](https://github.com/chmln/sd#installation), `brew install sd` (or see [sd](https://github.com/chmln/sd#installation))
 
-1. Prepare the release by updating the [CHANGELOG.md](./CHANGELOG.md) file, change `## Unreleased` to become `## [1.0.1](https://github.com/streamingfast/firehose-near/releases/tag/v1.0.1)`:
+1. Prepare the release by updating the [CHANGELOG.md](./CHANGELOG.md) file, updating `## Unreleased` title:
 
     ```bash
     sd "## Unreleased" "## [$version](https://github.com/streamingfast/firehose-near/releases/tag/v$version)" CHANGELOG.md
@@ -38,6 +38,18 @@
     ```bash
     ./bin/release.sh v$version
     ```
+
+### One-Liner
+
+```
+version=1.0.0 # Use correct version, latest released is given by 'git describe --tags --abbrev=0'
+
+sd "## Unreleased" "## [$version](https://github.com/streamingfast/firehose-near/releases/tag/v$version)" CHANGELOG.md &&\
+sd "version: v.*" "version: v$version" substreams.yaml &&\
+git add CHANGELOG.md substreams.yaml &&\
+git commit -m "Preparing for release v$version" &&\
+./bin/release.sh v$version
+```
 
 ## Contributing
 
