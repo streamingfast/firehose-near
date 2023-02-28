@@ -822,8 +822,9 @@ github.com/streamingfast/bstream v0.0.2-0.20220909121429-4647fd1522c9/go.mod h1:
 github.com/streamingfast/bstream v0.0.2-0.20221017131819-2a7e38be1047/go.mod h1:Njkx972HcZiz0djWBylxqO/eq686eDGr+egQ1lePj3Q=
 github.com/streamingfast/bstream v0.0.2-0.20221115101451-752234eb5e18/go.mod h1:Njkx972HcZiz0djWBylxqO/eq686eDGr+egQ1lePj3Q=
 github.com/streamingfast/bstream v0.0.2-0.20221209144659-0fb1074db0f3/go.mod h1:Njkx972HcZiz0djWBylxqO/eq686eDGr+egQ1lePj3Q=
-github.com/streamingfast/bstream v0.0.2-0.20230202150636-acd638a62663 h1:W5vkPIyA38Ncw23Z2vZkiF4R+TAiiSq7nxEvmMythSs=
 github.com/streamingfast/bstream v0.0.2-0.20230202150636-acd638a62663/go.mod h1:Njkx972HcZiz0djWBylxqO/eq686eDGr+egQ1lePj3Q=
+github.com/streamingfast/bstream v0.0.2-0.20230228213106-2b6a3160e01e h1:yf4LBv8l+abF7qggb6H4JIfXu6imLkbtXwIK/YOBj4U=
+github.com/streamingfast/bstream v0.0.2-0.20230228213106-2b6a3160e01e/go.mod h1:Njkx972HcZiz0djWBylxqO/eq686eDGr+egQ1lePj3Q=
 github.com/streamingfast/cli v0.0.4-0.20220419231930-a555cea243fc/go.mod h1:Lmirl0ABgXzidX33syiUG6lX64mJMK5pDNTBFuz8xZI=
 github.com/streamingfast/cli v0.0.4-0.20220630165922-bc58c6666fc8 h1:1W2VZY4jRTh7GJ6+PnydanRcr3Hj45SKDnb+kBQQwlc=
 github.com/streamingfast/cli v0.0.4-0.20220630165922-bc58c6666fc8/go.mod h1:Lmirl0ABgXzidX33syiUG6lX64mJMK5pDNTBFuz8xZI=
