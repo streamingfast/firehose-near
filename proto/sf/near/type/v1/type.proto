@@ -318,6 +318,12 @@ message ActionError {
     NewReceiptValidationErrorKind new_receipt_validation = 34;
     OnlyImplicitAccountCreationAllowedErrorKind only_implicit_account_creation_allowed = 35;
     DeleteAccountWithLargeStateErrorKind delete_account_with_large_state = 36;
+    DelegateActionInvalidSignatureKind delegate_action_invalid_signature = 37;
+    DelegateActionSenderDoesNotMatchTxReceiverKind delegate_action_sender_does_not_match_tx_receiver = 38;
+    DelegateActionExpiredKind delegate_action_expired = 39;
+    DelegateActionAccessKeyErrorKind delegate_action_access_key_error = 40;
+    DelegateActionInvalidNonceKind delegate_action_invalid_nonce = 41;
+    DelegateActionNonceTooLargeKind delegate_action_nonce_too_large = 42;
   }
 }
 
@@ -419,6 +425,29 @@ message DeleteAccountWithLargeStateErrorKind{
   string account_id = 1;
 }
 
+message DelegateActionInvalidSignatureKind{}
+
+message DelegateActionSenderDoesNotMatchTxReceiverKind{
+  string sender_id = 1;
+  string receiver_id = 2;
+}
+
+message DelegateActionExpiredKind{}
+
+message DelegateActionAccessKeyErrorKind{
+  InvalidTxError error = 1; // InvalidAccessKeyError
+}
+
+message DelegateActionInvalidNonceKind{
+  uint64 delegate_nonce = 1;
+  uint64 ak_nonce = 2;
+}
+
+message DelegateActionNonceTooLargeKind{
+  uint64 delegate_nonce = 1;
+  uint64 upper_bound = 2;
+}
+
 enum InvalidTxError { //todo: add more detail?
   InvalidAccessKeyError = 0;
   InvalidSignerId = 1;
@@ -460,6 +489,7 @@ message Action {
     AddKeyAction add_key = 6;
     DeleteKeyAction delete_key = 7;
     DeleteAccountAction delete_account = 8;
+    SignedDelegateAction delegate = 9;
   }
 }
 
@@ -497,6 +527,20 @@ message DeleteKeyAction {
 
 message DeleteAccountAction {
   string beneficiary_id = 1;
+}
+
+message SignedDelegateAction {
+  Signature signature = 1;
+  DelegateAction delegate_action = 2;
+}
+
+message DelegateAction {
+  string sender_id = 1;
+  string receiver_id = 2;
+  repeated Action actions = 3;
+  uint64 nonce = 4;
+  uint64 max_block_height = 5;
+  PublicKey public_key = 6;
 }
 
 message AccessKey {
