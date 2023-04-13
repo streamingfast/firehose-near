@@ -9,7 +9,7 @@ require (
 	github.com/mr-tron/base58 v1.2.0
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.8.1
-	github.com/streamingfast/bstream v0.0.2-0.20230228213106-2b6a3160e01e
+	github.com/streamingfast/bstream v0.0.2-0.20230412133411-95d9484d25c9
 	github.com/streamingfast/cli v0.0.4-0.20220630165922-bc58c6666fc8
 	github.com/streamingfast/dauth v0.0.0-20221027185237-b209f25fa3ff
 	github.com/streamingfast/dbin v0.9.1-0.20220513054835-1abebbb944ad
@@ -23,7 +23,7 @@ require (
 	github.com/streamingfast/firehose-near/types v0.0.0-20230202151014-d143e0024f66
 	github.com/streamingfast/index-builder v0.0.0-20220810183227-6de1a5d962c7
 	github.com/streamingfast/logging v0.0.0-20220813175024-b4fbb0e893df
-	github.com/streamingfast/merger v0.0.3-0.20221123202507-445dfd357868
+	github.com/streamingfast/merger v0.0.3-0.20230413191947-fe3ce68cb9f8
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d
 	github.com/streamingfast/node-manager v0.0.2-0.20221115101723-d9823ffd7ad5
 	github.com/streamingfast/pbgo v0.0.6-0.20221014191646-3a05d7bc30c8

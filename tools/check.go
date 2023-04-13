@@ -57,26 +57,12 @@ func init() {
 
 func checkMergedBlocksE(cmd *cobra.Command, args []string) error {
 	storeURL := args[0]
-	startBlock := -1
-
-	switch storeMainnetOrTestnet(storeURL) {
-	case "mainnet":
-		startBlock = 9820214
-	case "testnet":
-		startBlock = 42376923
-	default:
-		startBlock = -1
-	}
 
 	fileBlockSize := uint32(100)
 
 	blockRange, err := sftools.Flags.GetBlockRange("range")
 	if err != nil {
 		return err
-	}
-
-	if startBlock != -1 {
-		blockRange.Start = uint64(startBlock)
 	}
 
 	printDetails := sftools.PrintNothing
