@@ -51,8 +51,10 @@ func init() {
 
 	CheckCmd.PersistentFlags().StringP("range", "r", "", "Block range to use for the check")
 
-	checkMergedBlocksCmd.Flags().BoolP("print-stats", "s", false, "Natively decode each block in the segment and print statistics about it, ensuring it contains the required blocks")
-	checkMergedBlocksCmd.Flags().BoolP("print-full", "f", false, "Natively decode each block and print the full JSON representation of the block, should be used with a small range only if you don't want to be overwhelmed")
+	checkMergedBlocksCmd.Flags().BoolP("decode-errors", "e", false, "Natively decode each blocks, printing errors like forks or wrong blocks")
+	checkMergedBlocksCmd.Flags().BoolP("decode-warnings", "w", false, "Natively decode each block, printing warnings")
+	checkMergedBlocksCmd.Flags().BoolP("decode-stats", "s", false, "Natively decode each block in the segment and print statistics about it, ensuring it contains the required blocks")
+	checkMergedBlocksCmd.Flags().BoolP("decode-full", "f", false, "Natively decode each block and print the full JSON representation of the block, should be used with a small range only if you don't want to be overwhelmed")
 }
 
 func checkMergedBlocksE(cmd *cobra.Command, args []string) error {
@@ -66,12 +68,36 @@ func checkMergedBlocksE(cmd *cobra.Command, args []string) error {
 	}
 
 	printDetails := sftools.PrintNothing
-	if viper.GetBool("print-stats") {
-		printDetails = sftools.PrintStats
+
+	decodeErrors := viper.GetBool("decode-errors")
+	decodeWarnings := viper.GetBool("decode-warnings")
+	decodeStats := viper.GetBool("decode-stats")
+	decodeFull := viper.GetBool("decode-full")
+
+	var decodingOptionsCount int
+	// these are evaluated in increasing order of verbosity
+	if decodeErrors {
+		printDetails = sftools.PrintErrors
+		decodingOptionsCount++
 	}
 
-	if viper.GetBool("print-full") {
+	if decodeWarnings {
+		printDetails = sftools.PrintWarnings
+		decodingOptionsCount++
+	}
+
+	if decodeStats {
+		printDetails = sftools.PrintStats
+		decodingOptionsCount++
+	}
+
+	if decodeFull {
 		printDetails = sftools.PrintFull
+		decodingOptionsCount++
+	}
+
+	if decodingOptionsCount > 1 {
+		return fmt.Errorf("Only one of 'decode-full', 'decode-stats', 'decode-warnings' or 'decode-errors' can be chosen. More verbose levels include previous ones")
 	}
 
 	return sftools.CheckMergedBlocks(cmd.Context(), zlog, storeURL, fileBlockSize, blockRange, blockPrinter, printDetails)
