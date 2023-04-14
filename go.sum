@@ -896,10 +896,8 @@ github.com/streamingfast/pbgo v0.0.6-0.20221014191646-3a05d7bc30c8 h1:tz5y88t3tV
 github.com/streamingfast/pbgo v0.0.6-0.20221014191646-3a05d7bc30c8/go.mod h1:huKwfgTGFIFZMKSVbD5TywClM7zAeBUG/zePZMqvXQQ=
 github.com/streamingfast/relayer v0.0.2-0.20220909122435-e67fbc964fd9 h1:V3LPBmTofZbmT46qQsr0lFa+0qDHZNJXgqLRo9iZBHY=
 github.com/streamingfast/relayer v0.0.2-0.20220909122435-e67fbc964fd9/go.mod h1:55E/1g+ojZoX86Odp48LFgceJVyh1xx9ZuhknKfmc/o=
-github.com/streamingfast/sf-tools v0.0.0-20230324121357-70851a122ed5 h1:qQugtkQukqpfn2ptq+aTbGQuaz0eCZFtFdUEdjeJCdQ=
-github.com/streamingfast/sf-tools v0.0.0-20230324121357-70851a122ed5/go.mod h1:uM2R0jdjcHiMONKawyr1XNh8B+qebPJvuApGYn0l/rI=
-github.com/streamingfast/sf-tools v0.0.0-20230414094819-fbda956f816f h1:i1V0gTTB/DXAtLnWx/LOCQqdyuLX4sTrt+NXyLtbB3A=
-github.com/streamingfast/sf-tools v0.0.0-20230414094819-fbda956f816f/go.mod h1:uM2R0jdjcHiMONKawyr1XNh8B+qebPJvuApGYn0l/rI=
+github.com/streamingfast/sf-tools v0.0.0-20230414095737-2f7b6f257241 h1:PgNbYl8xY1sxAty4jmiOi+Ys4aUK3sVFgwJmm3rCIBI=
+github.com/streamingfast/sf-tools v0.0.0-20230414095737-2f7b6f257241/go.mod h1:uM2R0jdjcHiMONKawyr1XNh8B+qebPJvuApGYn0l/rI=
 github.com/streamingfast/sf-tracing v0.0.0-20220829120927-5a5d2e0fe525/go.mod h1:k3hivbalRWW6hvGSV3vJ3wtBSt1pszXI6m9MJa5k0/I=
 github.com/streamingfast/sf-tracing v0.0.0-20221104190152-7f721cb9b60c h1:ihGABWkMwVGubJ6LXPKWXDBFvOFKlYKp1o06X1151p8=
 github.com/streamingfast/sf-tracing v0.0.0-20221104190152-7f721cb9b60c/go.mod h1:Pm+uEfIOzgU97Kqwji9WRpJXqR/gKfi8myDCw8e74tU=
