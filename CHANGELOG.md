@@ -4,6 +4,49 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## [1.0.6](https://github.com/streamingfast/firehose-near/releases/tag/v1.0.6)
+
+### Highlights
+
+Before this release, the merger would create incorrect merged-blocks bundles if the chain skipped too many block (i.e. skipping a full bundle).
+
+While in some cases, it would not cause any issue while reading over these blocks, it WOULD result in skipped blocks from firehose if the requested start-block was within a problematic range, or even fail to start if given a cursor within that range.
+
+Here are the known affected block ranges showing these problems on NEAR Testnet:
+* 102435000-102449000
+* 102457500-102458500
+
+### Actions required
+
+* Upgrade your merger deployment to **v1.0.6**
+* Run this command to detect ranges with invalid merged-blocks:
+`firenear tools check merged-blocks /path/to/merged/blocks   -r 0:123879100 -e |tee /check-all-blocks` (the upper boundary should be adjusted to cover the chain up to the HEAD before you upgraded the merger.
+* You will see this kind of output:
+```
+(...)
+❌ invalid block 102448970 in segment 0102448800
+❌ invalid block 102458195 in segment 0102457700
+❌ invalid block 102458195 in segment 0102457800
+(...)
+```
+
+* Regroup the affected segments into larger ranges, adding 200 blocks 'before' and 1000 blocks 'after'
+* For each of these large ranges (START:END), run the following commands (with **v1.0.6**):
+
+```
+# get the one-blocks-files locally
+firenear tools unmerge /path/to/your/merged/blocks /tmp/one-blocks START END
+
+# bundle the files into new merged-blocks
+firenear start merger --config-file= --common-first-streamable-block=START  --common-merged-blocks-store-url=/tmp/re-merged-blocks --common-one-block-store-url=/tmp/one-blocks --merger-stop-block=END
+
+# copy the new merged files over
+cp /tmp/re-merged-blocks/* /path/to/your/merged/blocks/
+
+# clean up your tmp folders
+rm /tmp/one-blocks/* /tmp/re-merged-blocks/* 
+```
+
 ## [1.0.5](https://github.com/streamingfast/firehose-near/releases/tag/v1.0.5)
 
 ### Changed
