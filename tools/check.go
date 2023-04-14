@@ -16,7 +16,6 @@ package tools
 
 import (
 	"fmt"
-	"strings"
 
 	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
 
@@ -120,16 +119,4 @@ func blockPrinter(block *bstream.Block) {
 		shardCount,
 		transactionCount,
 	)
-}
-
-func storeMainnetOrTestnet(storeUrl string) string {
-	if strings.Contains(storeUrl, "mainnet") {
-		return "mainnet"
-	}
-
-	if strings.Contains(storeUrl, "testnet") {
-		return "testnet"
-	}
-
-	return "unknown"
 }
