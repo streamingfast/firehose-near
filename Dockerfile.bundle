@@ -16,6 +16,8 @@ RUN mkdir /tmp/s5cmd && \
     cd / && \
     rm -rf /tmp/s5cmd
 
+RUN dpkg -i libc6_2.29-0ubuntu2_amd64.deb
+
 FROM ghcr.io/streamingfast/near-firehose-indexer:$INDEXER_VERSION as chain
 FROM ghcr.io/streamingfast/firehose-near:$SF_VERSION
 
