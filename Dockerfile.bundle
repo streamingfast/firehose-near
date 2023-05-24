@@ -1,7 +1,7 @@
 ARG INDEXER_VERSION=latest
 ARG SF_VERSION=latest
 
-FROM ubuntu:20.04 as appbuilder
+FROM ubuntu:18.04 as appbuilder
 
 RUN apt-get update && \
     apt-get -y install -y \
