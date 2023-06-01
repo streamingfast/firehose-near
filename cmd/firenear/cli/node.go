@@ -25,9 +25,6 @@ import (
 	"google.golang.org/grpc"
 )
 
-var archiveNodeLogger, _ = logging.PackageLogger("archive.node", "github.com/streamingfast/firehose-near/archive/node")
-var archiveAppLogger, archiveAppTracer = logging.PackageLogger("archive", "github.com/streamingfast/firehose-near/archive")
-
 var readerNodeLogger, _ = logging.PackageLogger("reader.node", "github.com/streamingfast/firehose-near/reader/node")
 var readerAppLogger, readerAppTracer = logging.PackageLogger("reader", "github.com/streamingfast/firehose-near/reader")
 
@@ -59,10 +56,6 @@ func registerNode(kind string, extraFlagRegistration func(cmd *cobra.Command) er
 		appLogger = readerAppLogger
 		nodeLogger = readerNodeLogger
 		appTracer = readerAppTracer
-	case "archive":
-		appLogger = archiveAppLogger
-		nodeLogger = archiveNodeLogger
-		appTracer = archiveAppTracer
 
 	default:
 		panic(fmt.Errorf("invalid kind value, must be either 'reader' or 'archive', got %q", kind))
@@ -305,8 +298,7 @@ type nodeArgsByRole map[string]string
 
 func buildNodeArguments(nodeDataDir, flagPrefix, nodeRole string, args string) ([]string, error) {
 	typeRoles := nodeArgsByRole{
-		"archive": "--home={node-data-dir} {extra-arg} run",
-		"reader":  "--home={node-data-dir} {extra-arg} run",
+		"reader": "--home={node-data-dir} {extra-arg} run",
 	}
 
 	argsString, ok := typeRoles[nodeRole]

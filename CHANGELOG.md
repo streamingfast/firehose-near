@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## Unreleased
+
+* **Breaking** Removed support for `archive-node` app, if you were using this, please use a standard NEAR Archive node to do the same job.
+
 ## [1.0.6](https://github.com/streamingfast/firehose-near/releases/tag/v1.0.6)
 
 ### Highlights
@@ -44,7 +48,7 @@ firenear start merger --config-file= --common-first-streamable-block=START  --co
 cp /tmp/re-merged-blocks/* /path/to/your/merged/blocks/
 
 # clean up your tmp folders
-rm /tmp/one-blocks/* /tmp/re-merged-blocks/* 
+rm /tmp/one-blocks/* /tmp/re-merged-blocks/*
 ```
 
 ## [1.0.5](https://github.com/streamingfast/firehose-near/releases/tag/v1.0.5)

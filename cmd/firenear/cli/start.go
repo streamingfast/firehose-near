@@ -89,9 +89,6 @@ func Start(configFile string, dataDir string, args []string) (err error) {
 	zlog.Debug("launcher created")
 
 	runByDefault := func(app string) bool {
-		if app == "archive-node" {
-			return false
-		}
 		return true
 	}
 
