@@ -4,19 +4,18 @@ import (
 	"fmt"
 	"strings"
 
-	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
-
 	"github.com/streamingfast/bstream"
 	"github.com/streamingfast/bstream/transform"
 	"github.com/streamingfast/dstore"
-	pbtransform "github.com/streamingfast/firehose-near/types/pb/sf/near/transform/v1"
+	pbtransform "github.com/streamingfast/firehose-near/pb/sf/near/transform/v1"
+	pbnear "github.com/streamingfast/firehose-near/pb/sf/near/type/v1"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 )
 
 var ReceiptFilterMessageName = proto.MessageName(&pbtransform.BasicReceiptFilter{})
 
-func BasicReceiptFilterFactory(indexStore dstore.Store, possibleIndexSizes []uint64) *transform.Factory {
+func BasicReceiptFilterFactory(indexStore dstore.Store, possibleIndexSizes []uint64) (*transform.Factory, error) {
 	return &transform.Factory{
 		Obj: &pbtransform.BasicReceiptFilter{},
 		NewFunc: func(message *anypb.Any) (transform.Transform, error) {
@@ -52,7 +51,7 @@ func BasicReceiptFilterFactory(indexStore dstore.Store, possibleIndexSizes []uin
 			}
 			return f, nil
 		},
-	}
+	}, nil
 }
 
 type BasicReceiptFilter struct {

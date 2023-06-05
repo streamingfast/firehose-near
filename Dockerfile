@@ -11,12 +11,12 @@ RUN mkdir -p /app/ && curl -Lo /app/grpc_health_probe https://github.com/grpc-ec
 
 ADD /firenear /app/firenear
 
-COPY tools/firenear/motd_generic /etc/motd
-COPY tools/firenear/99-firenear.sh /etc/profile.d/
+COPY tools/docker/motd_generic /etc/motd
+COPY tools/docker/99-firehose.sh /etc/profile.d/
 
 # On SSH connection, /root/.bashrc is invoked which invokes '/root/.bash_aliases' if existing,
 # so we hijack the file to "execute" our specialized bash script
-RUN echo ". /etc/profile.d/99-firenear.sh" > /root/.bash_aliases
+RUN echo ". /etc/profile.d/99-firehose.sh" > /root/.bash_aliases
 
 ENV PATH "$PATH:/app"
 

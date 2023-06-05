@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/streamingfast/bstream/transform"
-	pbtransform "github.com/streamingfast/firehose-near/types/pb/sf/near/transform/v1"
-	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
+	pbtransform "github.com/streamingfast/firehose-near/pb/sf/near/transform/v1"
+	pbnear "github.com/streamingfast/firehose-near/pb/sf/near/type/v1"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/protobuf/types/known/anypb"
 )
@@ -18,8 +18,11 @@ func headerOnlyTransform(t *testing.T) *anypb.Any {
 }
 
 func TestHeaderOnly_Transform(t *testing.T) {
+	headerOnly, err := NewHeaderOnlyTransformFactory(nil, nil)
+	require.NoError(t, err)
+
 	transformReg := transform.NewRegistry()
-	transformReg.Register(HeaderOnlyTransformFactory)
+	transformReg.Register(headerOnly)
 
 	transforms := []*anypb.Any{headerOnlyTransform(t)}
 

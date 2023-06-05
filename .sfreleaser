@@ -1,0 +1,4 @@
+global:
+  binary: firenear
+  language: golang
+  variant: application
