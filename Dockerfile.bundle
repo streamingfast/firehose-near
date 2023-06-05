@@ -20,8 +20,7 @@ FROM ghcr.io/streamingfast/near-firehose-indexer:$INDEXER_VERSION as chain
 FROM ghcr.io/streamingfast/firehose-near:$SF_VERSION
 
 COPY --from=chain /app/near-firehose-indexer /app/near-firehose-indexer
-COPY --from=chain /app/neard /app/neard
 COPY --from=appbuilder /usr/bin/s5cmd /app/s5cmd
 
-COPY tools/firenear/motd_node_manager /etc/motd
-COPY tools/firenear/scripts/. /usr/local/bin/
+COPY tools/docker/motd_node_manager /etc/motd
+COPY tools/docker/scripts/. /usr/local/bin/

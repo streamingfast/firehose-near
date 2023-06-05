@@ -10,13 +10,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/streamingfast/firehose-near/types"
-	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
-
 	"github.com/streamingfast/bstream"
-
-	"github.com/golang/protobuf/proto"
+	firecore "github.com/streamingfast/firehose-core"
+	pbnear "github.com/streamingfast/firehose-near/pb/sf/near/type/v1"
 	"go.uber.org/zap"
+	"google.golang.org/protobuf/proto"
 )
 
 const FirePrefixLen = len("FIRE ")
@@ -24,17 +22,19 @@ const FirePrefixLen = len("FIRE ")
 // ConsoleReader is what reads the `geth` output directly. It builds
 // up some LogEntry objects. See `LogReader to read those entries .
 type ConsoleReader struct {
-	lines chan string
-	close func()
+	lines        chan string
+	blockEncoder firecore.BlockEncoder
+	close        func()
 
 	ctx  *parseCtx
 	done chan interface{}
 }
 
-func NewConsoleReader(lines chan string, rpcUrl string) (*ConsoleReader, error) {
+func NewConsoleReader(lines chan string, blockEncoder firecore.BlockEncoder, rpcUrl string) (*ConsoleReader, error) {
 	l := &ConsoleReader{
-		lines: lines,
-		close: func() {},
+		lines:        lines,
+		blockEncoder: blockEncoder,
+		close:        func() {},
 		ctx: &parseCtx{
 			blockMetas: newBlockMetaHeap(NewRPCBlockMetaGetter(rpcUrl)),
 		},
@@ -74,30 +74,24 @@ func (s *parsingStats) log() {
 	)
 }
 
-func (s *parsingStats) inc(key string) {
-	if s == nil {
-		return
-	}
-	k := strings.ToLower(key)
-	value := s.data[k]
-	value++
-	s.data[k] = value
-}
-
 type parseCtx struct {
 	blockMetas *blockMetaHeap
-	stats      *parsingStats
 }
 
 func (r *ConsoleReader) ReadBlock() (out *bstream.Block, err error) {
-	return r.next(readBlock)
+	block, err := r.next(readBlock)
+	if err != nil {
+		return nil, err
+	}
+
+	return r.blockEncoder.Encode(block)
 }
 
 const (
 	readBlock = 1
 )
 
-func (r *ConsoleReader) next(readType int) (out *bstream.Block, err error) {
+func (r *ConsoleReader) next(readType int) (out *pbnear.Block, err error) {
 	ctx := r.ctx
 
 	zlog.Debug("next", zap.Int("read_type", readType))
@@ -159,7 +153,7 @@ func (r *ConsoleReader) buildScanner(reader io.Reader) *bufio.Scanner {
 
 // Formats
 // FIRE BLOCK <NUM> <HASH> <PROTO_HEX>
-func (ctx *parseCtx) readBlock(line string) (*bstream.Block, error) {
+func (ctx *parseCtx) readBlock(line string) (*pbnear.Block, error) {
 	chunks, err := SplitInChunks(line, 4)
 	if err != nil {
 		return nil, fmt.Errorf("split: %s", err)
@@ -222,7 +216,7 @@ func (ctx *parseCtx) readBlock(line string) (*bstream.Block, error) {
 		heap.Pop(ctx.blockMetas)
 	}
 
-	return types.BlockFromProto(block)
+	return block, nil
 }
 
 // splitInChunks split the line in `count` chunks and returns the slice `chunks[1:count]` (so exclusive end), but verifies

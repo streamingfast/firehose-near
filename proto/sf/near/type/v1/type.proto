@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package sf.near.type.v1;
 
-option go_package = "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1;pbnear";
+option go_package = "github.com/streamingfast/firehose-near/pb/sf/near/type/v1;pbnear";
 
 message Block {
   string author = 1;

@@ -5,8 +5,9 @@ import (
 
 	"github.com/streamingfast/bstream"
 	"github.com/streamingfast/bstream/transform"
-	pbtransform "github.com/streamingfast/firehose-near/types/pb/sf/near/transform/v1"
-	pbnear "github.com/streamingfast/firehose-near/types/pb/sf/near/type/v1"
+	"github.com/streamingfast/dstore"
+	pbtransform "github.com/streamingfast/firehose-near/pb/sf/near/transform/v1"
+	pbnear "github.com/streamingfast/firehose-near/pb/sf/near/type/v1"
 	"go.uber.org/zap"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
@@ -14,21 +15,23 @@ import (
 
 var HeaderOnlyMessageName = proto.MessageName(&pbtransform.HeaderOnly{})
 
-var HeaderOnlyTransformFactory = &transform.Factory{
-	Obj: &pbtransform.HeaderOnly{},
-	NewFunc: func(message *anypb.Any) (transform.Transform, error) {
-		mname := message.MessageName()
-		if mname != HeaderOnlyMessageName {
-			return nil, fmt.Errorf("expected type url %q, recevied %q ", HeaderOnlyMessageName, message.TypeUrl)
-		}
+func NewHeaderOnlyTransformFactory(_ dstore.Store, _ []uint64) (*transform.Factory, error) {
+	return &transform.Factory{
+		Obj: &pbtransform.HeaderOnly{},
+		NewFunc: func(message *anypb.Any) (transform.Transform, error) {
+			mname := message.MessageName()
+			if mname != HeaderOnlyMessageName {
+				return nil, fmt.Errorf("expected type url %q, received %q ", HeaderOnlyMessageName, message.TypeUrl)
+			}
 
-		filter := &pbtransform.HeaderOnly{}
-		err := proto.Unmarshal(message.Value, filter)
-		if err != nil {
-			return nil, fmt.Errorf("unexpected unmarshall error: %w", err)
-		}
-		return &HeaderOnlyFilter{}, nil
-	},
+			filter := &pbtransform.HeaderOnly{}
+			err := proto.Unmarshal(message.Value, filter)
+			if err != nil {
+				return nil, fmt.Errorf("unexpected unmarshall error: %w", err)
+			}
+			return &HeaderOnlyFilter{}, nil
+		},
+	}, nil
 }
 
 type HeaderOnlyFilter struct{}
