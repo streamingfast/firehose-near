@@ -1,0 +1,10 @@
+version: v1
+name: buf.build/streamingfast/firehose-near
+
+lint:
+  use:
+    - DEFAULT
+
+breaking:
+  use:
+    - FILE
