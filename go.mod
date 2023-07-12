@@ -12,7 +12,7 @@ require (
 	github.com/streamingfast/cli v0.0.4-0.20230608140431-f501fec4f1ce
 	github.com/streamingfast/dbin v0.9.1-0.20220513054835-1abebbb944ad
 	github.com/streamingfast/dstore v0.1.1-0.20230620124109-3924b3b36c77
-	github.com/streamingfast/firehose-core v0.0.2-0.20230711182546-2b2f358c9ae2
+	github.com/streamingfast/firehose-core v0.1.0
 	github.com/streamingfast/logging v0.0.0-20230608130331-f22c91403091
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d
 	github.com/streamingfast/node-manager v0.0.2-0.20230406142433-692298a8b8d2

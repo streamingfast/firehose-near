@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## [1.1.1](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.1)
+
+#### Backend Changes
+
+* Fixed Substreams accepted block which was not working properly.
+
 ## [1.1.0](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.0)
 
 ### Highlights
