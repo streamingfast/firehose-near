@@ -2,3 +2,9 @@ global:
   binary: firenear
   language: golang
   variant: application
+  sfreleaser-min-version: v0.7.0
+release:
+  pre-build-hooks:
+    - substreams pack -o "{{ .buildDir }}/substreams-near-{{ .release.Version }}.spkg" substreams.yaml
+  upload-extra-assets:
+    - "{{ .buildDir }}/substreams-near-{{ .release.Version }}.spkg"
