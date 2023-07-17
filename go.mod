@@ -1,8 +1,6 @@
 module github.com/streamingfast/firehose-near
 
-go 1.21
-
-toolchain go1.21rc2
+go 1.19
 
 require (
 	github.com/RoaringBitmap/roaring v0.9.4
