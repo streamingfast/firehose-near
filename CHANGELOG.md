@@ -8,7 +8,9 @@ for instructions to keep up to date.
 
 #### Backend Changes
 
-* Update firehose-core to v0.1.1
+* Update firehose-core to v0.1.1:
+  - added missing `--substreams-tier2-request-stats` request debugging flag
+  - added missing firehose rate limiting options flags, `--firehose-rate-limit-bucket-size` and `--firehose-rate-limit-bucket-fill-rate` to manage concurrent connection attempts to Firehose.
 
 ## [1.1.1](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.1)
 
