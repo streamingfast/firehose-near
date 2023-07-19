@@ -4,6 +4,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## Next
+
+* Added `firenear tools check forks <forked-blocks-store-url> [--min-depth=<depth>]` that reads forked blocks you have and prints resolved longest forks you have seen. The command works for any chain, here a sample output:
+
+    ```log
+    ...
+
+    Fork Depth 3
+    #45236230 [ea33194e0a9bb1d8 <= 164aa1b9c8a02af0 (on chain)]
+    #45236231 [f7d2dc3fbdd0699c <= ea33194e0a9bb1d8]
+        #45236232 [ed588cca9b1db391 <= f7d2dc3fbdd0699c]
+
+    Fork Depth 2
+    #45236023 [b6b1c68c30b61166 <= 60083a796a079409 (on chain)]
+    #45236024 [6d64aec1aece4a43 <= b6b1c68c30b61166]
+
+    ...
+    ```
+
+* The `firenear tools` commands and sub-commands have better rendering `--help` by hidden not needed global flags with long description.
+
 ## [1.1.2](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.2)
 
 #### Backend Changes
