@@ -16,11 +16,6 @@ package transform
 
 import (
 	"github.com/streamingfast/logging"
-	"go.uber.org/zap"
 )
 
-var zlog = zap.NewNop()
-
-func init() {
-	logging.Register("github.com/streamingfast/firehose-near/transforms", &zlog)
-}
+var zlog, _ = logging.PackageLogger("firenear", "github.com/streamingfast/firehose-near/transforms")

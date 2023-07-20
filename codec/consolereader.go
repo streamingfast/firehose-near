@@ -107,7 +107,7 @@ func (r *ConsoleReader) next(readType int) (out *pbnear.Block, err error) {
 		case strings.HasPrefix(line, "BLOCK"):
 			out, err = ctx.readBlock(line)
 		default:
-			if traceEnabled {
+			if tracer.Enabled() {
 				zlog.Debug("skipping unknown Firehose log line", zap.String("line", line))
 			}
 

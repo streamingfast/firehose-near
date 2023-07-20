@@ -6,6 +6,8 @@ for instructions to keep up to date.
 
 ## Next
 
+* Fixed some loggers to not render a shortname (so appearing as `<n/a>` in the log).
+
 * Added `firenear tools check forks <forked-blocks-store-url> [--min-depth=<depth>]` that reads forked blocks you have and prints resolved longest forks you have seen. The command works for any chain, here a sample output:
 
     ```log
