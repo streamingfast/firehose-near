@@ -4,7 +4,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
-## Next
+## [1.1.4](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.4)
+
+This release bumps substreams to v1.1.10 and firehose-core to v0.1.4
+
+### Fixes
+
+* Fixed: jobs would hang when flags `--substreams-state-bundle-size` and `--substreams-tier1-subrequests-size` had different values. The latter flag has been completely **removed**, subrequests will be bound to the state bundle size.
+
+### Added
+
+* Added support for *continuous authentication* via the grpc auth plugin (allowing cutoff triggered by the auth system).
+
 
 ## [1.1.3](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.3)
 

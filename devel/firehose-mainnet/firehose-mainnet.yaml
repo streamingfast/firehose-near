@@ -1,12 +1,15 @@
 start:
   args:
-  - firehose
+  - substreams-tier1
+  - substreams-tier2
   flags:
-    common-merged-blocks-store-url: gs://dfuseio-global-blocks-us/near-mainnet/v3
+    common-merged-blocks-store-url: gs://dfuseio-global-blocks-uscentral/near-mainnet/v4?project=dfuseio-global
+    common-one-block-store-url: gs://dfuseio-global-blocks-uscentral/near-mainnet/v4-oneblock?project=dfuseio-global
+    common-forked-blocks-store-url: gs://dfuseio-global-blocks-uscentral/near-mainnet/v4-forked?project=dfuseio-global
     common-live-blocks-addr: localhost:9001
     common-first-streamable-block: 9820214
-    common-blocks-cache-enabled: true
-    common-blocks-cache-max-recent-entry-bytes: 594967296
-    common-blocks-cache-max-entry-by-age-bytes: 594967296
-    firehose-grpc-listen-addr: :9000
-    firehose-real-time-tolerance: 3m
+    substreams-tier1-grpc-listen-addr: :9000
+    substreams-tier2-grpc-listen-addr: :9002
+    substreams-tier1-subrequests-endpoint: localhost:9002
+    substreams-tier1-subrequests-plaintext: true
+    substreams-state-bundle-size: 100
