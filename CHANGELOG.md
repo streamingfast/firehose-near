@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## [1.1.5-rc1](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.5)
+
+This release candidate is a hotfix for an issue introduced at block v1.1.3 and affecting `production-mode` where the stream will hang and some `map_outputs` will not be produced over some specific ranges of the chains.
+
 ## [1.1.4](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.4)
 
 This release bumps substreams to v1.1.10 and firehose-core to v0.1.4
