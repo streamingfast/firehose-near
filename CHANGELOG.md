@@ -4,6 +4,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## [1.1.6](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.6)
+
+> [!IMPORTANT]
+> The Substreams service exposed from this version will send progress messages that cannot be decoded by substreams clients prior to v1.1.12.
+> Streaming of the actual data will not be affected. Clients will need to be upgraded to properly decode the new progress messages.
+
+### Changed
+
+* Bumped firehose-core to `0.1.8`
+* Bumped substreams to `v1.1.12` to support the new progress message format. Progression now relates to **stages** instead of modules. You can get stage information using the `substreams info` command starting at version `v1.1.12`.
+* Migrated to firehose-core
+* change block reader-node block encoding from hex to base64
+
+### Fixed
+
+* More tolerant retry/timeouts on filesource (prevent "Context Deadline Exceeded")
+
 ## [1.1.5-rc1](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.5)
 
 This release candidate is a hotfix for an issue introduced at block v1.1.3 and affecting `production-mode` where the stream will hang and some `map_outputs` will not be produced over some specific ranges of the chains.
