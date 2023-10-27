@@ -109,7 +109,7 @@ tools fix-bloated-merged-blocks <merged-blocks-store> <output-store> <start>:<st
 
 * More tolerant retry/timeouts on filesource (prevent "Context Deadline Exceeded")
 
-## [1.1.5-rc1](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.5)
+## [1.1.5-rc1](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.5-rc1)
 
 This release candidate is a hotfix for an issue introduced at block v1.1.3 and affecting `production-mode` where the stream will hang and some `map_outputs` will not be produced over some specific ranges of the chains.
 
@@ -134,7 +134,7 @@ This release bumps substreams to v1.1.9 and firehose-core to v0.1.3
 
 #### Substreams Scheduler Improvements for Parallel Processing
 
-The `substreams` scheduler has been improved to reduce the number of required jobs for parallel processing. This affects `backprocessing` (preparing the states of modules up to a "start-block") and `forward processing` (preparing the states and the outputs to speed up streaming in production-mode). 
+The `substreams` scheduler has been improved to reduce the number of required jobs for parallel processing. This affects `backprocessing` (preparing the states of modules up to a "start-block") and `forward processing` (preparing the states and the outputs to speed up streaming in production-mode).
 
 Jobs on `tier2` workers are now divided in "stages", each stage generating the partial states for all the modules that have the same dependencies. A `substreams` that has a single store won't be affected, but one that has 3 top-level stores, which used to run 3 jobs for every segment now only runs a single job per segment to get all the states ready.
 

@@ -22,15 +22,10 @@ func newReaderNodeBootstrapper(ctx context.Context, logger *zap.Logger, cmd *cob
 
 	hostname, _ := os.Hostname()
 
-	fmt.Println("Hostname", hostname)
-	fmt.Println("Config file", viper.GetString("reader-node-config-file"))
-
 	configFile := replaceNodeRole(viper.GetString("reader-node-config-file"), hostname)
 	genesisFile := replaceNodeRole(viper.GetString("reader-node-genesis-file"), hostname)
 	nodeKeyFile := replaceHostname(viper.GetString("reader-node-key-file"), hostname)
 	overwriteNodeFiles := viper.GetBool("reader-node-overwrite-node-files")
-
-	fmt.Println("Config final", configFile)
 
 	return &bootstrapper{
 		configFile:  configFile,
