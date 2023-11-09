@@ -5,9 +5,12 @@ import (
 	"io"
 	"strings"
 
+	"github.com/spf13/cobra"
 	"github.com/streamingfast/bstream"
+	"github.com/streamingfast/cli/sflags"
 	pbtransform "github.com/streamingfast/firehose-near/pb/sf/near/transform/v1"
 	pbnear "github.com/streamingfast/firehose-near/pb/sf/near/type/v1"
+	"go.uber.org/zap"
 	"google.golang.org/protobuf/types/known/anypb"
 )
 
@@ -55,7 +58,8 @@ func printBlock(blk *bstream.Block, alsoPrintTransactions bool, out io.Writer) e
 	return nil
 }
 
-func parseReceiptAccountFilters(in string) (*anypb.Any, error) {
+func parseReceiptAccountFilters(cmd *cobra.Command, logger *zap.Logger) ([]*anypb.Any, error) {
+	in := sflags.MustGetString(cmd, "receipt-account-filters")
 	if in == "" {
 		return nil, nil
 	}
@@ -79,5 +83,9 @@ func parseReceiptAccountFilters(in string) (*anypb.Any, error) {
 		PrefixAndSuffixPairs: pairs,
 	}
 
-	return anypb.New(filters)
+	any, err := anypb.New(filters)
+	if err != nil {
+		return nil, err
+	}
+	return []*anypb.Any{any}, nil
 }

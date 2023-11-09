@@ -68,6 +68,14 @@ func (b *Block) GetFirehoseBlockNumber() uint64 {
 	return b.Header.Height
 }
 
+func (b *Block) GetFirehoseBlockParentNumber() uint64 {
+	return b.Header.PrevHeight
+}
+
+func (b *Block) GetFirehoseBlockVersion() int32 {
+	return int32(b.Header.LatestProtocolVersion)
+}
+
 func (b *Block) GetFirehoseBlockParentID() string {
 	return b.PreviousID()
 }

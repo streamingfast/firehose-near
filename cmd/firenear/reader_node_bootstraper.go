@@ -12,10 +12,14 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/streamingfast/dstore"
+	firecore "github.com/streamingfast/firehose-core"
 	"github.com/streamingfast/node-manager/operator"
+	"go.uber.org/zap"
 )
 
-func newReaderNodeBootstrapper(cmd *cobra.Command, nodeDataDir string) (operator.Bootstrapper, error) {
+func newReaderNodeBootstrapper(ctx context.Context, logger *zap.Logger, cmd *cobra.Command, resolvedNodeArguments []string, resolver firecore.ReaderNodeArgumentResolver) (operator.Bootstrapper, error) {
+	nodeDataDir := resolver("{node-data-dir}")
+
 	hostname, _ := os.Hostname()
 
 	fmt.Println("Hostname", hostname)
