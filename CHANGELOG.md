@@ -5,7 +5,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). S
 for instructions to keep up to date.
 
 
-## [1.1.11](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.11)
+## [1.1.12](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.12)
+
+* 1.1.12 replaces the deleted release 1.1.11, which should not be used
 
 ### Operators
 
@@ -51,6 +53,10 @@ tools fix-bloated-merged-blocks <merged-blocks-store> <output-store> <start>:<st
 * Flag substreams-rpc-endpoints removed, this was present by mistake and unused actually.
 * Flag substreams-rpc-cache-store-url removed, this was present by mistake and unused actually.
 * Flag substreams-rpc-cache-chunk-size removed, this was present by mistake and unused actually.
+
+## 1.1.11
+
+* This version has been deleted because it contains a critical bug: it produced blocks with invalid version number
 
 ## [1.1.10](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.10)
 
