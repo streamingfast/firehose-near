@@ -73,7 +73,7 @@ func (b *Block) GetFirehoseBlockParentNumber() uint64 {
 }
 
 func (b *Block) GetFirehoseBlockVersion() int32 {
-	return int32(b.Header.LatestProtocolVersion)
+	return 1
 }
 
 func (b *Block) GetFirehoseBlockParentID() string {
