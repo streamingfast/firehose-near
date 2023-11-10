@@ -5,9 +5,7 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). S
 for instructions to keep up to date.
 
 
-## Unreleased
-
-* bumped firehose-core to `v0.2.1`
+## [1.1.11](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.11)
 
 ### Operators
 
@@ -36,6 +34,7 @@ tools fix-bloated-merged-blocks <merged-blocks-store> <output-store> <start>:<st
 * Added the command `tools fix-bloated-merged-blocks` to try to fix merged-blocks that contain duplicates and blocks outside of their range.
 * Command `tools print one-block and merged-blocks` now supports a new `--output-format` `jsonl` format. Bytes data can now printed as hex or base58 string instead of base64 string.
 * Added retry loop for merger when walking one block files. Some use-cases where the bundle reader was sending files too fast and the merger was not waiting to accumulate enough files to start bundling merged files
+* Firehose logs now include auth information (userID, keyID, realIP) along with blocks + egress bytes sent.
 
 ### Fixed
 
@@ -49,6 +48,9 @@ tools fix-bloated-merged-blocks <merged-blocks-store> <output-store> <start>:<st
 * **Breaking** The `reader-node-log-to-zap` flag has been removed. This was a source of confusion for operators reporting Firehose on <Chain> bugs because the node's logs where merged within normal Firehose on <Chain> logs and it was not super obvious.
 
   Now, logs from the node will be printed to `stdout` unformatted exactly like presented by the chain. Filtering of such logs must now be delegated to the node's implementation and how it deals depends on the node's binary. Refer to it to determine how you can tweak the logging verbosity emitted by the node.
+* Flag substreams-rpc-endpoints removed, this was present by mistake and unused actually.
+* Flag substreams-rpc-cache-store-url removed, this was present by mistake and unused actually.
+* Flag substreams-rpc-cache-chunk-size removed, this was present by mistake and unused actually.
 
 ## [1.1.10](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.10)
 
