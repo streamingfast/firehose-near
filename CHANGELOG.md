@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## [1.1.13](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.12)
+
+### Substreams
+
+* Performance: prevent reprocessing jobs when there is only a mapper in production mode and everything is already cached
+* Performance: prevent "UpdateStats" from running too often and stalling other operations when running with a high parallel jobs count
+* Performance: fixed bug in scheduler ramp-up function sometimes waiting before raising the number of workers
 
 ## [1.1.12](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.12)
 
