@@ -69,7 +69,7 @@ func newParsingStats(block uint64) *parsingStats {
 func (s *parsingStats) log() {
 	zlog.Info("reader block stats",
 		zap.Uint64("block_num", s.blockNum),
-		zap.Int64("duration", int64(time.Since(s.startAt))),
+		zap.Duration("duration", time.Since(s.startAt)),
 		zap.Reflect("stats", s.data),
 	)
 }

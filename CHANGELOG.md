@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## Unreleased
+
+* Fixed `reader block stats` to print properly time of importing block.
+
 ## [1.1.13](https://github.com/streamingfast/firehose-near/releases/tag/v1.1.12)
 
 ### Substreams
@@ -20,10 +24,10 @@ for instructions to keep up to date.
 
 > [!IMPORTANT]
 > We have had reports of older versions of this software creating corrupted merged-blocks-files (with duplicate or extra out-of-bound blocks)
-> This release adds additional validation of merged-blocks to prevent serving duplicate blocks from the firehose or substreams service. 
+> This release adds additional validation of merged-blocks to prevent serving duplicate blocks from the firehose or substreams service.
 > This may cause service outage if you have produced those blocks or downloaded them from another party who was affected by this bug.
 
-1. Find the affected files by running the following command (can be run multiple times in parallel, over smaller ranges) 
+1. Find the affected files by running the following command (can be run multiple times in parallel, over smaller ranges)
 
 ```
 tools check merged-blocks-batch <merged-blocks-store> <start> <stop>
