@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../.. && pwd )"
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
 
 # Protobuf definitions
 PROTO=${1:-"$ROOT/../proto"}
@@ -24,7 +24,7 @@ function main() {
 
   set -e
 
-  cd "$ROOT/types/pb" &> /dev/null
+  cd "$ROOT/pb"
 
   generate "sf/near/type/v1/type.proto"
   generate "sf/near/transform/v1/transform.proto"
