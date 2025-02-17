@@ -500,23 +500,23 @@ message Action {
     DeleteKeyAction delete_key = 7;
     DeleteAccountAction delete_account = 8;
     SignedDelegateAction delegate = 9;
-    DeployGlobalContract deploy_global_contract = 10;
-    DeployGlobalContractByAccountId deploy_global_contract_by_account_id = 11;
-    UseGlobalContract use_global_contract = 12;
-    UseGlobalContractByAccountId use_global_contract_by_account_id = 13;
+    DeployGlobalContractAction deploy_global_contract = 10;
+    DeployGlobalContractByAccountIdAction deploy_global_contract_by_account_id = 11;
+    UseGlobalContractAction use_global_contract = 12;
+    UseGlobalContractByAccountIdAction use_global_contract_by_account_id = 13;
   }
 }
 
-message DeployGlobalContract {
+message DeployGlobalContractAction {
   bytes code = 1;
 }
-message DeployGlobalContractByAccountId {
+message DeployGlobalContractByAccountIdAction {
   bytes code = 1;
 }
-message UseGlobalContract {
+message UseGlobalContractAction {
   CryptoHash code_hash = 1;
 }
-message UseGlobalContractByAccountId {
+message UseGlobalContractByAccountIdAction {
   string account_id = 1;
 }
 
