@@ -4,6 +4,149 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## [2.2.0]
+
+### Substreams
+
+* Fix another `cannot resolve 'old cursor' from files in passthrough mode -- not implemented` bug when receiving a request in production-mode with a cursor that is below the "linear handoff" block
+
+* Rust modules will now be executed with `wasmtime` by default instead of `wazero`.
+  - Prevents the whole server from stalling in certain memory-intensive operations in wazero.
+  - Speed improvement: cuts the execution time in half in some circumstances.
+  - Wazero is still used for modules with `wbindgen` and modules compiled with `tinygo`.
+  - Set env var `SUBSTREAMS_WASM_RUNTIME=wazero` to revert to previous behavior.
+
+* Implement "QuickSave" feature to save the state of "live running" substreams stores when shutting down, and then resume processing from that point if the cursor matches.
+  - Added flag `substreams-tier1-quicksave-store` to enable quicksave when non-empty
+    (requires `--common-system-shutdown-signal-delay` to be set to a long enough value to save the in-flight stores)
+
+- The `substreams-tier1` app now has two new configuration flags named respectively `substreams-tier1-active-requests-soft-limit` and `substreams-tier1-active-requests-hard-limit`
+  helping better load balance active requests across a pool of `tier1` instances.
+
+  The `substreams-tier1-active-requests-soft-limit` limits the number of client active requests that a tier1 accepts before starting
+  to be report itself as 'unready' within the health check endpoint. A limit of 0 or less means no limit.
+
+  This is useful to load balance active requests more easily across a pool of tier1 instance. When the instance reaches the soft
+  limit, it will start to be unready from the load balancer standpoint. The load balancer in return will remove it from the list
+  of available instances, and new connections will be routed to remaining clients, spreading the load.
+
+      The `substreams-tier1-active-requests-hard-limit` limits the number of client active requests that a tier1 accepts before
+
+  rejecting incoming gRPC requests with 'Unavailable' code and setting itself as unready. A limit of 0 or less means no limit.
+
+  This is useful to prevent the tier1 from being overwhelmed by too many requests, most client auto-reconnects on 'Unavailable' code
+  so they should end up on another tier1 instance, assuming you have proper auto-scaling of the number of instances available.
+
+- The `substreams-tier1` app now exposes a new Prometheus metric `substreams_tier1_rejected_request_counter` that tracks rejected
+  requests. The counter is labelled by the gRPC/ConnectRPC returned code (`ok` and `canceled` are not considered rejected requests).
+
+- The `substreams-tier2` app now exposes a new Prometheus metric `substreams_tier2_rejected_request_counter` that tracks rejected
+  requests. The counter is labelled by the gRPC/ConnectRPC returned code (`ok` and `canceled` are not considered rejected requests).
+
+- Properly accept and compress responses with `gzip` for browser HTTP clients using ConnectWeb with `Accept-Encoding` header
+- Allow setting subscription channel max capacity via `SOURCE_CHAN_SIZE` env var (default: 100)
+
+- Fix an issue preventing proper detection of gzip compression when multiple headers are set (ex: python grpc client)
+- Add support for zstd compression on server
+- Fix an issue preventing some tier2 requests on last-stage from correctly generating stores. This could lead to some missing "backfilling" jobs and slower time to first block on reconnection.
+- Fix a thread leak on cursor resolution resulting in bad counter for active connections
+> **Note** All caches for stores using the updatePolicy `set_sum` (added in substreams v1.7.0) and modules that depend on them will need to be deleted, since they may contain bad data.
+
+- Fix bad data in stores using `set_sum` policy: squashing of store segments incorrectly "summed" some values that should have been "set" if the last event for a key on this segment was a "sum"
+- Fix small bug making some requests in development-mode slow to start (when starting close to the module initialBlock with a store that doesn't start on a boundary)
+- Fixed an(other) issue where multiple stores running on the same stage with different initialBlocks will fail to proress (and hang)
+- Fix "cannot resolve 'old cursor' from files in passthrough mode" error on some requests with an old cursor
+- Fix handling of 'special case' substreams module with only "params" as its input: should not skip this execution (used in graph-node for head tracking)
+  -> empty files in module cache with hash `d3b1920483180cbcd2fd10abcabbee431146f4c8` should be deleted for consistency
+- Fix bug where some invalid cursors may be sent (with 'LIB' being above the block being sent) and add safeguard/loggin if the bug appears again
+- Fix panic in the whole tier2 process when stores go above the size limit while being read from "kvops" cached changes
+
+#### Capacity Management
+
+* Integrated the `GlobalRequestPool` service in the `Tier1App` to manage global requests pooling.
+* Integrated the `GlobalWorkerPool` service in the `Tier1App` to manage global worker pooling.
+
+* Added flag `substreams-tier1-global-worker-pool-address`, the address of the global worker pool to use for the substreams tier1. (disabled if empty)
+* Added flag `substreams-tier1-global-worker-pool-keep-alive-delay` delay between two keep alive call to the global worker pool. Default is 25s")
+* Added flag `substreams-tier1-global-request-pool-keep-alive-delay` delay between two keep alive call to the global worker pool for request. Default is 25s
+* Added flag `substreams-tier1-default-max-request-per-user` default max request per user, this will be use of the global worker pool is not reachable. Default is 5
+* Added flag `substreams-tier1-default-minimal-request-life-time-second` default minimal request life time, this will be use of the global worker pool is not reachable. . Default is 180
+
+* Limit parallel execution of a stage's layer: Previously, the engine was executing modules in a stage's layer all in parallel.
+  We now change that behavior, development mode will from now on execute every sequentially and when in production mode will
+  limit parallelism to 2 (hard-coded) for now.
+  The auth plugin can control that value dynamically by providing a trusted header `X-Sf-Substreams-Stage-Layer-Parallel-Executor-Max-Count`.
+
+#### Performance
+
+* Add shared cache for tier1 execution near HEAD, to prevent multiple tier1 instances from reprocessing the same module on the same block when it comes in (ex: foundational modules)
+* Improved fetching of state caches on tier1 requests to speed up "time to first data"
+
+* Fixed a regression since "v1.7.3" where the SkipEmptyOutput instruction was ignored in substreams mappers
+
+### Tools
+
+* make 'compare-blocks' command support one-blocks stores as well as merged-blocks
+
+* The `firecore tools print one-block` is now able to print from a file directly.
+
+- Improved logging of requests beginning/end
+- Improved `noop` mode (now sends less data)
+
+- fix panic when using an index that allows `skip_empty_output`
+
+- Fixed `substreams-tier2` not setting itself ready correctly on startup since `v1.7.0`.
+
+- Added support for `--output=bytes` mode which prints the chain's specific Protobuf block as bytes, the encoding for the bytes string printed is determined by `--bytes-encoding`, uses `hex` by default.
+
+- Added back `-o` as shortand for `--output` in `firecore tools ...` sub-commands.
+
+- Add back `grpc.health.v1.Health` service to `firehose` and `substreams-tier1` services (regression in 1.7.0)
+- Give precedence to the tracing header `X-Cloud-Trace-Context` over `Traceparent` to prevent user systems' trace IDs from leaking passed a GCP load-balancer
+
+- Reader Node Manager HTTP API now accepts `POST http://localhost:10011/v1/restart<?sync=true>` to restart the underlying reader node binary sub-process. This is a alias for `/v1/reload`.
+
+- Enhanced `firecore tools print merged-blocks` with various small quality of life improvements:
+  - Now accepts a block range instead of a single start block.
+  - Passing a single block as the block range will print this single block alone.
+  - Block range is now optional, defaulting to run until there is no more files to read.
+  - It's possible to pass a merged blocks file directly, with or without an optional range.
+
+### Firehose
+
+> [!IMPORTANT]
+> This release will reject firehose connections from clients that don't support GZIP or ZSTD compression. Use `--firehose-enforce-compression=false` to keep previous behavior, then check the logs for `incoming Substreams Blocks request` logs with the value `compressed: false` to track users who are not using compressed HTTP connections.
+
+> [!IMPORTANT]
+> This release removes the old `sf.firehose.v1` protocol (replaced by `sf.firehose.v2` in 2022, this should not affect any reasonably recent client).
+
+- Add support for ConnectWeb firehose requests.
+- Always use gzip compression on firehose requests for clients that support it (instead of always answering with the same compression as the request).
+
+> [!NOTE]
+> This release will reject substreams connections from clients that don't support GZIP compression. Use `--substreams-tier1-enforce-compression=false` to keep previous behavior, then check the logs for `incoming Substreams Blocks request` logs with the value `compressed: false` to track users who are not using compressed HTTP connections.
+
+- Substreams: add `--substreams-tier1-enforce-compression` to reject connections from clients that do not support GZIP compression
+- Substreams performance: reduced the number of `mallocs` (patching some third-party libraries)
+- Substreams performance: removed heavy tracing (that wasn't exposed to the client)
+- Fixed `reader-node-line-buffer-size` flag that was not being respected in `reader-node-stdin` app
+- Well-known chains: change genesis block for near-mainnet from 9820214 to 9820210
+- BlockPoller library: reworked logic to support more flexible balancing strategy
+
+- `firehose-grpc-listen-addr` and `substreams-tier1-grpc-listen-addr` flags now accepts comma-separated addresses (allows listening as plaintext and snakeoil-ssl at the same time or on specific ip addresses)
+- removed old `RegisterServiceExtension` implementation (not used anywhere anymore)
+- rpc-poller lib: fix fetching the first block on an endpoint (was not following the cursor, failing unnecessarily on non-archive nodes)
+
+- Bump `substreams` and `dmetering` to latest version adding the `outputModuleHash` to metering sender.
+
+- [Operator] Node Manager HTTP `/v1/resume` call now accepts `extra-env=<key>=<value>&extra-env=<keyN>=<valueN>` enabling to override environment variables for the next restart **only**. Use `curl -XPOST "http://localhost:10011/v1/resume?sync=true&extra-env=NODE_DEBUG=true"` (change `localhost:10011` accordingly to your setup).
+
+  > This is **not** persistent upon restart!
+
+- [Metering] Revert undesired Firehose metric `Endpoint` changes, the correct new value used is `sf.firehose.v2.Firehose/Blocks` (had been mistakenly set to `sf.firehose.v2.Firehose/Block` between version v1.6.1 and v1.6.4 inclusively).
+
+- fix: reader-node-stdin not shutting down after receiving an EOF
+
 ## [2.1.0]
 
 * Bump protobuf model to be compatible with v2.5.0-rc.2
