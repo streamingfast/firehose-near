@@ -235,7 +235,20 @@ message Receipt {
   oneof receipt {
     ReceiptAction action = 10;
     ReceiptData data = 11;
+    ReceiptGlobalContractDistribution global_contract_distribution = 12;
   }
+}
+
+message ReceiptGlobalContractDistribution {
+    GlobalContractIdentifier id = 1;
+    uint64 target_shard = 2;
+    repeated uint64 already_delivered_shards = 3;
+    bytes code = 4;
+}
+
+message GlobalContractIdentifier {
+    CryptoHash code_hash = 1;
+    string account_id = 2;
 }
 
 message ReceiptData {
