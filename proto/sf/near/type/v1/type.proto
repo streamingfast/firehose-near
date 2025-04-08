@@ -240,15 +240,18 @@ message Receipt {
 }
 
 message ReceiptGlobalContractDistribution {
-    GlobalContractIdentifier id = 1;
-    uint64 target_shard = 2;
-    repeated uint64 already_delivered_shards = 3;
-    bytes code = 4;
-}
 
-message GlobalContractIdentifier {
-    CryptoHash code_hash = 1;
-    string account_id = 2;
+    oneof id {
+       CryptoHash code_hash = 1;
+       string account_id = 2;
+    }
+
+    reserved 3 to 10;
+
+    uint64 target_shard = 11;
+    repeated uint64 already_delivered_shards = 12;
+    bytes code = 13;
+
 }
 
 message ReceiptData {
