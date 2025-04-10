@@ -341,6 +341,7 @@ message ActionError {
     DelegateActionInvalidNonceKind delegate_action_invalid_nonce = 41;
     DelegateActionNonceTooLargeKind delegate_action_nonce_too_large = 42;
     NonRefundableTransferToExistingAccountKind non_refundable_transfer_to_existing_account = 43;
+    GlobalContractDoesNotExist global_contract_does_not_exist = 44;
   }
 }
 
@@ -468,6 +469,13 @@ message DelegateActionNonceTooLargeKind{
 
 message NonRefundableTransferToExistingAccountKind {
   string account_id = 1;
+}
+
+message GlobalContractDoesNotExist {
+    oneof identifier {
+       CryptoHash code_hash = 1;
+       string account_id = 2;
+    }
 }
 
 enum InvalidTxError { //todo: add more detail?
