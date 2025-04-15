@@ -59,7 +59,7 @@ func main() {
 
 			TransformFlags: &firecore.TransformFlags{
 				Register: func(flags *pflag.FlagSet) {
-					flags.String("receipt-account-filters", "", "Comma-separated accounts to use as filter/index. If it contains a colon (:), it will be interpreted as <prefix>:<suffix> (each of which can be empty, ex: 'hello:' or ':world')")
+					flags.StringSlice("receipt-account-filters", nil, "Comma-separated accounts to use as filter/index. If it contains a colon (:), it will be interpreted as <prefix>:<suffix> (each of which can be empty, ex: 'hello:' or ':world')")
 				},
 				Parse: receiptAccountFiltersParser,
 			},
