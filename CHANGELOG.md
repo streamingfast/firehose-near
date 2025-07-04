@@ -4,6 +4,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## [2.2.2]
+
+* Re-release of 2.2.1, with latest firehose-core
+
 ## [2.2.1]
 
 * Re-release of 2.2.0 but now with Docker images built with `Ubuntu 24.04`.
