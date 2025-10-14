@@ -9,9 +9,9 @@ require (
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.15.0
 	github.com/streamingfast/bstream v0.0.2-0.20250903174843-9c884c3356fd
-	github.com/streamingfast/cli v0.0.4-0.20250424204306-678ec20cedec
-	github.com/streamingfast/dstore v0.1.1-0.20250609173504-95368d3441ee
-	github.com/streamingfast/firehose-core v1.11.2-0.20250912122430-eb3fb55fe1e2
+	github.com/streamingfast/cli v0.0.4-0.20250815192146-d8a233ec3d0b
+	github.com/streamingfast/dstore v0.1.1-0.20250929131642-07e4d13f2fda
+	github.com/streamingfast/firehose-core v1.11.3
 	github.com/streamingfast/logging v0.0.0-20230608130331-f22c91403091
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d
 	github.com/stretchr/testify v1.11.1
@@ -58,7 +58,7 @@ require (
 	github.com/blendle/zapdriver v1.3.2-0.20200203083823-9200777f8a3d // indirect
 	github.com/bobg/go-generics/v3 v3.5.0 // indirect
 	github.com/bufbuild/protocompile v0.4.0 // indirect
-	github.com/bytecodealliance/wasmtime-go/v30 v30.0.0 // indirect
+	github.com/bytecodealliance/wasmtime-go/v36 v36.0.0 // indirect
 	github.com/cenkalti/backoff/v5 v5.0.2 // indirect
 	github.com/census-instrumentation/opencensus-proto v0.4.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -165,14 +165,23 @@ require (
 	github.com/streamingfast/dmetrics v0.0.0-20250711072030-f023e918a175 // indirect
 	github.com/streamingfast/dsession v0.0.0-20250904235523-ffe9952a12d3 // indirect
 	github.com/streamingfast/dtracing v0.0.0-20220305214756-b5c0e8699839 // indirect
+<<<<<<< HEAD
 	github.com/streamingfast/firehose-networks v0.2.1 // indirect
+=======
+	github.com/streamingfast/firehose-networks v0.2.2 // indirect
+>>>>>>> 7e923b6 (Reelasing 2.4.0)
 	github.com/streamingfast/opaque v0.0.0-20210811180740-0c01d37ea308 // indirect
 	github.com/streamingfast/payment-gateway v0.0.0-20250910205031-eaa05d2fd1b7 // indirect
 	github.com/streamingfast/pbgo v0.0.6-0.20250114182320-0b43084f4000 // indirect
 	github.com/streamingfast/sf-tracing v0.0.0-20240430173521-888827872b90 // indirect
 	github.com/streamingfast/shutter v1.5.0 // indirect
 	github.com/streamingfast/snapshotter v0.0.0-20230316190750-5bcadfde44d0 // indirect
+<<<<<<< HEAD
 	github.com/streamingfast/substreams v1.16.5 // indirect
+=======
+	github.com/streamingfast/substreams v1.16.6-0.20250924125432-bee8c3d20e4c // indirect
+	github.com/streamingfast/substreams-foundational-store v0.1.1-0.20250912144020-b075d35bf78a // indirect
+>>>>>>> 7e923b6 (Reelasing 2.4.0)
 	github.com/streamingfast/worker-pool-protocol v0.0.0-20250826200931-136a043ecece // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
 	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf // indirect

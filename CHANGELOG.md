@@ -4,6 +4,91 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## [2.4.0]
+
+* Bumped to [firehose-core v1.11.3](https://github.com/streamingfast/firehose-core/releases/tag/v1.11.3).
+
+### Firehose Core Changes (copied over, see diff v1.10.2 => v1.11.3)
+
+* Improved panic message when reader node encounter a block whose finality is bigger than the block itself to include `lib_num`, `block_num`, `distance`, and `max_distance` for easier debugging.
+
+* Updated `firehose-networks` dependency to `v0.2.2` (latest).
+
+* Fixed `common-one-block-store-url` flag not expanding environment variables in all apps.
+
+#### Substreams v1.16.6
+
+* Updated Wasmtime runtime from v30.0.0 to v36.0.0, bringing performance improvements, inlining support, Component Model async implementation, and enhanced security features.
+* Added WASM bindgen shims support for Wasmtime runtime to handle WASM modules with WASM bindgen imports (when Substreams Module binary is defined as type `wasm/rust-v1+wasm-bindgen-shims`).
+* Added support for foundational-store (in wasmtime and wazero).
+* Added foundational-store grpc client to substreams engine.
+* Fixed module caching to properly handle modules with different runtime extensions.
+* 'paymentgateway' metering plugin renamed to `tgm`,  now supports the `indexer-api-key` parameter.
+
+##### Tier1 thread / memory leak
+
+* Fix thread leak on filereader.
+
+* If `--advertise-chain-name` is sey, `substreams-tier1` app will now infer default `--substreams-tier1-block-type` value by using chain's name and extracting chain's block type Protobuf package id, which will fix some cases where `substreams-tier1` waits for 100 blocks before starting up.
+
+##### Authentication changes
+
+People using their own authentication layer will need to consider these changes before upgrading!
+
+* Renamed config headers that come from authentication layer:
+  - `x-sf-user-id` renamed to `x-user-id` (from dauth module)
+  - `x-sf-api-key-id` renamed to `x-api-key-id` (from dauth module)
+  - `x-sf-meta` renamed to `x-meta` (from dauth module)
+  - `x-sf-substreams-parallel-jobs` renamed to `x-substreams-parallel-workers`
+* Allow decreasing `x-substreams-parallel-workers` through an HTTP headers (auth layer determines higher bound)
+* Detect value for the 'stage layer parallel executor max count' based on the `x-plan-tier` header (removed `x-sf-substreams-stage-layer-parallel-executor-max-count` handling)
+
+##### New authentication plugin
+
+* Added `tgm://auth.thegraph.market?indexer-api-key=<API_KEY>&reissue-jwt-max-age-secs=600` plugin that allows an indexer to use The Graph Market as the authentication source.
+  An API key with special "indexer" feature is needed to allow repeated calls to the API without rate limiting (for Key-based authentication and reissuance of "untrusted long-lived JWTs").
+
+##### Session (stream + workers management)
+
+* Concurrent streams and workers limits are now handled under the new session plugin, available under `common-session-plugin` argument.
+
+* The following flags were removed, now handled by that session plugin
+  - `substreams-tier1-global-worker-pool-address`
+  - `substreams-tier1-global-request-pool-address`
+  - `substreams-tier1-global-worker-pool-keep-alive-delay`
+  - `substreams-tier1-global-request-pool-keep-alive-delay`
+  - `substreams-tier1-default-max-request-per-use`
+  - `substreams-tier1-default-minimal-request-life-time-second`
+
+* To use thegraph.market as a session plugin, use:
+  `--common-session-plugin=tgm://session.thegraph.market:443?indexer-api-key={your-api-key}` (requires specific indexer API key)
+  see https://github.com/streamingfast/tgm-gateway/tree/develop/session for details on the various flags
+
+* To use simple local session management, use:
+  `--common-session-plugin=local://?max_sessions=30&max_sessions_per_user=3&max_workers_per_user=10&max_workers_per_session=10`
+  see https://github.com/streamingfast/dsession/tree/main/local for details on those flags
+
+* Note: The 'max_sessions' parameter from the `common-session-plugin` is now also used to limit the number of firehose streams.
+
+* If you were using a custom GRPC implementation for `--substreams-tier1-global-worker-pool-address` and `--substreams-tier1-global-request-pool-address` (ex: localhost:9010),
+  simply use this value for the session plugin: `--common-session-plugin=tgm://localhost:9010?plaintext=true`, it is compatible.
+
+##### Stability
+
+* Fix a slow memory leak around metering plugin on tier2
+* Add a maximum execution time for a full tier2 segment. By default, this is 60 minutes. It will fail with `rpc error: code = DeadlineExceeded desc = request active for too long`.
+  It can be configured from the --substreams-tier2-segment-execution-timeout flag
+* Fix `subscription channel at max capacity` error: when the LIVE channel is full (ex: slow module execution or slow client reader), the request will be continued from merged files instead of failing, and gracefully recover if performance is restored.
+* Improve log message for 'request active for a long time', adding stats.
+
+#### CLI
+
+* Improved how `firenear tools --output=protojson` and `firenear tools --output=json` renders `pbbstream.Block` type now printing the underlying chain's specific block.
+
+## [2.3.0]
+
+* Bumped to [firehose-core v1.10.2](https://github.com/streamingfast/firehose-core/releases/v1.10.2).
+
 ## [2.2.2]
 
 * Re-release of 2.2.1, with latest firehose-core
@@ -96,7 +181,7 @@ for instructions to keep up to date.
 
 * make 'compare-blocks' command support one-blocks stores as well as merged-blocks
 
-* The `firecore tools print one-block` is now able to print from a file directly.
+* The `firenear tools print one-block` is now able to print from a file directly.
 
 - Improved logging of requests beginning/end
 - Improved `noop` mode (now sends less data)
@@ -107,14 +192,14 @@ for instructions to keep up to date.
 
 - Added support for `--output=bytes` mode which prints the chain's specific Protobuf block as bytes, the encoding for the bytes string printed is determined by `--bytes-encoding`, uses `hex` by default.
 
-- Added back `-o` as shortand for `--output` in `firecore tools ...` sub-commands.
+- Added back `-o` as shortand for `--output` in `firenear tools ...` sub-commands.
 
 - Add back `grpc.health.v1.Health` service to `firehose` and `substreams-tier1` services (regression in 1.7.0)
 - Give precedence to the tracing header `X-Cloud-Trace-Context` over `Traceparent` to prevent user systems' trace IDs from leaking passed a GCP load-balancer
 
 - Reader Node Manager HTTP API now accepts `POST http://localhost:10011/v1/restart<?sync=true>` to restart the underlying reader node binary sub-process. This is a alias for `/v1/reload`.
 
-- Enhanced `firecore tools print merged-blocks` with various small quality of life improvements:
+- Enhanced `firenear tools print merged-blocks` with various small quality of life improvements:
   - Now accepts a block range instead of a single start block.
   - Passing a single block as the block range will print this single block alone.
   - Block range is now optional, defaulting to run until there is no more files to read.
