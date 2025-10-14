@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
-## [2.4.0]
+## [2.3.0]
 
 * Bumped to [firehose-core v1.11.3](https://github.com/streamingfast/firehose-core/releases/tag/v1.11.3).
 
@@ -84,10 +84,6 @@ People using their own authentication layer will need to consider these changes 
 #### CLI
 
 * Improved how `firenear tools --output=protojson` and `firenear tools --output=json` renders `pbbstream.Block` type now printing the underlying chain's specific block.
-
-## [2.3.0]
-
-* Bumped to [firehose-core v1.10.2](https://github.com/streamingfast/firehose-core/releases/v1.10.2).
 
 ## [2.2.2]
 

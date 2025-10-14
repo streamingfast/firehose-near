@@ -165,23 +165,15 @@ require (
 	github.com/streamingfast/dmetrics v0.0.0-20250711072030-f023e918a175 // indirect
 	github.com/streamingfast/dsession v0.0.0-20250904235523-ffe9952a12d3 // indirect
 	github.com/streamingfast/dtracing v0.0.0-20220305214756-b5c0e8699839 // indirect
-<<<<<<< HEAD
-	github.com/streamingfast/firehose-networks v0.2.1 // indirect
-=======
 	github.com/streamingfast/firehose-networks v0.2.2 // indirect
->>>>>>> 7e923b6 (Reelasing 2.4.0)
 	github.com/streamingfast/opaque v0.0.0-20210811180740-0c01d37ea308 // indirect
 	github.com/streamingfast/payment-gateway v0.0.0-20250910205031-eaa05d2fd1b7 // indirect
 	github.com/streamingfast/pbgo v0.0.6-0.20250114182320-0b43084f4000 // indirect
 	github.com/streamingfast/sf-tracing v0.0.0-20240430173521-888827872b90 // indirect
 	github.com/streamingfast/shutter v1.5.0 // indirect
 	github.com/streamingfast/snapshotter v0.0.0-20230316190750-5bcadfde44d0 // indirect
-<<<<<<< HEAD
-	github.com/streamingfast/substreams v1.16.5 // indirect
-=======
 	github.com/streamingfast/substreams v1.16.6-0.20250924125432-bee8c3d20e4c // indirect
 	github.com/streamingfast/substreams-foundational-store v0.1.1-0.20250912144020-b075d35bf78a // indirect
->>>>>>> 7e923b6 (Reelasing 2.4.0)
 	github.com/streamingfast/worker-pool-protocol v0.0.0-20250826200931-136a043ecece // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
 	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf // indirect
