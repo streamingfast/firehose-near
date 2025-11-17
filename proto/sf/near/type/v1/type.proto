@@ -542,6 +542,7 @@ message Action {
     DeployGlobalContractByAccountIdAction deploy_global_contract_by_account_id = 11;
     UseGlobalContractAction use_global_contract = 12;
     UseGlobalContractByAccountIdAction use_global_contract_by_account_id = 13;
+    DeterministicStateInit deterministic_state_init = 14;
   }
 }
 
@@ -556,6 +557,20 @@ message UseGlobalContractAction {
 }
 message UseGlobalContractByAccountIdAction {
   string account_id = 1;
+}
+
+message DeterministicStateInit {
+    GlobalContractIdentifierView code  = 1;
+    // data key is base64-encoded string
+    map<string, bytes> data = 2;
+    BigInt deposit = 3;
+}
+
+message GlobalContractIdentifierView {
+    oneof identifier {
+      CryptoHash code_hash = 1;
+      string account_id = 2;
+    }
 }
 
 message CreateAccountAction {}

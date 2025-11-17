@@ -4,6 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## [2.4.0]
+
+* Bumped to [firehose-core v1.12.1](https://github.com/streamingfast/firehose-core/releases/tag/v1.12.1).
+* added protobuf definitions for nearcore 2.10.0-rc.1
+
 ## [2.3.0]
 
 * Bumped to [firehose-core v1.11.3](https://github.com/streamingfast/firehose-core/releases/tag/v1.11.3).

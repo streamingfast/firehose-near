@@ -4765,6 +4765,7 @@ type Action struct {
 	//	*Action_DeployGlobalContractByAccountId
 	//	*Action_UseGlobalContract
 	//	*Action_UseGlobalContractByAccountId
+	//	*Action_DeterministicStateInit
 	Action        isAction_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4924,6 +4925,15 @@ func (x *Action) GetUseGlobalContractByAccountId() *UseGlobalContractByAccountId
 	return nil
 }
 
+func (x *Action) GetDeterministicStateInit() *DeterministicStateInit {
+	if x != nil {
+		if x, ok := x.Action.(*Action_DeterministicStateInit); ok {
+			return x.DeterministicStateInit
+		}
+	}
+	return nil
+}
+
 type isAction_Action interface {
 	isAction_Action()
 }
@@ -4980,6 +4990,10 @@ type Action_UseGlobalContractByAccountId struct {
 	UseGlobalContractByAccountId *UseGlobalContractByAccountIdAction `protobuf:"bytes,13,opt,name=use_global_contract_by_account_id,json=useGlobalContractByAccountId,proto3,oneof"`
 }
 
+type Action_DeterministicStateInit struct {
+	DeterministicStateInit *DeterministicStateInit `protobuf:"bytes,14,opt,name=deterministic_state_init,json=deterministicStateInit,proto3,oneof"`
+}
+
 func (*Action_CreateAccount) isAction_Action() {}
 
 func (*Action_DeployContract) isAction_Action() {}
@@ -5005,6 +5019,8 @@ func (*Action_DeployGlobalContractByAccountId) isAction_Action() {}
 func (*Action_UseGlobalContract) isAction_Action() {}
 
 func (*Action_UseGlobalContractByAccountId) isAction_Action() {}
+
+func (*Action_DeterministicStateInit) isAction_Action() {}
 
 type DeployGlobalContractAction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -5182,6 +5198,149 @@ func (x *UseGlobalContractByAccountIdAction) GetAccountId() string {
 	return ""
 }
 
+type DeterministicStateInit struct {
+	state protoimpl.MessageState        `protogen:"open.v1"`
+	Code  *GlobalContractIdentifierView `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	// data key is base64-encoded string
+	Data          map[string][]byte `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Deposit       *BigInt           `protobuf:"bytes,3,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeterministicStateInit) Reset() {
+	*x = DeterministicStateInit{}
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeterministicStateInit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeterministicStateInit) ProtoMessage() {}
+
+func (x *DeterministicStateInit) ProtoReflect() protoreflect.Message {
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeterministicStateInit.ProtoReflect.Descriptor instead.
+func (*DeterministicStateInit) Descriptor() ([]byte, []int) {
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{63}
+}
+
+func (x *DeterministicStateInit) GetCode() *GlobalContractIdentifierView {
+	if x != nil {
+		return x.Code
+	}
+	return nil
+}
+
+func (x *DeterministicStateInit) GetData() map[string][]byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *DeterministicStateInit) GetDeposit() *BigInt {
+	if x != nil {
+		return x.Deposit
+	}
+	return nil
+}
+
+type GlobalContractIdentifierView struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Identifier:
+	//
+	//	*GlobalContractIdentifierView_CodeHash
+	//	*GlobalContractIdentifierView_AccountId
+	Identifier    isGlobalContractIdentifierView_Identifier `protobuf_oneof:"identifier"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GlobalContractIdentifierView) Reset() {
+	*x = GlobalContractIdentifierView{}
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[64]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GlobalContractIdentifierView) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GlobalContractIdentifierView) ProtoMessage() {}
+
+func (x *GlobalContractIdentifierView) ProtoReflect() protoreflect.Message {
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[64]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GlobalContractIdentifierView.ProtoReflect.Descriptor instead.
+func (*GlobalContractIdentifierView) Descriptor() ([]byte, []int) {
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{64}
+}
+
+func (x *GlobalContractIdentifierView) GetIdentifier() isGlobalContractIdentifierView_Identifier {
+	if x != nil {
+		return x.Identifier
+	}
+	return nil
+}
+
+func (x *GlobalContractIdentifierView) GetCodeHash() *CryptoHash {
+	if x != nil {
+		if x, ok := x.Identifier.(*GlobalContractIdentifierView_CodeHash); ok {
+			return x.CodeHash
+		}
+	}
+	return nil
+}
+
+func (x *GlobalContractIdentifierView) GetAccountId() string {
+	if x != nil {
+		if x, ok := x.Identifier.(*GlobalContractIdentifierView_AccountId); ok {
+			return x.AccountId
+		}
+	}
+	return ""
+}
+
+type isGlobalContractIdentifierView_Identifier interface {
+	isGlobalContractIdentifierView_Identifier()
+}
+
+type GlobalContractIdentifierView_CodeHash struct {
+	CodeHash *CryptoHash `protobuf:"bytes,1,opt,name=code_hash,json=codeHash,proto3,oneof"`
+}
+
+type GlobalContractIdentifierView_AccountId struct {
+	AccountId string `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3,oneof"`
+}
+
+func (*GlobalContractIdentifierView_CodeHash) isGlobalContractIdentifierView_Identifier() {}
+
+func (*GlobalContractIdentifierView_AccountId) isGlobalContractIdentifierView_Identifier() {}
+
 type CreateAccountAction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -5190,7 +5349,7 @@ type CreateAccountAction struct {
 
 func (x *CreateAccountAction) Reset() {
 	*x = CreateAccountAction{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[63]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5202,7 +5361,7 @@ func (x *CreateAccountAction) String() string {
 func (*CreateAccountAction) ProtoMessage() {}
 
 func (x *CreateAccountAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[63]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5215,7 +5374,7 @@ func (x *CreateAccountAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAccountAction.ProtoReflect.Descriptor instead.
 func (*CreateAccountAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{63}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{65}
 }
 
 type DeployContractAction struct {
@@ -5227,7 +5386,7 @@ type DeployContractAction struct {
 
 func (x *DeployContractAction) Reset() {
 	*x = DeployContractAction{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[64]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5239,7 +5398,7 @@ func (x *DeployContractAction) String() string {
 func (*DeployContractAction) ProtoMessage() {}
 
 func (x *DeployContractAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[64]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5252,7 +5411,7 @@ func (x *DeployContractAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeployContractAction.ProtoReflect.Descriptor instead.
 func (*DeployContractAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{64}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *DeployContractAction) GetCode() []byte {
@@ -5274,7 +5433,7 @@ type FunctionCallAction struct {
 
 func (x *FunctionCallAction) Reset() {
 	*x = FunctionCallAction{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[65]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5286,7 +5445,7 @@ func (x *FunctionCallAction) String() string {
 func (*FunctionCallAction) ProtoMessage() {}
 
 func (x *FunctionCallAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[65]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5299,7 +5458,7 @@ func (x *FunctionCallAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FunctionCallAction.ProtoReflect.Descriptor instead.
 func (*FunctionCallAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{65}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *FunctionCallAction) GetMethodName() string {
@@ -5339,7 +5498,7 @@ type TransferAction struct {
 
 func (x *TransferAction) Reset() {
 	*x = TransferAction{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[66]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5351,7 +5510,7 @@ func (x *TransferAction) String() string {
 func (*TransferAction) ProtoMessage() {}
 
 func (x *TransferAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[66]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5364,7 +5523,7 @@ func (x *TransferAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferAction.ProtoReflect.Descriptor instead.
 func (*TransferAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{66}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *TransferAction) GetDeposit() *BigInt {
@@ -5384,7 +5543,7 @@ type StakeAction struct {
 
 func (x *StakeAction) Reset() {
 	*x = StakeAction{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[67]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5396,7 +5555,7 @@ func (x *StakeAction) String() string {
 func (*StakeAction) ProtoMessage() {}
 
 func (x *StakeAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[67]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5409,7 +5568,7 @@ func (x *StakeAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StakeAction.ProtoReflect.Descriptor instead.
 func (*StakeAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{67}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *StakeAction) GetStake() *BigInt {
@@ -5436,7 +5595,7 @@ type AddKeyAction struct {
 
 func (x *AddKeyAction) Reset() {
 	*x = AddKeyAction{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[68]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5448,7 +5607,7 @@ func (x *AddKeyAction) String() string {
 func (*AddKeyAction) ProtoMessage() {}
 
 func (x *AddKeyAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[68]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5461,7 +5620,7 @@ func (x *AddKeyAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddKeyAction.ProtoReflect.Descriptor instead.
 func (*AddKeyAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{68}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *AddKeyAction) GetPublicKey() *PublicKey {
@@ -5487,7 +5646,7 @@ type DeleteKeyAction struct {
 
 func (x *DeleteKeyAction) Reset() {
 	*x = DeleteKeyAction{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[69]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5499,7 +5658,7 @@ func (x *DeleteKeyAction) String() string {
 func (*DeleteKeyAction) ProtoMessage() {}
 
 func (x *DeleteKeyAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[69]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5512,7 +5671,7 @@ func (x *DeleteKeyAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteKeyAction.ProtoReflect.Descriptor instead.
 func (*DeleteKeyAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{69}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *DeleteKeyAction) GetPublicKey() *PublicKey {
@@ -5531,7 +5690,7 @@ type DeleteAccountAction struct {
 
 func (x *DeleteAccountAction) Reset() {
 	*x = DeleteAccountAction{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[70]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5543,7 +5702,7 @@ func (x *DeleteAccountAction) String() string {
 func (*DeleteAccountAction) ProtoMessage() {}
 
 func (x *DeleteAccountAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[70]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5556,7 +5715,7 @@ func (x *DeleteAccountAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccountAction.ProtoReflect.Descriptor instead.
 func (*DeleteAccountAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{70}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *DeleteAccountAction) GetBeneficiaryId() string {
@@ -5576,7 +5735,7 @@ type SignedDelegateAction struct {
 
 func (x *SignedDelegateAction) Reset() {
 	*x = SignedDelegateAction{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[71]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5588,7 +5747,7 @@ func (x *SignedDelegateAction) String() string {
 func (*SignedDelegateAction) ProtoMessage() {}
 
 func (x *SignedDelegateAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[71]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5601,7 +5760,7 @@ func (x *SignedDelegateAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignedDelegateAction.ProtoReflect.Descriptor instead.
 func (*SignedDelegateAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{71}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *SignedDelegateAction) GetSignature() *Signature {
@@ -5632,7 +5791,7 @@ type DelegateAction struct {
 
 func (x *DelegateAction) Reset() {
 	*x = DelegateAction{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[72]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5644,7 +5803,7 @@ func (x *DelegateAction) String() string {
 func (*DelegateAction) ProtoMessage() {}
 
 func (x *DelegateAction) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[72]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5657,7 +5816,7 @@ func (x *DelegateAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DelegateAction.ProtoReflect.Descriptor instead.
 func (*DelegateAction) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{72}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *DelegateAction) GetSenderId() string {
@@ -5712,7 +5871,7 @@ type AccessKey struct {
 
 func (x *AccessKey) Reset() {
 	*x = AccessKey{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[73]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5724,7 +5883,7 @@ func (x *AccessKey) String() string {
 func (*AccessKey) ProtoMessage() {}
 
 func (x *AccessKey) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[73]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5737,7 +5896,7 @@ func (x *AccessKey) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessKey.ProtoReflect.Descriptor instead.
 func (*AccessKey) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{73}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *AccessKey) GetNonce() uint64 {
@@ -5767,7 +5926,7 @@ type AccessKeyPermission struct {
 
 func (x *AccessKeyPermission) Reset() {
 	*x = AccessKeyPermission{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[74]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5779,7 +5938,7 @@ func (x *AccessKeyPermission) String() string {
 func (*AccessKeyPermission) ProtoMessage() {}
 
 func (x *AccessKeyPermission) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[74]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5792,7 +5951,7 @@ func (x *AccessKeyPermission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessKeyPermission.ProtoReflect.Descriptor instead.
 func (*AccessKeyPermission) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{74}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *AccessKeyPermission) GetPermission() isAccessKeyPermission_Permission {
@@ -5847,7 +6006,7 @@ type FunctionCallPermission struct {
 
 func (x *FunctionCallPermission) Reset() {
 	*x = FunctionCallPermission{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[75]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5859,7 +6018,7 @@ func (x *FunctionCallPermission) String() string {
 func (*FunctionCallPermission) ProtoMessage() {}
 
 func (x *FunctionCallPermission) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[75]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5872,7 +6031,7 @@ func (x *FunctionCallPermission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FunctionCallPermission.ProtoReflect.Descriptor instead.
 func (*FunctionCallPermission) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{75}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *FunctionCallPermission) GetAllowance() *BigInt {
@@ -5904,7 +6063,7 @@ type FullAccessPermission struct {
 
 func (x *FullAccessPermission) Reset() {
 	*x = FullAccessPermission{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[76]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5916,7 +6075,7 @@ func (x *FullAccessPermission) String() string {
 func (*FullAccessPermission) ProtoMessage() {}
 
 func (x *FullAccessPermission) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[76]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5929,7 +6088,7 @@ func (x *FullAccessPermission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FullAccessPermission.ProtoReflect.Descriptor instead.
 func (*FullAccessPermission) Descriptor() ([]byte, []int) {
-	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{76}
+	return file_sf_near_type_v1_type_proto_rawDescGZIP(), []int{78}
 }
 
 type StateChangeCause_NotWritableToDisk struct {
@@ -5940,7 +6099,7 @@ type StateChangeCause_NotWritableToDisk struct {
 
 func (x *StateChangeCause_NotWritableToDisk) Reset() {
 	*x = StateChangeCause_NotWritableToDisk{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[77]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5952,7 +6111,7 @@ func (x *StateChangeCause_NotWritableToDisk) String() string {
 func (*StateChangeCause_NotWritableToDisk) ProtoMessage() {}
 
 func (x *StateChangeCause_NotWritableToDisk) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[77]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5976,7 +6135,7 @@ type StateChangeCause_InitialState struct {
 
 func (x *StateChangeCause_InitialState) Reset() {
 	*x = StateChangeCause_InitialState{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[78]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5988,7 +6147,7 @@ func (x *StateChangeCause_InitialState) String() string {
 func (*StateChangeCause_InitialState) ProtoMessage() {}
 
 func (x *StateChangeCause_InitialState) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[78]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6013,7 +6172,7 @@ type StateChangeCause_TransactionProcessing struct {
 
 func (x *StateChangeCause_TransactionProcessing) Reset() {
 	*x = StateChangeCause_TransactionProcessing{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[79]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6025,7 +6184,7 @@ func (x *StateChangeCause_TransactionProcessing) String() string {
 func (*StateChangeCause_TransactionProcessing) ProtoMessage() {}
 
 func (x *StateChangeCause_TransactionProcessing) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[79]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6057,7 +6216,7 @@ type StateChangeCause_ActionReceiptProcessingStarted struct {
 
 func (x *StateChangeCause_ActionReceiptProcessingStarted) Reset() {
 	*x = StateChangeCause_ActionReceiptProcessingStarted{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[80]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6069,7 +6228,7 @@ func (x *StateChangeCause_ActionReceiptProcessingStarted) String() string {
 func (*StateChangeCause_ActionReceiptProcessingStarted) ProtoMessage() {}
 
 func (x *StateChangeCause_ActionReceiptProcessingStarted) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[80]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6101,7 +6260,7 @@ type StateChangeCause_ActionReceiptGasReward struct {
 
 func (x *StateChangeCause_ActionReceiptGasReward) Reset() {
 	*x = StateChangeCause_ActionReceiptGasReward{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[81]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6113,7 +6272,7 @@ func (x *StateChangeCause_ActionReceiptGasReward) String() string {
 func (*StateChangeCause_ActionReceiptGasReward) ProtoMessage() {}
 
 func (x *StateChangeCause_ActionReceiptGasReward) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[81]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6145,7 +6304,7 @@ type StateChangeCause_ReceiptProcessing struct {
 
 func (x *StateChangeCause_ReceiptProcessing) Reset() {
 	*x = StateChangeCause_ReceiptProcessing{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[82]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6157,7 +6316,7 @@ func (x *StateChangeCause_ReceiptProcessing) String() string {
 func (*StateChangeCause_ReceiptProcessing) ProtoMessage() {}
 
 func (x *StateChangeCause_ReceiptProcessing) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[82]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6189,7 +6348,7 @@ type StateChangeCause_PostponedReceipt struct {
 
 func (x *StateChangeCause_PostponedReceipt) Reset() {
 	*x = StateChangeCause_PostponedReceipt{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[83]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6201,7 +6360,7 @@ func (x *StateChangeCause_PostponedReceipt) String() string {
 func (*StateChangeCause_PostponedReceipt) ProtoMessage() {}
 
 func (x *StateChangeCause_PostponedReceipt) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[83]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6232,7 +6391,7 @@ type StateChangeCause_UpdatedDelayedReceipts struct {
 
 func (x *StateChangeCause_UpdatedDelayedReceipts) Reset() {
 	*x = StateChangeCause_UpdatedDelayedReceipts{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[84]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6244,7 +6403,7 @@ func (x *StateChangeCause_UpdatedDelayedReceipts) String() string {
 func (*StateChangeCause_UpdatedDelayedReceipts) ProtoMessage() {}
 
 func (x *StateChangeCause_UpdatedDelayedReceipts) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[84]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6268,7 +6427,7 @@ type StateChangeCause_ValidatorAccountsUpdate struct {
 
 func (x *StateChangeCause_ValidatorAccountsUpdate) Reset() {
 	*x = StateChangeCause_ValidatorAccountsUpdate{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[85]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6280,7 +6439,7 @@ func (x *StateChangeCause_ValidatorAccountsUpdate) String() string {
 func (*StateChangeCause_ValidatorAccountsUpdate) ProtoMessage() {}
 
 func (x *StateChangeCause_ValidatorAccountsUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[85]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6304,7 +6463,7 @@ type StateChangeCause_Migration struct {
 
 func (x *StateChangeCause_Migration) Reset() {
 	*x = StateChangeCause_Migration{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[86]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6316,7 +6475,7 @@ func (x *StateChangeCause_Migration) String() string {
 func (*StateChangeCause_Migration) ProtoMessage() {}
 
 func (x *StateChangeCause_Migration) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[86]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6342,7 +6501,7 @@ type StateChangeValue_AccountUpdate struct {
 
 func (x *StateChangeValue_AccountUpdate) Reset() {
 	*x = StateChangeValue_AccountUpdate{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[87]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6354,7 +6513,7 @@ func (x *StateChangeValue_AccountUpdate) String() string {
 func (*StateChangeValue_AccountUpdate) ProtoMessage() {}
 
 func (x *StateChangeValue_AccountUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[87]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6393,7 +6552,7 @@ type StateChangeValue_AccountDeletion struct {
 
 func (x *StateChangeValue_AccountDeletion) Reset() {
 	*x = StateChangeValue_AccountDeletion{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[88]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6405,7 +6564,7 @@ func (x *StateChangeValue_AccountDeletion) String() string {
 func (*StateChangeValue_AccountDeletion) ProtoMessage() {}
 
 func (x *StateChangeValue_AccountDeletion) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[88]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6439,7 +6598,7 @@ type StateChangeValue_AccessKeyUpdate struct {
 
 func (x *StateChangeValue_AccessKeyUpdate) Reset() {
 	*x = StateChangeValue_AccessKeyUpdate{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[89]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6451,7 +6610,7 @@ func (x *StateChangeValue_AccessKeyUpdate) String() string {
 func (*StateChangeValue_AccessKeyUpdate) ProtoMessage() {}
 
 func (x *StateChangeValue_AccessKeyUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[89]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6498,7 +6657,7 @@ type StateChangeValue_AccessKeyDeletion struct {
 
 func (x *StateChangeValue_AccessKeyDeletion) Reset() {
 	*x = StateChangeValue_AccessKeyDeletion{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[90]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6510,7 +6669,7 @@ func (x *StateChangeValue_AccessKeyDeletion) String() string {
 func (*StateChangeValue_AccessKeyDeletion) ProtoMessage() {}
 
 func (x *StateChangeValue_AccessKeyDeletion) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[90]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6551,7 +6710,7 @@ type StateChangeValue_DataUpdate struct {
 
 func (x *StateChangeValue_DataUpdate) Reset() {
 	*x = StateChangeValue_DataUpdate{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[91]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6563,7 +6722,7 @@ func (x *StateChangeValue_DataUpdate) String() string {
 func (*StateChangeValue_DataUpdate) ProtoMessage() {}
 
 func (x *StateChangeValue_DataUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[91]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6610,7 +6769,7 @@ type StateChangeValue_DataDeletion struct {
 
 func (x *StateChangeValue_DataDeletion) Reset() {
 	*x = StateChangeValue_DataDeletion{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[92]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6622,7 +6781,7 @@ func (x *StateChangeValue_DataDeletion) String() string {
 func (*StateChangeValue_DataDeletion) ProtoMessage() {}
 
 func (x *StateChangeValue_DataDeletion) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[92]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6662,7 +6821,7 @@ type StateChangeValue_ContractCodeUpdate struct {
 
 func (x *StateChangeValue_ContractCodeUpdate) Reset() {
 	*x = StateChangeValue_ContractCodeUpdate{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[93]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6674,7 +6833,7 @@ func (x *StateChangeValue_ContractCodeUpdate) String() string {
 func (*StateChangeValue_ContractCodeUpdate) ProtoMessage() {}
 
 func (x *StateChangeValue_ContractCodeUpdate) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[93]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6713,7 +6872,7 @@ type StateChangeValue_ContractCodeDeletion struct {
 
 func (x *StateChangeValue_ContractCodeDeletion) Reset() {
 	*x = StateChangeValue_ContractCodeDeletion{}
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[94]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6725,7 +6884,7 @@ func (x *StateChangeValue_ContractCodeDeletion) String() string {
 func (*StateChangeValue_ContractCodeDeletion) ProtoMessage() {}
 
 func (x *StateChangeValue_ContractCodeDeletion) ProtoReflect() protoreflect.Message {
-	mi := &file_sf_near_type_v1_type_proto_msgTypes[94]
+	mi := &file_sf_near_type_v1_type_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7128,7 +7287,7 @@ const file_sf_near_type_v1_type_proto_rawDesc = "" +
 	"\x04path\x18\x01 \x03(\v2\x1f.sf.near.type.v1.MerklePathItemR\x04path\"{\n" +
 	"\x0eMerklePathItem\x12/\n" +
 	"\x04hash\x18\x01 \x01(\v2\x1b.sf.near.type.v1.CryptoHashR\x04hash\x128\n" +
-	"\tdirection\x18\x02 \x01(\x0e2\x1a.sf.near.type.v1.DirectionR\tdirection\"\xd0\b\n" +
+	"\tdirection\x18\x02 \x01(\x0e2\x1a.sf.near.type.v1.DirectionR\tdirection\"\xb5\t\n" +
 	"\x06Action\x12M\n" +
 	"\x0ecreate_account\x18\x01 \x01(\v2$.sf.near.type.v1.CreateAccountActionH\x00R\rcreateAccount\x12P\n" +
 	"\x0fdeploy_contract\x18\x02 \x01(\v2%.sf.near.type.v1.DeployContractActionH\x00R\x0edeployContract\x12J\n" +
@@ -7144,7 +7303,8 @@ const file_sf_near_type_v1_type_proto_rawDesc = "" +
 	" \x01(\v2+.sf.near.type.v1.DeployGlobalContractActionH\x00R\x14deployGlobalContract\x12\x87\x01\n" +
 	"$deploy_global_contract_by_account_id\x18\v \x01(\v26.sf.near.type.v1.DeployGlobalContractByAccountIdActionH\x00R\x1fdeployGlobalContractByAccountId\x12Z\n" +
 	"\x13use_global_contract\x18\f \x01(\v2(.sf.near.type.v1.UseGlobalContractActionH\x00R\x11useGlobalContract\x12~\n" +
-	"!use_global_contract_by_account_id\x18\r \x01(\v23.sf.near.type.v1.UseGlobalContractByAccountIdActionH\x00R\x1cuseGlobalContractByAccountIdB\b\n" +
+	"!use_global_contract_by_account_id\x18\r \x01(\v23.sf.near.type.v1.UseGlobalContractByAccountIdActionH\x00R\x1cuseGlobalContractByAccountId\x12c\n" +
+	"\x18deterministic_state_init\x18\x0e \x01(\v2'.sf.near.type.v1.DeterministicStateInitH\x00R\x16deterministicStateInitB\b\n" +
 	"\x06action\"0\n" +
 	"\x1aDeployGlobalContractAction\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\fR\x04code\";\n" +
@@ -7154,7 +7314,20 @@ const file_sf_near_type_v1_type_proto_rawDesc = "" +
 	"\tcode_hash\x18\x01 \x01(\v2\x1b.sf.near.type.v1.CryptoHashR\bcodeHash\"C\n" +
 	"\"UseGlobalContractByAccountIdAction\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tR\taccountId\"\x15\n" +
+	"account_id\x18\x01 \x01(\tR\taccountId\"\x8e\x02\n" +
+	"\x16DeterministicStateInit\x12A\n" +
+	"\x04code\x18\x01 \x01(\v2-.sf.near.type.v1.GlobalContractIdentifierViewR\x04code\x12E\n" +
+	"\x04data\x18\x02 \x03(\v21.sf.near.type.v1.DeterministicStateInit.DataEntryR\x04data\x121\n" +
+	"\adeposit\x18\x03 \x01(\v2\x17.sf.near.type.v1.BigIntR\adeposit\x1a7\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\fR\x05value:\x028\x01\"\x89\x01\n" +
+	"\x1cGlobalContractIdentifierView\x12:\n" +
+	"\tcode_hash\x18\x01 \x01(\v2\x1b.sf.near.type.v1.CryptoHashH\x00R\bcodeHash\x12\x1f\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tH\x00R\taccountIdB\f\n" +
+	"\n" +
+	"identifier\"\x15\n" +
 	"\x13CreateAccountAction\"*\n" +
 	"\x14DeployContractAction\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\fR\x04code\"\x8e\x01\n" +
@@ -7271,7 +7444,7 @@ func file_sf_near_type_v1_type_proto_rawDescGZIP() []byte {
 }
 
 var file_sf_near_type_v1_type_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_sf_near_type_v1_type_proto_msgTypes = make([]protoimpl.MessageInfo, 95)
+var file_sf_near_type_v1_type_proto_msgTypes = make([]protoimpl.MessageInfo, 98)
 var file_sf_near_type_v1_type_proto_goTypes = []any{
 	(CurveKind)(0),                                          // 0: sf.near.type.v1.CurveKind
 	(ExecutionMetadata)(0),                                  // 1: sf.near.type.v1.ExecutionMetadata
@@ -7342,38 +7515,41 @@ var file_sf_near_type_v1_type_proto_goTypes = []any{
 	(*DeployGlobalContractByAccountIdAction)(nil),           // 66: sf.near.type.v1.DeployGlobalContractByAccountIdAction
 	(*UseGlobalContractAction)(nil),                         // 67: sf.near.type.v1.UseGlobalContractAction
 	(*UseGlobalContractByAccountIdAction)(nil),              // 68: sf.near.type.v1.UseGlobalContractByAccountIdAction
-	(*CreateAccountAction)(nil),                             // 69: sf.near.type.v1.CreateAccountAction
-	(*DeployContractAction)(nil),                            // 70: sf.near.type.v1.DeployContractAction
-	(*FunctionCallAction)(nil),                              // 71: sf.near.type.v1.FunctionCallAction
-	(*TransferAction)(nil),                                  // 72: sf.near.type.v1.TransferAction
-	(*StakeAction)(nil),                                     // 73: sf.near.type.v1.StakeAction
-	(*AddKeyAction)(nil),                                    // 74: sf.near.type.v1.AddKeyAction
-	(*DeleteKeyAction)(nil),                                 // 75: sf.near.type.v1.DeleteKeyAction
-	(*DeleteAccountAction)(nil),                             // 76: sf.near.type.v1.DeleteAccountAction
-	(*SignedDelegateAction)(nil),                            // 77: sf.near.type.v1.SignedDelegateAction
-	(*DelegateAction)(nil),                                  // 78: sf.near.type.v1.DelegateAction
-	(*AccessKey)(nil),                                       // 79: sf.near.type.v1.AccessKey
-	(*AccessKeyPermission)(nil),                             // 80: sf.near.type.v1.AccessKeyPermission
-	(*FunctionCallPermission)(nil),                          // 81: sf.near.type.v1.FunctionCallPermission
-	(*FullAccessPermission)(nil),                            // 82: sf.near.type.v1.FullAccessPermission
-	(*StateChangeCause_NotWritableToDisk)(nil),              // 83: sf.near.type.v1.StateChangeCause.NotWritableToDisk
-	(*StateChangeCause_InitialState)(nil),                   // 84: sf.near.type.v1.StateChangeCause.InitialState
-	(*StateChangeCause_TransactionProcessing)(nil),          // 85: sf.near.type.v1.StateChangeCause.TransactionProcessing
-	(*StateChangeCause_ActionReceiptProcessingStarted)(nil), // 86: sf.near.type.v1.StateChangeCause.ActionReceiptProcessingStarted
-	(*StateChangeCause_ActionReceiptGasReward)(nil),         // 87: sf.near.type.v1.StateChangeCause.ActionReceiptGasReward
-	(*StateChangeCause_ReceiptProcessing)(nil),              // 88: sf.near.type.v1.StateChangeCause.ReceiptProcessing
-	(*StateChangeCause_PostponedReceipt)(nil),               // 89: sf.near.type.v1.StateChangeCause.PostponedReceipt
-	(*StateChangeCause_UpdatedDelayedReceipts)(nil),         // 90: sf.near.type.v1.StateChangeCause.UpdatedDelayedReceipts
-	(*StateChangeCause_ValidatorAccountsUpdate)(nil),        // 91: sf.near.type.v1.StateChangeCause.ValidatorAccountsUpdate
-	(*StateChangeCause_Migration)(nil),                      // 92: sf.near.type.v1.StateChangeCause.Migration
-	(*StateChangeValue_AccountUpdate)(nil),                  // 93: sf.near.type.v1.StateChangeValue.AccountUpdate
-	(*StateChangeValue_AccountDeletion)(nil),                // 94: sf.near.type.v1.StateChangeValue.AccountDeletion
-	(*StateChangeValue_AccessKeyUpdate)(nil),                // 95: sf.near.type.v1.StateChangeValue.AccessKeyUpdate
-	(*StateChangeValue_AccessKeyDeletion)(nil),              // 96: sf.near.type.v1.StateChangeValue.AccessKeyDeletion
-	(*StateChangeValue_DataUpdate)(nil),                     // 97: sf.near.type.v1.StateChangeValue.DataUpdate
-	(*StateChangeValue_DataDeletion)(nil),                   // 98: sf.near.type.v1.StateChangeValue.DataDeletion
-	(*StateChangeValue_ContractCodeUpdate)(nil),             // 99: sf.near.type.v1.StateChangeValue.ContractCodeUpdate
-	(*StateChangeValue_ContractCodeDeletion)(nil),           // 100: sf.near.type.v1.StateChangeValue.ContractCodeDeletion
+	(*DeterministicStateInit)(nil),                          // 69: sf.near.type.v1.DeterministicStateInit
+	(*GlobalContractIdentifierView)(nil),                    // 70: sf.near.type.v1.GlobalContractIdentifierView
+	(*CreateAccountAction)(nil),                             // 71: sf.near.type.v1.CreateAccountAction
+	(*DeployContractAction)(nil),                            // 72: sf.near.type.v1.DeployContractAction
+	(*FunctionCallAction)(nil),                              // 73: sf.near.type.v1.FunctionCallAction
+	(*TransferAction)(nil),                                  // 74: sf.near.type.v1.TransferAction
+	(*StakeAction)(nil),                                     // 75: sf.near.type.v1.StakeAction
+	(*AddKeyAction)(nil),                                    // 76: sf.near.type.v1.AddKeyAction
+	(*DeleteKeyAction)(nil),                                 // 77: sf.near.type.v1.DeleteKeyAction
+	(*DeleteAccountAction)(nil),                             // 78: sf.near.type.v1.DeleteAccountAction
+	(*SignedDelegateAction)(nil),                            // 79: sf.near.type.v1.SignedDelegateAction
+	(*DelegateAction)(nil),                                  // 80: sf.near.type.v1.DelegateAction
+	(*AccessKey)(nil),                                       // 81: sf.near.type.v1.AccessKey
+	(*AccessKeyPermission)(nil),                             // 82: sf.near.type.v1.AccessKeyPermission
+	(*FunctionCallPermission)(nil),                          // 83: sf.near.type.v1.FunctionCallPermission
+	(*FullAccessPermission)(nil),                            // 84: sf.near.type.v1.FullAccessPermission
+	(*StateChangeCause_NotWritableToDisk)(nil),              // 85: sf.near.type.v1.StateChangeCause.NotWritableToDisk
+	(*StateChangeCause_InitialState)(nil),                   // 86: sf.near.type.v1.StateChangeCause.InitialState
+	(*StateChangeCause_TransactionProcessing)(nil),          // 87: sf.near.type.v1.StateChangeCause.TransactionProcessing
+	(*StateChangeCause_ActionReceiptProcessingStarted)(nil), // 88: sf.near.type.v1.StateChangeCause.ActionReceiptProcessingStarted
+	(*StateChangeCause_ActionReceiptGasReward)(nil),         // 89: sf.near.type.v1.StateChangeCause.ActionReceiptGasReward
+	(*StateChangeCause_ReceiptProcessing)(nil),              // 90: sf.near.type.v1.StateChangeCause.ReceiptProcessing
+	(*StateChangeCause_PostponedReceipt)(nil),               // 91: sf.near.type.v1.StateChangeCause.PostponedReceipt
+	(*StateChangeCause_UpdatedDelayedReceipts)(nil),         // 92: sf.near.type.v1.StateChangeCause.UpdatedDelayedReceipts
+	(*StateChangeCause_ValidatorAccountsUpdate)(nil),        // 93: sf.near.type.v1.StateChangeCause.ValidatorAccountsUpdate
+	(*StateChangeCause_Migration)(nil),                      // 94: sf.near.type.v1.StateChangeCause.Migration
+	(*StateChangeValue_AccountUpdate)(nil),                  // 95: sf.near.type.v1.StateChangeValue.AccountUpdate
+	(*StateChangeValue_AccountDeletion)(nil),                // 96: sf.near.type.v1.StateChangeValue.AccountDeletion
+	(*StateChangeValue_AccessKeyUpdate)(nil),                // 97: sf.near.type.v1.StateChangeValue.AccessKeyUpdate
+	(*StateChangeValue_AccessKeyDeletion)(nil),              // 98: sf.near.type.v1.StateChangeValue.AccessKeyDeletion
+	(*StateChangeValue_DataUpdate)(nil),                     // 99: sf.near.type.v1.StateChangeValue.DataUpdate
+	(*StateChangeValue_DataDeletion)(nil),                   // 100: sf.near.type.v1.StateChangeValue.DataDeletion
+	(*StateChangeValue_ContractCodeUpdate)(nil),             // 101: sf.near.type.v1.StateChangeValue.ContractCodeUpdate
+	(*StateChangeValue_ContractCodeDeletion)(nil),           // 102: sf.near.type.v1.StateChangeValue.ContractCodeDeletion
+	nil, // 103: sf.near.type.v1.DeterministicStateInit.DataEntry
 }
 var file_sf_near_type_v1_type_proto_depIdxs = []int32{
 	12,  // 0: sf.near.type.v1.Block.header:type_name -> sf.near.type.v1.BlockHeader
@@ -7383,24 +7559,24 @@ var file_sf_near_type_v1_type_proto_depIdxs = []int32{
 	12,  // 4: sf.near.type.v1.HeaderOnlyBlock.header:type_name -> sf.near.type.v1.BlockHeader
 	10,  // 5: sf.near.type.v1.StateChangeWithCause.value:type_name -> sf.near.type.v1.StateChangeValue
 	9,   // 6: sf.near.type.v1.StateChangeWithCause.cause:type_name -> sf.near.type.v1.StateChangeCause
-	83,  // 7: sf.near.type.v1.StateChangeCause.not_writable_to_disk:type_name -> sf.near.type.v1.StateChangeCause.NotWritableToDisk
-	84,  // 8: sf.near.type.v1.StateChangeCause.initial_state:type_name -> sf.near.type.v1.StateChangeCause.InitialState
-	85,  // 9: sf.near.type.v1.StateChangeCause.transaction_processing:type_name -> sf.near.type.v1.StateChangeCause.TransactionProcessing
-	86,  // 10: sf.near.type.v1.StateChangeCause.action_receipt_processing_started:type_name -> sf.near.type.v1.StateChangeCause.ActionReceiptProcessingStarted
-	87,  // 11: sf.near.type.v1.StateChangeCause.action_receipt_gas_reward:type_name -> sf.near.type.v1.StateChangeCause.ActionReceiptGasReward
-	88,  // 12: sf.near.type.v1.StateChangeCause.receipt_processing:type_name -> sf.near.type.v1.StateChangeCause.ReceiptProcessing
-	89,  // 13: sf.near.type.v1.StateChangeCause.postponed_receipt:type_name -> sf.near.type.v1.StateChangeCause.PostponedReceipt
-	90,  // 14: sf.near.type.v1.StateChangeCause.updated_delayed_receipts:type_name -> sf.near.type.v1.StateChangeCause.UpdatedDelayedReceipts
-	91,  // 15: sf.near.type.v1.StateChangeCause.validator_accounts_update:type_name -> sf.near.type.v1.StateChangeCause.ValidatorAccountsUpdate
-	92,  // 16: sf.near.type.v1.StateChangeCause.migration:type_name -> sf.near.type.v1.StateChangeCause.Migration
-	93,  // 17: sf.near.type.v1.StateChangeValue.account_update:type_name -> sf.near.type.v1.StateChangeValue.AccountUpdate
-	94,  // 18: sf.near.type.v1.StateChangeValue.account_deletion:type_name -> sf.near.type.v1.StateChangeValue.AccountDeletion
-	95,  // 19: sf.near.type.v1.StateChangeValue.access_key_update:type_name -> sf.near.type.v1.StateChangeValue.AccessKeyUpdate
-	96,  // 20: sf.near.type.v1.StateChangeValue.access_key_deletion:type_name -> sf.near.type.v1.StateChangeValue.AccessKeyDeletion
-	97,  // 21: sf.near.type.v1.StateChangeValue.data_update:type_name -> sf.near.type.v1.StateChangeValue.DataUpdate
-	98,  // 22: sf.near.type.v1.StateChangeValue.data_deletion:type_name -> sf.near.type.v1.StateChangeValue.DataDeletion
-	99,  // 23: sf.near.type.v1.StateChangeValue.contract_code_update:type_name -> sf.near.type.v1.StateChangeValue.ContractCodeUpdate
-	100, // 24: sf.near.type.v1.StateChangeValue.contract_deletion:type_name -> sf.near.type.v1.StateChangeValue.ContractCodeDeletion
+	85,  // 7: sf.near.type.v1.StateChangeCause.not_writable_to_disk:type_name -> sf.near.type.v1.StateChangeCause.NotWritableToDisk
+	86,  // 8: sf.near.type.v1.StateChangeCause.initial_state:type_name -> sf.near.type.v1.StateChangeCause.InitialState
+	87,  // 9: sf.near.type.v1.StateChangeCause.transaction_processing:type_name -> sf.near.type.v1.StateChangeCause.TransactionProcessing
+	88,  // 10: sf.near.type.v1.StateChangeCause.action_receipt_processing_started:type_name -> sf.near.type.v1.StateChangeCause.ActionReceiptProcessingStarted
+	89,  // 11: sf.near.type.v1.StateChangeCause.action_receipt_gas_reward:type_name -> sf.near.type.v1.StateChangeCause.ActionReceiptGasReward
+	90,  // 12: sf.near.type.v1.StateChangeCause.receipt_processing:type_name -> sf.near.type.v1.StateChangeCause.ReceiptProcessing
+	91,  // 13: sf.near.type.v1.StateChangeCause.postponed_receipt:type_name -> sf.near.type.v1.StateChangeCause.PostponedReceipt
+	92,  // 14: sf.near.type.v1.StateChangeCause.updated_delayed_receipts:type_name -> sf.near.type.v1.StateChangeCause.UpdatedDelayedReceipts
+	93,  // 15: sf.near.type.v1.StateChangeCause.validator_accounts_update:type_name -> sf.near.type.v1.StateChangeCause.ValidatorAccountsUpdate
+	94,  // 16: sf.near.type.v1.StateChangeCause.migration:type_name -> sf.near.type.v1.StateChangeCause.Migration
+	95,  // 17: sf.near.type.v1.StateChangeValue.account_update:type_name -> sf.near.type.v1.StateChangeValue.AccountUpdate
+	96,  // 18: sf.near.type.v1.StateChangeValue.account_deletion:type_name -> sf.near.type.v1.StateChangeValue.AccountDeletion
+	97,  // 19: sf.near.type.v1.StateChangeValue.access_key_update:type_name -> sf.near.type.v1.StateChangeValue.AccessKeyUpdate
+	98,  // 20: sf.near.type.v1.StateChangeValue.access_key_deletion:type_name -> sf.near.type.v1.StateChangeValue.AccessKeyDeletion
+	99,  // 21: sf.near.type.v1.StateChangeValue.data_update:type_name -> sf.near.type.v1.StateChangeValue.DataUpdate
+	100, // 22: sf.near.type.v1.StateChangeValue.data_deletion:type_name -> sf.near.type.v1.StateChangeValue.DataDeletion
+	101, // 23: sf.near.type.v1.StateChangeValue.contract_code_update:type_name -> sf.near.type.v1.StateChangeValue.ContractCodeUpdate
+	102, // 24: sf.near.type.v1.StateChangeValue.contract_deletion:type_name -> sf.near.type.v1.StateChangeValue.ContractCodeDeletion
 	13,  // 25: sf.near.type.v1.Account.amount:type_name -> sf.near.type.v1.BigInt
 	13,  // 26: sf.near.type.v1.Account.locked:type_name -> sf.near.type.v1.BigInt
 	14,  // 27: sf.near.type.v1.Account.code_hash:type_name -> sf.near.type.v1.CryptoHash
@@ -7513,49 +7689,54 @@ var file_sf_near_type_v1_type_proto_depIdxs = []int32{
 	63,  // 134: sf.near.type.v1.MerklePath.path:type_name -> sf.near.type.v1.MerklePathItem
 	14,  // 135: sf.near.type.v1.MerklePathItem.hash:type_name -> sf.near.type.v1.CryptoHash
 	5,   // 136: sf.near.type.v1.MerklePathItem.direction:type_name -> sf.near.type.v1.Direction
-	69,  // 137: sf.near.type.v1.Action.create_account:type_name -> sf.near.type.v1.CreateAccountAction
-	70,  // 138: sf.near.type.v1.Action.deploy_contract:type_name -> sf.near.type.v1.DeployContractAction
-	71,  // 139: sf.near.type.v1.Action.function_call:type_name -> sf.near.type.v1.FunctionCallAction
-	72,  // 140: sf.near.type.v1.Action.transfer:type_name -> sf.near.type.v1.TransferAction
-	73,  // 141: sf.near.type.v1.Action.stake:type_name -> sf.near.type.v1.StakeAction
-	74,  // 142: sf.near.type.v1.Action.add_key:type_name -> sf.near.type.v1.AddKeyAction
-	75,  // 143: sf.near.type.v1.Action.delete_key:type_name -> sf.near.type.v1.DeleteKeyAction
-	76,  // 144: sf.near.type.v1.Action.delete_account:type_name -> sf.near.type.v1.DeleteAccountAction
-	77,  // 145: sf.near.type.v1.Action.delegate:type_name -> sf.near.type.v1.SignedDelegateAction
+	71,  // 137: sf.near.type.v1.Action.create_account:type_name -> sf.near.type.v1.CreateAccountAction
+	72,  // 138: sf.near.type.v1.Action.deploy_contract:type_name -> sf.near.type.v1.DeployContractAction
+	73,  // 139: sf.near.type.v1.Action.function_call:type_name -> sf.near.type.v1.FunctionCallAction
+	74,  // 140: sf.near.type.v1.Action.transfer:type_name -> sf.near.type.v1.TransferAction
+	75,  // 141: sf.near.type.v1.Action.stake:type_name -> sf.near.type.v1.StakeAction
+	76,  // 142: sf.near.type.v1.Action.add_key:type_name -> sf.near.type.v1.AddKeyAction
+	77,  // 143: sf.near.type.v1.Action.delete_key:type_name -> sf.near.type.v1.DeleteKeyAction
+	78,  // 144: sf.near.type.v1.Action.delete_account:type_name -> sf.near.type.v1.DeleteAccountAction
+	79,  // 145: sf.near.type.v1.Action.delegate:type_name -> sf.near.type.v1.SignedDelegateAction
 	65,  // 146: sf.near.type.v1.Action.deploy_global_contract:type_name -> sf.near.type.v1.DeployGlobalContractAction
 	66,  // 147: sf.near.type.v1.Action.deploy_global_contract_by_account_id:type_name -> sf.near.type.v1.DeployGlobalContractByAccountIdAction
 	67,  // 148: sf.near.type.v1.Action.use_global_contract:type_name -> sf.near.type.v1.UseGlobalContractAction
 	68,  // 149: sf.near.type.v1.Action.use_global_contract_by_account_id:type_name -> sf.near.type.v1.UseGlobalContractByAccountIdAction
-	14,  // 150: sf.near.type.v1.UseGlobalContractAction.code_hash:type_name -> sf.near.type.v1.CryptoHash
-	13,  // 151: sf.near.type.v1.FunctionCallAction.deposit:type_name -> sf.near.type.v1.BigInt
-	13,  // 152: sf.near.type.v1.TransferAction.deposit:type_name -> sf.near.type.v1.BigInt
-	13,  // 153: sf.near.type.v1.StakeAction.stake:type_name -> sf.near.type.v1.BigInt
-	16,  // 154: sf.near.type.v1.StakeAction.public_key:type_name -> sf.near.type.v1.PublicKey
-	16,  // 155: sf.near.type.v1.AddKeyAction.public_key:type_name -> sf.near.type.v1.PublicKey
-	79,  // 156: sf.near.type.v1.AddKeyAction.access_key:type_name -> sf.near.type.v1.AccessKey
-	16,  // 157: sf.near.type.v1.DeleteKeyAction.public_key:type_name -> sf.near.type.v1.PublicKey
-	15,  // 158: sf.near.type.v1.SignedDelegateAction.signature:type_name -> sf.near.type.v1.Signature
-	78,  // 159: sf.near.type.v1.SignedDelegateAction.delegate_action:type_name -> sf.near.type.v1.DelegateAction
-	64,  // 160: sf.near.type.v1.DelegateAction.actions:type_name -> sf.near.type.v1.Action
-	16,  // 161: sf.near.type.v1.DelegateAction.public_key:type_name -> sf.near.type.v1.PublicKey
-	80,  // 162: sf.near.type.v1.AccessKey.permission:type_name -> sf.near.type.v1.AccessKeyPermission
-	81,  // 163: sf.near.type.v1.AccessKeyPermission.function_call:type_name -> sf.near.type.v1.FunctionCallPermission
-	82,  // 164: sf.near.type.v1.AccessKeyPermission.full_access:type_name -> sf.near.type.v1.FullAccessPermission
-	13,  // 165: sf.near.type.v1.FunctionCallPermission.allowance:type_name -> sf.near.type.v1.BigInt
-	14,  // 166: sf.near.type.v1.StateChangeCause.TransactionProcessing.tx_hash:type_name -> sf.near.type.v1.CryptoHash
-	14,  // 167: sf.near.type.v1.StateChangeCause.ActionReceiptProcessingStarted.receipt_hash:type_name -> sf.near.type.v1.CryptoHash
-	14,  // 168: sf.near.type.v1.StateChangeCause.ActionReceiptGasReward.tx_hash:type_name -> sf.near.type.v1.CryptoHash
-	14,  // 169: sf.near.type.v1.StateChangeCause.ReceiptProcessing.tx_hash:type_name -> sf.near.type.v1.CryptoHash
-	14,  // 170: sf.near.type.v1.StateChangeCause.PostponedReceipt.tx_hash:type_name -> sf.near.type.v1.CryptoHash
-	11,  // 171: sf.near.type.v1.StateChangeValue.AccountUpdate.account:type_name -> sf.near.type.v1.Account
-	16,  // 172: sf.near.type.v1.StateChangeValue.AccessKeyUpdate.public_key:type_name -> sf.near.type.v1.PublicKey
-	79,  // 173: sf.near.type.v1.StateChangeValue.AccessKeyUpdate.access_key:type_name -> sf.near.type.v1.AccessKey
-	16,  // 174: sf.near.type.v1.StateChangeValue.AccessKeyDeletion.public_key:type_name -> sf.near.type.v1.PublicKey
-	175, // [175:175] is the sub-list for method output_type
-	175, // [175:175] is the sub-list for method input_type
-	175, // [175:175] is the sub-list for extension type_name
-	175, // [175:175] is the sub-list for extension extendee
-	0,   // [0:175] is the sub-list for field type_name
+	69,  // 150: sf.near.type.v1.Action.deterministic_state_init:type_name -> sf.near.type.v1.DeterministicStateInit
+	14,  // 151: sf.near.type.v1.UseGlobalContractAction.code_hash:type_name -> sf.near.type.v1.CryptoHash
+	70,  // 152: sf.near.type.v1.DeterministicStateInit.code:type_name -> sf.near.type.v1.GlobalContractIdentifierView
+	103, // 153: sf.near.type.v1.DeterministicStateInit.data:type_name -> sf.near.type.v1.DeterministicStateInit.DataEntry
+	13,  // 154: sf.near.type.v1.DeterministicStateInit.deposit:type_name -> sf.near.type.v1.BigInt
+	14,  // 155: sf.near.type.v1.GlobalContractIdentifierView.code_hash:type_name -> sf.near.type.v1.CryptoHash
+	13,  // 156: sf.near.type.v1.FunctionCallAction.deposit:type_name -> sf.near.type.v1.BigInt
+	13,  // 157: sf.near.type.v1.TransferAction.deposit:type_name -> sf.near.type.v1.BigInt
+	13,  // 158: sf.near.type.v1.StakeAction.stake:type_name -> sf.near.type.v1.BigInt
+	16,  // 159: sf.near.type.v1.StakeAction.public_key:type_name -> sf.near.type.v1.PublicKey
+	16,  // 160: sf.near.type.v1.AddKeyAction.public_key:type_name -> sf.near.type.v1.PublicKey
+	81,  // 161: sf.near.type.v1.AddKeyAction.access_key:type_name -> sf.near.type.v1.AccessKey
+	16,  // 162: sf.near.type.v1.DeleteKeyAction.public_key:type_name -> sf.near.type.v1.PublicKey
+	15,  // 163: sf.near.type.v1.SignedDelegateAction.signature:type_name -> sf.near.type.v1.Signature
+	80,  // 164: sf.near.type.v1.SignedDelegateAction.delegate_action:type_name -> sf.near.type.v1.DelegateAction
+	64,  // 165: sf.near.type.v1.DelegateAction.actions:type_name -> sf.near.type.v1.Action
+	16,  // 166: sf.near.type.v1.DelegateAction.public_key:type_name -> sf.near.type.v1.PublicKey
+	82,  // 167: sf.near.type.v1.AccessKey.permission:type_name -> sf.near.type.v1.AccessKeyPermission
+	83,  // 168: sf.near.type.v1.AccessKeyPermission.function_call:type_name -> sf.near.type.v1.FunctionCallPermission
+	84,  // 169: sf.near.type.v1.AccessKeyPermission.full_access:type_name -> sf.near.type.v1.FullAccessPermission
+	13,  // 170: sf.near.type.v1.FunctionCallPermission.allowance:type_name -> sf.near.type.v1.BigInt
+	14,  // 171: sf.near.type.v1.StateChangeCause.TransactionProcessing.tx_hash:type_name -> sf.near.type.v1.CryptoHash
+	14,  // 172: sf.near.type.v1.StateChangeCause.ActionReceiptProcessingStarted.receipt_hash:type_name -> sf.near.type.v1.CryptoHash
+	14,  // 173: sf.near.type.v1.StateChangeCause.ActionReceiptGasReward.tx_hash:type_name -> sf.near.type.v1.CryptoHash
+	14,  // 174: sf.near.type.v1.StateChangeCause.ReceiptProcessing.tx_hash:type_name -> sf.near.type.v1.CryptoHash
+	14,  // 175: sf.near.type.v1.StateChangeCause.PostponedReceipt.tx_hash:type_name -> sf.near.type.v1.CryptoHash
+	11,  // 176: sf.near.type.v1.StateChangeValue.AccountUpdate.account:type_name -> sf.near.type.v1.Account
+	16,  // 177: sf.near.type.v1.StateChangeValue.AccessKeyUpdate.public_key:type_name -> sf.near.type.v1.PublicKey
+	81,  // 178: sf.near.type.v1.StateChangeValue.AccessKeyUpdate.access_key:type_name -> sf.near.type.v1.AccessKey
+	16,  // 179: sf.near.type.v1.StateChangeValue.AccessKeyDeletion.public_key:type_name -> sf.near.type.v1.PublicKey
+	180, // [180:180] is the sub-list for method output_type
+	180, // [180:180] is the sub-list for method input_type
+	180, // [180:180] is the sub-list for extension type_name
+	180, // [180:180] is the sub-list for extension extendee
+	0,   // [0:180] is the sub-list for field type_name
 }
 
 func init() { file_sf_near_type_v1_type_proto_init() }
@@ -7648,8 +7829,13 @@ func file_sf_near_type_v1_type_proto_init() {
 		(*Action_DeployGlobalContractByAccountId)(nil),
 		(*Action_UseGlobalContract)(nil),
 		(*Action_UseGlobalContractByAccountId)(nil),
+		(*Action_DeterministicStateInit)(nil),
 	}
-	file_sf_near_type_v1_type_proto_msgTypes[74].OneofWrappers = []any{
+	file_sf_near_type_v1_type_proto_msgTypes[64].OneofWrappers = []any{
+		(*GlobalContractIdentifierView_CodeHash)(nil),
+		(*GlobalContractIdentifierView_AccountId)(nil),
+	}
+	file_sf_near_type_v1_type_proto_msgTypes[76].OneofWrappers = []any{
 		(*AccessKeyPermission_FunctionCall)(nil),
 		(*AccessKeyPermission_FullAccess)(nil),
 	}
@@ -7659,7 +7845,7 @@ func file_sf_near_type_v1_type_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sf_near_type_v1_type_proto_rawDesc), len(file_sf_near_type_v1_type_proto_rawDesc)),
 			NumEnums:      6,
-			NumMessages:   95,
+			NumMessages:   98,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
