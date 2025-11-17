@@ -31,7 +31,7 @@ message StateChangeCause {
   oneof cause {
     NotWritableToDisk not_writable_to_disk = 1;
     InitialState initial_state = 2;
-    TransactionProcessing  transaction_processing = 3;
+    TransactionProcessing transaction_processing = 3;
     ActionReceiptProcessingStarted action_receipt_processing_started = 4;
     ActionReceiptGasReward action_receipt_gas_reward = 5;
     ReceiptProcessing receipt_processing = 6;
@@ -43,11 +43,21 @@ message StateChangeCause {
 
   message NotWritableToDisk {}
   message InitialState {}
-  message TransactionProcessing {CryptoHash tx_hash = 1;}
-  message ActionReceiptProcessingStarted {CryptoHash receipt_hash = 1;}
-  message ActionReceiptGasReward {CryptoHash tx_hash = 1;}
-  message ReceiptProcessing {CryptoHash tx_hash = 1;}
-  message PostponedReceipt {CryptoHash tx_hash = 1;}
+  message TransactionProcessing {
+    CryptoHash tx_hash = 1;
+  }
+  message ActionReceiptProcessingStarted {
+    CryptoHash receipt_hash = 1;
+  }
+  message ActionReceiptGasReward {
+    CryptoHash tx_hash = 1;
+  }
+  message ReceiptProcessing {
+    CryptoHash tx_hash = 1;
+  }
+  message PostponedReceipt {
+    CryptoHash tx_hash = 1;
+  }
   message UpdatedDelayedReceipts {}
   message ValidatorAccountsUpdate {}
   message Migration {}
@@ -65,8 +75,13 @@ message StateChangeValue {
     ContractCodeDeletion contract_deletion = 8;
   }
 
-  message AccountUpdate {string account_id = 1; Account account = 2;}
-  message AccountDeletion {string account_id = 1;}
+  message AccountUpdate {
+    string account_id = 1;
+    Account account = 2;
+  }
+  message AccountDeletion {
+    string account_id = 1;
+  }
   message AccessKeyUpdate {
     string account_id = 1;
     PublicKey public_key = 2;
@@ -240,18 +255,16 @@ message Receipt {
 }
 
 message ReceiptGlobalContractDistribution {
+  oneof id {
+    CryptoHash code_hash = 1;
+    string account_id = 2;
+  }
 
-    oneof id {
-       CryptoHash code_hash = 1;
-       string account_id = 2;
-    }
+  reserved 3 to 10;
 
-    reserved 3 to 10;
-
-    uint64 target_shard = 11;
-    repeated uint64 already_delivered_shards = 12;
-    bytes code = 13;
-
+  uint64 target_shard = 11;
+  repeated uint64 already_delivered_shards = 12;
+  bytes code = 13;
 }
 
 message ReceiptData {
@@ -322,9 +335,9 @@ message ActionError {
     AccountDoesNotExistErrorKind account_does_not_exist = 22;
     CreateAccountOnlyByRegistrarErrorKind create_account_only_by_registrar = 23;
     CreateAccountNotAllowedErrorKind create_account_not_allowed = 24;
-    ActorNoPermissionErrorKind actor_no_permission =25;
-    DeleteKeyDoesNotExistErrorKind  delete_key_does_not_exist = 26;
-    AddKeyAlreadyExistsErrorKind  add_key_already_exists = 27;
+    ActorNoPermissionErrorKind actor_no_permission = 25;
+    DeleteKeyDoesNotExistErrorKind delete_key_does_not_exist = 26;
+    AddKeyAlreadyExistsErrorKind add_key_already_exists = 27;
     DeleteAccountStakingErrorKind delete_account_staking = 28;
     LackBalanceForStateErrorKind lack_balance_for_state = 29;
     TriesToUnstakeErrorKind tries_to_unstake = 30;
@@ -354,53 +367,53 @@ message AccountDoesNotExistErrorKind {
 }
 
 /// A top-level account ID can only be created by registrar.
-message CreateAccountOnlyByRegistrarErrorKind{
+message CreateAccountOnlyByRegistrarErrorKind {
   string account_id = 1;
-  string  registrar_account_id = 2;
+  string registrar_account_id = 2;
   string predecessor_id = 3;
 }
 
-message CreateAccountNotAllowedErrorKind{
+message CreateAccountNotAllowedErrorKind {
   string account_id = 1;
-  string  predecessor_id = 2;
+  string predecessor_id = 2;
 }
 
-message ActorNoPermissionErrorKind{
+message ActorNoPermissionErrorKind {
   string account_id = 1;
   string actor_id = 2;
 }
 
-message DeleteKeyDoesNotExistErrorKind{
+message DeleteKeyDoesNotExistErrorKind {
   string account_id = 1;
   PublicKey public_key = 2;
 }
 
-message AddKeyAlreadyExistsErrorKind{
+message AddKeyAlreadyExistsErrorKind {
   string account_id = 1;
   PublicKey public_key = 2;
 }
 
-message DeleteAccountStakingErrorKind{
+message DeleteAccountStakingErrorKind {
   string account_id = 1;
 }
 
-message LackBalanceForStateErrorKind{
+message LackBalanceForStateErrorKind {
   string account_id = 1;
   BigInt balance = 2;
 }
 
-message TriesToUnstakeErrorKind{
+message TriesToUnstakeErrorKind {
   string account_id = 1;
 }
 
-message TriesToStakeErrorKind{
+message TriesToStakeErrorKind {
   string account_id = 1;
   BigInt stake = 2;
   BigInt locked = 3;
   BigInt balance = 4;
 }
 
-message InsufficientStakeErrorKind{
+message InsufficientStakeErrorKind {
   string account_id = 1;
   BigInt stake = 2;
   BigInt minimum_stake = 3;
@@ -434,35 +447,36 @@ enum ReceiptValidationError { //todo: add more detail?
   NumberInputDataDependenciesExceeded = 5;
   ActionsValidationError = 6;
   ReceiptSizeExceeded = 7;
+  InvalidRefundTo = 8;
 }
 
-message OnlyImplicitAccountCreationAllowedErrorKind{
+message OnlyImplicitAccountCreationAllowedErrorKind {
   string account_id = 1;
 }
 
-message DeleteAccountWithLargeStateErrorKind{
+message DeleteAccountWithLargeStateErrorKind {
   string account_id = 1;
 }
 
-message DelegateActionInvalidSignatureKind{}
+message DelegateActionInvalidSignatureKind {}
 
-message DelegateActionSenderDoesNotMatchTxReceiverKind{
+message DelegateActionSenderDoesNotMatchTxReceiverKind {
   string sender_id = 1;
   string receiver_id = 2;
 }
 
-message DelegateActionExpiredKind{}
+message DelegateActionExpiredKind {}
 
-message DelegateActionAccessKeyErrorKind{
+message DelegateActionAccessKeyErrorKind {
   InvalidTxError error = 1; // InvalidAccessKeyError
 }
 
-message DelegateActionInvalidNonceKind{
+message DelegateActionInvalidNonceKind {
   uint64 delegate_nonce = 1;
   uint64 ak_nonce = 2;
 }
 
-message DelegateActionNonceTooLargeKind{
+message DelegateActionNonceTooLargeKind {
   uint64 delegate_nonce = 1;
   uint64 upper_bound = 2;
 }
@@ -472,10 +486,10 @@ message NonRefundableTransferToExistingAccountKind {
 }
 
 message GlobalContractDoesNotExist {
-    oneof identifier {
-       CryptoHash code_hash = 1;
-       string account_id = 2;
-    }
+  oneof identifier {
+    CryptoHash code_hash = 1;
+    string account_id = 2;
+  }
 }
 
 enum InvalidTxError { //todo: add more detail?
@@ -544,8 +558,7 @@ message UseGlobalContractByAccountIdAction {
   string account_id = 1;
 }
 
-message CreateAccountAction {
-}
+message CreateAccountAction {}
 
 message DeployContractAction {
   bytes code = 1;
@@ -609,8 +622,7 @@ message AccessKeyPermission {
 message FunctionCallPermission {
   BigInt allowance = 1;
   string receiver_id = 2;
-  repeated  string method_names = 3;
+  repeated string method_names = 3;
 }
 
-message FullAccessPermission {
-}
+message FullAccessPermission {}
