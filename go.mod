@@ -3,7 +3,7 @@ module github.com/streamingfast/firehose-near
 go 1.26.0
 
 require (
-	github.com/RoaringBitmap/roaring v1.9.1
+	github.com/RoaringBitmap/roaring v1.9.4
 	github.com/mr-tron/base58 v1.3.0
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.10
@@ -15,7 +15,7 @@ require (
 	github.com/streamingfast/logging v1.2.2
 	github.com/streamingfast/near-go v0.0.0-20220302163233-b638f5b48a2d
 	github.com/stretchr/testify v1.11.1
-	go.uber.org/zap v1.27.1
+	go.uber.org/zap v1.28.0
 	google.golang.org/protobuf v1.36.11
 )
 
