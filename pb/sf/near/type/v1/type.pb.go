@@ -26,6 +26,7 @@ type CurveKind int32
 const (
 	CurveKind_ED25519   CurveKind = 0
 	CurveKind_SECP256K1 CurveKind = 1
+	CurveKind_MLDSA65   CurveKind = 2
 )
 
 // Enum value maps for CurveKind.
@@ -33,10 +34,12 @@ var (
 	CurveKind_name = map[int32]string{
 		0: "ED25519",
 		1: "SECP256K1",
+		2: "MLDSA65",
 	}
 	CurveKind_value = map[string]int32{
 		"ED25519":   0,
 		"SECP256K1": 1,
+		"MLDSA65":   2,
 	}
 )
 
@@ -7381,10 +7384,11 @@ const file_sf_near_type_v1_type_proto_rawDesc = "" +
 	"\vreceiver_id\x18\x02 \x01(\tR\n" +
 	"receiverId\x12!\n" +
 	"\fmethod_names\x18\x03 \x03(\tR\vmethodNames\"\x16\n" +
-	"\x14FullAccessPermission*'\n" +
+	"\x14FullAccessPermission*4\n" +
 	"\tCurveKind\x12\v\n" +
 	"\aED25519\x10\x00\x12\r\n" +
-	"\tSECP256K1\x10\x01*,\n" +
+	"\tSECP256K1\x10\x01\x12\v\n" +
+	"\aMLDSA65\x10\x02*,\n" +
 	"\x11ExecutionMetadata\x12\x17\n" +
 	"\x13ExecutionMetadataV1\x10\x00*\xa9\x01\n" +
 	"\x14FunctionCallErrorSer\x12\x14\n" +
