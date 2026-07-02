@@ -161,6 +161,7 @@ message CryptoHash {
 enum CurveKind {
   ED25519 = 0;
   SECP256K1 = 1;
+  MLDSA65 = 2;
 }
 
 message Signature {
