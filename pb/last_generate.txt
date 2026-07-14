@@ -1,3 +1,3 @@
-generate.sh - Mon Nov 17 16:44:27 EST 2025 - stepd
-streamingfast/proto revision: aa6f4a7531b7946abaa60eccc1adeef1109e305a
-streamingfast/firehose-near/proto revision: 994dea9
+generate.sh - mar. 14 juil. 2026 10:36:45 EDT - stepd
+streamingfast/proto revision: 0122b19ece0716f44cdc63370a346e4d0592b262
+streamingfast/firehose-near/proto revision: ffe7ace
