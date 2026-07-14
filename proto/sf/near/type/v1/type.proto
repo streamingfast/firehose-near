@@ -356,6 +356,10 @@ message ActionError {
     DelegateActionNonceTooLargeKind delegate_action_nonce_too_large = 42;
     NonRefundableTransferToExistingAccountKind non_refundable_transfer_to_existing_account = 43;
     GlobalContractDoesNotExist global_contract_does_not_exist = 44;
+    GasKeyDoesNotExistKind gas_key_does_not_exist = 45;
+    InsufficientGasKeyBalanceKind insufficient_gas_key_balance = 46;
+    GasKeyBalanceTooHighKind gas_key_balance_too_high = 47;
+    DelegateActionInvalidNonceIndexKind delegate_action_invalid_nonce_index = 48;
   }
 }
 
@@ -493,6 +497,30 @@ message GlobalContractDoesNotExist {
   }
 }
 
+message GasKeyDoesNotExistKind {
+  string account_id = 1;
+  PublicKey public_key = 2;
+}
+
+message InsufficientGasKeyBalanceKind {
+  string account_id = 1;
+  PublicKey public_key = 2;
+  BigInt balance = 3;
+  BigInt required = 4;
+}
+
+message GasKeyBalanceTooHighKind {
+  string account_id = 1;
+  // Set for DeleteKey (specific key), unset for DeleteAccount (aggregate)
+  PublicKey public_key = 2;
+  BigInt balance = 3;
+}
+
+message DelegateActionInvalidNonceIndexKind {
+  uint32 nonce_index = 1;
+  uint32 num_nonces = 2;
+}
+
 enum InvalidTxError { //todo: add more detail?
   InvalidAccessKeyError = 0;
   InvalidSignerId = 1;
@@ -512,6 +540,9 @@ enum InvalidTxError { //todo: add more detail?
   StorageError = 15;
   ShardCongested = 16;
   ShardStuck = 17;
+  InvalidNonceIndex = 18;
+  NotEnoughGasKeyBalance = 19;
+  NotEnoughBalanceForDeposit = 20;
 }
 
 message MerklePath {
@@ -544,7 +575,36 @@ message Action {
     UseGlobalContractAction use_global_contract = 12;
     UseGlobalContractByAccountIdAction use_global_contract_by_account_id = 13;
     DeterministicStateInit deterministic_state_init = 14;
+    TransferToGasKeyAction transfer_to_gas_key = 15;
+    WithdrawFromGasKeyAction withdraw_from_gas_key = 16;
+    SignedDelegateActionV2 delegate_v2 = 17;
   }
+}
+
+message TransferToGasKeyAction {
+  PublicKey public_key = 1;
+  BigInt deposit = 2;
+}
+
+message WithdrawFromGasKeyAction {
+  PublicKey public_key = 1;
+  BigInt amount = 2;
+}
+
+message SignedDelegateActionV2 {
+  Signature signature = 1;
+  DelegateActionV2 delegate_action = 2;
+}
+
+message DelegateActionV2 {
+  string sender_id = 1;
+  string receiver_id = 2;
+  repeated Action actions = 3;
+  uint64 nonce = 4;
+  // Present only for gas-key nonces (GasKeyNonce); unset for a plain nonce.
+  optional uint32 nonce_index = 5;
+  uint64 max_block_height = 6;
+  PublicKey public_key = 7;
 }
 
 message DeployGlobalContractAction {
@@ -632,6 +692,8 @@ message AccessKeyPermission {
   oneof permission {
     FunctionCallPermission function_call = 1;
     FullAccessPermission full_access = 2;
+    GasKeyFunctionCallPermission gas_key_function_call = 3;
+    GasKeyFullAccessPermission gas_key_full_access = 4;
   }
 }
 
@@ -642,3 +704,16 @@ message FunctionCallPermission {
 }
 
 message FullAccessPermission {}
+
+message GasKeyFunctionCallPermission {
+  BigInt balance = 1;
+  uint32 num_nonces = 2;
+  BigInt allowance = 3;
+  string receiver_id = 4;
+  repeated string method_names = 5;
+}
+
+message GasKeyFullAccessPermission {
+  BigInt balance = 1;
+  uint32 num_nonces = 2;
+}
