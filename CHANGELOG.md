@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
+## Unreleased
+
+* Added `UniversalStateInitAction` to the `Action` oneof, for the `UniversalStateInit` action stabilized in [nearcore 2.14.0-rc.1](https://github.com/near/nearcore/releases/tag/2.14.0-rc.1). Its `state_init` is carried as opaque bytes: nearcore models it as `RawStateInit`, a newtype over the borsh of a `UniversalStateInit`, so there is nothing structured to decode at this layer.
+
+* Added four `ActionErrorKind` variants: `TotalPromiseInputSizeExceededKind` (a receipt's resolved promise inputs exceed `max_receipt_total_input_size`), `ReceiptStorageProofSizeExceededKind` (the per-receipt storage proof limit now applies to every action, not just `FunctionCall`), `MalformedUniversalStateInitKind` and `AccountNotInitializedKind`.
+
+* `Action.delegate_v2` is unchanged. nearcore 2.14.0 rejects `DelegateV2` at action validation, but keeps the type, and receipts created before the upgrade still execute — so the wire type has to stay.
+
 ## [2.5.2]
 
 * Added `MLDSA65` variant to `CurveKind` enum to support NEAR post-quantum (ML-DSA-65) keys and signatures.

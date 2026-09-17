@@ -360,6 +360,10 @@ message ActionError {
     InsufficientGasKeyBalanceKind insufficient_gas_key_balance = 46;
     GasKeyBalanceTooHighKind gas_key_balance_too_high = 47;
     DelegateActionInvalidNonceIndexKind delegate_action_invalid_nonce_index = 48;
+    TotalPromiseInputSizeExceededKind total_promise_input_size_exceeded = 49;
+    ReceiptStorageProofSizeExceededKind receipt_storage_proof_size_exceeded = 50;
+    MalformedUniversalStateInitKind malformed_universal_state_init = 51;
+    AccountNotInitializedKind account_not_initialized = 52;
   }
 }
 
@@ -521,6 +525,30 @@ message DelegateActionInvalidNonceIndexKind {
   uint32 num_nonces = 2;
 }
 
+// The combined size of the resolved promise inputs (the DataReceipts referenced
+// by the receipt's input_data_ids) exceeded max_receipt_total_input_size.
+message TotalPromiseInputSizeExceededKind {
+  uint64 size = 1;
+  uint64 limit = 2;
+}
+
+// The receipt recorded more storage proof than per_receipt_storage_proof_size_limit
+// allows. The actions after the offending one do not run.
+message ReceiptStorageProofSizeExceededKind {
+  uint64 limit = 1;
+}
+
+// The bytes of a UniversalStateInit action do not decode into a state init.
+message MalformedUniversalStateInitKind {
+}
+
+// The action needs a set-up account, but the receiver is an uninitialized
+// universal account: the account exists, it just has no access keys, code or
+// data yet. Distinct from AccountDoesNotExist.
+message AccountNotInitializedKind {
+  string account_id = 1;
+}
+
 enum InvalidTxError { //todo: add more detail?
   InvalidAccessKeyError = 0;
   InvalidSignerId = 1;
@@ -578,6 +606,7 @@ message Action {
     TransferToGasKeyAction transfer_to_gas_key = 15;
     WithdrawFromGasKeyAction withdraw_from_gas_key = 16;
     SignedDelegateActionV2 delegate_v2 = 17;
+    UniversalStateInitAction universal_state_init = 18;
   }
 }
 
@@ -589,6 +618,15 @@ message TransferToGasKeyAction {
 message WithdrawFromGasKeyAction {
   PublicKey public_key = 1;
   BigInt amount = 2;
+}
+
+// Creates a `0u` universal account (NEP: universal accounts). `state_init` is the
+// opaque borsh of a UniversalStateInit -- nearcore models it as RawStateInit, a
+// newtype over the raw bytes -- so it is carried through verbatim rather than
+// decoded into a structured message here.
+message UniversalStateInitAction {
+  bytes state_init = 1;
+  BigInt deposit = 2;
 }
 
 message SignedDelegateActionV2 {
