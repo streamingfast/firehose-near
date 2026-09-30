@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [MAINTAINERS.md](./MAINTAINERS.md)
 for instructions to keep up to date.
 
-## [2.5.3]
+## Unreleased
 
 * Added `UniversalStateInitAction` to the `Action` oneof, for the `UniversalStateInit` action stabilized in [nearcore 2.14.0-rc.1](https://github.com/near/nearcore/releases/tag/2.14.0-rc.1). Its `state_init` is carried as opaque bytes: nearcore models it as `RawStateInit`, a newtype over the borsh of a `UniversalStateInit`, so there is nothing structured to decode at this layer.
 
