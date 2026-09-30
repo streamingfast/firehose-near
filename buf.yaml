@@ -1,0 +1,10 @@
+version: v2
+modules:
+  - path: proto
+    name: buf.build/streamingfast/firehose-near
+lint:
+  use:
+    - DEFAULT
+breaking:
+  use:
+    - FILE
